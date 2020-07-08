@@ -22,8 +22,7 @@ export default class Landing extends Component {
             humanSymbol : '',
             agentSymbol : '',
             gameBeginner : '',
-            whoPlaysFirstDialog : false,
-            startGameButton : "Start Game"
+            whoPlaysFirstDialog : false
         }
     }
 
@@ -35,38 +34,45 @@ export default class Landing extends Component {
         // console.log(cell%3)
 
         let copy_board = this.state.board.slice();
-        copy_board[Math.floor(cell/3)][cell%3] = 'x'
+        if(copy_board[Math.floor(cell/3)][cell%3] == '')
+        {
+            copy_board[Math.floor(cell/3)][cell%3] = 'x'
+        }
         this.setState({
             board : copy_board
         })
+
+
         console.log(this.state.board)
 
+        const sendData = {
+            humanSymbol: this.state.humanSymbol,
+            agentSymbol: this.state.agentSymbol,
+            gameBeginner: this.state.gameBeginner,
+            board: this.state.board
+        }
 
-        // this.setState({
-            // this.state.board.map((row,i) => {
-        // })
-        // this.setState( ({board}) => ({ board:
-        //     board.map((row,i) => {
-        //         row.map((column,j) => {
-        //             console.log(i)
-        //             console.log(j)
-        //             if(i === 2 && j === 2)
-        //             {
-        //                 return 'x';
-        //                 // board[i][j] = 'x'
-        //             }
-        //             else
-        //             {
-        //                 return 'o';
-        //             }
-        //         });
-        //     })
-        // }));
+        axios.post('http://localhost:5000/',sendData) //route to filled according to flask route name
+        .then(res=> {
+            console.log(res.data);
+
+            // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
+
+            // this.setState({
+            //     board : copy_resultant_board
+            // })
+
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
     };
 
     handleStartHuman = (e) => {
         console.log('Human begins the game!')
     }
+
 
     handleStartAgent = (e) => {
         console.log('Agent begins the game!')
@@ -74,6 +80,11 @@ export default class Landing extends Component {
 
     handleStartGame = (e) => {
         console.log('The game begins!')
+
+        this.setState({
+            whoPlaysFirstDialog : true
+        })
+
     }
 
     render () {
@@ -105,16 +116,18 @@ export default class Landing extends Component {
             </Container>
                     
                     <div style={{textAlign:"center"}}>
-                        <i class="fas fa-user-astronaut fa-7x orange-text mr-3" onClick={this.handleStartHuman}></i>
+                        <i class="fas fa-user-astronaut fa-7x orange-text mr-3" onClick={e=>this.handleStartHuman(e)}></i>
                     </div>
                     
                     <div style={{}}>
-                        <i class="fas fa-robot fa-7x orange-text fa-spin" onClick={this.handleStartAgent}></i>
+                        <i class="fas fa-robot fa-7x orange-text fa-spin" onClick={e=>this.handleStartAgent(e)}></i>
                     </div>
 
                     <div style = {{}}>
-                        <Button variant="info" size="sm" style={{float: 'bottom'}} onClick={this.handleStartGame}>Start Game</Button>{' '}
+                        <Button variant="info" size="sm" style={{float: 'bottom'}} onClick={e=>this.handleStartGame(e)}>Start Game</Button>{' '}
                     </div>
+
+                        {/* <> */}
         </div>
         )
   }
@@ -149,3 +162,7 @@ const alignAgent = {
     position : 'absolute',
     bottom : 0
 }
+
+// var images = imgs.map(function(image) {
+//     return (<Image src={image} rounded />);
+//    });
