@@ -15,8 +15,40 @@ export default class Landing extends Component {
         }
     }
     handleCellClick = (e,cell) => {
-      console.log("The clicked cell is : ",cell)
-    }
+
+        console.log("The clicked cell is : ",cell)
+        // console.log(Math.floor(cell/3))
+        // console.log(cell%3)
+
+        let copy_board = this.state.board.slice();
+        copy_board[Math.floor(cell/3)][cell%3] = 'x'
+        this.setState({
+            board : copy_board
+        })
+        console.log(this.state.board)
+
+
+        // this.setState({
+            // this.state.board.map((row,i) => {
+        // })
+        // this.setState( ({board}) => ({ board:
+        //     board.map((row,i) => {
+        //         row.map((column,j) => {
+        //             console.log(i)
+        //             console.log(j)
+        //             if(i === 2 && j === 2)
+        //             {
+        //                 return 'x';
+        //                 // board[i][j] = 'x'
+        //             }
+        //             else
+        //             {
+        //                 return 'o';
+        //             }
+        //         });
+        //     })
+        // }));
+    };
 
     render () {
         return (
@@ -32,9 +64,10 @@ export default class Landing extends Component {
                             {
                                 row.map((cell, j)=> (
                                     <Col md style={cellStyle}
-                                    onClick={e=>this.handleCellClick(e,3*i+j+1)}
+                                    onClick={e=>this.handleCellClick(e,3*i+j)}
                                     >
-                                    {3*i+j+1}
+                                        {/* {'x'} */}
+                                    {this.state.board[i][j]}
                                     </Col>
                                 ))
                             }
