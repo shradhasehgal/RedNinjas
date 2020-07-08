@@ -22,7 +22,9 @@ export default class Landing extends Component {
             humanSymbol : '',
             agentSymbol : '',
             gameBeginner : '',
-            whoPlaysFirstDialog : false
+            whoPlaysFirstDialog : false,
+            startGameButton : "Start Game"
+            // toggleText : ''
         }
     }
 
@@ -78,13 +80,25 @@ export default class Landing extends Component {
         console.log('Agent begins the game!')
     }
 
-    handleStartGame = (e) => {
+    handleStartGame = (e,startGame) => {
         console.log('The game begins!')
 
-        this.setState({
-            whoPlaysFirstDialog : true
-        })
+        // this.setState({
+        //     whoPlaysFirstDialog : true
+        // })
 
+        if(startGame === 'Start Game')
+        {
+            this.setState({
+                startGameButton : "Reset Game"
+            })
+        }
+        else
+        {
+            this.setState({
+                startGameButton : "Start Game"
+            })
+        }
     }
 
     render () {
@@ -124,7 +138,7 @@ export default class Landing extends Component {
                     </div>
 
                     <div style = {{}}>
-                        <Button variant="info" size="sm" style={{float: 'bottom'}} onClick={e=>this.handleStartGame(e)}>Start Game</Button>{' '}
+                        <Button variant="info" size="sm" style={{float: 'bottom'}} onClick={e=>this.handleStartGame(e,this.state.startGameButton)}>{this.state.startGameButton}</Button>{' '}
                     </div>
 
                         {/* <> */}
