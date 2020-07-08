@@ -4,6 +4,7 @@ import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon}
 import { Link } from 'react-router-dom'
 import { Button, Container, Col, Row } from 'react-bootstrap'
 import axios from 'axios';
+import Sky from 'react-sky';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -14,16 +15,29 @@ export default class Landing extends Component {
         super(props)
         this.state = {
             board:[
-                ['','',''],
-                ['','',''],
-                ['','','']
+                ["X","",""],
+                ["","O",""],
+                ["O","","X"]
             ],
             chosenCell:'',
-            humanSymbol : '',
-            agentSymbol : '',
             gameBeginner : '',
+            startGameValue : false,
             whoPlaysFirstDialog : false,
-            startGameButton : "Start Game"
+            startGameButton : "Start Game",
+            symbol : {
+                X: <div style={{textAlign:"center"}}>
+                <i class="fas fa-user-astronaut fa-6x orange-text mr-2"></i>
+            </div>,
+                O: <div style={{textAlign:"center"}}>
+                <i class="fas fa-robot fa-6x orange-text mr-2"></i>
+            </div>,
+                WA: <div style={{textAlign:"center"}}>
+                <i class="fas fa-robot fa-6x orange-text fa-spin mr-2"></i>
+            </div>,
+                WH: <div style={{textAlign:"center"}}>
+                <i class="fas fa-user-astronaut fa-6x orange-text fa-spin mr-2"></i>
+            </div>
+              }
         }
     }
 
@@ -33,39 +47,109 @@ export default class Landing extends Component {
         console.log("The clicked cell is : ",cell)
         // console.log(Math.floor(cell/3))
         // console.log(cell%3)
-
-        let copy_board = this.state.board.slice();
-        if(copy_board[Math.floor(cell/3)][cell%3] == '')
+        if(this.state.startGameValue)
         {
-            copy_board[Math.floor(cell/3)][cell%3] = 'x'
-        }
-        this.setState({
-            board : copy_board
-        })
+            let copy_board = this.state.board.slice();
+            if(copy_board[Math.floor(cell/3)][cell%3] == '')
+            {
+                copy_board[Math.floor(cell/3)][cell%3] = 'O'
+            }
+            for(let i = 0; i < 3; i++)
+            {
+                if(copy_board[i][0] === copy_board[i][1] && copy_board[i][0] === copy_board[i][2] && copy_board[i][1] === copy_board[i][2])
+                {
+                    if(copy_board[i][0] === 'O')
+                    {
+                        copy_board[i][0] = 'WA'
+                        copy_board[i][1] = 'WA'
+                        copy_board[i][2] = 'WA'
+                    }
+                    else if(copy_board[i][0] === 'X')
+                    {
+                        copy_board[i][0] = 'WH'
+                        copy_board[i][1] = 'WH'
+                        copy_board[i][2] = 'WH'
+                    }
+                }
+            }
+            for(let i = 0; i < 3; i++)
+            {
+                if(copy_board[0][i] === copy_board[1][i] && copy_board[0][i] === copy_board[2][i] && copy_board[1][i] === copy_board[2][i])
+                {
+                    if(copy_board[0][i] === 'O')
+                    {
+                        copy_board[0][i] = 'WA'
+                        copy_board[1][i] = 'WA'
+                        copy_board[2][i] = 'WA'
+                    }
+                    else if(copy_board[0][i] === 'X')
+                    {
+                        copy_board[0][i] = 'WH'
+                        copy_board[1][i] = 'WH'
+                        copy_board[2][i] = 'WH'
+                    }
+                }
+            }
+
+            if(copy_board[0][0] === copy_board[1][1] &&  copy_board[0][0] === copy_board[2][2] && copy_board[1][1] === copy_board[2][2])
+            {
+                if(copy_board[0][0] === 'O')
+                {
+                    copy_board[0][0] = 'WA'
+                    copy_board[1][1] = 'WA'
+                    copy_board[2][2] = 'WA'
+                }
+                else if(copy_board[0][0] === 'X')
+                {
+                    copy_board[0][0] = 'WH'
+                    copy_board[1][1] = 'WH'
+                    copy_board[2][2] = 'WH'
+                }
+            }
+
+            if(copy_board[0][2] === copy_board[1][1] && copy_board[0][2] === copy_board[1][1] && copy_board[0][2] === copy_board[2][0])
+            {
+                if(copy_board[0][2] === 'O')
+                {
+                    copy_board[0][2] = 'WA'
+                    copy_board[1][1] = 'WA'
+                    copy_board[2][0] = 'WA'
+                }
+                else if(copy_board[0][2] === 'X')
+                {
+                    copy_board[0][2] = 'WH'
+                    copy_board[1][1] = 'WH'
+                    copy_board[2][0] = 'WH'
+                }
+            }
+            
+            this.setState({
+                board : copy_board
+            })
 
 
-        console.log(this.state.board)
+            console.log(this.state.board)
 
-        const sendData = {
-            humanSymbol: this.state.humanSymbol,
-            agentSymbol: this.state.agentSymbol,
-            gameBeginner: this.state.gameBeginner,
-            board: this.state.board
-        }
+            const sendData = {
+                gameBeginner: this.state.gameBeginner,
+                board: this.state.board
+            }
 
-        axios.post('http://localhost:5000/',sendData) //route to filled according to flask route name
-        .then(res=> {
-            console.log(res.data);
-            // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
+            axios.post('http://localhost:5000/',sendData) //route to filled according to flask route name
+            .then(res=> {
+                console.log(res.data);
+                // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
 
-            // this.setState({
-            //     board : copy_resultant_board
-            // })
+                // this.setState({
+                //     board : copy_resultant_board
+                // })
 
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            } 
+        
 
     };
 
@@ -96,7 +180,8 @@ export default class Landing extends Component {
         if(startGame === 'Start Game')
         {
             this.setState({
-                startGameButton : "Reset Game"
+                startGameButton : "Reset Game",
+                startGameValue : true
             })
         }
         else if(startGame === 'Reset Game')
@@ -112,11 +197,10 @@ export default class Landing extends Component {
             }
             this.setState({
                 board : copy_board,
-                humanSymbol : '',
-                agentSymbol : '',
                 gameBeginner : '',
                 whoPlaysFirstDialog : false,
-                startGameButton : "Start Game"
+                startGameButton : "Start Game",
+                startGameValue : false
             })
         }
     }
@@ -124,6 +208,20 @@ export default class Landing extends Component {
     render () {
         return (
             
+    //        <div> 
+    //     {/* /* Sky adapts size to its container */ }
+    //     <Sky 
+    //       images={{
+    //         /* FORMAT AS FOLLOWS */
+    //         0: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Fspace-background-night-sky-and-stars-black-and-vector-10884328&psig=AOvVaw1x5pVx5xBTuJgJu_FU5Ni6&ust=1594332363722000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLintIXVvuoCFQAAAAAdAAAAABAD'
+    //       }}
+    //       how={130} /* You have to pass a number so Sky will render that amount of images chosen randomly from the object you passed in the previous step */
+    //       time={40} /* time of the animation. Dfaults at 20s */
+    //       size={'100px'} /* size of the rendered images. Defaults at 150px */
+    //       background={'palettedvioletred'} /* color of background. Defaults to none */
+    //     />
+    // {/* //   </div> */}
+
         <div style={{marginTop:"5%"}}>
             <div style={{textAlign:"center"}}>
             <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
@@ -138,8 +236,10 @@ export default class Landing extends Component {
                                     <Col md style={cellStyle}
                                     onClick={e=>this.handleCellClick(e,3*i+j)}
                                     >
-                                        {/* {'x'} */}
-                                    {this.state.board[i][j]}
+                                        {/* {<div style={{textAlign:"center"}}>
+                        <i class="fas fa-user-astronaut fa-7x orange-text fa-spin mr-3" onClick={e=>this.handleStartHuman(e)}></i>
+                    </div>} */}
+                                    {this.state.symbol[this.state.board[i][j]]}
                                     </Col>
                                 ))
                             }
@@ -149,16 +249,16 @@ export default class Landing extends Component {
                 </Container>
             </Container>
                     
-                    <div style={{textAlign:"center"}}>
+                    {/* <div style={{textAlign:"center"}}>
                         <i class="fas fa-user-astronaut fa-7x orange-text mr-3" onClick={e=>this.handleStartHuman(e)}></i>
                     </div>
                     
                     <div style={{}}>
                         <i class="fas fa-robot fa-7x orange-text fa-spin" onClick={e=>this.handleStartAgent(e)}></i>
-                    </div>
+                    </div> */}
 
                     <div style = {{}}>
-                        <Button variant="info" size="sm" style={{float: 'bottom'}} onClick={e=>this.handleStartGame(e,this.state.startGameButton)}>{this.state.startGameButton}</Button>{' '}
+                        <Button variant="info" size="lg" style={{startButton}} onClick={e=>this.handleStartGame(e,this.state.startGameButton)}>{this.state.startGameButton}</Button>{' '}
                     </div>
 
                         {/* <> */}
@@ -169,13 +269,15 @@ export default class Landing extends Component {
 
 
 const cellStyle = {
-  backgroundColor: 'pink',
+  backgroundColor: 'black',
   textAlign: 'center',
   border : "1px solid",
   width:"10%",
-  padding:"5%"
-//   border-collapse: "separate"
+  height : 185,
+  padding:"3%"
 }
+//   border-collapse: "separate"
+// }
 const heading = {
   display:"inline-block",
   textAlign: 'center',
@@ -183,20 +285,9 @@ const heading = {
   lineHeight: 1.5
 }
 
-// const startGame = {
-//     padding:"1%"
-// }
-
-// const alignHuman = {
-    // left : "70%",
-    // right: "20%"
-
-// }
-const alignAgent = {
-    position : 'absolute',
-    bottom : 0
+const startButton = {
+    // position: 'absolute',
+    // bottom:0,
+    // right : 0
+    // left:50
 }
-
-// var images = imgs.map(function(image) {
-//     return (<Image src={image} rounded />);
-//    });
