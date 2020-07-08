@@ -4,6 +4,8 @@ import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Board from './components/Board'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios';
+
 
 
 function App() {
