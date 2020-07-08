@@ -35,91 +35,34 @@ export default class Landing extends Component {
         // console.log(cell%3)
 
         let copy_board = this.state.board.slice();
-        if(copy_board[Math.floor(cell/3)][cell%3] == '')
-        {
-            copy_board[Math.floor(cell/3)][cell%3] = 'x'
-        }
+        copy_board[Math.floor(cell/3)][cell%3] = 'x'
         this.setState({
             board : copy_board
         })
-
-
         console.log(this.state.board)
 
-        const sendData = {
-            humanSymbol: this.state.humanSymbol,
-            agentSymbol: this.state.agentSymbol,
-            gameBeginner: this.state.gameBeginner,
-            board: this.state.board
-        }
-
-        axios.post('http://localhost:5000/',sendData) //route to filled according to flask route name
-        .then(res=> {
-            console.log(res.data);
-            // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
-
-            // this.setState({
-            //     board : copy_resultant_board
-            // })
-
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-
-    };
-
-    handleStartHuman = (e) => {
-        console.log('Human begins the game!')
-
-        this.setState({
-            gameBeginner : 'HUMAN'
-        })
-    }
-
-
-    handleStartAgent = (e) => {
-        console.log('Agent begins the game!')
-
-        this.setState({
-            gameBeginner : 'AGENT'
-        })
-    }
-
-    handleStartGame = (e,startGame) => {
-        console.log('The game begins!')
 
         // this.setState({
-        //     whoPlaysFirstDialog : true
+            // this.state.board.map((row,i) => {
         // })
-
-        if(startGame === 'Start Game')
-        {
-            this.setState({
-                startGameButton : "Reset Game"
-            })
-        }
-        else if(startGame === 'Reset Game')
-        {
-
-            let copy_board = this.state.board.slice();
-            for(let i = 0; i < 3; i++)
-            {
-                for(let j = 0; j < 3; j++)
-                {
-                    copy_board[i][j] = '';
-                }
-            }
-            this.setState({
-                board : copy_board,
-                humanSymbol : '',
-                agentSymbol : '',
-                gameBeginner : '',
-                whoPlaysFirstDialog : false,
-                startGameButton : "Start Game"
-            })
-        }
-    }
+        // this.setState( ({board}) => ({ board:
+        //     board.map((row,i) => {
+        //         row.map((column,j) => {
+        //             console.log(i)
+        //             console.log(j)
+        //             if(i === 2 && j === 2)
+        //             {
+        //                 return 'x';
+        //                 // board[i][j] = 'x'
+        //             }
+        //             else
+        //             {
+        //                 return 'o';
+        //             }
+        //         });
+        //     })
+        // }));
+    };
 
     handleStartHuman = (e) => {
         console.log('Human begins the game!')
