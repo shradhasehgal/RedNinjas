@@ -57,7 +57,6 @@ export default class Landing extends Component {
         axios.post('http://localhost:5000/',sendData) //route to filled according to flask route name
         .then(res=> {
             console.log(res.data);
-
             // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
 
             // this.setState({
@@ -93,11 +92,25 @@ export default class Landing extends Component {
                 startGameButton : "Reset Game"
             })
         }
-        else
+        else if(startGame === 'Reset Game')
         {
             this.setState({
                 startGameButton : "Start Game"
             })
+
+            let copy_board = this.state.board.slice();
+            for(let i = 0; i < 3; i++)
+            {
+                for(let j = 0; j < 3; j++)
+                {
+                    copy_board[i][j] = '';
+                }
+            }
+            
+            this.setState({
+                board : copy_board
+            })
+
         }
     }
 
