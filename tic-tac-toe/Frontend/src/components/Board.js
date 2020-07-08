@@ -18,7 +18,6 @@ export default class Landing extends Component {
             gameBeginner : '',
             whoPlaysFirstDialog : false,
             startGameButton : "Start Game"
-            // toggleText : ''
         }
     }
     handleCellClick = (e,cell) => {
@@ -64,11 +63,19 @@ export default class Landing extends Component {
 
     handleStartHuman = (e) => {
         console.log('Human begins the game!')
+
+        this.setState({
+            gameBeginner : 'HUMAN'
+        })
     }
 
 
     handleStartAgent = (e) => {
         console.log('Agent begins the game!')
+
+        this.setState({
+            gameBeginner : 'AGENT'
+        })
     }
 
     handleStartGame = (e,startGame) => {
@@ -86,9 +93,6 @@ export default class Landing extends Component {
         }
         else if(startGame === 'Reset Game')
         {
-            this.setState({
-                startGameButton : "Start Game"
-            })
 
             let copy_board = this.state.board.slice();
             for(let i = 0; i < 3; i++)
@@ -98,11 +102,14 @@ export default class Landing extends Component {
                     copy_board[i][j] = '';
                 }
             }
-            
             this.setState({
-                board : copy_board
+                board : copy_board,
+                humanSymbol : '',
+                agentSymbol : '',
+                gameBeginner : '',
+                whoPlaysFirstDialog : false,
+                startGameButton : "Start Game"
             })
-
         }
     }
 
