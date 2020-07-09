@@ -20,7 +20,6 @@ class Move ():
 
         # In case of ultimate : proceed as usual
         if(depth_type == -1):
-            
             current_States = bigtree_obj.bigtree[depth]
 
             for i in range(len(current_States)):
