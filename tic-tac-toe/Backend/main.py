@@ -20,7 +20,8 @@ def agent_turn():
     board = ast.literal_eval(board)
     board = np.array(board, dtype = str)
     depth = int(args['depth'])
-    return g.agent_next_move(board,depth)
+    r,c,win = g.agent_next_move(board,depth)
+    return {"r": r, "c":c, "win": win}
 
 if __name__ == '__main__':
     
