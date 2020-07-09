@@ -23,6 +23,7 @@ export default class Landing extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            show_3x3_BoardComponent : this.props.show_3x3_BoardComponent,
             board:[
                 ["X","",""],
                 ["","O",""],
@@ -48,7 +49,6 @@ export default class Landing extends Component {
             </div>
               },
               win : false,
-              showBoardComponent : this.props.showBoardComponent
         }
     }
 
