@@ -29,16 +29,16 @@ export default class GameStarter extends Component {
                 <Button variant="info" size="lg" 
                 onClick = {() => {
                   this.setState ({
-                     showBoardComponent : true,
-                     showGameStarterComponent : false
+                        show_3x3_BoardComponent : true,
+                        showGameStarterComponent : false
                   });
                 }}> 3*3 TIC-TAC-TOE
                 </Button>
                 <Button variant="info" size="lg" 
                 onClick = {() => {
                   this.setState ({
-                        show_3x3_BoardComponent : true,
-                        show_9x9_BoardComponent : false
+                        show_9x9_BoardComponent : true,
+                        showGameStarterComponent : false
                   });
                 }}> 9*9 TIC-TAC-TOE
                 </Button>
