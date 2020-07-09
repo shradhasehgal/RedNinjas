@@ -42,8 +42,12 @@ export default class GameStarter extends Component {
                   });
                 }}> 9*9 TIC-TAC-TOE
                 </Button>
-                {this.state.showBoardComponent && <Board/>}
+                {this.state.show_3x3_BoardComponent && <Board/>}
+                {this.state.show_9x9_BoardComponent && <Board/>}
                 </div>
         )
     }
 }
+
+{/* <MDBIcon icon="space-shuttle" /> */}
+{/* <MDBIcon icon="rocket" /> */}
