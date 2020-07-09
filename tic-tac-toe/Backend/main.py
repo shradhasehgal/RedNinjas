@@ -2,8 +2,8 @@ from flask import Flask, request
 import requests
 import numpy as np
 import sys
-sys.path.insert(1, '../MinmaxAlgorithm')
-import combined_depths
+sys.path.insert(1, '../Integrate/oops')
+from game import *
 import ast
 
 app = Flask(__name__)
@@ -19,8 +19,12 @@ def agent_turn():
     board = args['board']
     board = ast.literal_eval(board)
     board = np.array(board, dtype = str)
-    return combined_depths.agent_turn(board)
-
+    depth = int(args['depth'])
+    return g.agent_next_move(board,depth)
 
 if __name__ == '__main__':
+    
+    g = Game()
+    is_max = True
+    g.initialize_bigtree(is_max)
     app.run()
