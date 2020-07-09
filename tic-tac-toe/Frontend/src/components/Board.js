@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-// import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
-// import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
+import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
 // import { Link } from 'react-router-dom'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { Button, Container, Col, Row } from 'react-bootstrap'
 import axios from 'axios';
 // import Sky from 'react-sky';
@@ -11,13 +12,6 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 
-// var bgColors = { "Default": "#81b71a",
-//                     "Blue": "#00B1E1",
-//                     "Cyan": "#37BC9B",
-//                     "Green": "#8CC152",
-//                     "Red": "#E9573F",
-//                     "Yellow": "#F6BB42",
-// };
 
 export default class Landing extends Component {
     constructor (props) {
@@ -49,6 +43,7 @@ export default class Landing extends Component {
             </div>
               },
               win : false,
+              depth : ''
         }
     }
 
@@ -302,7 +297,6 @@ export default class Landing extends Component {
                     {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
 
         </div>
-        // </div>
         )
   }
 }
