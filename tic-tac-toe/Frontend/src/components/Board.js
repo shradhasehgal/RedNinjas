@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
-import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
-import { Link } from 'react-router-dom'
+// import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
+// import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
+// import { Link } from 'react-router-dom'
 import { Button, Container, Col, Row } from 'react-bootstrap'
 import axios from 'axios';
-import Sky from 'react-sky';
+// import Sky from 'react-sky';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+
+
+// var bgColors = { "Default": "#81b71a",
+//                     "Blue": "#00B1E1",
+//                     "Cyan": "#37BC9B",
+//                     "Green": "#8CC152",
+//                     "Red": "#E9573F",
+//                     "Yellow": "#F6BB42",
+// };
 
 export default class Landing extends Component {
     constructor (props) {
@@ -37,7 +46,9 @@ export default class Landing extends Component {
                 WH: <div style={{textAlign:"center"}}>
                 <i class="fas fa-user-astronaut fa-6x orange-text fa-spin mr-2"></i>
             </div>
-              }
+              },
+              win : false,
+              showBoardComponent : this.props.showBoardComponent
         }
     }
 
@@ -47,16 +58,16 @@ export default class Landing extends Component {
         console.log("The clicked cell is : ",cell)
         // console.log(Math.floor(cell/3))
         // console.log(cell%3)
-        if(this.state.startGameValue)
+        if(this.state.startGameValue && this.state.win === false)
         {
             let copy_board = this.state.board.slice();
-            if(copy_board[Math.floor(cell/3)][cell%3] == '')
+            if(copy_board[Math.floor(cell/3)][cell%3] === '')
             {
                 copy_board[Math.floor(cell/3)][cell%3] = 'O'
             }
             for(let i = 0; i < 3; i++)
             {
-                if(copy_board[i][0] === copy_board[i][1] && copy_board[i][0] === copy_board[i][2] && copy_board[i][1] === copy_board[i][2])
+                if(copy_board[i][0] === copy_board[i][1] && copy_board[i][0] === copy_board[i][2] && copy_board[i][1] === copy_board[i][2] && copy_board[i][0] !== "")
                 {
                     if(copy_board[i][0] === 'O')
                     {
@@ -70,11 +81,14 @@ export default class Landing extends Component {
                         copy_board[i][1] = 'WH'
                         copy_board[i][2] = 'WH'
                     }
+                    this.setState({
+                        win : true
+                    })
                 }
             }
             for(let i = 0; i < 3; i++)
             {
-                if(copy_board[0][i] === copy_board[1][i] && copy_board[0][i] === copy_board[2][i] && copy_board[1][i] === copy_board[2][i])
+                if(copy_board[0][i] === copy_board[1][i] && copy_board[0][i] === copy_board[2][i] && copy_board[1][i] === copy_board[2][i] && copy_board[0][i] !== "")
                 {
                     if(copy_board[0][i] === 'O')
                     {
@@ -88,10 +102,13 @@ export default class Landing extends Component {
                         copy_board[1][i] = 'WH'
                         copy_board[2][i] = 'WH'
                     }
+                    this.setState({
+                        win : true
+                    })
                 }
             }
 
-            if(copy_board[0][0] === copy_board[1][1] &&  copy_board[0][0] === copy_board[2][2] && copy_board[1][1] === copy_board[2][2])
+            if(copy_board[0][0] === copy_board[1][1] &&  copy_board[0][0] === copy_board[2][2] && copy_board[1][1] === copy_board[2][2] && copy_board[0][0] !== "")
             {
                 if(copy_board[0][0] === 'O')
                 {
@@ -105,9 +122,12 @@ export default class Landing extends Component {
                     copy_board[1][1] = 'WH'
                     copy_board[2][2] = 'WH'
                 }
+                this.setState({
+                    win : true
+                })
             }
 
-            if(copy_board[0][2] === copy_board[1][1] && copy_board[0][2] === copy_board[1][1] && copy_board[0][2] === copy_board[2][0])
+            if(copy_board[0][2] === copy_board[1][1] && copy_board[0][2] === copy_board[1][1] && copy_board[0][2] === copy_board[2][0] && copy_board[0][2] !== "")
             {
                 if(copy_board[0][2] === 'O')
                 {
@@ -121,12 +141,13 @@ export default class Landing extends Component {
                     copy_board[1][1] = 'WH'
                     copy_board[2][0] = 'WH'
                 }
+                this.setState({
+                    win : true
+                })
             }
-            
             this.setState({
                 board : copy_board
             })
-
 
             console.log(this.state.board)
 
@@ -221,8 +242,15 @@ export default class Landing extends Component {
     //       background={'palettedvioletred'} /* color of background. Defaults to none */
     //     />
     // {/* //   </div> */}
+        // <div>
+        // <a style={{backgroundColor: bgColors.Yellow}}>yellow</a>
 
-        <div style={{marginTop:"5%"}}>
+        <div style={{marginTop:"5%"
+        // <div style ={{
+            // backgroundColor: 'black',
+            // width: '1900px',
+            // height: '945px'
+          }}>
             <div style={{textAlign:"center"}}>
             <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
             </div>
@@ -263,6 +291,7 @@ export default class Landing extends Component {
 
                         {/* <> */}
         </div>
+        // </div>
         )
   }
 }
@@ -279,10 +308,10 @@ const cellStyle = {
 //   border-collapse: "separate"
 // }
 const heading = {
-  display:"inline-block",
-  textAlign: 'center',
-  width: '80%',
-  lineHeight: 1.5
+    display:"inline-block",
+    textAlign: 'center',
+    width: '80%',
+    lineHeight: 1.5
 }
 
 const startButton = {
