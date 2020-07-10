@@ -29,3 +29,4 @@ yarn-error.log*
 /Backend/__pycache__
 
 MinmaxAlgorithm\ /oops/__pycache__/
+/Backend/_pycache_/
