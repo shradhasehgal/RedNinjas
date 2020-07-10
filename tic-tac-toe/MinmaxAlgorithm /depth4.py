@@ -77,17 +77,21 @@ def calc_score(b,row,coloumn):
         else:
             return -MAX_UTIL 
 
-    
+
+    diagonal=0     
     #Cross-over 
     if row==coloumn :
+        diagonal=1
         if row==1:
             score=4
         else :
             score=3 
 
     if row==2 and coloumn==0 :
+        diagonal=1
         score=3
     elif row==0 and coloumn==2 :
+        diagonal=1
         score=3 
     else :
         score=2 
@@ -121,18 +125,19 @@ def calc_score(b,row,coloumn):
     #checking the element in the diagonal 
     flag_diagonal = 1
     other_loss = 1 
-    for i in range(0,3):
-        for j in range (0,3):
-            if i!=row and j!=coloumn:
-                row_diff= row - i 
-                coloumn_diff = coloumn - j 
-                if row_diff == coloumn_diff :
-                    if b[i][j]== b[row][coloumn]:
-                        score +=flag_diagonal
-                        flag_diagonal += 1 
-                    elif b[i][j]!=EMPTY :
-                        score += score + other_loss
-                        other_loss = other_loss + 1
+    if diagonal :
+        for i in range(0,3):
+            for j in range (0,3):
+                if i!=row and j!=coloumn:
+                    row_diff= row - i 
+                    coloumn_diff = coloumn - j 
+                    if row_diff == coloumn_diff :
+                        if b[i][j]== b[row][coloumn]:
+                            score +=flag_diagonal
+                            flag_diagonal += 1 
+                        elif b[i][j]!=EMPTY :
+                            score += score + other_loss
+                            other_loss = other_loss + 1
 
     if b[row][coloumn]==AGENT :
         return score 
@@ -195,8 +200,9 @@ def choose_optimal_move(board):
                 #Player move? 
                 board[i][j]=AGENT
                 
-                move_val = calc_score(board,i,j)
-                move_val = calc_score(board,i,j) + minimax(board,1,i,j,False)
+                # move_val = max(calc_score(board,i,j),minimax(board,1,i,j,False))
+                # move_val = calc_score(board,i,j) + minimax(board,1,i,j,False)
+                move_val = minimax(board,1,i,j,False) 
 
                 print(i,j,calc_score(board,i,j),minimax(board,1,i,j,False),move_val)
                 #Player unmove?
