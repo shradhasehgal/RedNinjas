@@ -118,7 +118,7 @@ def calc_score(b,row,coloumn):
             if b[i][coloumn]==b[row][coloumn]:
                 score +=flag_coloumn
                 flag_coloumn +=1   
-            if b[row][j]!=EMPTY :
+            elif b[i][coloumn]!=EMPTY :
                 score += other_loss
                 other_loss += 1 
 
