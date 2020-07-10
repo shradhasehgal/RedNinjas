@@ -33,5 +33,9 @@ MinmaxAlgorithm\ /oops/__pycache__/
 =======
 MinmaxAlgorithm\ /oops/__pycache__/
 Integrate/oops/__pycache__/
+<<<<<<< 5ac9746bb37ac1768f5d96f66559981a71ea16c4
 /Backend/_pycache_/
 >>>>>>> Include depth 3 and 4 in OOPS
+=======
+Backend/_pycache_/
+>>>>>>> Add pycache backend to gitignore
