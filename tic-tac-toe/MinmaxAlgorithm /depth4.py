@@ -77,7 +77,22 @@ def calc_score(b,row,coloumn):
         else:
             return -MAX_UTIL 
 
-    score = 0 
+    
+    #Cross-over 
+    if row==coloumn :
+        if row==1:
+            score=4
+        else :
+            score=3 
+
+    if row==2 and coloumn==0 :
+        score=3
+    elif row==0 and coloumn==2 :
+        score=3 
+    else :
+        score=2 
+
+    #Players Win + Opponents loss
     #checking the element in the same row 
     flag_row = 1
     other_loss = 1
