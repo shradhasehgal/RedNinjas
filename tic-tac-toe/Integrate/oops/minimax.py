@@ -71,10 +71,10 @@ class Minimax ():
 
         if(depth_type == 2):
             score = self.score.calc_score_depth_2(board_obj.board, row, col)
-        # if(depth_type == 3):
-        #     score = calc_score_depth_3(b)
-        # if(depth_type == 4):
-        #     score = calc_score_depth_4(b)
+        if(depth_type == 3):
+            score = self.score.calc_score_depth_3(board_obj.board, row, col)
+        if(depth_type == 4):
+            score = self.score.calc_score_depth_4(board_obj.board, row, col)
 
         #If max depth reached, return score
         if flag == 1 : 

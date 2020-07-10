@@ -18,13 +18,27 @@ class Game ():
         self.human_obj = Human()
         self.agent_obj = Agent()
         self.bigtree_obj = Bigtree()
+        self.bigtree_obj_human_start = Bigtree()
+        self.bigtree_obj_agent_start = Bigtree()
         self.minimax_obj = Minimax()
 
-    def initialize_bigtree(self,is_max):
+    def initialize_bigtree(self):
 
         # Calling the minmax function for the entire tree : if depth_type == -1
-        self.minimax_obj.minimax(self.board_obj, 0, is_max,self.bigtree_obj)
 
+        #if agent starts
+        self.minimax_obj.minimax(self.board_obj, 0, True,self.bigtree_obj_agent_start)
+
+        #for human starts
+        self.minimax_obj.minimax(self.board_obj, 0, False,self.bigtree_obj_human_start)
+        
+
+    def use_bigtree(self, is_max):
+
+        if(is_max):
+            self.bigtree_obj = self.bigtree_obj_agent_start
+        else:
+            self.bigtree_obj = self.bigtree_obj_human_start
 
     def check_win(self):
         for i in range(0, 3):
@@ -108,15 +122,19 @@ if __name__ == '__main__':
     
     g = Game()
 
-    #is agent maximizer
-    is_max = True
+    #agent is always maximizer
+    #if agent starts is_max = True else is_max = false
+    is_max = False
 
     #Inialise bigtree for all subsequent games
-    g.initialize_bigtree(is_max)
+    g.initialize_bigtree()
+
+    #pass is_max based on which player is starting 
+    g.use_bigtree(is_max)
 
     #start playing
     # g.game()
 
-    a = np.array(([['O','O',EMPTY],['X','X',EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
+    a = np.array(([['O',EMPTY,EMPTY],['X','X',EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
 
-    g.agent_next_move(a,-1)
+    g.agent_next_move(a,4)

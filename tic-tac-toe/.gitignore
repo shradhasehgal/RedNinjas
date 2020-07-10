@@ -28,4 +28,10 @@ yarn-error.log*
 /Backend/venv
 /Backend/__pycache__
 
+<<<<<<< 1c8e158f1c760368deabc0061aab6e03cb9478b3
 MinmaxAlgorithm\ /oops/__pycache__/
+=======
+MinmaxAlgorithm\ /oops/__pycache__/
+Integrate/oops/__pycache__/
+/Backend/_pycache_/
+>>>>>>> Include depth 3 and 4 in OOPS
