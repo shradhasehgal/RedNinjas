@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component,useEffect } from 'react'
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
 import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
 // import { Link } from 'react-router-dom'
@@ -36,10 +36,10 @@ export default class Landing extends Component {
                 <i class="fas fa-robot fa-6x orange-text mr-2"></i>
             </div>,
                 WA: <div style={{textAlign:"center"}}>
-                <i class="fas fa-robot fa-6x orange-text fa-spin mr-2"></i>
+                <i class="fas fa-robot fa-6x light-green-text fa-spin mr-2"></i>
             </div>,
                 WH: <div style={{textAlign:"center"}}>
-                <i class="fas fa-user-astronaut fa-6x orange-text fa-spin mr-2"></i>
+                <i class="fas fa-user-astronaut fa-6x green-text fa-spin mr-2"></i>
             </div>
               },
               win : false,
@@ -47,20 +47,9 @@ export default class Landing extends Component {
         }
     }
 
-
-    handleCellClick = (e,cell) => {
-
-        console.log("The clicked cell is : ",cell)
-        // console.log(Math.floor(cell/3))
-        // console.log(cell%3)
-        if(this.state.startGameValue && this.state.win === false)
-        {
-            let copy_board = this.state.board.slice();
-            if(copy_board[Math.floor(cell/3)][cell%3] === '')
-            {
-                copy_board[Math.floor(cell/3)][cell%3] = 'O'
-            }
-            for(let i = 0; i < 3; i++)
+    check_win(copy_board)
+    {
+        for(let i = 0; i < 3; i++)
             {
                 if(copy_board[i][0] === copy_board[i][1] && copy_board[i][0] === copy_board[i][2] && copy_board[i][1] === copy_board[i][2] && copy_board[i][0] !== "")
                 {
@@ -140,20 +129,41 @@ export default class Landing extends Component {
                     win : true
                 })
             }
+    }
+
+    handleCellClick = (e,cell) => {
+
+        if(this.state.startGameValue && this.state.win === false)
+        {
+            let copy_board = this.state.board.slice();
+            if(copy_board[Math.floor(cell/3)][cell%3] === '')
+            {
+                copy_board[Math.floor(cell/3)][cell%3] = 'O'
+            }
+
+            this.check_win(copy_board);
+
             this.setState({
                 board : copy_board
             })
 
-            console.log(this.state.board)
-
             const sendData = {
-                gameBeginner: this.state.gameBeginner,
-                board: this.state.board
+                // gameBeginner: this.state.gameBeginner,
+                board: this.state.board,
+                depth: this.state.depth
             }
 
-            axios.post('http://localhost:5000/',sendData) //route to filled according to flask route name
+
+            // useEffect(()=> {
+            //     fetch("/agent").then(response => 
+            //         response.json().then(data => {
+            //             console.log(data)
+            //         }))
+            // },[])
+
+            axios.get('http://127.0.0.1:5000/',sendData) //route to filled according to flask route name
             .then(res=> {
-                console.log(res.data);
+                console.log(Response)
                 // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
 
                 // this.setState({
@@ -171,7 +181,6 @@ export default class Landing extends Component {
 
     handleStartHuman = (e) => {
         console.log('Human begins the game!')
-
         this.setState({
             gameBeginner : 'HUMAN'
         })
@@ -180,7 +189,6 @@ export default class Landing extends Component {
 
     handleStartAgent = (e) => {
         console.log('Agent begins the game!')
-
         this.setState({
             gameBeginner : 'AGENT'
         })
@@ -216,9 +224,23 @@ export default class Landing extends Component {
                 gameBeginner : '',
                 whoPlaysFirstDialog : false,
                 startGameButton : "Start Game",
-                startGameValue : false
+                startGameValue : false,
+                depth : ''
             })
         }
+    }
+
+    handleDepth = (e,depth_selected) => {
+        // console.log(depth_selected)
+        // console.log(this.state.depth)
+
+        if(this.state.depth === '')
+        {
+            this.setState ({
+                depth : depth_selected
+            })
+        }
+        // console.log(this.state.depth)
     }
 
     render () {
@@ -285,11 +307,11 @@ export default class Landing extends Component {
                     </div>
 
                     <ButtonGroup aria-label="Basic example">
-                        <Button variant="secondary" onClick={}>Depth 1</Button>
-                        <Button variant="secondary" onClick={}>Depth 2</Button>
-                        <Button variant="secondary" onClick={}>Depth 3</Button>
-                        <Button variant="secondary" onClick={}>Depth 4</Button>
-                        <Button variant="secondary" onClick={}>Ultimate</Button>
+                        <Button variant="default" onClick = {e=>this.handleDepth(e,1)}>Depth 1</Button>
+                        <Button variant="default" onClick = {e=>this.handleDepth(e,2)}>Depth 2</Button>
+                        <Button variant="default" onClick = {e=>this.handleDepth(e,3)}>Depth 3</Button>
+                        <Button variant="default" onClick = {e=>this.handleDepth(e,4)}>Depth 4</Button>
+                        <Button variant="default" onClick = {e=>this.handleDepth(e,5)}>Ultimate</Button>
 
                     </ButtonGroup>
 
@@ -325,3 +347,5 @@ const startButton = {
     // right : 0
     // left:50
 }
+
+// "proxy": "http://127.0.0.1:5000/"
