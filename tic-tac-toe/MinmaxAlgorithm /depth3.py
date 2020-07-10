@@ -104,7 +104,7 @@ def calc_score(b,row,coloumn):
                 score += flag_row
                 flag_row +=1  
             elif b[row][j]!=EMPTY :
-                score = score - 2 
+                score = score - 1
 
                 
     #checking the element in the same coloumn 
@@ -115,7 +115,7 @@ def calc_score(b,row,coloumn):
                 score +=flag_coloumn
                 flag_coloumn +=1   
             if b[row][j]!=EMPTY :
-                score = score - 2
+                score = score - 1 
 
 
     #checking the element in the diagonal 
@@ -195,9 +195,9 @@ def choose_optimal_move(board):
                 board[i][j]=AGENT
                 
                 # move_val = 0.33*(calc_score(board,i,j))+minimax(board,1,i,j,False)
-                # move_val = max(calc_score(board,i,j),minimax(board,1,i,j,False)) 
+                move_val = max(calc_score(board,i,j),minimax(board,1,i,j,False)) 
                 # move_val = calc_score(board,i,j) + minimax(board,1,i,j,False)
-                move_val = minimax(board,1,i,j,False)
+                # move_val = minimax(board,1,i,j,False)
 
                 print(i,j,calc_score(board,i,j),minimax(board,1,i,j,False),move_val)
                 #Player unmove?
