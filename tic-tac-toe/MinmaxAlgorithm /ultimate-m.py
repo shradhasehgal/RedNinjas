@@ -128,7 +128,44 @@ def is_moves_left(board):
                         return True
     return False
 
-def calc_score(b):
+# def calc_score(b):
+#     for i in range(0,3):
+#         for j in range(0,3):
+#             sb = b[i][j]
+#             for r in range(0,3):
+#                 if sb[r][0] == sb[r][1] == sb[r][2] != EMPTY:
+#                     if sb[r][0] == AGENT:
+#                         return MAX_UTIL
+#                     else:
+#                         return -MAX_UTIL
+
+#             for c in range(0,3):
+#                 if sb[0][c] == sb[1][c] == sb[2][c] != EMPTY :
+#                     if sb[0][c] == AGENT:
+#                         return MAX_UTIL
+#                     else:
+#                         return -MAX_UTIL
+
+#             if sb[0][0]==sb[1][1]==sb[2][2] != EMPTY :
+#                 if sb[0][0] == AGENT:
+#                     return MAX_UTIL
+#                 else:
+#                     return -MAX_UTIL
+
+#             if sb[0][2]==sb[1][1]==sb[2][0] != EMPTY :
+#                 if sb[0][2] == AGENT:
+#                     return MAX_UTIL
+#                 else:
+#                     return -MAX_UTIL
+
+#     return 0
+
+def calc_score(board):
+    current_checkboard= np.zeros((3,3),dtype=str)
+    for i in range(3):
+        for j in range(3):
+            current_checkboard[i][j]=EMPTY
+    #creating global board for win 
     for i in range(0,3):
         for j in range(0,3):
             sb = b[i][j]
@@ -237,7 +274,7 @@ def choose_optimal_move(board,previous_move):
     CurrentSmallBoardColoumn = previous_move[3]
     print("Currentsmallboard",CurrentSmallBoardRow,CurrentSmallBoardColoumn)
 
-    if checkboard[CurrentSmallBoardRow][CurrentSmallBoardColoumn]==EMPTY : 
+    if (CurrentSmallBoardRow!=-1 and CurrentSmallBoardColoumn != -1) and (checkboard[CurrentSmallBoardRow][CurrentSmallBoardColoumn]==EMPTY) : 
     
         optimal_val = -math.inf
 
@@ -294,30 +331,55 @@ def choose_optimal_move(board,previous_move):
             
 
 
-def human_turn(board):
-    current_move = np.zeros((4,), dtype=int)
-
+def human_turn(board,previous_move):
+    current_move = np.array(([-1,-1,-1,-1]), dtype=int)
     printBoard(theBoard)
     print("It's your turn," + HUMAN + ".Move to which place?")
             
     while(True):
         gr , gc = [int(x) for x in input("Enter Global row and coloumn: ").split()] 
         sr , sc = [int(x) for x in input("Enter small row and small coloumn: ").split()] 
-        if checkboard[gr][gc]==EMPTY:
-            if theBoard[gr][gc][sr][sc] == EMPTY:
-                theBoard[gr][gc][sr][sc] = HUMAN
-                temp_move=list()
-                temp_move.extend([gr,gc,sr,sc])
-                current_move=temp_move
-                break
-        else:
-            print("That place is already filled.\nMove to which place?")
-            continue
+        if (previous_move[2]!=-1 and previous_move[3] != -1) and (checkboard[previous_move[2]][previous_move[3]]==EMPTY) : # the user has to definitely place in this square
+            print("111")
+            if gr==previous_move[2] and gc==previous_move[3]: #the user has choosen the correct smallboard
+                print("222")
+                if theBoard[gr][gc][sr][sc] == EMPTY:
+                    print("333")
+                    theBoard[gr][gc][sr][sc] = HUMAN
+                    temp_move=list()
+                    temp_move.extend([gr,gc,sr,sc])
+                    current_move=temp_move
+                    break
+                else :
+                    print("444")
+                    print("That place is already filled.\nMove to which place?")
+                    continue
+
+            else :
+                print("555")
+                print("Wrong small board")
+                continue
+
+        else :
+            print("666")
+            if checkboard[gr][gc]==EMPTY:
+                print("7777")
+                if theBoard[gr][gc][sr][sc] == EMPTY:
+                    print("888")
+                    theBoard[gr][gc][sr][sc] = HUMAN
+                    temp_move=list()
+                    temp_move.extend([gr,gc,sr,sc])
+                    current_move=temp_move
+                    break
+            else:
+                print("999")
+                print("That place is already filled.\nMove to which place?")
+                continue
 
     return current_move
 
 def agent_turn(board,previous_move):
-    current_move = np.zeros((4,), dtype=int)
+    current_move = np.array(([-1,-1,-1,-1]), dtype=int)
     printBoard(theBoard)
     print(AGENT + " is moving please wait ...")
     
@@ -332,7 +394,7 @@ def agent_turn(board,previous_move):
 # Now we'll write the main function which has all the gameplay functionality.
 def game():
 
-    previous_move= np.zeros((4,), dtype=int)
+    previous_move= np.array(([-1,-1,-1,-1]), dtype=int)
     set_up_board()
     turn = HUMAN
     count = 0
