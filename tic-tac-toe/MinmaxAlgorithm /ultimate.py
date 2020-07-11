@@ -12,6 +12,7 @@ import numpy as np
 global BigTree 
 theBoard = np.zeros((3,3),dtype=object)
 checkboard= np.zeros((3,3),dtype=str)
+previous_move = np.zeros((4,), dtype=int)
 board_keys = []
 HUMAN = 'X'
 AGENT = 'O'
@@ -154,7 +155,7 @@ def calc_score(b):
     return 0
 
 
-def minimax(board,depth,is_max):
+def minimax(board,depth,rowindex,coloumnindex,is_max):
     
     score = calc_score(board)
 
@@ -169,53 +170,115 @@ def minimax(board,depth,is_max):
 
     if is_max :
 
-        best_val = -math.inf
+        if checkboard[rowindex][coloumnindex]==EMPTY:
 
-        for i in range(0,3):
-            for j in range(0,3):
-                if(board[i][j]==EMPTY):
-                    board[i][j] = AGENT
-                    best_val = max(best_val,minimax(board,depth+1,not(is_max)))
-                    board[i][j]=EMPTY
+            best_val = -math.inf
+
+            for i in range(0,3):
+                for j in range(0,3):
+                    if(board[rowindex][coloumnindex][i][j]==EMPTY):
+                        board[rowindex][coloumnindex][i][j] = AGENT
+                        best_val = max(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                        board[i][j]=EMPTY
+        
+        else :
+
+            for m in range(0,3):
+                for n in range(0,3):
+                    if checkboard[i][j]==EMPTY:
+                        for i in range(0,3):
+                            for j in range(0,3):
+                                 if(board[m][n][i][j]==EMPTY):
+                                    board[m][n][i][j] = AGENT
+                                    best_val = max(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                                    board[i][j]=EMPTY
 
         return best_val
 
     else:
 
-        best_val = math.inf
+        if checkboard[rowindex][coloumnindex]==EMPTY:
 
-        for i in range(0,3):
-            for j in range(0,3):
-                if(board[i][j]==EMPTY):
-                    board[i][j] = HUMAN
-                    best_val = min(best_val,minimax(board,depth+1,not(is_max)))
-                    board[i][j]=EMPTY
+            best_val = math.inf
+
+            for i in range(0,3):
+                for j in range(0,3):
+                    if(board[rowindex][coloumnindex][i][j]==EMPTY):
+                        board[rowindex][coloumnindex][i][j] = AGENT
+                        best_val = min(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                        board[i][j]=EMPTY
+        
+        else :
+
+            for m in range(0,3):
+                for n in range(0,3):
+                    if checkboard[i][j]==EMPTY:
+                        for i in range(0,3):
+                            for j in range(0,3):
+                                 if(board[m][n][i][j]==EMPTY):
+                                    board[m][n][i][j] = AGENT
+                                    best_val = min(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                                    board[i][j]=EMPTY
 
         return best_val
 
+        
+
 
 def choose_optimal_move(board):
+
+    CurrentSmallBoardRow = previous_move[2]
+    CurrentSmallBoardColoumn = previous_move[3]
+
+    if checkboard[CurrentSmallBoardRow][CurrentSmallBoardColoumn]==EMPTY : 
     
-    optimal_val = -math.inf
+        optimal_val = -math.inf
 
-    for i in range(0,3):
-        for j in range(0,3):
-            
-            if(board[i][j]==EMPTY):
-
-                #Player move? 
-                board[i][j]=AGENT
+        for i in range(0,3):
+            for j in range(0,3):
                 
-                move_val = minimax(board,0,False)
+                if(board[i][j]==EMPTY):
 
-                #Player unmove?
-                board[i][j]=EMPTY
-            
-                if move_val > optimal_val:
+                    #Player move? 
+                    board[i][j]=AGENT
+                    
+                    move_val = minimax(board,0,i,j,False)
 
-                    best_val_row = i
-                    best_val_col = j
-                    optimal_val = move_val
+                    #Player unmove?
+                    board[i][j]=EMPTY
+                
+                    if move_val > optimal_val:
+
+                        best_val_row = i
+                        best_val_col = j
+                        optimal_val = move_val
+
+    else :
+
+        optimal_val = -math.inf
+
+        for m in range(0,3):
+            for n in range(0,3):
+                if checkboard[m][n]==EMPTY:
+                    for i in range(0,3):
+                        for j in range(0,3):
+                            
+                            if(board[i][j]==EMPTY):
+
+                                #Player move? 
+                                board[i][j]=AGENT
+                                
+                                move_val = minimax(board,0,i,j,False)
+
+                                #Player unmove?
+                                board[i][j]=EMPTY
+                            
+                                if move_val > optimal_val:
+
+                                    best_val_row = i
+                                    best_val_col = j
+                                    optimal_val = move_val
+
 
     return best_val_row, best_val_col, optimal_val
             
@@ -231,6 +294,9 @@ def human_turn(board):
         sr , sc = [int(x) for x in input("Enter small row and small coloumn: ").split()] 
         if theBoard[gr][gc][sr][sc] == EMPTY:
             theBoard[gr][gc][sr][sc] = HUMAN
+            temp_move=list()
+            temp_move.extend([gr,gc,sr,sc])
+            previous_move=temp_move
             break
         else:
             print("That place is already filled.\nMove to which place?")
@@ -240,8 +306,11 @@ def agent_turn(board):
     printBoard(theBoard)
     print(AGENT + " is moving please wait ...")
     
-    r,c,val = choose_optimal_move(board)
-    theBoard[r][c] = AGENT
+    gr,gc,sr,sc = choose_optimal_move(board)
+    temp_move=list()
+    temp_move.extend([gr,gc,sr,sc])
+    previous_move=temp_move
+    theBoard[gr][gc][sr][sc] = AGENT
 
 # Now we'll write the main function which has all the gameplay functionality.
 def game():
