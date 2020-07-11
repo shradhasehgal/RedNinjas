@@ -61,10 +61,15 @@ class Game ():
         self.board_obj.clear_board()
     
 
-    def agent_next_move(self, board, depth_type):
+    def agent_next_move(self, board, depth_type, is_max):
         self.board_obj.board = board
         print("self == ", self.board_obj.board)
-        r,c = self.agent_obj.agent_turn(self.board_obj,self.minimax_obj,self.bigtree_obj,depth_type)
+
+        #use appropriate big tree based on whoever starts first
+        if is_max : 
+            r,c = self.agent_obj.agent_turn(self.board_obj,self.minimax_obj,self.bigtree_obj_agent_start,depth_type)
+        else:
+            r,c = self.agent_obj.agent_turn(self.board_obj,self.minimax_obj,self.bigtree_obj_human_start,depth_type)
         win = self.check_win()
 
         print(r,c,win)
@@ -137,4 +142,4 @@ if __name__ == '__main__':
 
     a = np.array(([['O',EMPTY,EMPTY],['X','X',EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
 
-    g.agent_next_move(a,3)
+    g.agent_next_move(a,-1, is_max)
