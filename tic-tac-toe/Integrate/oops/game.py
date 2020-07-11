@@ -137,4 +137,4 @@ if __name__ == '__main__':
 
     a = np.array(([['O',EMPTY,EMPTY],['X','X',EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
 
-    g.agent_next_move(a,4)
+    g.agent_next_move(a,3)
