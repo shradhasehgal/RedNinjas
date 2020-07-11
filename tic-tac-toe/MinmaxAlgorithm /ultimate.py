@@ -237,20 +237,21 @@ def choose_optimal_move(board):
         for i in range(0,3):
             for j in range(0,3):
                 
-                if(board[i][j]==EMPTY):
+                if(board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]==EMPTY):
 
                     #Player move? 
-                    board[i][j]=AGENT
-                    
+                    board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=AGENT
                     move_val = minimax(board,0,i,j,False)
 
                     #Player unmove?
-                    board[i][j]=EMPTY
+                    board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=EMPTY
                 
                     if move_val > optimal_val:
 
-                        best_val_row = i
-                        best_val_col = j
+                        best_global_row=CurrentSmallBoardRow
+                        best_global_coloumn=CurrentSmallBoardColoumn
+                        best_small_row = i
+                        best_small_col = j
                         optimal_val = move_val
 
     else :
@@ -263,24 +264,26 @@ def choose_optimal_move(board):
                     for i in range(0,3):
                         for j in range(0,3):
                             
-                            if(board[i][j]==EMPTY):
+                            if(board[m][n][i][j]==EMPTY):
 
                                 #Player move? 
-                                board[i][j]=AGENT
+                                board[m][n][i][j]=AGENT
                                 
                                 move_val = minimax(board,0,i,j,False)
 
                                 #Player unmove?
-                                board[i][j]=EMPTY
+                                board[m][n][i][j]=EMPTY
                             
                                 if move_val > optimal_val:
 
-                                    best_val_row = i
-                                    best_val_col = j
+                                    best_global_row=m
+                                    best_global_coloumn=n 
+                                    best_small_row = i
+                                    best_small_col = j
                                     optimal_val = move_val
 
 
-    return best_val_row, best_val_col, optimal_val
+    return best_global_row,best_global_coloumn,best_small_row,best_small_col
             
 
 
