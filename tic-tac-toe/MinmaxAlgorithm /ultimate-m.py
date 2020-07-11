@@ -12,7 +12,8 @@ import numpy as np
 global BigTree 
 theBoard = np.zeros((3,3),dtype=object)
 # checkboard= np.zeros((3,3),dtype=str)
-previous_move = np.zeros((4,), dtype=int)
+# global previous_move 
+# previous_move = np.zeros((4,), dtype=int)
 board_keys = []
 HUMAN = 'X'
 AGENT = 'O'
@@ -190,7 +191,7 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
             for m in range(0,3):
                 for n in range(0,3):
                     if checkboard[m][n]==EMPTY:
-                        print("m,n",m,n)
+                        # print("m,n",m,n)
                         for i in range(0,3):
                             for j in range(0,3):
                                  if(board[m][n][i][j]==EMPTY):
@@ -218,7 +219,6 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
             for m in range(0,3):
                 for n in range(0,3):
                     if checkboard[m][n]==EMPTY:
-                        print("m,n",m,n)
                         for i in range(0,3):
                             for j in range(0,3):
                                  if(board[m][n][i][j]==EMPTY):
@@ -231,10 +231,11 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
         
 
 
-def choose_optimal_move(board):
-
+def choose_optimal_move(board,previous_move):
+    
     CurrentSmallBoardRow = previous_move[2]
     CurrentSmallBoardColoumn = previous_move[3]
+    print("Currentsmallboard",CurrentSmallBoardRow,CurrentSmallBoardColoumn)
 
     if checkboard[CurrentSmallBoardRow][CurrentSmallBoardColoumn]==EMPTY : 
     
@@ -294,36 +295,44 @@ def choose_optimal_move(board):
 
 
 def human_turn(board):
-    
+    current_move = np.zeros((4,), dtype=int)
+
     printBoard(theBoard)
     print("It's your turn," + HUMAN + ".Move to which place?")
             
     while(True):
         gr , gc = [int(x) for x in input("Enter Global row and coloumn: ").split()] 
         sr , sc = [int(x) for x in input("Enter small row and small coloumn: ").split()] 
-        if theBoard[gr][gc][sr][sc] == EMPTY:
-            theBoard[gr][gc][sr][sc] = HUMAN
-            temp_move=list()
-            temp_move.extend([gr,gc,sr,sc])
-            previous_move=temp_move
-            break
+        if checkboard[gr][gc]==EMPTY:
+            if theBoard[gr][gc][sr][sc] == EMPTY:
+                theBoard[gr][gc][sr][sc] = HUMAN
+                temp_move=list()
+                temp_move.extend([gr,gc,sr,sc])
+                current_move=temp_move
+                break
         else:
             print("That place is already filled.\nMove to which place?")
             continue
 
-def agent_turn(board):
+    return current_move
+
+def agent_turn(board,previous_move):
+    current_move = np.zeros((4,), dtype=int)
     printBoard(theBoard)
     print(AGENT + " is moving please wait ...")
     
-    gr,gc,sr,sc = choose_optimal_move(board)
-    temp_move=list()
-    temp_move.extend([gr,gc,sr,sc])
-    previous_move=temp_move
+    gr,gc,sr,sc = choose_optimal_move(board,previous_move)
+    # temp_move=list()
+    # temp_move.extend([gr,gc,sr,sc])
+    # current_move=temp_move
     theBoard[gr][gc][sr][sc] = AGENT
+
+    # return current_move
 
 # Now we'll write the main function which has all the gameplay functionality.
 def game():
 
+    previous_move= np.zeros((4,), dtype=int)
     set_up_board()
     turn = HUMAN
     count = 0
@@ -331,10 +340,10 @@ def game():
     while(True):
         
         if(turn==HUMAN):
-            human_turn(theBoard)
+            previous_move =human_turn(theBoard)
             count+=1
         else:
-            agent_turn(theBoard)
+            agent_turn(theBoard,previous_move)
             count+=1
         
         did_win = False
