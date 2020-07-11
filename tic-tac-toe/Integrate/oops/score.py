@@ -99,26 +99,26 @@ class Score():
                 if b[r][0] == AGENT:
                     return MAX_UTIL
                 else:
-                    return 0 
+                    return -MAX_UTIL/2
 
         for c in range(0,3):
             if b[0][c] == b[1][c] == b[2][c] != EMPTY :
                 if b[0][c] == AGENT:
                     return MAX_UTIL
                 else:
-                    return 0 
+                    return -MAX_UTIL/2
 
         if b[0][0]==b[1][1]==b[2][2] != EMPTY :
             if b[0][0] == AGENT:
                 return MAX_UTIL
             else:
-                return 0 
+                return -MAX_UTIL/2
 
         if b[0][2]==b[1][1]==b[2][0] != EMPTY :
             if b[0][2] == AGENT:
                 return MAX_UTIL
-            else:
-                return 0 
+            else :
+                return -MAX_UTIL/2
 
         diagonal=0 
         # Cross-over 
@@ -137,28 +137,32 @@ class Score():
             score=3 
         else :
             score=2 
-
         #Players Win 
         #checking the element in the same row 
         flag_row = 1
         for j in range(0,3):
             if  j!=coloumn:
                 if b[row][j]==b[row][coloumn]:
+                    # print("row1")
                     score += flag_row
                     flag_row +=1  
                 elif b[row][j]!=EMPTY :
-                    score = score - 1
+                    # print("row2")
+                    score = score - 2 
 
                     
         #checking the element in the same coloumn 
         flag_coloumn = 1
+        # print("row  : ",row)
         for i in range(0,3):
             if i!=row :
                 if b[i][coloumn]==b[row][coloumn]:
+                    # print("coloumn1",i)
                     score +=flag_coloumn
                     flag_coloumn +=1   
-                if b[row][j]!=EMPTY :
-                    score = score - 1 
+                elif b[i][coloumn]!=EMPTY :
+                    # print("coloumn2",i)
+                    score = score - 2 
 
 
         #checking the element in the diagonal 
@@ -171,15 +175,17 @@ class Score():
                         coloumn_diff = coloumn - j 
                         if row_diff == coloumn_diff :
                             if b[i][j]==b[row][coloumn]:
+                                # print("diagonal1")
                                 score +=flag_diagonal
                                 flag_diagonal += 1 
                             elif b[i][j]!=EMPTY :
-                                score = score - 2  
+                                # print("diagonal2")
+                                score = score - 1  
 
         if b[row][coloumn]==AGENT :
             return score 
         else :
-            return -score
+            return -score 
     
     def calc_score_depth_4(self,b,row,coloumn):
     
@@ -250,7 +256,7 @@ class Score():
                 if b[i][coloumn]==b[row][coloumn]:
                     score +=flag_coloumn
                     flag_coloumn +=1   
-                if b[row][j]!=EMPTY :
+                elif b[i][coloumn]!=EMPTY :
                     score += other_loss
                     other_loss += 1 
 
