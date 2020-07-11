@@ -20,12 +20,11 @@ AGENT = 'O'
 EMPTY = ' '
 TIE = 'T'
 MAX_UTIL = 10
-MAX_DEPTH = 3
-# checkboard = [
-#         ['X','O','X'],
-#         [EMPTY,'O','O'],
-#         ['X','X','O']
-#     ]
+checkboard = [
+        ['X','X','O'],
+        [EMPTY,'O','X'],
+        ['X','X','O']
+    ]
 
 def set_up_board():
     for i in range(0,3):
@@ -34,6 +33,8 @@ def set_up_board():
             for m in range(0,3):
                 for n in range(0,3):
                     smallboard[m][n]=EMPTY
+                    # if i==0 and m==0 : 
+                    #     smallboard[m][n]=HUMAN
             theBoard[i][j]=smallboard 
 
 
@@ -55,100 +56,63 @@ def printBoard(board):
         if i<2:
             print("-------------------------")
 
-def checkwin_smallboard(smallboard, i,j,check=checkboard):
-
-    small_win_val = -1
-
-    for r in range(0,3):
-        if smallboard[r][0] == smallboard[r][1] == smallboard[r][2] != EMPTY:
-            if smallboard[r][0] == AGENT:
-                check[i][j]=AGENT
-                small_win_val = 1
-            else:
-                check[i][j]=HUMAN
-                small_win_val = 2
-
-    for c in range(0,3):
-        if smallboard[0][c] == smallboard[1][c] == smallboard[2][c] != EMPTY :
-            if smallboard[0][c] == AGENT:
-                check[i][j]=AGENT
-                small_win_val = 1
-            else:
-                check[i][j]=HUMAN
-                small_win_val = 2 
-
-    if smallboard[0][0]==smallboard[1][1]==smallboard[2][2] != EMPTY :
-        if smallboard[0][0] == AGENT:
-            check[i][j]= AGENT
-            small_win_val = 1
-        else:
-            check[i][j] = HUMAN 
-            small_win_val = 2
-
-    if smallboard[0][2]==smallboard[1][1]==smallboard[2][0] != EMPTY :
-        if smallboard[0][2] == AGENT:
-            check[i][j]= AGENT
-            small_win_val = 1
-        else:
-            check[i][j] = HUMAN
-            small_win_val = 2 
-
-    #If all the cells are filled in a small box and no one has won 
-    flag=0
-    for m in range(0,3):
-        for n in range(0,3):
-            if smallboard[m][n]==EMPTY:
-                flag=1
-    if flag==0 :
-        check[i][j]=TIE
-    
-    if(small_win_val == -1):
-        small_win_val = 0
-    print("in small ", check)
-    print(hex(id(check)))
-    print(hex(id(checkboard)))
-    return small_win_val
-
-def checkwin_global(checkboard=checkboard):
-    for r in range(0,3):
-        if checkboard[r][0] == checkboard[r][1] == checkboard[r][2] != EMPTY:
-            if checkboard[r][0] == AGENT:
-                return 1
-            else:
-                return 2
-
-    for c in range(0,3):
-        if checkboard[0][c] == checkboard[1][c] == checkboard[2][c] != EMPTY:
-            if checkboard[0][c] == AGENT:
-                return 1
-            else:
-                return 2
-
-    if checkboard[0][0]==checkboard[1][1]==checkboard[2][2] != EMPTY : 
-        if checkboard[0][0]==AGENT:
-            return 1
-        else:
-            return 2 
-    
-    if checkboard[0][2]==checkboard[1][1]==checkboard[2][0] != EMPTY :
-        if checkboard[0][2] == AGENT:
-            return 1
-        else:
-            return 2 
-
-    return 0
-
 def checkwin(board):
     # Cheking smallboards for win
     for i in range(0,3):
         for j in range(0,3):
             if checkboard[i][j]==EMPTY:
                 smallboard=board[i][j]
-                checkwin_smallboard(smallboard,i,j)
+                for r in range(0,3):
+                    if smallboard[r][0] == smallboard[r][1] == smallboard[r][2] != EMPTY:
+                        if smallboard[r][0] == AGENT:
+                            checkboard[i][j]=AGENT
+                        else:
+                            checkboard[i][j]=HUMAN
+
+                for c in range(0,3):
+                    if smallboard[0][c] == smallboard[1][c] == smallboard[2][c] != EMPTY :
+                        if smallboard[0][c] == AGENT:
+                            checkboard[i][j]=AGENT
+                        else:
+                            checkboard[i][j]=HUMAN 
+
+                if smallboard[0][0]==smallboard[1][1]==smallboard[2][2] != EMPTY :
+                    if smallboard[0][0] == AGENT:
+                        checkboard[i][j]= AGENT
+                    else:
+                        checkboard[i][j] = HUMAN 
+
+                if smallboard[0][2]==smallboard[1][1]==smallboard[2][0] != EMPTY :
+                    if smallboard[0][2] == AGENT:
+                        checkboard[i][j]= AGENT
+                    else:
+                        checkboard[i][j] = HUMAN 
+
+                #If all the cells are filled in a small box and no one has won 
+                flag=0
+                for m in range(0,3):
+                    for n in range(0,3):
+                        if smallboard[m][n]==EMPTY:
+                            flag=1
+                if flag==0 :
+                    checkboard[i][j]=TIE
 
     # checking the globalboard for win 
-    print("returning ", checkwin_global())
-    return checkwin_global()
+    for r in range(0,3):
+        if checkboard[r][0] == checkboard[r][1] == checkboard[r][2] != EMPTY:
+            return 1
+
+    for c in range(0,3):
+        if checkboard[0][c] == checkboard[1][c] == checkboard[2][c] != EMPTY:
+            return 1
+
+    if checkboard[0][0]==checkboard[1][1]==checkboard[2][2] != EMPTY : 
+        return 1 
+    
+    if checkboard[0][2]==checkboard[1][1]==checkboard[2][0] != EMPTY :
+        return 1 
+
+    return 0 
 
 def print_game_over(turn):
     print("\nGame Over.\n")                
@@ -164,53 +128,46 @@ def is_moves_left(board):
                         return True
     return False
 
-
-def calc_score(board):
-    current_checkboard= np.zeros((3,3),dtype=str)
-    for i in range(3):
-        for j in range(3):
-            current_checkboard[i][j]=EMPTY
-
-    #creating global board for win 
+def calc_score(b):
     for i in range(0,3):
         for j in range(0,3):
-                smallboard=board[i][j]
-                print("from calcscore",smallboard)
-                small_win=checkwin_smallboard(smallboard,i,j,current_checkboard)
+            sb = b[i][j]
+            for r in range(0,3):
+                if sb[r][0] == sb[r][1] == sb[r][2] != EMPTY:
+                    if sb[r][0] == AGENT:
+                        return MAX_UTIL
+                    else:
+                        return -MAX_UTIL
 
-    print("currr", current_checkboard)
-    print("lol", checkboard)
+            for c in range(0,3):
+                if sb[0][c] == sb[1][c] == sb[2][c] != EMPTY :
+                    if sb[0][c] == AGENT:
+                        return MAX_UTIL
+                    else:
+                        return -MAX_UTIL
 
-    # checking the globalboard for win 
+            if sb[0][0]==sb[1][1]==sb[2][2] != EMPTY :
+                if sb[0][0] == AGENT:
+                    return MAX_UTIL
+                else:
+                    return -MAX_UTIL
 
-    #if agent wins checkwin_global returns 1 
-    if checkwin_global(current_checkboard) == 1 :
-        return 2*MAX_UTIL
+            if sb[0][2]==sb[1][1]==sb[2][0] != EMPTY :
+                if sb[0][2] == AGENT:
+                    return MAX_UTIL
+                else:
+                    return -MAX_UTIL
 
-    #If the human wins checkwin returns 2
-    elif checkwin_global(current_checkboard) == 2 :
-        return -2*MAX_UTIL
-
-    print("smalllll winnnn", small_win)
-    return small_win
-    # return 0 
+    return 0
 
 
 def minimax(board,depth,rowindex,coloumnindex,is_max):
     score = calc_score(board)
 
-    print("depth = ", depth)
-    if depth == MAX_DEPTH :
-        print("lelele")
+    if score == MAX_UTIL:
         return score
 
-    if score == 2*MAX_UTIL:
-        return score
-
-    if score == -2*MAX_UTIL:
-        return score
-
-    if score == MAX_UTIL or score == -MAX_UTIL:
+    if score == -MAX_UTIL:
         return score
 
     if is_moves_left(board)==False :
@@ -275,12 +232,11 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
 
 
 def choose_optimal_move(board,previous_move):
-    
     CurrentSmallBoardRow = previous_move[2]
     CurrentSmallBoardColoumn = previous_move[3]
     print("Currentsmallboard",CurrentSmallBoardRow,CurrentSmallBoardColoumn)
 
-    if (CurrentSmallBoardRow!=-1 and CurrentSmallBoardColoumn != -1) and (checkboard[CurrentSmallBoardRow][CurrentSmallBoardColoumn]==EMPTY) : 
+    if checkboard[CurrentSmallBoardRow][CurrentSmallBoardColoumn]==EMPTY : 
     
         optimal_val = -math.inf
 
@@ -288,7 +244,6 @@ def choose_optimal_move(board,previous_move):
             for j in range(0,3):
                 
                 if(board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]==EMPTY):
-
                     #Player move? 
                     board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=AGENT
                     move_val = minimax(board,0,i,j,False)
@@ -337,55 +292,30 @@ def choose_optimal_move(board,previous_move):
             
 
 
-def human_turn(board,previous_move):
-    current_move = np.array(([-1,-1,-1,-1]), dtype=int)
+def human_turn(board):
+    current_move = np.zeros((4,), dtype=int)
+
     printBoard(theBoard)
     print("It's your turn," + HUMAN + ".Move to which place?")
             
     while(True):
         gr , gc = [int(x) for x in input("Enter Global row and coloumn: ").split()] 
         sr , sc = [int(x) for x in input("Enter small row and small coloumn: ").split()] 
-        if (previous_move[2]!=-1 and previous_move[3] != -1) and (checkboard[previous_move[2]][previous_move[3]]==EMPTY) : # the user has to definitely place in this square
-            print("111")
-            if gr==previous_move[2] and gc==previous_move[3]: #the user has choosen the correct smallboard
-                print("222")
-                if theBoard[gr][gc][sr][sc] == EMPTY:
-                    print("333")
-                    theBoard[gr][gc][sr][sc] = HUMAN
-                    temp_move=list()
-                    temp_move.extend([gr,gc,sr,sc])
-                    current_move=temp_move
-                    break
-                else :
-                    print("444")
-                    print("That place is already filled.\nMove to which place?")
-                    continue
-
-            else :
-                print("555")
-                print("Wrong small board")
-                continue
-
-        else :
-            print("666")
-            if checkboard[gr][gc]==EMPTY:
-                print("7777")
-                if theBoard[gr][gc][sr][sc] == EMPTY:
-                    print("888")
-                    theBoard[gr][gc][sr][sc] = HUMAN
-                    temp_move=list()
-                    temp_move.extend([gr,gc,sr,sc])
-                    current_move=temp_move
-                    break
-            else:
-                print("999")
-                print("That place is already filled.\nMove to which place?")
-                continue
+        if checkboard[gr][gc]==EMPTY:
+            if theBoard[gr][gc][sr][sc] == EMPTY:
+                theBoard[gr][gc][sr][sc] = HUMAN
+                temp_move=list()
+                temp_move.extend([gr,gc,sr,sc])
+                current_move=temp_move
+                break
+        else:
+            print("That place is already filled.\nMove to which place?")
+            continue
 
     return current_move
 
 def agent_turn(board,previous_move):
-    current_move = np.array(([-1,-1,-1,-1]), dtype=int)
+    current_move = np.zeros((4,), dtype=int)
     printBoard(theBoard)
     print(AGENT + " is moving please wait ...")
     
@@ -400,7 +330,7 @@ def agent_turn(board,previous_move):
 # Now we'll write the main function which has all the gameplay functionality.
 def game():
 
-    previous_move= np.array(([-1,-1,-1,-1]), dtype=int)
+    previous_move= np.zeros((4,), dtype=int)
     set_up_board()
     turn = HUMAN
     count = 0
