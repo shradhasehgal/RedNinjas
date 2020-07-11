@@ -23,7 +23,7 @@ export default class Landing extends Component {
                 ["","X","X"]
             ],
             chosenCell:'',
-            gameBeginner : '',
+            gameBeginner : 'HUMAN',
             startGameValue : false,
             whoPlaysFirstDialog : false,
             startGameButton : "Start Game",
@@ -42,7 +42,7 @@ export default class Landing extends Component {
             </div>
               },
               win : false,
-              depth : '',
+              depth : 2,
               undoStack : []
         }
     }
@@ -204,11 +204,12 @@ export default class Landing extends Component {
                 board : copy_board
             })
 
-            const sendData = {
-                // gameBeginner: this.state.gameBeginner,
-                board: this.state.board,
-                depth: this.state.depth
-            }
+            // const sendData = {
+            //     gameBeginner: this.state.gameBeginner,
+            //     board: this.state.board,
+            //     depth: this.state.depth
+            // }
+
 
 
             // useEffect(()=> {
@@ -217,20 +218,28 @@ export default class Landing extends Component {
             //             console.log(data)
             //         }))
             // },[])
-
-            // axios.get('http://127.0.0.1:5000/',sendData) //route to filled according to flask route name
-            // .then(res=> {
-            //     console.log(Response)
+            // console.log(sendData)
+            axios.get('http://127.0.0.1:5000/agent-turn', {
+                params : {
+                    gameBeginner: this.state.gameBeginner,
+                    board: "'" + this.state.board + "'",
+                    depth: JSON.stringify(this.state.depth)
+                }
+            }) //route to filled according to flask route name
+            .then(res=> {
+                // console.log('hrehj')
+                // console.log(res.status)
+                // console.log(Response)
                 // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
 
                 // this.setState({
-                //     board : copy_resultant_board
+                    // board : copy_resultant_board
                 // })
 
-            // })
-            // .catch(err=>{
-            //     console.log(err);
-            // })
+            })
+            .catch(err=>{
+                console.log(err);
+            })
             } 
         
 
@@ -287,6 +296,39 @@ export default class Landing extends Component {
         }
     }
 
+    handleBeginner = (e) => {
+        this.setState({
+            // startGameButton : "Reset Game",
+            // startGameValue : true
+            gameBeginner : 'HUMAN'
+        })
+        console.log('done')
+
+        axios.get('http://127.0.0.1:5000/first-move', {
+                params : {
+                    gameBeginner: this.state.gameBeginner,
+                    // board: "'" + this.state.board + "'",
+                    // depth: JSON.stringify(this.state.depth)
+                }
+            }) //route to filled according to flask route name
+            .then(res=> {
+                // console.log('hrehj')
+                // console.log(res.status)
+                // console.log(Response)
+                // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
+
+                // this.setState({
+                    // board : copy_resultant_board
+                // })
+
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+            } 
+    // }
+// }
+
 
     handleUndoFeature = (e,index,cell) => {
         let copy_board = this.state.board.slice();
@@ -322,6 +364,7 @@ export default class Landing extends Component {
         }
         // console.log(this.state.depth)
     }
+// }
 
     render () {
         return (
@@ -393,6 +436,8 @@ export default class Landing extends Component {
                     </div>
 
 
+                    <Button variant="default" onClick = {e=>this.handleBeginner(e)}>Beginner</Button>
+                    
 
                     <ButtonGroup aria-label="Basic example">
                         <Button variant="default" onClick = {e=>this.handleDepth(e,1)}>Depth 1</Button>
