@@ -12,16 +12,15 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 
-
 export default class Landing extends Component {
     constructor (props) {
         super(props)
         this.state = {
             show_3x3_BoardComponent : this.props.show_3x3_BoardComponent,
             board:[
-                ["X","",""],
+                ["X","","X"],
                 ["","O",""],
-                ["O","","X"]
+                ["","X","X"]
             ],
             chosenCell:'',
             gameBeginner : '',
@@ -43,9 +42,66 @@ export default class Landing extends Component {
             </div>
               },
               win : false,
-              depth : ''
+              depth : '',
+              undoStack : []
         }
     }
+
+
+
+    // pop()  {
+    //     // return top most element in the stack
+    //     // and removes it from the stack
+    //     // Underflow if stack is empty
+    //     if (this.state.data.length == 0) {
+    //         return "Underflow";
+    //     } else {
+    //     return this.state.data.pop();
+    //     }
+    // }
+
+    //     top () {
+    //       return this.data.length;
+    //     }
+
+    //     push (...element) {
+    //         for (var i of element) {
+    //             return this.state.data.push(i)
+    //         }
+    //     }
+
+    // // peek() method looks at the object at the top of this stack
+    // // without removing it from the stack.  
+    // // The stack is not modified (it does not remove the element; 
+    // // it only returns the element for information purposes).
+
+    //     peek () {
+    //         return this.state.data[this.state.data.length - 1];
+    //     }
+
+    //     clear () {
+    //         return this.state.data = [];
+    //     }
+
+    //     length(){
+    //         // console.log(this.state.data.length)
+    //       return this.state.data.length;
+    //   }
+
+    //     search (value) {
+    //         for (let i = 0; i < this.state.data.length; i++) {
+    //             if (this.state.data[i] === value) {
+    //                 return value;
+    //             } else {
+    //                 return false;
+    //             }
+    //         }
+    //     }
+
+
+
+
+
 
     check_win(copy_board)
     {
@@ -135,6 +191,7 @@ export default class Landing extends Component {
 
         if(this.state.startGameValue && this.state.win === false)
         {
+            this.state.undoStack.push(cell)
             let copy_board = this.state.board.slice();
             if(copy_board[Math.floor(cell/3)][cell%3] === '')
             {
@@ -161,19 +218,19 @@ export default class Landing extends Component {
             //         }))
             // },[])
 
-            axios.get('http://127.0.0.1:5000/',sendData) //route to filled according to flask route name
-            .then(res=> {
-                console.log(Response)
+            // axios.get('http://127.0.0.1:5000/',sendData) //route to filled according to flask route name
+            // .then(res=> {
+            //     console.log(Response)
                 // copy_resultant_board = res.data.resultant_board.slice();       /////// will uncomment when backend and frontend are bound together because for now this will give error
 
                 // this.setState({
                 //     board : copy_resultant_board
                 // })
 
-            })
-            .catch(err=>{
-                console.log(err);
-            })
+            // })
+            // .catch(err=>{
+            //     console.log(err);
+            // })
             } 
         
 
@@ -228,6 +285,29 @@ export default class Landing extends Component {
                 depth : ''
             })
         }
+    }
+
+
+    handleUndoFeature = (e,index,cell) => {
+        let copy_board = this.state.board.slice();
+        let copy_undoStack = this.state.undoStack.slice();
+
+
+        let totalOfUndoButtons = copy_undoStack.length
+        let buttonsToErase = totalOfUndoButtons - (index+1);
+        console.log(totalOfUndoButtons)
+        console.log(buttonsToErase)
+
+        for(let i = 0; i <= buttonsToErase; i++)
+        {
+            copy_board[Math.floor(copy_undoStack[copy_undoStack.length - 1]/3)][copy_undoStack[copy_undoStack.length - 1]%3] = ''
+            copy_undoStack.pop()
+        }
+        this.setState({
+            board : copy_board,
+            undoStack : copy_undoStack
+        })
+        // console.log(this.length())
     }
 
     handleDepth = (e,depth_selected) => {
@@ -293,18 +373,26 @@ export default class Landing extends Component {
                 }
                 </Container>
             </Container>
-                    
-                    {/* <div style={{textAlign:"center"}}>
-                        <i class="fas fa-user-astronaut fa-7x orange-text mr-3" onClick={e=>this.handleStartHuman(e)}></i>
-                    </div>
-                    
-                    <div style={{}}>
-                        <i class="fas fa-robot fa-7x orange-text fa-spin" onClick={e=>this.handleStartAgent(e)}></i>
-                    </div> */}
+
+
+
+
+                <Container fluid='true'>
+                {
+                    this.state.undoStack.map((cell,i)=>(
+                        <Button onClick = {e=>this.handleUndoFeature(e,i,cell)}>{i+1}</Button>
+                    ))
+                }
+                </Container>
+
+
+
 
                     <div style = {{}}>
                         <Button variant="info" size="lg" style={{startButton}} onClick={e=>this.handleStartGame(e,this.state.startGameButton)}>{this.state.startGameButton}</Button>{' '}
                     </div>
+
+
 
                     <ButtonGroup aria-label="Basic example">
                         <Button variant="default" onClick = {e=>this.handleDepth(e,1)}>Depth 1</Button>
@@ -323,6 +411,7 @@ export default class Landing extends Component {
   }
 }
 
+// var stack = new Landing();
 
 const cellStyle = {
   backgroundColor: 'black',
