@@ -9,7 +9,6 @@ import ast
 
 app = Flask(__name__, static_folder='Frontend/build', static_url_path='/')
 CORS(app)
-# cors = CORS(app, resources={r"/Backend/*": {"origins": "*"}})
 
 @app.route('/')
 def index():
@@ -34,5 +33,4 @@ def agent_turn():
 if __name__ == "__main__": 
     g = Game()
     g.initialize_bigtree()
-    print("TRIAL")
     app.run(host='0.0.0.0', port = sys.argv[1])
