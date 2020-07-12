@@ -3,11 +3,11 @@ from flask_cors import CORS
 import requests
 import numpy as np
 import sys
-sys.path.insert(1, '../Integrate/oops')
+sys.path.insert(1, 'Integrate/oops')
 from game import *
 import ast
 
-app = Flask(__name__, static_folder='../Frontend/build', static_url_path='/')
+app = Flask(__name__, static_folder='Frontend/build', static_url_path='/')
 CORS(app)
 # cors = CORS(app, resources={r"/Backend/*": {"origins": "*"}})
 
