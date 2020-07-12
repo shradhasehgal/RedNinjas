@@ -26,7 +26,9 @@ export default class GameStarter extends Component {
     render () 
     {
         return (
-                <div style = {{}}>
+          <div style = {{}}>
+
+          {/* <section style = {sectionStyle}></section> */}
                 <Button variant="info" size="lg" 
                 onClick = {() => {
                   this.setState ({
@@ -50,5 +52,11 @@ export default class GameStarter extends Component {
     }
 }
 
+
+// var sectionStyle = {
+//   width: "100%",
+//   height: "400px",
+//   backgroundImage: "url(" + "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Fastronaut-standing-at-mars-vector-19656662&psig=AOvVaw2xG1bjZqrv24uSLeNYwXMg&ust=1594645072145000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjYl5Dix-oCFQAAAAAdAAAAABAI" + ")"
+// };
 {/* <MDBIcon icon="space-shuttle" /> */}
 {/* <MDBIcon icon="rocket" /> */}

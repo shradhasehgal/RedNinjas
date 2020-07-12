@@ -183,8 +183,8 @@ export default class Landing extends Component {
 
     if (
       copy_board[0][2] === copy_board[1][1] &&
-      copy_board[0][2] === copy_board[1][1] &&
       copy_board[0][2] === copy_board[2][0] &&
+      copy_board[1][1] === copy_board[2][0] &&
       copy_board[0][2] !== " "
     ) {
       if (copy_board[0][2] === "O") {
@@ -222,7 +222,7 @@ export default class Landing extends Component {
         board: JSON.stringify(this.state.board),
         depth: JSON.stringify(this.state.depth),
       }
-
+      
       // useEffect(()=> {
       //     fetch("/agent").then(response =>
       //         response.json().then(data => {
@@ -233,7 +233,7 @@ export default class Landing extends Component {
       if(this.state.win === false)
       {
         axios
-        .get("http://127.0.0.1:5000/agent-turn", {
+        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
           params: {
             gameBeginner: this.state.gameBeginner,
             board: JSON.stringify(this.state.board),
@@ -243,7 +243,6 @@ export default class Landing extends Component {
         .then((res) => {
 
           let copy_board = this.state.board.slice();
-          // console.log("hrehj");
           console.log(res.status)
           console.log(res)
           console.log(copy_board)
@@ -308,16 +307,9 @@ export default class Landing extends Component {
 
   handleBeginner = (e) => {
     this.setState({
-      // startGameButton : "Reset Game",
-      // startGameValue : true
       gameBeginner: "HUMAN",
     });
-    console.log('done');
-    console.log("done");
-    console.log("done");
   };
-  // }
-  // }
 
   handleUndoFeature = (e, index, cell) => {
     let copy_board = this.state.board.slice();
@@ -350,35 +342,14 @@ export default class Landing extends Component {
         depth: depth_selected,
       });
     }
-    // console.log(this.state.depth)
   };
-  // }
 
   render() {
     return (
-      //        <div>
-      //     {/* /* Sky adapts size to its container */ }
-      //     <Sky
-      //       images={{
-      //         /* FORMAT AS FOLLOWS */
-      //         0: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Fspace-background-night-sky-and-stars-black-and-vector-10884328&psig=AOvVaw1x5pVx5xBTuJgJu_FU5Ni6&ust=1594332363722000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLintIXVvuoCFQAAAAAdAAAAABAD'
-      //       }}
-      //       how={130} /* You have to pass a number so Sky will render that amount of images chosen randomly from the object you passed in the previous step */
-      //       time={40} /* time of the animation. Dfaults at 20s */
-      //       size={'100px'} /* size of the rendered images. Defaults at 150px */
-      //       background={'palettedvioletred'} /* color of background. Defaults to none */
-      //     />
-      // {/* //   </div> */}
-      // <div>
-      // <a style={{backgroundColor: bgColors.Yellow}}>yellow</a>
 
       <div
         style={{
           marginTop: "5%",
-          // <div style ={{
-          // backgroundColor: 'black',
-          // width: '1900px',
-          // height: '945px'
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -394,9 +365,6 @@ export default class Landing extends Component {
                     style={cellStyle}
                     onClick={(e) => this.handleCellClick(e, 3 * i + j)}
                   >
-                    {/* {<div style={{textAlign:"center"}}>
-                        <i class="fas fa-user-astronaut fa-7x orange-text fa-spin mr-3" onClick={e=>this.handleStartHuman(e)}></i>
-                    </div>} */}
                     {this.state.symbol[this.state.board[i][j]]}
                   </Col>
                 ))}

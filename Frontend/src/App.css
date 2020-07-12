@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  background-image: url("./astronaut-standing-at-mars.jpg");
+  /* background-color: 'pink'; */
+  position: fixed; 
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center; 
 }
 
 .App-logo {
@@ -36,3 +43,4 @@
     transform: rotate(360deg);
   }
 }
+
