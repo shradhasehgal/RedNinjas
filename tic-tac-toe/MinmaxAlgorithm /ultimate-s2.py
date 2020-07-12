@@ -135,6 +135,15 @@ def is_moves_left(board):
 
 
 def calc_score(board,rowindex,coloumnindex):
+<<<<<<< bd75a1a55d496b8f87f224064d055dc4b3d667cd
+=======
+    print(rowindex,coloumnindex)
+    print("")
+    # print(board[1][1])
+    # print("")
+    # smallboard=board[1][1] 
+    # print(smallboard)
+>>>>>>> ChangedcalscoreFunction
     current_checkboard= np.zeros((3,3),dtype=str)
     for i in range(3):
         for j in range(3):
@@ -143,11 +152,22 @@ def calc_score(board,rowindex,coloumnindex):
     score = 0 
     #creating global board for win 
     for i in range(0,3):
+<<<<<<< bd75a1a55d496b8f87f224064d055dc4b3d667cd
         for j in range(0,3): 
             smallboard=board[i][j] 
             # print(smallboard)
             for r in range(0,3):
                 if smallboard[r][0] == smallboard[r][1] == smallboard[r][2] != EMPTY:
+=======
+        for j in range(0,3):
+            print(i,j)
+            smallboardwin=0 
+            smallboard=board[i][j] 
+            print(smallboard)
+            for r in range(0,3):
+                if smallboard[r][0] == smallboard[r][1] == smallboard[r][2] != EMPTY:
+                    smallboardwin=1
+>>>>>>> ChangedcalscoreFunction
                     if smallboard[r][0] == AGENT:
                         current_checkboard[i][j]=AGENT
                         score+=MAX_UTIL
@@ -157,6 +177,10 @@ def calc_score(board,rowindex,coloumnindex):
 
             for c in range(0,3):
                 if smallboard[0][c] == smallboard[1][c] == smallboard[2][c] != EMPTY :
+<<<<<<< bd75a1a55d496b8f87f224064d055dc4b3d667cd
+=======
+                    smallboardwin=1
+>>>>>>> ChangedcalscoreFunction
                     if smallboard[0][c] == AGENT:
                         current_checkboard[i][j]=AGENT
                         score+=MAX_UTIL
@@ -165,6 +189,10 @@ def calc_score(board,rowindex,coloumnindex):
                         score-=MAX_UTIL 
 
             if smallboard[0][0]==smallboard[1][1]==smallboard[2][2] != EMPTY :
+<<<<<<< bd75a1a55d496b8f87f224064d055dc4b3d667cd
+=======
+                smallboardwin=1
+>>>>>>> ChangedcalscoreFunction
                 if smallboard[0][0] == AGENT:
                     current_checkboard[i][j]= AGENT
                     score+=MAX_UTIL
@@ -173,6 +201,10 @@ def calc_score(board,rowindex,coloumnindex):
                     score-=MAX_UTIL
 
             if smallboard[0][2]==smallboard[1][1]==smallboard[2][0] != EMPTY :
+<<<<<<< bd75a1a55d496b8f87f224064d055dc4b3d667cd
+=======
+                smallboardwin=1 
+>>>>>>> ChangedcalscoreFunction
                 if smallboard[0][2] == AGENT:
                     current_checkboard[i][j]= AGENT
                     score+=MAX_UTIL
@@ -189,6 +221,79 @@ def calc_score(board,rowindex,coloumnindex):
             if flag==0 :
                 current_checkboard[i][j]=TIE
 
+<<<<<<< bd75a1a55d496b8f87f224064d055dc4b3d667cd
+=======
+            # if the smallboard is not in a win state , then use utility functions as in case of depth4
+            cur_score=0
+            if smallboardwin==0 :
+                print("innnn")
+                diagonal=0     
+                #Cross-over 
+                if rowindex==coloumnindex :
+                    diagonal=1
+                    if rowindex==1:
+                        cur_score=4
+                    else :
+                        cur_score=3 
+
+                if rowindex==2 and coloumnindex==0 :
+                    diagonal=1
+                    cur_score=3
+                elif rowindex==0 and coloumnindex==2 :
+                    diagonal=1
+                    cur_score=3 
+                else :
+                    cur_score=2 
+
+                #Players Win + Opponents loss
+                #checking the element in the same row 
+                flag_row = 1
+                other_loss = 1
+                for j in range(0,3):
+                    if  j!=coloumnindex:
+                        if smallboard[rowindex][j]==smallboard[rowindex][coloumnindex]:
+                            cur_score += flag_row
+                            flag_row +=1  
+                        elif smallboard[rowindex][j]!=EMPTY :
+                            cur_score += other_loss
+                            other_loss += 1 
+
+                
+                #checking the element in the same coloumn 
+                flag_coloumn = 1
+                other_loss = 1
+                for i in range(0,3):
+                    if i!=rowindex :
+                        if smallboard[i][coloumnindex]== smallboard[rowindex][coloumnindex]:
+                            cur_score +=flag_coloumn
+                            flag_coloumn +=1   
+                        elif smallboard[i][coloumnindex]!=EMPTY :
+                            cur_score += other_loss
+                            other_loss += 1 
+
+                #checking the element in the diagonal 
+                flag_diagonal = 1
+                other_loss = 1 
+                if diagonal :
+                    for i in range(0,3):
+                        for j in range (0,3):
+                            if i!=rowindex and j!=coloumnindex:
+                                row_diff= rowindex - i 
+                                coloumn_diff = coloumnindex - j 
+                                if row_diff == coloumn_diff :
+                                    if smallboard[i][j]== smallboard[rowindex][coloumnindex]:
+                                        cur_score +=flag_diagonal
+                                        flag_diagonal += 1 
+                                    elif smallboard[i][j]!=EMPTY :
+                                        cur_score += score + other_loss
+                                        other_loss = other_loss + 1
+
+            if smallboard[rowindex][coloumnindex]==AGENT:
+                score+=cur_score
+            else : 
+                score-+cur_score
+
+>>>>>>> ChangedcalscoreFunction
     # checking the globalboard for win 
     for r in range(0,3):
         if current_checkboard[r][0] == current_checkboard[r][1] == current_checkboard[r][2] != EMPTY:
