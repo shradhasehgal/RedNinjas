@@ -135,8 +135,8 @@ def is_moves_left(board):
 
 
 def calc_score(board,rowindex,coloumnindex):
-    print(rowindex,coloumnindex)
-    print("")
+    # print(rowindex,coloumnindex)
+    # print("")
     # print(board[1][1])
     # print("")
     # smallboard=board[1][1] 
@@ -149,11 +149,10 @@ def calc_score(board,rowindex,coloumnindex):
     score = 0 
     #creating global board for win 
     for i in range(0,3):
-        for j in range(0,3):
-            print(i,j)
+        for j in range(0,3): 
             smallboardwin=0 
             smallboard=board[i][j] 
-            print(smallboard)
+            # print(smallboard)
             for r in range(0,3):
                 if smallboard[r][0] == smallboard[r][1] == smallboard[r][2] != EMPTY:
                     smallboardwin=1
@@ -204,7 +203,6 @@ def calc_score(board,rowindex,coloumnindex):
             # if the smallboard is not in a win state , then use utility functions as in case of depth4
             cur_score=0
             if smallboardwin==0 :
-                print("innnn")
                 diagonal=0     
                 #Cross-over 
                 if rowindex==coloumnindex :
@@ -227,12 +225,12 @@ def calc_score(board,rowindex,coloumnindex):
                 #checking the element in the same row 
                 flag_row = 1
                 other_loss = 1
-                for j in range(0,3):
-                    if  j!=coloumnindex:
-                        if smallboard[rowindex][j]==smallboard[rowindex][coloumnindex]:
+                for n in range(0,3):
+                    if  n!=coloumnindex:
+                        if smallboard[rowindex][n]==smallboard[rowindex][coloumnindex]:
                             cur_score += flag_row
                             flag_row +=1  
-                        elif smallboard[rowindex][j]!=EMPTY :
+                        elif smallboard[rowindex][n]!=EMPTY :
                             cur_score += other_loss
                             other_loss += 1 
 
@@ -240,12 +238,12 @@ def calc_score(board,rowindex,coloumnindex):
                 #checking the element in the same coloumn 
                 flag_coloumn = 1
                 other_loss = 1
-                for i in range(0,3):
-                    if i!=rowindex :
-                        if smallboard[i][coloumnindex]== smallboard[rowindex][coloumnindex]:
+                for m in range(0,3):
+                    if m!=rowindex :
+                        if smallboard[m][coloumnindex]== smallboard[rowindex][coloumnindex]:
                             cur_score +=flag_coloumn
                             flag_coloumn +=1   
-                        elif smallboard[i][coloumnindex]!=EMPTY :
+                        elif smallboard[m][coloumnindex]!=EMPTY :
                             cur_score += other_loss
                             other_loss += 1 
 
@@ -253,13 +251,14 @@ def calc_score(board,rowindex,coloumnindex):
                 flag_diagonal = 1
                 other_loss = 1 
                 if diagonal :
-                    for i in range(0,3):
-                        for j in range (0,3):
-                            if i!=rowindex and j!=coloumnindex:
-                                row_diff= rowindex - i 
-                                coloumn_diff = coloumnindex - j 
+                    # print("innnnnnn")
+                    for m in range(0,3):
+                        for n in range (0,3):
+                            if m!=rowindex and n!=coloumnindex:
+                                row_diff= rowindex - m 
+                                coloumn_diff = coloumnindex - n
                                 if row_diff == coloumn_diff :
-                                    if smallboard[i][j]== smallboard[rowindex][coloumnindex]:
+                                    if smallboard[m][n]== smallboard[rowindex][coloumnindex]:
                                         cur_score +=flag_diagonal
                                         flag_diagonal += 1 
                                     elif smallboard[i][j]!=EMPTY :
@@ -270,7 +269,8 @@ def calc_score(board,rowindex,coloumnindex):
                 score+=cur_score
             else : 
                 score-+cur_score
-
+            # if i==1 and j==1 :
+                # print("score",score)
     # checking the globalboard for win 
     for r in range(0,3):
         if current_checkboard[r][0] == current_checkboard[r][1] == current_checkboard[r][2] != EMPTY:
