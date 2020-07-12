@@ -135,12 +135,6 @@ def is_moves_left(board):
 
 
 def calc_score(board,rowindex,coloumnindex):
-    # print(rowindex,coloumnindex)
-    # print("")
-    # print(board[1][1])
-    # print("")
-    # smallboard=board[1][1] 
-    # print(smallboard)
     current_checkboard= np.zeros((3,3),dtype=str)
     for i in range(3):
         for j in range(3):
@@ -150,12 +144,10 @@ def calc_score(board,rowindex,coloumnindex):
     #creating global board for win 
     for i in range(0,3):
         for j in range(0,3): 
-            smallboardwin=0 
             smallboard=board[i][j] 
             # print(smallboard)
             for r in range(0,3):
                 if smallboard[r][0] == smallboard[r][1] == smallboard[r][2] != EMPTY:
-                    smallboardwin=1
                     if smallboard[r][0] == AGENT:
                         current_checkboard[i][j]=AGENT
                         score+=MAX_UTIL
@@ -165,7 +157,6 @@ def calc_score(board,rowindex,coloumnindex):
 
             for c in range(0,3):
                 if smallboard[0][c] == smallboard[1][c] == smallboard[2][c] != EMPTY :
-                    smallboardwin=1
                     if smallboard[0][c] == AGENT:
                         current_checkboard[i][j]=AGENT
                         score+=MAX_UTIL
@@ -174,7 +165,6 @@ def calc_score(board,rowindex,coloumnindex):
                         score-=MAX_UTIL 
 
             if smallboard[0][0]==smallboard[1][1]==smallboard[2][2] != EMPTY :
-                smallboardwin=1
                 if smallboard[0][0] == AGENT:
                     current_checkboard[i][j]= AGENT
                     score+=MAX_UTIL
@@ -183,7 +173,6 @@ def calc_score(board,rowindex,coloumnindex):
                     score-=MAX_UTIL
 
             if smallboard[0][2]==smallboard[1][1]==smallboard[2][0] != EMPTY :
-                smallboardwin=1 
                 if smallboard[0][2] == AGENT:
                     current_checkboard[i][j]= AGENT
                     score+=MAX_UTIL
@@ -200,77 +189,6 @@ def calc_score(board,rowindex,coloumnindex):
             if flag==0 :
                 current_checkboard[i][j]=TIE
 
-            # if the smallboard is not in a win state , then use utility functions as in case of depth4
-            cur_score=0
-            if smallboardwin==0 :
-                diagonal=0     
-                #Cross-over 
-                if rowindex==coloumnindex :
-                    diagonal=1
-                    if rowindex==1:
-                        cur_score=4
-                    else :
-                        cur_score=3 
-
-                if rowindex==2 and coloumnindex==0 :
-                    diagonal=1
-                    cur_score=3
-                elif rowindex==0 and coloumnindex==2 :
-                    diagonal=1
-                    cur_score=3 
-                else :
-                    cur_score=2 
-
-                #Players Win + Opponents loss
-                #checking the element in the same row 
-                flag_row = 1
-                other_loss = 1
-                for n in range(0,3):
-                    if  n!=coloumnindex:
-                        if smallboard[rowindex][n]==smallboard[rowindex][coloumnindex]:
-                            cur_score += flag_row
-                            flag_row +=1  
-                        elif smallboard[rowindex][n]!=EMPTY :
-                            cur_score += other_loss
-                            other_loss += 1 
-
-                
-                #checking the element in the same coloumn 
-                flag_coloumn = 1
-                other_loss = 1
-                for m in range(0,3):
-                    if m!=rowindex :
-                        if smallboard[m][coloumnindex]== smallboard[rowindex][coloumnindex]:
-                            cur_score +=flag_coloumn
-                            flag_coloumn +=1   
-                        elif smallboard[m][coloumnindex]!=EMPTY :
-                            cur_score += other_loss
-                            other_loss += 1 
-
-                #checking the element in the diagonal 
-                flag_diagonal = 1
-                other_loss = 1 
-                if diagonal :
-                    # print("innnnnnn")
-                    for m in range(0,3):
-                        for n in range (0,3):
-                            if m!=rowindex and n!=coloumnindex:
-                                row_diff= rowindex - m 
-                                coloumn_diff = coloumnindex - n
-                                if row_diff == coloumn_diff :
-                                    if smallboard[m][n]== smallboard[rowindex][coloumnindex]:
-                                        cur_score +=flag_diagonal
-                                        flag_diagonal += 1 
-                                    elif smallboard[i][j]!=EMPTY :
-                                        cur_score += score + other_loss
-                                        other_loss = other_loss + 1
-
-            if smallboard[rowindex][coloumnindex]==AGENT:
-                score+=cur_score
-            else : 
-                score-+cur_score
-            # if i==1 and j==1 :
-                # print("score",score)
     # checking the globalboard for win 
     for r in range(0,3):
         if current_checkboard[r][0] == current_checkboard[r][1] == current_checkboard[r][2] != EMPTY:
