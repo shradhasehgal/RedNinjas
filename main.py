@@ -12,7 +12,7 @@ CORS(app)
 # cors = CORS(app, resources={r"/Backend/*": {"origins": "*"}})
 
 @app.route('/')
-def hello():
+def index():
     return app.send_static_file('index.html')
 
 @app.route('/agent-turn', methods=['GET'])
@@ -35,4 +35,5 @@ if __name__ == '__main__':
     
     g = Game()
     g.initialize_bigtree()
+    print("TRIAL")
     app.run()
