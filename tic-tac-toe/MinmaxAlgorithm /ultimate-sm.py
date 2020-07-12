@@ -20,7 +20,11 @@ HUMAN = 'X'
 AGENT = 'O'
 EMPTY = ' '
 TIE = 'T'
-MAX_UTIL = 20
+MAX_UTIL = 20    
+CAN_PLACE = 5
+NO_PLACE = 4
+alpha = -math.inf
+beta = math.inf
 # checkboard = [
 #         ['X','O','X'],
 #         [EMPTY,'O','O'],
@@ -140,11 +144,11 @@ def calc_score_depth4(b,row,coloumn):
     if row==coloumn :
         diagonal=1
         if row==1:
-            score=4
+            score=4 
         else :
             score=3 
 
-    if row==2 and coloumn==0 :
+    elif row==2 and coloumn==0 :
         diagonal=1
         score=3
     elif row==0 and coloumn==2 :
@@ -161,10 +165,10 @@ def calc_score_depth4(b,row,coloumn):
         if  j!=coloumn:
             if b[row][j]==b[row][coloumn]:
                 score += flag_row
-                flag_row +=1  
+                flag_row +=2  
             elif b[row][j]!=EMPTY :
                 score += other_loss
-                other_loss += 1 
+                other_loss += 3  
 
                 
     #checking the element in the same coloumn 
@@ -174,10 +178,10 @@ def calc_score_depth4(b,row,coloumn):
         if i!=row :
             if b[i][coloumn]==b[row][coloumn]:
                 score +=flag_coloumn
-                flag_coloumn +=1   
+                flag_coloumn +=2   
             elif b[i][coloumn]!=EMPTY :
                 score += other_loss
-                other_loss += 1 
+                other_loss += 3 
 
     #checking the element in the diagonal 
     flag_diagonal = 1
@@ -191,11 +195,13 @@ def calc_score_depth4(b,row,coloumn):
                     if row_diff == coloumn_diff :
                         if b[i][j]== b[row][coloumn]:
                             score +=flag_diagonal
-                            flag_diagonal += 1 
+                            flag_diagonal += 2 
                         elif b[i][j]!=EMPTY :
                             score += score + other_loss
-                            other_loss = other_loss + 1
+                            other_loss = other_loss + 3 
 
+    # print("score",score)
+    # print("enddddddddddddddddddddd")
     if b[row][coloumn]==AGENT :
         return score 
     else :
@@ -307,7 +313,7 @@ def calc_score_custom(b,parent_utility,parent_checkboard,gr,gc,sr,sc):
     return child_utility,child_checkboard,globalwin
 
 
-def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumnindex,is_max):
+def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumnindex,is_max,alpha,beta,upto_depth):
 
     current_utility,current_checkboard ,globalwin = calc_score_custom(board,parent_utility,parent_chekbox,gr,gc,rowindex,coloumnindex)
 
@@ -317,7 +323,7 @@ def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumninde
     if is_moves_left(board)==False :
         return 0
 
-    if depth==4 :
+    if depth==upto_depth :
         return current_utility
 
     if is_max :
@@ -330,8 +336,13 @@ def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumninde
                 for j in range(0,3):
                     if(board[rowindex][coloumnindex][i][j]==EMPTY):
                         board[rowindex][coloumnindex][i][j] = AGENT
-                        best_val = max(best_val,minimax(board,depth+1,current_utility,current_checkboard,rowindex,coloumnindex,i,j,not(is_max)))
+                        best_val = max(best_val,minimax(board,depth+1,current_utility,current_checkboard,rowindex,coloumnindex,i,j,not(is_max),alpha,beta,upto_depth))
                         board[rowindex][coloumnindex][i][j]=EMPTY
+                        if best_val >= beta :
+                            return best_val
+
+                        if best_val > alpha:
+                            alpha = best_val
         
         else :
 
@@ -343,8 +354,13 @@ def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumninde
                             for j in range(0,3):
                                  if(board[m][n][i][j]==EMPTY):
                                     board[m][n][i][j] = AGENT
-                                    best_val = max(best_val,minimax(board,depth+1,current_utility,current_checkboard,m,n,i,j,not(is_max)))
-                                    board[m][n][i][j]=EMPTY 
+                                    best_val = max(best_val,minimax(board,depth+1,current_utility,current_checkboard,m,n,i,j,not(is_max),alpha,beta,upto_depth))
+                                    board[m][n][i][j]=EMPTY
+                                    if best_val >= beta :
+                                        return best_val
+
+                                    if best_val > alpha:
+                                        alpha = best_val
 
         return best_val
 
@@ -358,8 +374,13 @@ def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumninde
                 for j in range(0,3):
                     if(board[rowindex][coloumnindex][i][j]==EMPTY):
                         board[rowindex][coloumnindex][i][j] = AGENT
-                        best_val = min(best_val,minimax(board,depth+1,current_utility,current_checkboard,rowindex,coloumnindex,i,j,not(is_max)))
+                        best_val = min(best_val,minimax(board,depth+1,current_utility,current_checkboard,rowindex,coloumnindex,i,j,not(is_max),alpha,beta,upto_depth))
                         board[rowindex][coloumnindex][i][j]=EMPTY
+                        if best_val <= alpha:
+                            return best_val
+
+                        if best_val < beta:
+                            beta = best_val
         
         else :
 
@@ -370,8 +391,13 @@ def minimax(board,depth,parent_utility,parent_chekbox,gr,gc,rowindex,coloumninde
                             for j in range(0,3):
                                  if(board[m][n][i][j]==EMPTY):
                                     board[m][n][i][j] = AGENT
-                                    best_val = min(best_val,minimax(board,depth+1,current_utility,current_checkboard,m,n,i,j,not(is_max)))
+                                    best_val = min(best_val,minimax(board,depth+1,current_utility,current_checkboard,m,n,i,j,not(is_max),alpha,beta,upto_depth))
                                     board[m][n][i][j]=EMPTY
+                                    if best_val <= alpha:
+                                        return best_val
+
+                                    if best_val < beta:
+                                        beta = best_val
 
         return best_val
 
@@ -397,7 +423,7 @@ def choose_optimal_move(board,previous_move):
                     #Player move? 
                     board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=AGENT
                     cur_board_value,current_checkboard,X = calc_score_custom(board,0,checkboard,CurrentSmallBoardRow,CurrentSmallBoardColoumn,i,j)
-                    move_val = minimax(board,0,cur_board_value,current_checkboard,CurrentSmallBoardRow,CurrentSmallBoardColoumn,i,j,False)
+                    move_val = minimax(board,0,cur_board_value,current_checkboard,CurrentSmallBoardRow,CurrentSmallBoardColoumn,i,j,False,alpha,beta,CAN_PLACE)
                     
                     #Player unmove?
                     board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=EMPTY
@@ -415,12 +441,13 @@ def choose_optimal_move(board,previous_move):
         for i in range(0,len(moves)-1):
             if moves[i][4]==optimal_val:
                 equalmoves.append(moves[i])
-        x=random.randint(0,len(equalmoves)-1)
-        print(x)
-        best_global_row=equalmoves[x][0]
-        best_global_coloumn=equalmoves[x][1]
-        best_small_row = equalmoves[x][2]
-        best_small_col = equalmoves[x][3]
+        if len(equalmoves)>1 :
+            x=random.randint(0,len(equalmoves)-1)
+            print(x)
+            best_global_row=equalmoves[x][0]
+            best_global_coloumn=equalmoves[x][1]
+            best_small_row = equalmoves[x][2]
+            best_small_col = equalmoves[x][3]
 
     else :
 
@@ -438,13 +465,12 @@ def choose_optimal_move(board,previous_move):
                                 #Player move? 
                                 board[m][n][i][j]=AGENT
                                 cur_board_value,current_checkboard,X = calc_score_custom(board,0,checkboard,m,n,i,j)
-                                move_val = minimax(board,0,cur_board_value,current_checkboard,m,n,i,j,False)
-        
-
+                                move_val = minimax(board,0,cur_board_value,current_checkboard,m,n,i,j,False,alpha,beta,NO_PLACE)
+                                
                                 #Player unmove?
                                 board[m][n][i][j]=EMPTY
                             
-                                moves.append([CurrentSmallBoardRow,CurrentSmallBoardColoumn,i,j,move_val])
+                                moves.append([m,n,i,j,move_val])
                                 print("2 ",m,n,i,j,move_val) 
                                 if move_val > optimal_val:
 
@@ -457,12 +483,13 @@ def choose_optimal_move(board,previous_move):
         for i in range(0,len(moves)-1):
             if moves[i][4]==optimal_val:
                 equalmoves.append(moves[i])
-        x=random.randint(0,len(equalmoves)-1)
-        print(x)
-        best_global_row=equalmoves[x][0]
-        best_global_coloumn=equalmoves[x][1]
-        best_small_row = equalmoves[x][2]
-        best_small_col = equalmoves[x][3]
+        if len(equalmoves)>1 :
+            x=random.randint(0,len(equalmoves)-1)
+            print(x)
+            best_global_row=equalmoves[x][0]
+            best_global_coloumn=equalmoves[x][1]
+            best_small_row = equalmoves[x][2]
+            best_small_col = equalmoves[x][3]
 
 
     return best_global_row,best_global_coloumn,best_small_row,best_small_col 

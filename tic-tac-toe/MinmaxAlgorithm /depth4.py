@@ -87,7 +87,7 @@ def calc_score(b,row,coloumn):
         else :
             score=3 
 
-    if row==2 and coloumn==0 :
+    elif row==2 and coloumn==0 :
         diagonal=1
         score=3
     elif row==0 and coloumn==2 :
