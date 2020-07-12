@@ -10,7 +10,6 @@ import ast
 app = Flask(__name__)
 CORS(app)
 # cors = CORS(app, resources={r"/Backend/*": {"origins": "*"}})
-is_max = True
 
 @app.route('/')
 def hello():
@@ -23,17 +22,14 @@ def agent_turn():
     board = ast.literal_eval(board)
     board = np.array(board, dtype = str)
     depth = int(args['depth'])
-    r,c,win = g.agent_next_move(board,depth)
-    return {"r": r, "c":c, "win": win}
-
-@app.route('/first-move', methods=['GET'])
-def first_move():
-    args = request.args
     beginner = args['gameBeginner']
     if beginner == "HUMAN":
         is_max = False
+    else:
+        is_max = True
     g.use_bigtree(is_max)
-    return beginner 
+    r,c,win = g.agent_next_move(board,depth, is_max)
+    return {"r": r, "c":c, "win": win}
 
 if __name__ == '__main__':
     
