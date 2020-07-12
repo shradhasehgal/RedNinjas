@@ -31,9 +31,7 @@ def agent_turn():
     r,c,win = g.agent_next_move(board,depth, is_max)
     return {"r": r, "c":c, "win": win}
 
-if __name__ == '__main__':
-    
+def initialize():
     g = Game()
     g.initialize_bigtree()
     print("TRIAL")
-    app.run()
