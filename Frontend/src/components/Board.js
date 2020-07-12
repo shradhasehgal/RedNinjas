@@ -209,8 +209,8 @@ export default class Landing extends Component {
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
         copy_board[Math.floor(cell / 3)][cell % 3] = "X";
       }
-
-      console.log("hjfhhdhf");
+      
+      console.log('hjfhhdhf')
       this.check_win(copy_board);
 
       this.setState({
@@ -221,7 +221,7 @@ export default class Landing extends Component {
         gameBeginner: this.state.gameBeginner,
         board: JSON.stringify(this.state.board),
         depth: JSON.stringify(this.state.depth),
-      };
+      }
 
       // useEffect(()=> {
       //     fetch("/agent").then(response =>
@@ -229,32 +229,35 @@ export default class Landing extends Component {
       //             console.log(data)
       //         }))
       // },[])
-      console.log(sendData);
-      if (this.state.win === false) {
+      console.log(sendData)
+      if(this.state.win === false)
+      {
         axios
-          .get("/agent-turn", {
-            params: {
-              gameBeginner: this.state.gameBeginner,
-              board: JSON.stringify(this.state.board),
-              depth: JSON.stringify(this.state.depth),
-            },
-          }) //route to be filled according to flask route name
-          .then((res) => {
-            let copy_board = this.state.board.slice();
-            // console.log("hrehj");
-            console.log(res.status);
-            console.log(res);
-            console.log(copy_board);
+        .get("http://127.0.0.1:5000/agent-turn", {
+          params: {
+            gameBeginner: this.state.gameBeginner,
+            board: JSON.stringify(this.state.board),
+            depth: JSON.stringify(this.state.depth)
+          },
+        }) //route to be filled according to flask route name
+        .then((res) => {
 
-            copy_board[res.data.r][res.data.c] = "O"; /////// will uncomment when backend and frontend are bound together because for now this will give error
+          let copy_board = this.state.board.slice();
+          // console.log("hrehj");
+          console.log(res.status)
+          console.log(res)
+          console.log(copy_board)
 
-            this.setState({
-              board: copy_board,
-            });
+          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+
+
+          this.setState({
+              board : copy_board
           })
-          .catch((err) => {
-            console.log(err);
-          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       }
     }
   };
@@ -309,6 +312,7 @@ export default class Landing extends Component {
       // startGameValue : true
       gameBeginner: "HUMAN",
     });
+    console.log('done');
     console.log("done");
     console.log("done");
   };
