@@ -7,13 +7,13 @@ sys.path.insert(1, '../Integrate/oops')
 from game import *
 import ast
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../Frontend/build', static_url_path='/')
 CORS(app)
 # cors = CORS(app, resources={r"/Backend/*": {"origins": "*"}})
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return app.send_static_file('index.html')
 
 @app.route('/agent-turn', methods=['GET'])
 def agent_turn():
