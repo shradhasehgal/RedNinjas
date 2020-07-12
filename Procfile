@@ -1,1 +1,1 @@
-web: gunicorn wsgi:app
+web: python3 main.py $PORT  
