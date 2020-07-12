@@ -471,7 +471,7 @@ export default class BigBoard extends Component {
             let copy_bigBoard = this.state.bigboard.slice()
             if(copy_bigBoard[outerRow][outerColumn][innerRow][innerColumn] === " ")
             {
-                copy_bigBoard[outerRow][outerColumn][innerRow][innerColumn] = "X"
+                copy_bigBoard[outerRow][outerColumn][innerRow][innerColumn] = "O"
 
                 this.setState({
                     bigBoard : copy_bigBoard
