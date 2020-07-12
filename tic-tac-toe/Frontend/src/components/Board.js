@@ -31,9 +31,9 @@ export default class Landing extends Component {
     this.state = {
       show_3x3_BoardComponent: this.props.show_3x3_BoardComponent,
       board: [
-        ["X", " ", "X"],
-        [" ", "O", " "],
-        [" ", "X", "X"],
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "],
       ],
       chosenCell: "",
       gameBeginner: "HUMAN",
@@ -123,7 +123,7 @@ export default class Landing extends Component {
         copy_board[i][0] === copy_board[i][1] &&
         copy_board[i][0] === copy_board[i][2] &&
         copy_board[i][1] === copy_board[i][2] &&
-        copy_board[i][0] !== ""
+        copy_board[i][0] !== " "
       ) {
         if (copy_board[i][0] === "O") {
           copy_board[i][0] = "WA";
@@ -144,7 +144,7 @@ export default class Landing extends Component {
         copy_board[0][i] === copy_board[1][i] &&
         copy_board[0][i] === copy_board[2][i] &&
         copy_board[1][i] === copy_board[2][i] &&
-        copy_board[0][i] !== ""
+        copy_board[0][i] !== " "
       ) {
         if (copy_board[0][i] === "O") {
           copy_board[0][i] = "WA";
@@ -165,7 +165,7 @@ export default class Landing extends Component {
       copy_board[0][0] === copy_board[1][1] &&
       copy_board[0][0] === copy_board[2][2] &&
       copy_board[1][1] === copy_board[2][2] &&
-      copy_board[0][0] !== ""
+      copy_board[0][0] !== " "
     ) {
       if (copy_board[0][0] === "O") {
         copy_board[0][0] = "WA";
@@ -185,7 +185,7 @@ export default class Landing extends Component {
       copy_board[0][2] === copy_board[1][1] &&
       copy_board[0][2] === copy_board[1][1] &&
       copy_board[0][2] === copy_board[2][0] &&
-      copy_board[0][2] !== ""
+      copy_board[0][2] !== " "
     ) {
       if (copy_board[0][2] === "O") {
         copy_board[0][2] = "WA";
@@ -206,21 +206,22 @@ export default class Landing extends Component {
     if (this.state.startGameValue && this.state.win === false) {
       this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
-      if (copy_board[Math.floor(cell / 3)][cell % 3] === "") {
-        copy_board[Math.floor(cell / 3)][cell % 3] = "O";
+      if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
+        copy_board[Math.floor(cell / 3)][cell % 3] = "X";
       }
-
+      
+      console.log('hjfhhdhf')
       this.check_win(copy_board);
 
       this.setState({
         board: copy_board,
       });
 
-      // const sendData = {
-      //     gameBeginner: this.state.gameBeginner,
-      //     board: this.state.board,
-      //     depth: this.state.depth
-      // }
+      const sendData = {
+        gameBeginner: this.state.gameBeginner,
+        board: JSON.stringify(this.state.board),
+        depth: JSON.stringify(this.state.depth),
+      }
 
       // useEffect(()=> {
       //     fetch("/agent").then(response =>
@@ -228,22 +229,27 @@ export default class Landing extends Component {
       //             console.log(data)
       //         }))
       // },[])
-      // console.log(sendData)
-      axios
+      console.log(sendData)
+      if(this.state.win === false)
+      {
+        axios
         .get("http://127.0.0.1:5000/agent-turn", {
           params: {
             gameBeginner: this.state.gameBeginner,
             board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.state.depth),
+            depth: JSON.stringify(this.state.depth)
           },
-        }) //route to filled according to flask route name
+        }) //route to be filled according to flask route name
         .then((res) => {
-          console.log("hrehj");
-          console.log(res.status);
-          console.log(res);
-          console.log(copy_board);
 
-          copy_board[res.data.r][res.data.c] = "X";       /////// will uncomment when backend and frontend are bound together because for now this will give error
+          let copy_board = this.state.board.slice();
+          // console.log("hrehj");
+          console.log(res.status)
+          console.log(res)
+          console.log(copy_board)
+
+          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+
 
           this.setState({
               board : copy_board
@@ -252,6 +258,7 @@ export default class Landing extends Component {
         .catch((err) => {
           console.log(err);
         });
+      }
     }
   };
 
@@ -285,7 +292,7 @@ export default class Landing extends Component {
       let copy_board = this.state.board.slice();
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-          copy_board[i][j] = "";
+          copy_board[i][j] = " ";
         }
       }
       this.setState({
@@ -305,6 +312,7 @@ export default class Landing extends Component {
       // startGameValue : true
       gameBeginner: "HUMAN",
     });
+    console.log('done');
     console.log("done");
   };
   // }
@@ -322,7 +330,7 @@ export default class Landing extends Component {
     for (let i = 0; i <= buttonsToErase; i++) {
       copy_board[Math.floor(copy_undoStack[copy_undoStack.length - 1] / 3)][
         copy_undoStack[copy_undoStack.length - 1] % 3
-      ] = "";
+      ] = " ";
       copy_undoStack.pop();
     }
     this.setState({
