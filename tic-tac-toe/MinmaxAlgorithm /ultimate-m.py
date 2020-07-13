@@ -20,12 +20,9 @@ AGENT = 'O'
 EMPTY = ' '
 TIE = 'T'
 MAX_UTIL = 10
-MAX_DEPTH = 3
-# checkboard = [
-#         ['X','O','X'],
-#         [EMPTY,'O','O'],
-#         ['X','X','O']
-#     ]
+alpha = -10
+beta = 10
+MAX_DEPTH = 5
 
 def set_up_board():
     for i in range(0,3):
@@ -61,6 +58,7 @@ def printBoard(board):
 
 def checkwin_smallboard(smallboard, i,j,check=checkboard):
 
+    print("evaluating board", smallboard)
     small_win_val = -1
 
     for r in range(0,3):
@@ -108,9 +106,7 @@ def checkwin_smallboard(smallboard, i,j,check=checkboard):
     
     if(small_win_val == -1):
         small_win_val = 0
-    print("in small ", check)
-    print(hex(id(check)))
-    print(hex(id(checkboard)))
+    print("in small checkboard", check)
     return small_win_val
 
 def checkwin_global(checkboard=checkboard):
@@ -143,6 +139,7 @@ def checkwin_global(checkboard=checkboard):
     return 0
 
 def checkwin(board):
+    print("from checkwin ", board)
     # Cheking smallboards for win
     for i in range(0,3):
         for j in range(0,3):
@@ -200,9 +197,9 @@ def calc_score(board):
     # return 0 
 
 
-def minimax(board,depth,rowindex,coloumnindex,is_max):
+def minimax(board,depth,rowindex,coloumnindex,is_max,alpha,beta):
     score = calc_score(board)
-
+    print("board : ", board,"\nscore:", score)
     print("depth = ", depth)
     if depth == MAX_DEPTH :
         print("lelele")
@@ -230,8 +227,15 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
                 for j in range(0,3):
                     if(board[rowindex][coloumnindex][i][j]==EMPTY):
                         board[rowindex][coloumnindex][i][j] = AGENT
-                        best_val = max(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                        best_val = max(best_val,minimax(board,depth+1,i,j,not(is_max),alpha,beta))
                         board[rowindex][coloumnindex][i][j]=EMPTY
+                        
+                        if best_val >= beta :
+                            return best_val
+
+                        if best_val > alpha:
+                            alpha = best_val
+
         
         else :
 
@@ -243,8 +247,13 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
                             for j in range(0,3):
                                  if(board[m][n][i][j]==EMPTY):
                                     board[m][n][i][j] = AGENT
-                                    best_val = max(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                                    best_val = max(best_val,minimax(board,depth+1,i,j,not(is_max),alpha,beta))
                                     board[m][n][i][j]=EMPTY
+                                    if best_val >= beta :
+                                        return best_val
+
+                                    if best_val > alpha:
+                                        alpha = best_val
 
         return best_val
 
@@ -258,8 +267,13 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
                 for j in range(0,3):
                     if(board[rowindex][coloumnindex][i][j]==EMPTY):
                         board[rowindex][coloumnindex][i][j] = AGENT
-                        best_val = min(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                        best_val = min(best_val,minimax(board,depth+1,i,j,not(is_max),alpha,beta))
                         board[rowindex][coloumnindex][i][j]=EMPTY
+                        if best_val <= alpha:
+                            return best_val
+
+                        if best_val < beta:
+                            beta = best_val
         
         else :
 
@@ -270,8 +284,14 @@ def minimax(board,depth,rowindex,coloumnindex,is_max):
                             for j in range(0,3):
                                  if(board[m][n][i][j]==EMPTY):
                                     board[m][n][i][j] = AGENT
-                                    best_val = min(best_val,minimax(board,depth+1,i,j,not(is_max)))
+                                    best_val = min(best_val,minimax(board,depth+1,i,j,not(is_max),alpha,beta))
                                     board[m][n][i][j]=EMPTY
+                                    
+                                    if best_val <= alpha:
+                                        return best_val
+
+                                    if best_val < beta:
+                                        beta = best_val
 
         return best_val
 
@@ -295,7 +315,7 @@ def choose_optimal_move(board,previous_move):
                     
                     #Player move? 
                     board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=AGENT
-                    move_val = minimax(board,0,i,j,False)
+                    move_val = minimax(board,0,i,j,False,alpha,beta)
 
                     #Player unmove?
                     board[CurrentSmallBoardRow][CurrentSmallBoardColoumn][i][j]=EMPTY
@@ -323,7 +343,7 @@ def choose_optimal_move(board,previous_move):
                                 #Player move? 
                                 board[m][n][i][j]=AGENT
                                 
-                                move_val = minimax(board,0,i,j,False)
+                                move_val = minimax(board,0,i,j,False,alpha,beta)
 
                                 #Player unmove?
                                 board[m][n][i][j]=EMPTY
@@ -419,6 +439,7 @@ def game():
             count+=1
         
         did_win = False
+        print("thehehehe",theBoard)
         did_win=checkwin(theBoard)
 
         if did_win :

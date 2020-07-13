@@ -9,6 +9,7 @@ from move import *
 from player import *
 from score import *
 from bigtree import *
+from u_board import *
 
 class Game ():
 
@@ -21,6 +22,7 @@ class Game ():
         self.bigtree_obj_human_start = Bigtree()
         self.bigtree_obj_agent_start = Bigtree()
         self.minimax_obj = Minimax()
+        self.uboard_obj = UBoard()
 
     def initialize_bigtree(self):
 
@@ -76,6 +78,16 @@ class Game ():
 
         return r,c,win
 
+    def agent_next_move_ultimate(self,board, checkboard, previous_move):
+        self.uboard_obj.board = board
+        self.uboard_obj.checkboard = checkboard
+        print("self == ",self.uboard_obj.board)
+        print("chk == ",self.uboard_obj.checkboard)
+        print("prev == ",previous_move)
+
+        arr = self.agent_obj.agent_turn_ultimate(self.uboard_obj,previous_move)
+        return arr
+
 
     def game(self):
     
@@ -127,19 +139,82 @@ if __name__ == '__main__':
     
     g = Game()
 
-    #agent is always maximizer
-    #if agent starts is_max = True else is_max = false
-    is_max = False
+    # #agent is always maximizer
+    # #if agent starts is_max = True else is_max = false
+    # is_max = False
 
-    #Inialise bigtree for all subsequent games
-    g.initialize_bigtree()
+    # #Inialise bigtree for all subsequent games
+    # g.initialize_bigtree()
 
-    #pass is_max based on which player is starting 
-    g.use_bigtree(is_max)
+    # #pass is_max based on which player is starting 
+    # g.use_bigtree(is_max)
 
-    #start playing
-    # g.game()
+    # #start playing
+    # # g.game()
 
-    a = np.array(([['O',EMPTY,EMPTY],['X','X',EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
+    # a = np.array(([['O',EMPTY,EMPTY],['X','X',EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
 
-    g.agent_next_move(a,-1, is_max)
+    # g.agent_next_move(a,-1, is_max)
+
+
+    board = np.array ((
+        [
+            [
+                [
+                    ['X','X',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ],
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ],
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ]
+            ],
+            [
+                [
+                    [' ',' ',' '],
+                    [' ','O',' '],
+                    [' ',' ',' '],
+                ],
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ],
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ]
+            ],
+            [
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ],
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                ],
+                [
+                    [' ',' ',' '],
+                    [' ',' ',' '],
+                    [' ',' ','O'],
+                ]
+            ]
+        ]
+    ),dtype=object)
+
+    checkboard = np.array(([[EMPTY,EMPTY,EMPTY],[EMPTY,EMPTY,EMPTY],[EMPTY,EMPTY,EMPTY]]),dtype=str)
+
+    arr = g.agent_next_move_ultimate(board,checkboard,[0,0,0,0])
+
+    print("ans = ",arr)
