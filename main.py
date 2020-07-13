@@ -30,6 +30,21 @@ def agent_turn():
     r,c,win = g.agent_next_move(board,depth, is_max)
     return {"r": r, "c":c, "win": win}
 
+@app.route('/agent-turn-ultimate', methods=['GET'])
+def agent_turn_ultimate():
+    args = request.args
+    board = args['board']
+    board = ast.literal_eval(board)
+    board = np.array(board, dtype = str)
+    checkboard = args['checkboard']
+    checkboard = ast.literal_eval(checkboard)
+    checkboard = np.array(checkboard, dtype = str)
+    previous_move = args['previous_move']
+    previous_move = ast.literal_eval(previous_move)
+    arr = g.agent_next_move_ultimate(board,checkboard,previous_move)
+    return {"agent-move": arr}
+
+
 if __name__ == "__main__": 
     g = Game()
     g.initialize_bigtree()

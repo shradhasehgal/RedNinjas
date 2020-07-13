@@ -40,3 +40,17 @@ class Agent():
         board_obj.board[r][c] = AGENT
 
         return r,c
+
+
+    def agent_turn_ultimate(self,board_obj,previous_move):
+        current_move = np.array(([-1,-1,-1,-1]), dtype=int)
+        board_obj.printBoard(board_obj)
+        print(AGENT + " is moving please wait ...")
+        
+        gr,gc,sr,sc = self.move_obj.choose_optimal_move_ultimate(board_obj,previous_move)
+        temp_move=list()
+        temp_move.extend([gr,gc,sr,sc])
+        current_move=temp_move
+        board_obj.board[gr][gc][sr][sc] = AGENT
+
+        return current_move
