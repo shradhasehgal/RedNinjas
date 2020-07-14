@@ -21,7 +21,10 @@ export default class BigBoard extends Component {
             startGameButton: "Start Game",
             startGameValue: false,
             ultimateWin : false,
-            gameBeginner : "",
+            gameBeginner : " ",
+            rowToPlace : " ",
+            columnToPlace : " ",
+            moveNumber : 1,
             ultimateWinBoard: [
                 [" ", " ", " "],
                 [" ", " ", " "],
@@ -29,41 +32,41 @@ export default class BigBoard extends Component {
               ],
             bigboard:[
 
-                [ [ ["X"," ","X"],
-                    [" ","O"," "],
-                    [" ","X","X"] ], 
+                [ [ [" "," "," "],
+                    [" "," "," "],
+                    [" "," "," "] ], 
                     
-                    [ ["X"," ","X"],
-                      [" ","O"," "],
-                      [" ","X","X"] ],
+                    [ [" "," "," "],
+                      [" "," "," "],
+                      [" "," "," "] ],
 
-                      [ ["X"," ","X"],
-                        [" ","O"," "],
-                        [" ","X","X"] ] ], 
+                      [ [" "," "," "],
+                        [" "," "," "],
+                        [" "," "," "] ] ], 
 
-                        [ [ ["X"," ","X"],
-                    [" ","O"," "],
-                    [" ","X","X"] ], 
+                        [ [ [" "," "," "],
+                    [" "," "," "],
+                    [" "," "," "] ], 
                     
-                    [ ["X"," ","X"],
-                      [" ","O"," "],
-                      [" ","X","X"] ],
+                    [ [" "," "," "],
+                      [" "," "," "],
+                      [" "," "," "] ],
 
-                      [ ["X"," ","X"],
-                        [" ","O"," "],
-                        [" ","X","X"] ] ],
+                      [ [" "," "," "],
+                        [" "," "," "],
+                        [" "," "," "] ] ],
 
-                        [ [ ["X"," ","X"],
-                    [" ","O"," "],
-                    [" ","X","X"] ] , 
+                        [ [ [" "," "," "],
+                    [" "," "," "],
+                    [" "," "," "] ], 
                     
-                    [ ["X"," ","X"],
-                      [" ","O"," "],
-                      [" ","X","X"] ],
+                    [ [" "," "," "],
+                      [" "," "," "],
+                      [" "," "," "] ],
 
-                      [ ["X"," ","X"],
-                        [" ","O"," "],
-                        [" ","X","X"] ] ]
+                      [ [" "," "," "],
+                        [" "," "," "],
+                        [" "," "," "] ] ]
 
             ],
 
@@ -264,7 +267,7 @@ export default class BigBoard extends Component {
     {
         // let copy_bigBoard = this.state.bigboard.slice()
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) { //for row
             if (
               copy_board[i][0] === copy_board[i][1] &&
               copy_board[i][0] === copy_board[i][2] &&
@@ -284,7 +287,9 @@ export default class BigBoard extends Component {
               });
             }
           }
-          for (let i = 0; i < 3; i++) {
+        
+
+          for (let i = 0; i < 3; i++) { // for column
             if (
               copy_board[0][i] === copy_board[1][i] &&
               copy_board[0][i] === copy_board[2][i] &&
@@ -464,48 +469,119 @@ export default class BigBoard extends Component {
         }
     }
 
+
+
+    checkValidityOfMove(outer_row,outer_column)
+    {
+        if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
+        {
+            if(outer_row !== this.state.rowToPlace)
+                return false
+            else if(outer_column !== this.state.columnToPlace)
+                return false
+            else if(outer_row === this.state.rowToPlace && outer_column === this.state.columnToPlace)
+                return true
+        }
+        else
+            return true
+    }
+
     handleCellClick = (e, outerRow,outerColumn,innerRow,innerColumn) => {
-        // console.log(i + " " + j + " " + ii + " " + jj)
         if(this.state.startGameValue === true && this.state.ultimateWin === false)
         {
-            let copy_bigBoard = this.state.bigboard.slice()
-            if(copy_bigBoard[outerRow][outerColumn][innerRow][innerColumn] === " ")
+            let copy_bigBoard1 = this.state.bigboard.slice()
+            if(copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] === " ")
             {
-                copy_bigBoard[outerRow][outerColumn][innerRow][innerColumn] = "O"
-
-                this.setState({
-                    bigBoard : copy_bigBoard
-                })
-
-                console.log(this.state.bigboard)
-
-                let copy_bigBoard2 = this.state.bigboard.slice()
-
-                this.checkPartialWin(copy_bigBoard2)
-
-                if(this.state.ultimateWin === false)
+                if(this.state.moveNumber !== 1)
                 {
-                    axios.get("https://redninjas-tic-tac-toe.herokuapp.com/", {
-                        params: {
-                            board : this.state.bigboard,
-                            gameBeginner : this.state.gameBeginner,
-                            outerRow : outerRow,
-                            outerColumn : outerColumn,
-                            innerRow : innerRow,
-                            innerColumn : innerColumn 
-                        },
-                    }) //route to be filled according to flask route name
-                    .then((res) => {
-            
-                    // copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-            
-                    // this.setState({
-                    //     board : copy_board
-                    // })
-                    })
-                    .catch((err) => {
-                    console.log(err);
-                    });
+                    if(this.checkValidityOfMove(outerRow,outerColumn) === true)
+                    {
+                        // console.log("yeah it is truueee")
+                        // console.log(this.state.ultimateWinBoard)
+                        copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
+
+                        this.setState({
+                            bigboard : copy_bigBoard1
+                        })
+
+                        let copy_bigBoard2 = this.state.bigboard.slice()
+                        this.checkPartialWin(copy_bigBoard2)
+
+
+                        if(this.state.ultimateWin === false)
+                        {
+                            axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
+                                params: {
+                                    board : JSON.stringify(this.state.bigboard),
+                                    checkboard : JSON.stringify(this.state.ultimateWinBoard),
+                                    previous_move : JSON.stringify([outerRow,outerColumn,innerRow,innerColumn])
+                                },
+                            }) //route to be filled according to flask route name
+                            .then((res) => {
+                                console.log(res.data)
+                                let copy_board1 = this.state.bigboard.slice()
+                                copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+                                if(this.state.startGameButton === "Reset Game")
+                                {
+                                    this.setState({
+                                        bigboard : copy_board1,
+                                        moveNumber : this.moveNumber + 1,
+                                        rowToPlace : res.data["agent-move"][2],
+                                        columnToPlace : res.data["agent-move"][3]
+                                    })
+                                    
+                                    // console.log("jhbejhedh")
+                                    let copy_bigBoard2 = this.state.bigboard.slice()
+                                    this.checkPartialWin(copy_bigBoard2)
+                                }     
+                            })
+                            .catch((err) => {
+                            console.log(err);
+                            });
+                        }
+                    }
+                    else
+                    {
+                        console.log("try again")
+                    }
+                }
+                else
+                {
+
+                    let copy_bigBoard1 = this.state.bigboard.slice()
+
+                    copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
+
+                        this.setState({
+                            bigboard : copy_bigBoard1
+                        })
+                    axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
+                            params: {
+                                board : JSON.stringify(this.state.bigboard),
+                                checkboard : JSON.stringify(this.state.ultimateWinBoard),
+                                previous_move : JSON.stringify([outerRow,outerColumn,innerRow,innerColumn])
+                            },
+                        }) //route to be filled according to flask route name
+                        .then((res) => {
+                            console.log(res.data)
+                            let copy_board1 = this.state.bigboard.slice()
+                            
+                            copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+                        if(this.state.startGameButton === "Reset Game")
+                        {
+                            this.setState({
+                                bigboard : copy_board1,
+                                moveNumber : this.moveNumber + 1,
+                                rowToPlace : res.data["agent-move"][2],
+                                columnToPlace : res.data["agent-move"][3]
+                            })
+                            let copy_bigBoard2 = this.state.bigboard.slice()
+                            this.checkPartialWin(copy_bigBoard2)
+                        }
+                        })
+                        .catch((err) => {
+                        console.log(err);
+                        });
                 }
             }
         }
@@ -541,12 +617,70 @@ export default class BigBoard extends Component {
 
         this.setState({
             bigboard: copy_board,
-            gameBeginner: "",
+            gameBeginner: " ",
+            startGameValue : false,
             startGameButton: "Start Game",
-            startGameValue : false
+            startGameValue: false,
+            ultimateWin : false,
+            rowToPlace : " ",
+            columnToPlace : " ",
+            moveNumber : 1,
+            ultimateWinBoard: [
+                [" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "],
+              ]
+        });
+    }
+
+    if(this.state.gameBeginner === "AGENT")
+    {
+        console.log("Agent beginner")
+        axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
+            params: {
+                board : JSON.stringify(this.state.bigboard),
+                checkboard : JSON.stringify(this.state.ultimateWinBoard),
+                previous_move : JSON.stringify([-1,-1,-1,-1])
+            },
+        }) //route to be filled according to flask route name
+        .then((res) => {
+
+            let copy_board1 = this.state.bigboard.slice()
+            copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+
+        if(this.state.startGameButton === "Reset Game")
+        {
+            this.setState({
+                bigboard : copy_board1,
+                rowToPlace : res.data["agent-move"][2],
+                columnToPlace : res.data["agent-move"][3],
+                moveNumber : this.moveNumber + 1
+            })
+            let copy_bigBoard2 = this.state.bigboard.slice()
+            this.checkPartialWin(copy_bigBoard2)
+        }
+                
+        })
+        .catch((err) => {
+        console.log(err);
         });
     }
 }
+
+handleStartHuman = (e) => {
+    console.log("Human begins the game!");
+    this.setState({
+      gameBeginner: "HUMAN",
+    });
+  };
+
+  handleStartAgent = (e) => {
+    console.log("Agent begins the game!");
+    this.setState({
+      gameBeginner: "AGENT",
+    });
+  };
+
 
     render () {
         return (
@@ -601,6 +735,15 @@ export default class BigBoard extends Component {
                             {this.state.startGameButton}
                         </Button>{" "}
             </div>
+
+            <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
+                Beginner_Human
+            </Button>
+
+
+            <Button variant="default" onClick={(e) => this.handleStartAgent(e)}>
+                Beginner_Agent
+            </Button>
 </div>
         )
     }    

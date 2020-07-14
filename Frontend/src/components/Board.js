@@ -35,8 +35,8 @@ export default class Landing extends Component {
         [" ", " ", " "],
         [" ", " ", " "],
       ],
-      chosenCell: "",
-      gameBeginner: "HUMAN",
+      // chosenCell: " ",
+      gameBeginner: " ",
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
@@ -63,7 +63,7 @@ export default class Landing extends Component {
         ),
       },
       win: false,
-      depth: 2,
+      depth: " ",
       undoStack: [],
     };
   }
@@ -209,19 +209,23 @@ export default class Landing extends Component {
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
         copy_board[Math.floor(cell / 3)][cell % 3] = "X";
       }
-      
-      console.log('hjfhhdhf')
-      this.check_win(copy_board);
-
       this.setState({
         board: copy_board,
       });
+      // console.log('hjfhhdhf')
 
-      const sendData = {
-        gameBeginner: this.state.gameBeginner,
-        board: JSON.stringify(this.state.board),
-        depth: JSON.stringify(this.state.depth),
-      }
+      let copy_board2 = this.state.board.slice();
+      this.check_win(copy_board2);
+
+      // this.setState({
+        // board: copy_board,
+      // });
+
+      // const sendData = {
+      //   gameBeginner: this.state.gameBeginner,
+      //   board: JSON.stringify(this.state.board),
+      //   depth: JSON.stringify(this.state.depth),
+      // }
       
       // useEffect(()=> {
       //     fetch("/agent").then(response =>
@@ -229,7 +233,10 @@ export default class Landing extends Component {
       //             console.log(data)
       //         }))
       // },[])
-      console.log(sendData)
+      // console.log(sendData)
+      console.log(this.state.win)
+      
+      // console.log(JSON.stringify(this.state.board))
       if(this.state.win === false)
       {
         axios
@@ -243,16 +250,20 @@ export default class Landing extends Component {
         .then((res) => {
 
           let copy_board = this.state.board.slice();
-          console.log(res.status)
-          console.log(res)
-          console.log(copy_board)
+          // console.log(res.status)
+          // console.log(res)
+          // console.log(copy_board)
 
           copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-
-
-          this.setState({
-              board : copy_board
-          })
+          console.log(this.state.startGameButton)
+          if(this.state.startGameButton === "Reset Game")
+          {
+              this.setState({
+                  board : copy_board
+              })
+                  let copy_board3 = this.state.board.slice();
+                  this.check_win(copy_board3);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -261,12 +272,16 @@ export default class Landing extends Component {
     }
   };
 
+  
+
   handleStartHuman = (e) => {
     console.log("Human begins the game!");
     this.setState({
       gameBeginner: "HUMAN",
     });
   };
+
+
 
   handleStartAgent = (e) => {
     console.log("Agent begins the game!");
@@ -275,40 +290,64 @@ export default class Landing extends Component {
     });
   };
 
+
+
   handleStartGame = (e, startGame) => {
     console.log("The game begins!");
+    // console.log(this.state.gameBeginner)
 
-    // this.setState({
-    //     whoPlaysFirstDialog : true
-    // })
-
-    if (startGame === "Start Game") {
+    if (startGame === "Start Game")
+    {
       this.setState({
         startGameButton: "Reset Game",
         startGameValue: true,
       });
-    } else if (startGame === "Reset Game") {
-      let copy_board = this.state.board.slice();
-      for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-          copy_board[i][j] = " ";
-        }
-      }
+    } 
+    else if (startGame === "Reset Game")
+    {
+
       this.setState({
-        board: copy_board,
-        gameBeginner: "",
+        board: [
+          [" ", " ", " "],
+          [" ", " ", " "],
+          [" ", " ", " "],
+        ],
+        gameBeginner: " ",
+        startGameValue: false,
         whoPlaysFirstDialog: false,
         startGameButton: "Start Game",
-        startGameValue: false,
-        depth: "",
+        win: false,
+        depth: " ",
+        undoStack: []
       });
     }
-  };
+    if(this.state.gameBeginner === "AGENT")
+    {
+      axios
+        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+          params: {
+            gameBeginner: this.state.gameBeginner,
+            board: JSON.stringify(this.state.board),
+            depth: JSON.stringify(this.state.depth)
+          },
+        }) //route to be filled according to flask route name
+        .then((res) => {
 
-  handleBeginner = (e) => {
-    this.setState({
-      gameBeginner: "HUMAN",
-    });
+          let copy_board = this.state.board.slice();
+
+          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+
+          if(this.state.startGameButton === "Reset Game")
+          {
+            this.setState({
+              board : copy_board
+              })
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   handleUndoFeature = (e, index, cell) => {
@@ -330,17 +369,17 @@ export default class Landing extends Component {
       board: copy_board,
       undoStack: copy_undoStack,
     });
-    // console.log(this.length())
+
   };
 
   handleDepth = (e, depth_selected) => {
-    // console.log(depth_selected)
-    // console.log(this.state.depth)
 
-    if (this.state.depth === "") {
+    if (this.state.depth === " ") {
+
       this.setState({
-        depth: depth_selected,
+        depth: depth_selected
       });
+
     }
   };
 
@@ -392,24 +431,29 @@ export default class Landing extends Component {
           </Button>{" "}
         </div>
 
-        <Button variant="default" onClick={(e) => this.handleBeginner(e)}>
-          Beginner
+        <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
+          Beginner_Human
+        </Button>
+
+
+        <Button variant="default" onClick={(e) => this.handleStartAgent(e)}>
+          Beginner_Agent
         </Button>
 
         <ButtonGroup aria-label="Basic example">
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 1)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e,1)}>
             Depth 1
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 2)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e,2)}>
             Depth 2
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 3)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e,3)}>
             Depth 3
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 4)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e,4)}>
             Depth 4
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 5)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e,-1)}>
             Ultimate
           </Button>
         </ButtonGroup>
