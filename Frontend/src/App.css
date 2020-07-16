@@ -14,6 +14,23 @@
   pointer-events: none;
 }
 
+.cell-style-three {
+  background-color: black;
+  text-align: center;
+  border: 1px solid;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0;
+  max-width: 100%;
+  width: 10%;
+  height: 185px;
+  padding: 3%;
+};
+
+.icon-size-3 {
+  font-size: 6rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -29,6 +46,32 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+
+@media(max-width: 700px) {
+  .cell-style-three{
+    height: 130px;
+  }
+
+  .icon-size-3 {
+    font-size: 4rem;
+  }
+
+}
+
+@media (max-width: 525px) {
+  .cell-style-three {
+    height: 100px;
+  }
+
+  .row-nine{
+    height: 30px !important;
+  }
+
+  .icon-size-3 {
+    font-size: 3rem;
+  }
 }
 
 .App-link {

@@ -1,4 +1,5 @@
 import React, { Component, useEffect } from "react";
+import '../App.css'; 
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -43,22 +44,22 @@ export default class Landing extends Component {
       symbol: {
         X: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-user-astronaut fa-6x orange-text mr-2"></i>
+            <i class="fas fa-user-astronaut icon-size-3 orange-text mr-2"></i>
           </div>
         ),
         O: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-robot fa-6x orange-text mr-2"></i>
+            <i class="fas fa-robot icon-size-3 orange-text mr-2"></i>
           </div>
         ),
         WA: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-robot fa-6x light-green-text fa-spin mr-2"></i>
+            <i class="fas fa-robot icon-size-3 light-green-text fa-spin mr-2"></i>
           </div>
         ),
         WH: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-user-astronaut fa-6x green-text fa-spin mr-2"></i>
+            <i class="fas fa-user-astronaut icon-size-3 green-text fa-spin mr-2"></i>
           </div>
         ),
       },
@@ -390,7 +391,7 @@ export default class Landing extends Component {
         style={{
           marginTop: "5%",
           margin: "0 auto",
-          maxWidth: "80%"
+          maxWidth: "90%"
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -403,7 +404,7 @@ export default class Landing extends Component {
                 {row.map((cell, j) => (
                   <Col
                     md
-                    style={cellStyle}
+                    className = "cell-style-three"
                     onClick={(e) => this.handleCellClick(e, 3 * i + j)}
                   >
                     {this.state.symbol[this.state.board[i][j]]}
@@ -469,18 +470,7 @@ export default class Landing extends Component {
 
 // var stack = new Landing();
 
-const cellStyle = {
-  backgroundColor: "black",
-  textAlign: "center",
-  border: "1px solid",
-  width: "10%",
-  height: 185,
-  padding: "3%",
-  flexBasis: "0",
-  flexGrow: "1",
-  minWidth: "0",
-  maxWidth: "100%"
-};
+
 //   border-collapse: "separate"
 // }
 const heading = {

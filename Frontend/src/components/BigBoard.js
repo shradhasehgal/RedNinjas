@@ -1,4 +1,5 @@
 import React, { Component,useEffect } from 'react'
+import '../App.css'
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
 import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
 // import { Link } from 'react-router-dom'
@@ -684,7 +685,7 @@ handleStartHuman = (e) => {
 
     render () {
         return (
-            <div style={{marginTop:"2%"}}>
+            <div style={{marginTop:"2%", margin: "0 auto", maxWidth: "90%"}}>
             <div style={{textAlign:"center"}}>
             <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
             </div>
@@ -700,10 +701,10 @@ handleStartHuman = (e) => {
                                     >
                                         {
                                             this.state.bigboard.map((inner_row,innerRow)=>(
-                                            <Row>
+                                            <Row style={{maxWidth: "100%", margin: "0 auto"}}>
                                             {
                                                 inner_row.map((inner_column,innerColumn)=> (
-                                                    <Col md style={cellStyle2}
+                                                    <Col md className="row-nine" style={cellStyle2}
                                                     onClick={(e) => this.handleCellClick(e,outerRow,outerColumn,innerRow,innerColumn)}>
                                                 {
                                                     <div style={{textAlign:"center"}}>
@@ -754,8 +755,11 @@ const cellStyle1 = {
     textAlign: 'center',
     border : "1px solid",
     width:"10%",
-    height : 250,
-    padding:"3%"
+    padding:"3%",
+    flexBasis: 0,
+    flexGrow: 1,
+    minWidth: 0,
+    maxWidth: "90%"
   }
 
   const cellStyle2 = {
@@ -763,8 +767,12 @@ const cellStyle1 = {
     textAlign: 'center',
     border : "1px solid",
     width:"5%",
-    height : 70,
-    padding:"1%"
+    height : 60,
+    padding:"1%",
+    flexBasis: 0,
+    flexGrow: 1,
+    minWidth: 0,
+    maxWidth: "90%"
   }
 
   const cellStyle3 = {
@@ -773,7 +781,11 @@ const cellStyle1 = {
     border : "1px solid",
     width:"10%",
     height : 250,
-    padding:"3%"
+    padding:"3%",
+    // flexBasis: 0,
+    // flexGrow: 1,
+    // minWidth: 0,
+    // maxWidth: "100%"
   }
   //   border-collapse: "separate"
   // }
