@@ -25,7 +25,7 @@ import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import stylesThree from "../static/css/Three.module.css";
+import styles from "../static/css/Three.module.css";
 import common from "../static/css/Common.module.css";
 
 export default class Landing extends Component {
@@ -400,7 +400,7 @@ export default class Landing extends Component {
           margin: "0 auto",
           maxWidth: "90%"
         }}
-        // className={stylesThree.landingBody}
+        className = {styles.landingBody}
       >
         <div style={{ textAlign: "center" }}>
           <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
