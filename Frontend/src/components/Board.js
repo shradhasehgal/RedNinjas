@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import '../styles/styles.css'; 
+import styles from '../styles/board.module.css';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -43,23 +43,23 @@ export default class Landing extends Component {
       startGameButton: "Start Game",
       symbol: {
         X: (
-          <div style={{ textAlign: "center" }}>
-            <i className="fas fa-user-astronaut icon-size-3 orange-text mr-2"></i>
+          <div style={{ textAlign: "center" }} className={styles.centerDiv}>
+            <i className={'fas fa-user-astronaut orange-text mr-2 ' + styles.iconThree}></i>
           </div>
         ),
         O: (
           <div style={{ textAlign: "center" }}>
-            <i className="fas fa-robot icon-size-3 orange-text mr-2"></i>
+            <i className={'fas fa-robot orange-text mr-2 ' + styles.iconThree}></i>
           </div>
         ),
         WA: (
           <div style={{ textAlign: "center" }}>
-            <i className="fas fa-robot icon-size-3 light-green-text fa-spin mr-2"></i>
+            <i className={'fas fa-robot light-green-text fa-spin mr-2 ' + styles.iconThree}></i>
           </div>
         ),
         WH: (
           <div style={{ textAlign: "center" }}>
-            <i className="fas fa-user-astronaut icon-size-3 green-text fa-spin mr-2"></i>
+            <i className={'fas fa-user-astronaut light-green-text fa-spin mr-2 ' + styles.iconThree}></i>
           </div>
         ),
       },
@@ -219,7 +219,7 @@ export default class Landing extends Component {
       this.check_win(copy_board2);
 
       // this.setState({
-        // board: copy_board,
+      // board: copy_board,
       // });
 
       // const sendData = {
@@ -227,7 +227,7 @@ export default class Landing extends Component {
       //   board: JSON.stringify(this.state.board),
       //   depth: JSON.stringify(this.state.depth),
       // }
-      
+
       // useEffect(()=> {
       //     fetch("/agent").then(response =>
       //         response.json().then(data => {
@@ -236,44 +236,42 @@ export default class Landing extends Component {
       // },[])
       // console.log(sendData)
       console.log(this.state.win)
-      
+
       // console.log(JSON.stringify(this.state.board))
-      if(this.state.win === false)
-      {
+      if (this.state.win === false) {
         axios
-        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
-          params: {
-            gameBeginner: this.state.gameBeginner,
-            board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.state.depth)
-          },
-        }) //route to be filled according to flask route name
-        .then((res) => {
+          .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+            params: {
+              gameBeginner: this.state.gameBeginner,
+              board: JSON.stringify(this.state.board),
+              depth: JSON.stringify(this.state.depth)
+            },
+          }) //route to be filled according to flask route name
+          .then((res) => {
 
-          let copy_board = this.state.board.slice();
-          // console.log(res.status)
-          // console.log(res)
-          // console.log(copy_board)
+            let copy_board = this.state.board.slice();
+            // console.log(res.status)
+            // console.log(res)
+            // console.log(copy_board)
 
-          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-          console.log(this.state.startGameButton)
-          if(this.state.startGameButton === "Reset Game")
-          {
+            copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+            console.log(this.state.startGameButton)
+            if (this.state.startGameButton === "Reset Game") {
               this.setState({
-                  board : copy_board
+                board: copy_board
               })
-                  let copy_board3 = this.state.board.slice();
-                  this.check_win(copy_board3);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+              let copy_board3 = this.state.board.slice();
+              this.check_win(copy_board3);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
   };
 
-  
+
 
   handleStartHuman = (e) => {
     console.log("Human begins the game!");
@@ -297,15 +295,13 @@ export default class Landing extends Component {
     console.log("The game begins!");
     // console.log(this.state.gameBeginner)
 
-    if (startGame === "Start Game")
-    {
+    if (startGame === "Start Game") {
       this.setState({
         startGameButton: "Reset Game",
         startGameValue: true,
       });
-    } 
-    else if (startGame === "Reset Game")
-    {
+    }
+    else if (startGame === "Reset Game") {
 
       this.setState({
         board: [
@@ -322,8 +318,7 @@ export default class Landing extends Component {
         undoStack: []
       });
     }
-    if(this.state.gameBeginner === "AGENT")
-    {
+    if (this.state.gameBeginner === "AGENT") {
       axios
         .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
           params: {
@@ -338,11 +333,10 @@ export default class Landing extends Component {
 
           copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
 
-          if(this.state.startGameButton === "Reset Game")
-          {
+          if (this.state.startGameButton === "Reset Game") {
             this.setState({
-              board : copy_board
-              })
+              board: copy_board
+            })
           }
         })
         .catch((err) => {
@@ -404,7 +398,7 @@ export default class Landing extends Component {
                 {row.map((cell, j) => (
                   <Col
                     md
-                    className = "cell-style-3"
+                    className={styles.cellThree}
                     onClick={(e) => this.handleCellClick(e, 3 * i + j)}
                   >
                     {this.state.symbol[this.state.board[i][j]]}
@@ -444,19 +438,19 @@ export default class Landing extends Component {
         </Button>
 
         <ButtonGroup aria-label="Basic example">
-          <Button variant="default" onClick={(e) => this.handleDepth(e,1)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e, 1)}>
             Depth 1
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e,2)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e, 2)}>
             Depth 2
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e,3)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e, 3)}>
             Depth 3
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e,4)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e, 4)}>
             Depth 4
           </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e,-1)}>
+          <Button variant="default" onClick={(e) => this.handleDepth(e, -1)}>
             Ultimate
           </Button>
         </ButtonGroup>
@@ -488,6 +482,6 @@ const startButton = {
 };
 
 // const cellStyle = {
-  
+
 // }
 // "proxy": "http://127.0.0.1:5000/"
