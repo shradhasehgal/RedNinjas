@@ -1,0 +1,50 @@
+.content {
+  background-color: #000000;
+  padding: 10%;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.landingBody {
+  margin: auto;
+  align-items: center;
+  background-image: url('../assets/idea2.gif');
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.heading {
+  color: #ffffff;
+  font-size: 2vw;
+}
+
+.subheading {
+  color: #ffffff;
+  font-size: 1.2vw;
+}
+
+@media screen and (min-width: 601px) {
+  .heading {
+    font-size: 50px;
+  }
+  .subheading {
+    font-size: 20px;
+  }
+  .content {
+    margin: 10% 20% 0 20%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 30px;
+  }
+  .subheading {
+    font-size: 15px;
+  }
+  .content {
+    margin: 40% 10% 0 10%;
+  }
+}
