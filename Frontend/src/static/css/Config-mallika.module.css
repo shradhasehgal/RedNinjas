@@ -1,0 +1,55 @@
+.wrapper{
+    background-color: #FF7885;
+}
+
+.mainDiv{
+    background-color: #FF7885;
+    min-height: 100vh;
+    margin: 0;
+    overflow: auto;
+    display: flex;
+}
+
+.containerBody{
+    background-color: #3B3251;
+    text-align: center;
+    margin: auto;
+    min-height: 70vh;
+}
+
+.heading{
+    margin:6%;
+    color: #ffffff;
+}
+
+.startContent{
+    color: #ffffff;
+}
+
+.icons{
+    color: #FF7885;
+}
+
+@media screen and (min-width: 601px) {
+    .heading {
+      font-size: 50px;
+    }
+    .subheading {
+      font-size: 20px;
+    }
+    .startContent {
+        font-size: 30px;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .heading {
+      font-size: 20px;
+    }
+    .subheading {
+      font-size: 15px;
+    }
+    .startContent {
+        font-size: 15px;
+    }
+  }
