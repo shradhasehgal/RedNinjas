@@ -1,5 +1,5 @@
 import React, { Component,useEffect } from 'react'
-import '../App.css'
+import '../styles/styles.css'
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse} from "mdbreact";
 import {MDBRow, MDBCard, MDBCardBody,MDBCardTitle, MDBCardText, MDBCol, MDBIcon} from "mdbreact";
 // import { Link } from 'react-router-dom'
@@ -704,7 +704,7 @@ handleStartHuman = (e) => {
                                             <Row style={{maxWidth: "100%", margin: "0 auto"}}>
                                             {
                                                 inner_row.map((inner_column,innerColumn)=> (
-                                                    <Col md className="row-nine" style={cellStyle2}
+                                                    <Col md className="row-style-9" style={cellStyle2}
                                                     onClick={(e) => this.handleCellClick(e,outerRow,outerColumn,innerRow,innerColumn)}>
                                                 {
                                                     <div style={{textAlign:"center"}}>

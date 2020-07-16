@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import '../App.css'; 
+import '../styles/styles.css'; 
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -44,22 +44,22 @@ export default class Landing extends Component {
       symbol: {
         X: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-user-astronaut icon-size-3 orange-text mr-2"></i>
+            <i className="fas fa-user-astronaut icon-size-3 orange-text mr-2"></i>
           </div>
         ),
         O: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-robot icon-size-3 orange-text mr-2"></i>
+            <i className="fas fa-robot icon-size-3 orange-text mr-2"></i>
           </div>
         ),
         WA: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-robot icon-size-3 light-green-text fa-spin mr-2"></i>
+            <i className="fas fa-robot icon-size-3 light-green-text fa-spin mr-2"></i>
           </div>
         ),
         WH: (
           <div style={{ textAlign: "center" }}>
-            <i class="fas fa-user-astronaut icon-size-3 green-text fa-spin mr-2"></i>
+            <i className="fas fa-user-astronaut icon-size-3 green-text fa-spin mr-2"></i>
           </div>
         ),
       },
@@ -404,7 +404,7 @@ export default class Landing extends Component {
                 {row.map((cell, j) => (
                   <Col
                     md
-                    className = "cell-style-three"
+                    className = "cell-style-3"
                     onClick={(e) => this.handleCellClick(e, 3 * i + j)}
                   >
                     {this.state.symbol[this.state.board[i][j]]}
