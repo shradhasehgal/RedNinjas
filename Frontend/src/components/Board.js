@@ -389,6 +389,8 @@ export default class Landing extends Component {
       <div
         style={{
           marginTop: "5%",
+          margin: "0 auto",
+          maxWidth: "80%"
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -474,6 +476,10 @@ const cellStyle = {
   width: "10%",
   height: 185,
   padding: "3%",
+  flexBasis: "0",
+  flexGrow: "1",
+  minWidth: "0",
+  maxWidth: "100%"
 };
 //   border-collapse: "separate"
 // }
@@ -491,4 +497,7 @@ const startButton = {
   // left:50
 };
 
+// const cellStyle = {
+  
+// }
 // "proxy": "http://127.0.0.1:5000/"
