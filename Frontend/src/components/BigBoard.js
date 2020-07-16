@@ -73,37 +73,37 @@ export default class BigBoard extends Component {
 
             symbol: {
                 X: <div style={{ textAlign: "center" }}>
-                    <i className={'fas fa-grin amber-text mr-2 ' + styles.iconNine}></i>
+                    <i className={'fas fa-grin amber-text ' + styles.iconNine}></i>
 
                     {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
                     {/* <i class="far fa-grin fa-3x amber-text mr-2"></i> */}
                 </div>,
                 O: <div style={{ textAlign: "center" }}>
-                    <i className={"far fa-grin pink-text mr-2 " + styles.iconNine}></i>
+                    <i className={"far fa-grin pink-text " + styles.iconNine}></i>
 
                     {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
                     {/* <i class="fas fa-grin fa-3x pink-text mr-2"></i> */}
                 </div>,
                 WA: <div style={{ textAlign: "center" }}>
-                    <i className={"fas fa-laugh-wink amber-text mr-2 " + styles.iconNine}></i>
+                    <i className={"fas fa-laugh-wink amber-text " + styles.iconNine}></i>
 
                     {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
                     {/* <i class="fas fa-robot fa-2x light-green-text mr-2"></i> */}
                 </div>,
                 WH: <div style={{ textAlign: "center" }}>
-                    <i className={"far fa-laugh-wink pink-text mr-2 " + styles.iconNine}></i>
+                    <i className={"far fa-laugh-wink pink-text " + styles.iconNine}></i>
 
                     {/* <i class="fas fa-user-astronaut fa-2x green-text mr-2"></i> */}
                     {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
                 </div>,
                 LA: <div style={{ textAlign: "center" }}>
-                    <i className={"fas fa-sad-cry amber-text mr-2 " + styles.iconNine}></i>
+                    <i className={"fas fa-sad-cry amber-text " + styles.iconNine}></i>
 
                     {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
                     {/* <i class="fas fa-robot fa-2x light-green-text mr-2"></i> */}
                 </div>,
                 LH: <div style={{ textAlign: "center" }}>
-                    <i className={"far fa-sad-cry pink-text mr-2 " + styles.iconNine}></i>
+                    <i className={"far fa-sad-cry pink-text " + styles.iconNine}></i>
 
                     {/* <i class="fas fa-user-astronaut fa-2x green-text mr-2"></i> */}
                     {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
