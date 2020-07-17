@@ -43,6 +43,7 @@ export default class Landing extends Component {
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
+      turn : " ",
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
@@ -206,7 +207,7 @@ export default class Landing extends Component {
   }
 
   handleCellClick = (e, cell) => {
-    if (this.state.startGameValue && this.state.win === false) {
+    if (this.state.startGameValue && this.state.win === false && this.state.turn === "HUMAN") {
       this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
@@ -214,6 +215,7 @@ export default class Landing extends Component {
       }
       this.setState({
         board: copy_board,
+        turn : "AGENT"
       });
       // console.log('hjfhhdhf')
 
@@ -242,6 +244,7 @@ export default class Landing extends Component {
       // console.log(JSON.stringify(this.state.board))
       if (this.state.win === false) {
         axios
+<<<<<<< HEAD
           .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
             params: {
               gameBeginner: this.state.gameBeginner,
@@ -261,6 +264,31 @@ export default class Landing extends Component {
             if (this.state.startGameButton === "Reset Game") {
               this.setState({
                 board: copy_board
+=======
+        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+          params: {
+            gameBeginner: this.state.gameBeginner,
+            board: JSON.stringify(this.state.board),
+            depth: JSON.stringify(this.state.depth)
+          },
+        }) //route to be filled according to flask route name
+        .then((res) => {
+
+          let copy_board = this.state.board.slice();
+          // console.log(res.status)
+          // console.log(res)
+          // console.log(copy_board)
+
+          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+          this.state.undoStack.push(3 * res.data.r + res.data.c)
+
+          // console.log(this.state.startGameButton)
+          if(this.state.startGameButton === "Reset Game")
+          {
+              this.setState({
+                  board : copy_board,
+                  turn : "HUMAN"
+>>>>>>> 006939df... Errors handling + Highlight small board
               })
               let copy_board3 = this.state.board.slice();
               this.check_win(copy_board3);
@@ -279,6 +307,7 @@ export default class Landing extends Component {
     console.log("Human begins the game!");
     this.setState({
       gameBeginner: "HUMAN",
+      turn : "HUMAN"
     });
   };
 
@@ -288,6 +317,7 @@ export default class Landing extends Component {
     console.log("Agent begins the game!");
     this.setState({
       gameBeginner: "AGENT",
+      turn : " "
     });
   };
 
@@ -317,7 +347,8 @@ export default class Landing extends Component {
         startGameButton: "Start Game",
         win: false,
         depth: " ",
-        undoStack: []
+        undoStack: [],
+        turn : " ",
       });
     }
     if (this.state.gameBeginner === "AGENT") {
@@ -334,11 +365,21 @@ export default class Landing extends Component {
           let copy_board = this.state.board.slice();
 
           copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+<<<<<<< HEAD
 
           if (this.state.startGameButton === "Reset Game") {
             this.setState({
               board: copy_board
             })
+=======
+          this.state.undoStack.push(3 * res.data.r + res.data.c)
+          if(this.state.startGameButton === "Reset Game")
+          {
+            this.setState({
+              board : copy_board,
+              turn : "HUMAN",
+              })
+>>>>>>> 006939df... Errors handling + Highlight small board
           }
         })
         .catch((err) => {
