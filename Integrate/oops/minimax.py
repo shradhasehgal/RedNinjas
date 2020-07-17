@@ -16,10 +16,10 @@ class Minimax ():
         score = self.score.calc_score(board_obj.board)
         dup_board = board_obj.board.copy()
         if score == MAX_UTIL:
-            return score
+            return score*(10-depth)
 
         if score == -MAX_UTIL:
-            return score
+            return score*(10-depth)
 
         if board_obj.is_moves_left() == False:
             return 0
@@ -74,7 +74,7 @@ class Minimax ():
         if(depth_type == 3):
             score = self.score.calc_score_depth_3(board_obj.board, row, col)
         if(depth_type == 4):
-            score = self.score.calc_score_depth4(board_obj.board, row, col)
+            score = self.score.calc_score_depth_4(board_obj.board, row, col)
 
         #If max depth reached, return score
         if flag == 1 : 

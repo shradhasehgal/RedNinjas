@@ -187,7 +187,35 @@ class Score():
         else :
             return -score 
     
-    def calc_score_depth4(self,b,row,coloumn):
+    def calc_score_depth_4(self,b,row,coloumn, normal=True):
+        
+        if(normal):
+            for r in range(0,3):
+                if b[r][0] == b[r][1] == b[r][2] != EMPTY:
+                    if b[r][0] == AGENT:
+                        return MAX_UTIL
+                    else:
+                        return -MAX_UTIL
+
+            for c in range(0,3):
+                if b[0][c] == b[1][c] == b[2][c] != EMPTY :
+                    if b[0][c] == AGENT:
+                        return MAX_UTIL
+                    else:
+                        return -MAX_UTIL
+
+            if b[0][0]==b[1][1]==b[2][2] != EMPTY :
+                if b[0][0] == AGENT:
+                    return MAX_UTIL
+                else:
+                    return -MAX_UTIL 
+
+            if b[0][2]==b[1][1]==b[2][0] != EMPTY :
+                if b[0][2] == AGENT:
+                    return MAX_UTIL
+                else:
+                    return -MAX_UTIL 
+
         diagonal=0     
         #Cross-over 
         if row==coloumn :
@@ -358,7 +386,7 @@ class Score():
             '''If there is no win/loss in smallboard there won;t be any change in the child_board
                 Score will remain 0 '''
             if flag==1 :
-                child_utility = parent_utility + self.calc_score_depth4(smallboard,sr,sc)
+                child_utility = parent_utility + self.calc_score_depth_4(smallboard,sr,sc,False)
 
         return child_utility,child_checkboard,globalwin
 
