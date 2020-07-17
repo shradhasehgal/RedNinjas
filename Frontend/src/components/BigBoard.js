@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from 'react'
-import styles from '../styles/board.module.css'
+import styles from '../static/css/board.module.css'
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse } from "mdbreact";
 import { MDBRow, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCol, MDBIcon } from "mdbreact";
 // import { Link } from 'react-router-dom'
@@ -20,7 +20,7 @@ export default class BigBoard extends Component {
         this.state = {
             show_9x9_BoardComponent: this.props.show_9x9_BoardComponent,
             startGameButton: "Start Game",
-            turn : " ",
+            turn: " ",
             startGameValue: false,
             ultimateWin: false,
             gameBeginner: " ",
@@ -232,91 +232,87 @@ export default class BigBoard extends Component {
     check_ultimate_win(copy_board) {
         // let copy_bigBoard = this.state.bigboard.slice()
 
-        if(this.state.ultimateWin === false)
-        {
+        if (this.state.ultimateWin === false) {
             for (let i = 0; i < 3; i++) { //for row
                 if (
-                  copy_board[i][0] === copy_board[i][1] &&
-                  copy_board[i][0] === copy_board[i][2] &&
-                  copy_board[i][1] === copy_board[i][2] &&
-                  copy_board[i][0] !== " "
+                    copy_board[i][0] === copy_board[i][1] &&
+                    copy_board[i][0] === copy_board[i][2] &&
+                    copy_board[i][1] === copy_board[i][2] &&
+                    copy_board[i][0] !== " "
                 ) {
-                  if (copy_board[i][0] === "O") {
-    
-                    this.alterBigBoardRow("O","WH","X","LA",i)
-    
-                  } else if (copy_board[i][0] === "X") {
-                    this.alterBigBoardRow("X","WA","O","LH",i)                
-                  }
-                  this.setState({
-                    ultimateWin: true,
-                    ultimateWinBoard : copy_board
-                  });
+                    if (copy_board[i][0] === "O") {
+
+                        this.alterBigBoardRow("O", "WH", "X", "LA", i)
+
+                    } else if (copy_board[i][0] === "X") {
+                        this.alterBigBoardRow("X", "WA", "O", "LH", i)
+                    }
+                    this.setState({
+                        ultimateWin: true,
+                        ultimateWinBoard: copy_board
+                    });
                 }
-              }
-            
+            }
+
         }
 
-        if(this.state.ultimateWin === false)
-        {
-        for (let i = 0; i < 3; i++) { // for column
+        if (this.state.ultimateWin === false) {
+            for (let i = 0; i < 3; i++) { // for column
+                if (
+                    copy_board[0][i] === copy_board[1][i] &&
+                    copy_board[0][i] === copy_board[2][i] &&
+                    copy_board[1][i] === copy_board[2][i] &&
+                    copy_board[0][i] !== " "
+                ) {
+                    if (copy_board[0][i] === "O") {
+                        this.alterBigBoardColumn("O", "WH", "X", "LA", i)
+                    } else if (copy_board[0][i] === "X") {
+                        this.alterBigBoardColumn("X", "WA", "O", "LH", i)
+
+                    }
+                    this.setState({
+                        ultimateWin: true,
+                        ultimateWinBoard: copy_board
+                    });
+                }
+            }
+        }
+
+        if (this.state.ultimateWin === false) {
             if (
-                copy_board[0][i] === copy_board[1][i] &&
-                copy_board[0][i] === copy_board[2][i] &&
-                copy_board[1][i] === copy_board[2][i] &&
-                copy_board[0][i] !== " "
+                copy_board[0][0] === copy_board[1][1] &&
+                copy_board[0][0] === copy_board[2][2] &&
+                copy_board[1][1] === copy_board[2][2] &&
+                copy_board[0][0] !== " "
             ) {
-                if (copy_board[0][i] === "O") {
-                this.alterBigBoardColumn("O","WH","X","LA",i)
-                } else if (copy_board[0][i] === "X") {
-                this.alterBigBoardColumn("X","WA","O","LH",i)
-                
+                if (copy_board[0][0] === "O") {
+                    this.alterBigBoardLeftDiagonal("O", "WH", "X", "LA")
+                } else if (copy_board[0][0] === "X") {
+                    this.alterBigBoardLeftDiagonal("X", "WA", "O", "LH")
                 }
                 this.setState({
-                ultimateWin: true,
-                ultimateWinBoard : copy_board
+                    ultimateWin: true,
+                    ultimateWinBoard: copy_board
                 });
-            }
             }
         }
 
-        if(this.state.ultimateWin === false)
-        {
-        if (
-            copy_board[0][0] === copy_board[1][1] &&
-            copy_board[0][0] === copy_board[2][2] &&
-            copy_board[1][1] === copy_board[2][2] &&
-            copy_board[0][0] !== " "
+        if (this.state.ultimateWin === false) {
+            if (
+                copy_board[0][2] === copy_board[1][1] &&
+                copy_board[0][2] === copy_board[2][0] &&
+                copy_board[1][1] === copy_board[2][0] &&
+                copy_board[0][2] !== " "
             ) {
-            if (copy_board[0][0] === "O") {
-                this.alterBigBoardLeftDiagonal("O","WH","X","LA")
-            } else if (copy_board[0][0] === "X") {
-                this.alterBigBoardLeftDiagonal("X", "WA", "O", "LH")
-            }
-            this.setState({
-                ultimateWin: true,
-                ultimateWinBoard : copy_board
-            });
-            }
-        }
-        
-        if(this.state.ultimateWin === false)
-        {
-        if (
-            copy_board[0][2] === copy_board[1][1] &&
-            copy_board[0][2] === copy_board[2][0] &&
-            copy_board[1][1] === copy_board[2][0] &&
-            copy_board[0][2] !== " "
-            ) {
-            if (copy_board[0][2] === "O") {
-                this.alterBigBoardLeftDiagonal("O", "WH", "X", "LA")
-            } else if (copy_board[0][2] === "X") {
-                this.alterBigBoardRightDiagonal("X", "WA", "O", "LH")
-            }
-            this.setState({
-                ultimateWin: true,
-                ultimateWinBoard : copy_board
-            });
+                if (copy_board[0][2] === "O") {
+                    this.alterBigBoardLeftDiagonal("O", "WH", "X", "LA")
+                } else if (copy_board[0][2] === "X") {
+                    this.alterBigBoardRightDiagonal("X", "WA", "O", "LH")
+                }
+                this.setState({
+                    ultimateWin: true,
+                    ultimateWinBoard: copy_board
+                });
             }
         }
     }
@@ -435,21 +431,17 @@ export default class BigBoard extends Component {
             return true
     }
 
-    handleCellClick = (e, outerRow,outerColumn,innerRow,innerColumn) => {
-        if(this.state.startGameValue === true && this.state.ultimateWin === false && this.state.turn === "HUMAN")
-        {
+    handleCellClick = (e, outerRow, outerColumn, innerRow, innerColumn) => {
+        if (this.state.startGameValue === true && this.state.ultimateWin === false && this.state.turn === "HUMAN") {
             let copy_bigBoard1 = this.state.bigboard.slice()
-            if(copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] === " ")
-            {
-                if(this.state.moveNumber !== 1)
-                {
-                    if(this.checkValidityOfMove(outerRow,outerColumn) === true)
-                    {
+            if (copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] === " ") {
+                if (this.state.moveNumber !== 1) {
+                    if (this.checkValidityOfMove(outerRow, outerColumn) === true) {
                         copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
 
                         this.setState({
-                            bigboard : copy_bigBoard1,
-                            turn : "AGENT"
+                            bigboard: copy_bigBoard1,
+                            turn: "AGENT"
                         })
 
                         let copy_bigBoard2 = this.state.bigboard.slice()
@@ -464,27 +456,26 @@ export default class BigBoard extends Component {
                                     previous_move: JSON.stringify([outerRow, outerColumn, innerRow, innerColumn])
                                 },
                             }) //route to be filled according to flask route name
-                            .then((res) => {
-                                console.log(res.data)
-                                let copy_board1 = this.state.bigboard.slice()
-                                copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
-                                if(this.state.startGameButton === "Reset Game")
-                                {
-                                    this.setState({
-                                        bigboard : copy_board1,
-                                        moveNumber : this.moveNumber + 1,
-                                        rowToPlace : res.data["agent-move"][2],
-                                        columnToPlace : res.data["agent-move"][3],
-                                        turn : "HUMAN"
-                                    })
-                                    
-                                    let copy_bigBoard2 = this.state.bigboard.slice()
-                                    this.checkPartialWin(copy_bigBoard2)
-                                }     
-                            })
-                            .catch((err) => {
-                            console.log(err);
-                            });
+                                .then((res) => {
+                                    console.log(res.data)
+                                    let copy_board1 = this.state.bigboard.slice()
+                                    copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+                                    if (this.state.startGameButton === "Reset Game") {
+                                        this.setState({
+                                            bigboard: copy_board1,
+                                            moveNumber: this.moveNumber + 1,
+                                            rowToPlace: res.data["agent-move"][2],
+                                            columnToPlace: res.data["agent-move"][3],
+                                            turn: "HUMAN"
+                                        })
+
+                                        let copy_bigBoard2 = this.state.bigboard.slice()
+                                        this.checkPartialWin(copy_bigBoard2)
+                                    }
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                });
                         }
                     }
                     else {
@@ -497,10 +488,10 @@ export default class BigBoard extends Component {
 
                     copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
 
-                        this.setState({
-                            bigboard : copy_bigBoard1,
-                            turn : "AGENT"
-                        })
+                    this.setState({
+                        bigboard: copy_bigBoard1,
+                        turn: "AGENT"
+                    })
                     axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                         params: {
                             board: JSON.stringify(this.state.bigboard),
@@ -513,18 +504,17 @@ export default class BigBoard extends Component {
                             let copy_board1 = this.state.bigboard.slice()
 
                             copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
-                        if(this.state.startGameButton === "Reset Game")
-                        {
-                            this.setState({
-                                bigboard : copy_board1,
-                                moveNumber : this.moveNumber + 1,
-                                rowToPlace : res.data["agent-move"][2],
-                                columnToPlace : res.data["agent-move"][3],
-                                turn : "HUMAN"
-                            })
-                            let copy_bigBoard2 = this.state.bigboard.slice()
-                            this.checkPartialWin(copy_bigBoard2)
-                        }
+                            if (this.state.startGameButton === "Reset Game") {
+                                this.setState({
+                                    bigboard: copy_board1,
+                                    moveNumber: this.moveNumber + 1,
+                                    rowToPlace: res.data["agent-move"][2],
+                                    columnToPlace: res.data["agent-move"][3],
+                                    turn: "HUMAN"
+                                })
+                                let copy_bigBoard2 = this.state.bigboard.slice()
+                                this.checkPartialWin(copy_bigBoard2)
+                            }
                         })
                         .catch((err) => {
                             console.log(err);
@@ -559,112 +549,111 @@ export default class BigBoard extends Component {
             this.setState({
                 bigboard: copy_board,
                 gameBeginner: " ",
-                startGameValue : false,
+                startGameValue: false,
                 startGameButton: "Start Game",
                 startGameValue: false,
-                ultimateWin : false,
-                rowToPlace : " ",
-                columnToPlace : " ",
-                moveNumber : 1,
+                ultimateWin: false,
+                rowToPlace: " ",
+                columnToPlace: " ",
+                moveNumber: 1,
                 ultimateWinBoard: [
                     [" ", " ", " "],
                     [" ", " ", " "],
                     [" ", " ", " "],
                 ],
-                turn : " "
+                turn: " "
             });
         }
 
-        if(this.state.gameBeginner === "AGENT")
-        {
+        if (this.state.gameBeginner === "AGENT") {
             console.log("Agent beginner")
             axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                 params: {
-                    board : JSON.stringify(this.state.bigboard),
-                    checkboard : JSON.stringify(this.state.ultimateWinBoard),
-                    previous_move : JSON.stringify([-1,-1,-1,-1])
+                    board: JSON.stringify(this.state.bigboard),
+                    checkboard: JSON.stringify(this.state.ultimateWinBoard),
+                    previous_move: JSON.stringify([-1, -1, -1, -1])
                 },
             }) //route to be filled according to flask route name
-            .then((res) => {
+                .then((res) => {
 
-                let copy_board1 = this.state.bigboard.slice()
-                copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+                    let copy_board1 = this.state.bigboard.slice()
+                    copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
 
-            if(this.state.startGameButton === "Reset Game")
-            {
-                this.setState({
-                    bigboard : copy_board1,
-                    rowToPlace : res.data["agent-move"][2],
-                    columnToPlace : res.data["agent-move"][3],
-                    moveNumber : this.moveNumber + 1,
-                    turn : "HUMAN"
+                    if (this.state.startGameButton === "Reset Game") {
+                        this.setState({
+                            bigboard: copy_board1,
+                            rowToPlace: res.data["agent-move"][2],
+                            columnToPlace: res.data["agent-move"][3],
+                            moveNumber: this.moveNumber + 1,
+                            turn: "HUMAN"
+                        })
+                        let copy_bigBoard2 = this.state.bigboard.slice()
+                        this.checkPartialWin(copy_bigBoard2)
+                    }
                 })
-                let copy_bigBoard2 = this.state.bigboard.slice()
-                this.checkPartialWin(copy_bigBoard2)
-            }
-        })
+        }
     }
-}
 
-handleStartHuman = (e) => {
-    console.log("Human begins the game!");
-    this.setState({
-      gameBeginner: "HUMAN",
-      turn : "HUMAN"
-    });
-  };
+    handleStartHuman = (e) => {
+        console.log("Human begins the game!");
+        this.setState({
+            gameBeginner: "HUMAN",
+            turn: "HUMAN"
+        });
+    };
 
-  handleStartAgent = (e) => {
-    console.log("Agent begins the game!");
-    this.setState({
-      gameBeginner : "AGENT",
-      turn : "AGENT"
-    });
-  };
+    handleStartAgent = (e) => {
+        console.log("Agent begins the game!");
+        this.setState({
+            gameBeginner: "AGENT",
+            turn: "AGENT"
+        });
+    };
 
 
     render() {
         return (
             <div style={{ marginTop: "2%", margin: "0 auto", maxWidth: "90%" }}>
-            <div style={{textAlign:"center"}}>
-            <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
-            </div>
-            <Container>
-                <Container fluid='true'>
-                {
-                    this.state.bigboard.map((row, outerRow)=>(
-                        <Row>
-                            {
-                                row.map((column, outerColumn)=> (
+                <div style={{ textAlign: "center" }}>
+                    <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
+                </div>
+                <Container>
+                    <Container fluid='true'>
+                        {
+                            this.state.bigboard.map((row, outerRow) => (
+                                <Row>
+                                    {
+                                        row.map((column, outerColumn) => (
 
-                                    <Col md style={cellStyle1}
-                                    >
-                                        {
-                                            this.state.bigboard.map((inner_row,innerRow)=>(
-                                            <Row  style={{ maxWidth: "100%", margin: "0 auto" }}>
-                                            {
-                                                inner_row.map((inner_column,innerColumn)=> (
-                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " ? cellStyle3 : cellStyle2}
-                                                    onClick={(e) => this.handleCellClick(e,outerRow,outerColumn,innerRow,innerColumn)}>
-                                                
-                                                    {
-                                                        <div style={{ textAlign: "center" }}>
-                                                            {this.state.symbol[this.state.bigboard[outerRow][outerColumn][innerRow][innerColumn]]}
-                                                        </div>
-                                                    }
-                                                            
+                                            <Col md style={cellStyle1}
+                                            >
+                                                {
+                                                    this.state.bigboard.map((inner_row, innerRow) => (
+                                                        <Row style={{ maxWidth: "100%", margin: "0 auto" }}>
+                                                            {
+                                                                inner_row.map((inner_column, innerColumn) => (
+                                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " ? cellStyle3 : cellStyle2}
+                                                                    className={styles.cellNine}  
+                                                                        onClick={(e) => this.handleCellClick(e, outerRow, outerColumn, innerRow, innerColumn)}>
+
+                                                                        {
+                                                                            <div style={{ textAlign: "center" }}>
+                                                                                {this.state.symbol[this.state.bigboard[outerRow][outerColumn][innerRow][innerColumn]]}
+                                                                            </div>
+                                                                        }
+
+                                                                    </Col>
+                                                                ))
+                                                            }
+                                                        </Row>
+                                                    ))
+                                                }
                                             </Col>
                                         ))
                                     }
                                 </Row>
                             ))
                         }
-                        </Col>
-                                ))
-                            }
-                        </Row>
-                    ))
-                }
                     </Container>
                 </Container>
 

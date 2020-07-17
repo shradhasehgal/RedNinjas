@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import styles from '../styles/board.module.css';
+import styles from '../static/css/board.module.css';
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -25,7 +25,7 @@ import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import styles from "../static/css/Three.module.css";
+import stylesThree from "../static/css/Three.module.css";
 import common from "../static/css/Common.module.css";
 
 export default class Landing extends Component {
@@ -43,7 +43,7 @@ export default class Landing extends Component {
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
-      turn : " ",
+      turn: " ",
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
@@ -215,7 +215,7 @@ export default class Landing extends Component {
       }
       this.setState({
         board: copy_board,
-        turn : "AGENT"
+        turn: "AGENT"
       });
       // console.log('hjfhhdhf')
 
@@ -244,27 +244,6 @@ export default class Landing extends Component {
       // console.log(JSON.stringify(this.state.board))
       if (this.state.win === false) {
         axios
-<<<<<<< HEAD
-          .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
-            params: {
-              gameBeginner: this.state.gameBeginner,
-              board: JSON.stringify(this.state.board),
-              depth: JSON.stringify(this.state.depth)
-            },
-          }) //route to be filled according to flask route name
-          .then((res) => {
-
-            let copy_board = this.state.board.slice();
-            // console.log(res.status)
-            // console.log(res)
-            // console.log(copy_board)
-
-            copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-            console.log(this.state.startGameButton)
-            if (this.state.startGameButton === "Reset Game") {
-              this.setState({
-                board: copy_board
-=======
         .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
           params: {
             gameBeginner: this.state.gameBeginner,
@@ -288,7 +267,6 @@ export default class Landing extends Component {
               this.setState({
                   board : copy_board,
                   turn : "HUMAN"
->>>>>>> 006939df... Errors handling + Highlight small board
               })
               let copy_board3 = this.state.board.slice();
               this.check_win(copy_board3);
@@ -307,7 +285,7 @@ export default class Landing extends Component {
     console.log("Human begins the game!");
     this.setState({
       gameBeginner: "HUMAN",
-      turn : "HUMAN"
+      turn: "HUMAN"
     });
   };
 
@@ -317,7 +295,7 @@ export default class Landing extends Component {
     console.log("Agent begins the game!");
     this.setState({
       gameBeginner: "AGENT",
-      turn : " "
+      turn: " "
     });
   };
 
@@ -348,7 +326,7 @@ export default class Landing extends Component {
         win: false,
         depth: " ",
         undoStack: [],
-        turn : " ",
+        turn: " ",
       });
     }
     if (this.state.gameBeginner === "AGENT") {
@@ -365,13 +343,6 @@ export default class Landing extends Component {
           let copy_board = this.state.board.slice();
 
           copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-<<<<<<< HEAD
-
-          if (this.state.startGameButton === "Reset Game") {
-            this.setState({
-              board: copy_board
-            })
-=======
           this.state.undoStack.push(3 * res.data.r + res.data.c)
           if(this.state.startGameButton === "Reset Game")
           {
@@ -379,7 +350,6 @@ export default class Landing extends Component {
               board : copy_board,
               turn : "HUMAN",
               })
->>>>>>> 006939df... Errors handling + Highlight small board
           }
         })
         .catch((err) => {
@@ -430,7 +400,7 @@ export default class Landing extends Component {
           margin: "0 auto",
           maxWidth: "90%"
         }}
-        className = {styles.landingBody}
+        // className={stylesThree.landingBody}
       >
         <div style={{ textAlign: "center" }}>
           <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
