@@ -43,7 +43,7 @@ export default class Landing extends Component {
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
-      turn: " ",
+      turn : " ",
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
@@ -215,7 +215,7 @@ export default class Landing extends Component {
       }
       this.setState({
         board: copy_board,
-        turn: "AGENT"
+        turn : "AGENT"
       });
       // console.log('hjfhhdhf')
 
@@ -285,7 +285,7 @@ export default class Landing extends Component {
     console.log("Human begins the game!");
     this.setState({
       gameBeginner: "HUMAN",
-      turn: "HUMAN"
+      turn : "HUMAN"
     });
   };
 
@@ -295,7 +295,7 @@ export default class Landing extends Component {
     console.log("Agent begins the game!");
     this.setState({
       gameBeginner: "AGENT",
-      turn: " "
+      turn : " "
     });
   };
 
@@ -326,7 +326,7 @@ export default class Landing extends Component {
         win: false,
         depth: " ",
         undoStack: [],
-        turn: " ",
+        turn : " ",
       });
     }
     if (this.state.gameBeginner === "AGENT") {
