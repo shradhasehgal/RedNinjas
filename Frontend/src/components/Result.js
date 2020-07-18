@@ -75,7 +75,6 @@ export default class Result extends Component {
                       <text className={styles.text}> Better Luck next time!!</text>
                   </MDBAnimation>
                   <Button size="lg" variant="light"> Play Again!</Button>
-
                 </Container>
               </Container>
             </Container>
