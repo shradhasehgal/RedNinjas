@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 import { Button, Container, Col, Row } from 'react-bootstrap'
 // import axios from 'axios';
-import Board from './Board.js'
-import BigBoard from './BigBoard.js'
+import Board from './threeBoard.js'
+import bigBoard from './nineBoard.js'
 // import Sky from 'react-sky';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -46,7 +46,7 @@ export default class GameStarter extends Component {
                 }}> 9*9 TIC-TAC-TOE
                 </Button>
                 {this.state.show_3x3_BoardComponent && <Board/>}
-                {this.state.show_9x9_BoardComponent && <BigBoard/>}
+                {this.state.show_9x9_BoardComponent && <bigBoard/>}
                 </div>
         )
     }

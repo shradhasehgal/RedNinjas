@@ -14,16 +14,18 @@ import 'mdbreact/dist/css/mdb.css';
 
 
 
-export default class BigBoard extends Component {
+export default class NineBoard extends Component {
     constructor(props) {
         super(props)
+    console.log(this.props.gameBeginner)
+
         this.state = {
             show_9x9_BoardComponent: this.props.show_9x9_BoardComponent,
             startGameButton: "Start Game",
-            turn: " ",
+            turn: this.props.gameBeginner,
             startGameValue: false,
             ultimateWin: false,
-            gameBeginner: " ",
+            // gameBeginner: " ",
             rowToPlace: " ",
             columnToPlace: " ",
             moveNumber: 1,
@@ -74,13 +76,13 @@ export default class BigBoard extends Component {
 
             symbol: {
                 X: <div style={{ textAlign: "center" }}>
-                    <i className={'fas fa-grin amber-text ' + styles.iconNine}></i>
+                    <i className={'fas fa-times amber-text ' + styles.iconNine}></i>
 
                     {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
                     {/* <i class="far fa-grin fa-3x amber-text mr-2"></i> */}
                 </div>,
                 O: <div style={{ textAlign: "center" }}>
-                    <i className={"far fa-grin pink-text " + styles.iconNine}></i>
+                    <i className={"far fa-circle pink-text " + styles.iconNine}></i>
 
                     {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
                     {/* <i class="fas fa-grin fa-3x pink-text mr-2"></i> */}
@@ -565,7 +567,7 @@ export default class BigBoard extends Component {
             });
         }
 
-        if (this.state.gameBeginner === "AGENT") {
+        if (this.props.gameBeginner === "AGENT") {
             console.log("Agent beginner")
             axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                 params: {
@@ -594,21 +596,21 @@ export default class BigBoard extends Component {
         }
     }
 
-    handleStartHuman = (e) => {
-        console.log("Human begins the game!");
-        this.setState({
-            gameBeginner: "HUMAN",
-            turn: "HUMAN"
-        });
-    };
+    // handleStartHuman = (e) => {
+    //     console.log("Human begins the game!");
+    //     this.setState({
+    //         gameBeginner: "HUMAN",
+    //         turn: "HUMAN"
+    //     });
+    // };
 
-    handleStartAgent = (e) => {
-        console.log("Agent begins the game!");
-        this.setState({
-            gameBeginner: "AGENT",
-            turn: "AGENT"
-        });
-    };
+    // handleStartAgent = (e) => {
+    //     console.log("Agent begins the game!");
+    //     this.setState({
+    //         gameBeginner: "AGENT",
+    //         turn: "AGENT"
+    //     });
+    // };
 
 
     render() {
@@ -632,7 +634,7 @@ export default class BigBoard extends Component {
                                                         <Row style={{ maxWidth: "100%", margin: "0 auto" }}>
                                                             {
                                                                 inner_row.map((inner_column, innerColumn) => (
-                                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " ? cellStyle3 : cellStyle2}
+                                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false ? cellStyle3 : cellStyle2}
                                                                     className={styles.cellNine}  
                                                                         onClick={(e) => this.handleCellClick(e, outerRow, outerColumn, innerRow, innerColumn)}>
 
@@ -667,15 +669,18 @@ export default class BigBoard extends Component {
                         {this.state.startGameButton}
                     </Button>{" "}
                 </div>
+                <div>
+                    <div> Turn : {this.state.turn}</div>
+                </div>
 
-                <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
+                {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
                     Beginner_Human
             </Button>
 
 
                 <Button variant="default" onClick={(e) => this.handleStartAgent(e)}>
                     Beginner_Agent
-            </Button>
+            </Button> */}
             </div>
         )
     }
@@ -703,21 +708,35 @@ const cellStyle2 = {
     flexBasis: 0,
     flexGrow: 1,
     minWidth: 0,
-    maxWidth: "90%",
+    maxWidth: "90%"
 }
 
+
 const cellStyle3 = {
-    backgroundColor: 'pink',
+    backgroundColor: 'grey',
     textAlign: 'center',
     border: "1px solid",
-    width: "10%",
-    height: 250,
-    padding: "3%",
-    // flexBasis: 0,
-    // flexGrow: 1,
-    // minWidth: 0,
-    // maxWidth: "100%"
+    width: "5%",
+    height: 60,
+    padding: "1%",
+    flexBasis: 0,
+    flexGrow: 1,
+    minWidth: 0,
+    maxWidth: "90%"
 }
+
+// const cellStyle3 = {
+//     backgroundColor: 'pink',
+//     textAlign: 'center',
+//     border: "1px solid",
+//     width: "10%",
+//     height: 250,
+//     padding: "3%",
+//     // flexBasis: 0,
+//     // flexGrow: 1,
+//     // minWidth: 0,
+//     // maxWidth: "100%"
+// }
 //   border-collapse: "separate"
 // }
 const heading = {

@@ -25,25 +25,29 @@ import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import styles from "../static/css/Three.module.css";
+// import styles from "../static/css/Three.module.css";
 import common from "../static/css/Common.module.css";
 
-export default class Landing extends Component {
+export default class ThreeBoard extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.depth)
+    console.log(this.props.gameBeginner)
     this.state = {
-      show_3x3_BoardComponent: this.props.show_3x3_BoardComponent,
+      // show_3x3_BoardComponent: this.props.show_3x3_BoardComponent,
       board: [
         [" ", " ", " "],
         [" ", " ", " "],
         [" ", " ", " "],
       ],
-      // chosenCell: " ",
-      gameBeginner: " ",
+      // gameBeginner: " ",
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
-      turn : " ",
+      turn : this.props.gameBeginner,
+      win: false,
+      // depth: " ",
+      undoStack: [],
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
@@ -64,11 +68,11 @@ export default class Landing extends Component {
           <div style={{ textAlign: "center" }}>
             <i className={'fas fa-user-astronaut light-green-text fa-spin mr-2 ' + styles.iconThree}></i>
           </div>
-        ),
+        )
       },
-      win: false,
-      depth: " ",
-      undoStack: [],
+      // showWinComponent : false,
+      // showConfigurationComponent : false,
+      // showGameConfiguration : false
     };
   }
 
@@ -207,6 +211,8 @@ export default class Landing extends Component {
   }
 
   handleCellClick = (e, cell) => {
+    // console.log(this.state.turn)
+    // console.log("came to handle cell click")
     if (this.state.startGameValue && this.state.win === false && this.state.turn === "HUMAN") {
       this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
@@ -239,23 +245,24 @@ export default class Landing extends Component {
       //         }))
       // },[])
       // console.log(sendData)
-      console.log(this.state.win)
+      // console.log(this.state.win)
 
       // console.log(JSON.stringify(this.state.board))
       if (this.state.win === false) {
+        // console.log("hiiii")
         axios
         .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
           params: {
-            gameBeginner: this.state.gameBeginner,
+            gameBeginner: this.props.gameBeginner,
             board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.state.depth)
+            depth: JSON.stringify(this.props.depth)
           },
         }) //route to be filled according to flask route name
         .then((res) => {
-
+          
           let copy_board = this.state.board.slice();
           // console.log(res.status)
-          // console.log(res)
+          console.log(res.data)
           // console.log(copy_board)
 
           copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
@@ -281,28 +288,28 @@ export default class Landing extends Component {
 
 
 
-  handleStartHuman = (e) => {
-    console.log("Human begins the game!");
-    this.setState({
-      gameBeginner: "HUMAN",
-      turn : "HUMAN"
-    });
-  };
+  // handleStartHuman = (e) => {
+  //   console.log("Human begins the game!");
+  //   this.setState({
+  //     gameBeginner: "HUMAN",
+  //     turn : "HUMAN"
+  //   });
+  // };
 
 
 
-  handleStartAgent = (e) => {
-    console.log("Agent begins the game!");
-    this.setState({
-      gameBeginner: "AGENT",
-      turn : " "
-    });
-  };
+  // handleStartAgent = (e) => {
+  //   console.log("Agent begins the game!");
+  //   this.setState({
+  //     gameBeginner: "AGENT",
+  //     turn : " "
+  //   });
+  // };
 
 
 
   handleStartGame = (e, startGame) => {
-    console.log("The game begins!");
+    // console.log("The game begins!");
     // console.log(this.state.gameBeginner)
 
     if (startGame === "Start Game") {
@@ -319,23 +326,23 @@ export default class Landing extends Component {
           [" ", " ", " "],
           [" ", " ", " "],
         ],
-        gameBeginner: " ",
+        // gameBeginner: " ",
         startGameValue: false,
         whoPlaysFirstDialog: false,
         startGameButton: "Start Game",
         win: false,
-        depth: " ",
+        depth: this.props.depth,
         undoStack: [],
-        turn : " ",
+        turn : this.props.gameBeginner,
       });
     }
-    if (this.state.gameBeginner === "AGENT") {
+    if (this.props.gameBeginner === "AGENT") {
       axios
         .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
           params: {
-            gameBeginner: this.state.gameBeginner,
+            gameBeginner: this.props.gameBeginner,
             board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.state.depth)
+            depth: JSON.stringify(this.props.depth)
           },
         }) //route to be filled according to flask route name
         .then((res) => {
@@ -364,8 +371,8 @@ export default class Landing extends Component {
 
     let totalOfUndoButtons = copy_undoStack.length;
     let buttonsToErase = totalOfUndoButtons - (index + 1);
-    console.log(totalOfUndoButtons);
-    console.log(buttonsToErase);
+    // console.log(totalOfUndoButtons);
+    // console.log(buttonsToErase);
 
     for (let i = 0; i <= buttonsToErase; i++) {
       copy_board[Math.floor(copy_undoStack[copy_undoStack.length - 1] / 3)][
@@ -380,16 +387,16 @@ export default class Landing extends Component {
 
   };
 
-  handleDepth = (e, depth_selected) => {
+  // handleDepth = (e, depth_selected) => {
 
-    if (this.state.depth === " ") {
+  //   if (this.state.depth === " ") {
 
-      this.setState({
-        depth: depth_selected
-      });
+  //     this.setState({
+  //       depth: depth_selected
+  //     });
 
-    }
-  };
+  //   }
+  // };
 
   render() {
     return (
@@ -442,7 +449,9 @@ export default class Landing extends Component {
           </Button>{" "}
         </div>
 
-        <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
+        <div> Turn : {this.state.turn}</div>
+
+        {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
           Beginner_Human
         </Button>
 
@@ -467,7 +476,7 @@ export default class Landing extends Component {
           <Button variant="default" onClick={(e) => this.handleDepth(e, -1)}>
             Ultimate
           </Button>
-        </ButtonGroup>
+        </ButtonGroup> */}
 
         {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
         {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
