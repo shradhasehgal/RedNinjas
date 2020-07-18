@@ -14,10 +14,11 @@ CORS(app)
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    if path != "":
-        return app.send_static_file(path)
+    path_dir = os.path.abspath("Frontend/build") #path react build
+    if path != "" and os.path.exists(os.path.join(path_dir, path)):
+        return send_from_directory(os.path.join(path_dir), path)
     else:
-        return app.send_static_file('index.html')
+        return send_from_directory(os.path.join(path_dir),'index.html')
 
 @app.route('/agent-turn', methods=['GET'])
 def agent_turn():
