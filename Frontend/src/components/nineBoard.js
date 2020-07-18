@@ -527,7 +527,7 @@ export default class NineBoard extends Component {
     }
 
     handleStartGame = (e, startGame) => {
-        console.log(startGame)
+        // console.log(startGame)
 
         if (startGame === "Start Game") {
             this.setState({
@@ -550,8 +550,8 @@ export default class NineBoard extends Component {
 
             this.setState({
                 bigboard: copy_board,
-                gameBeginner: " ",
-                startGameValue: false,
+                gameBeginner: this.props.gameBeginner,
+                // startGameValue: false,
                 startGameButton: "Start Game",
                 startGameValue: false,
                 ultimateWin: false,
@@ -563,12 +563,13 @@ export default class NineBoard extends Component {
                     [" ", " ", " "],
                     [" ", " ", " "],
                 ],
-                turn: " "
+                turn : this.props.gameBeginner
             });
         }
 
-        if (this.props.gameBeginner === "AGENT") {
-            console.log("Agent beginner")
+        // console.log(this.state.startGameValue)
+        if (this.state.turn === "AGENT") {
+            // console.log("Agent beginner")
             axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                 params: {
                     board: JSON.stringify(this.state.bigboard),
