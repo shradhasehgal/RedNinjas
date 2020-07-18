@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 import requests
 import numpy as np
@@ -6,13 +6,18 @@ import sys
 sys.path.insert(1, 'Integrate/oops')
 from game import *
 import ast
+import os
 
-app = Flask(__name__, static_folder='Frontend/build', static_url_path='/')
+app = Flask(__name__, static_folder='Frontend/build')
 CORS(app)
 
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "":
+        return app.send_static_file(path)
+    else:
+        return app.send_static_file('index.html')
 
 @app.route('/agent-turn', methods=['GET'])
 def agent_turn():
