@@ -210,6 +210,11 @@ export default class ThreeBoard extends Component {
     }
   }
 
+
+  sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
   handleCellClick = (e, cell) => {
     // console.log(this.state.turn)
     // console.log("came to handle cell click")
@@ -248,41 +253,43 @@ export default class ThreeBoard extends Component {
       // console.log(this.state.win)
 
       // console.log(JSON.stringify(this.state.board))
-      if (this.state.win === false) {
-        // console.log("hiiii")
-        axios
-        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
-          params: {
-            gameBeginner: this.props.gameBeginner,
-            board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.props.depth)
-          },
-        }) //route to be filled according to flask route name
-        .then((res) => {
-          
-          let copy_board = this.state.board.slice();
-          // console.log(res.status)
-          console.log(res.data)
-          // console.log(copy_board)
 
-          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-          this.state.undoStack.push(3 * res.data.r + res.data.c)
 
-          // console.log(this.state.startGameButton)
-          if(this.state.startGameButton === "Reset Game")
-          {
-              this.setState({
-                  board : copy_board,
-                  turn : "HUMAN"
-              })
-              let copy_board3 = this.state.board.slice();
-              this.check_win(copy_board3);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+      this.sleep(1).then(() => {
+
+        if (this.state.win === false) {
+          axios
+          .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+            params: {
+              gameBeginner: this.props.gameBeginner,
+              board: JSON.stringify(this.state.board),
+              depth: JSON.stringify(this.props.depth)
+            },
+          }) //route to be filled according to flask route name
+          .then((res) => {
+            
+            let copy_board = this.state.board.slice();
+            console.log(res.data)
+  
+            copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+            this.state.undoStack.push(3 * res.data.r + res.data.c)
+  
+            if(this.state.startGameButton === "Reset Game")
+            {
+                this.setState({
+                    board : copy_board,
+                    turn : "HUMAN"
+                })
+                let copy_board3 = this.state.board.slice();
+                this.check_win(copy_board3);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      })
+     
     }
   };
 
