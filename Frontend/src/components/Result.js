@@ -29,7 +29,7 @@ import styles from "../static/css/result.module.css";
 // import common from "../static/css/Common.module.css";
 // import configStyles from "../static/css/Config-mallika.module.css";
 
-export default class Landing extends Component {
+export default class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,6 +54,7 @@ export default class Landing extends Component {
                     <text className={styles.text}>You WONNN   </text>
                     <text className={styles.text}>Congrats!!!</text>
                 </MDBAnimation>
+                <Button size="lg" variant="light"> Play Again!</Button>
               </Container>
             </Container>
           </Container>
@@ -73,6 +74,7 @@ export default class Landing extends Component {
                       <br></br>
                       <text className={styles.text}> Better Luck next time!!</text>
                   </MDBAnimation>
+                  <Button size="lg" variant="light"> Play Again!</Button>
                 </Container>
               </Container>
             </Container>
