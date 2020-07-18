@@ -2,10 +2,8 @@
 import React, { Component } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 import Landing from './components/Landing'
 import Error from './components/Error'
-<<<<<<< HEAD
 import Result from './components/Result'
 import Config from './components/Config-mallika'
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
@@ -13,9 +11,6 @@ import Overview from "./components/Overview";
 import Rules from "./components/Rules";
 import common from "./static/css/Common.module.css";
 import Message from './components/Message'
-=======
-import 'bootstrap/dist/css/bootstrap.min.css'
->>>>>>> 55ee24dc... Added 404 page
 // import axios from 'axios';
 import ThreeGame from './components/threeGame'
 import NineGame from './components/nineGame'

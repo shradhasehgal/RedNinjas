@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Col, Row } from "react-bootstrap";
 // import axios from 'axios';
+<<<<<<< HEAD
+=======
+// import Board from "./threeBoard.js";
+// import BigBoard from "./nineBoard.js";
+>>>>>>> 0b132584... Changed to component implementation
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -10,10 +15,54 @@ import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
 
 
+<<<<<<< HEAD
+=======
+import ThreeBoard from './threeBoard.js'
+import ThreeWin from './threeWin.js'
+import ThreeConfiguration from './threeConfiguration.js'
+
+import NineBoard from './nineBoard.js'
+import NineWin from './nineWin.js'
+import NineConfiguration from './nineConfiguration.js'
+
+>>>>>>> 0b132584... Changed to component implementation
 export default class Landing extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        // showThreeConfigurationComponent : false,
+        // showThreeGameComponent : false,
+        // showThreeWinComponent : false,
+
+        // showNineConfigurationComponent : false,
+        // showNineGameComponent : false,
+        // showNineWinComponent : false,
+    }
+
+    // this.updateStateOfComponents = this.updateStateOfComponents.bind(this);  
+
   }
+
+
+  // updateStateOfComponents(message)
+  //   {
+  //     if(message === "Start Game")
+  //     {
+  //       this.setState({
+  //         showThreeConfigurationComponent : false,
+  //         showThreeGameComponent : false,
+  //         showThreeWinComponent : false,
+  //       })
+  //     }
+  //     else if(message === "Display Win")
+  //     {
+  //       this.setState({
+  //         showThreeConfigurationComponent : false,
+  //         showThreeGameComponent : false,
+  //         showThreeWinComponent : false,
+  //       })
+  //     }
+  //   }
 
   render() {
     return (
@@ -27,6 +76,17 @@ export default class Landing extends Component {
           </h4>
           <Link to="/three">
             <Button variant="danger" size="lg"
+<<<<<<< HEAD
+=======
+            // onClick = {() => {
+            //   this.setState ({
+            //     showThreeConfigurationComponent : false,
+            //     showThreeGameComponent : true,
+            //     showThreeWinComponent : false
+            //   });
+            //   console.log(this.state.showThreeGameComponent)
+            // }}
+>>>>>>> 0b132584... Changed to component implementation
             >
               {" "}
               3*3 TIC-TAC-TOE
@@ -34,12 +94,33 @@ export default class Landing extends Component {
           </Link>
           <Link to="/nine">
             <Button variant="danger" size="lg"
+<<<<<<< HEAD
+=======
+            // onClick = {() => {
+            //   this.setState ({
+            //     showNineConfigurationComponent : false,
+            //     showNineGameComponent : true,
+            //     showNineWinComponent : false
+            //   });
+            // }}
+>>>>>>> 0b132584... Changed to component implementation
             >
               {" "}
               9*9 TIC-TAC-TOE
             </Button>
           </Link>
         </div>
+          {/* {this.state.showThreeConfigurationComponent && <threeConfiguration update={this.updateStateOfComponents}/>}
+          {/* <hr /> */}
+          {/* {this.state.showThreeGameComponent && <Board/>} */}
+          {/* <hr /> */}
+          {/* {this.state.showThreeWinComponent && <threeWin update={this.updateStateOfComponents}/>} */}
+
+          {/* {this.state.showNineConfigurationComponent && <nineConfiguration update={this.updateStateOfComponents}/>} */}
+          {/* <hr /> */}
+          {/* {this.state.showNineGameComponent && <nineBoard update={this.updateStateOfComponents}/>} */}
+          {/* <hr /> */}
+          {/* {this.state.showNineWinComponent && <nineWin update={this.updateStateOfComponents}/>} */} */}
       </div>
     );
   }

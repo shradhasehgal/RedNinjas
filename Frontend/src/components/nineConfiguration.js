@@ -10,8 +10,11 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
+<<<<<<< HEAD
 import configStyles from "../static/css/Config-mallika.module.css";
 
+=======
+>>>>>>> 0b132584... Changed to component implementation
 
 export default class NineConfiguration extends Component {
     constructor(props) {
@@ -24,6 +27,7 @@ export default class NineConfiguration extends Component {
     }
   
 
+<<<<<<< HEAD
 //     render() {
 //       return (
 //           <div>
@@ -194,3 +198,49 @@ render() {
 const iconStyles = {
 color: "#FF7885",
 };
+=======
+    handleStartAgent(e)
+    {
+
+    }
+
+    handleStartHuman(e)
+    {
+
+    }
+
+    handleDepth()
+    {
+
+    }
+
+    render() {
+      return (
+          <div>
+
+        <Button variant="default" onClick={(e) => this.props.handleStartHuman_Nine(e)}>
+          Beginner_Human
+        </Button>
+
+
+        <Button variant="default" onClick={(e) => this.props.handleStartAgent_Nine(e)}>
+          Beginner_Agent
+        </Button>
+
+        <div style={{}}>
+          <Button
+            variant="info"
+            size="lg"
+            style={{}}
+            onClick={(e) => this.props.update_Nine("Go To Game")}
+          >
+              Go To Game
+            {/* {this.state.startGameButton} */}
+          </Button>{" "}
+        </div>
+
+
+          </div>
+      )}
+}
+>>>>>>> 0b132584... Changed to component implementation
