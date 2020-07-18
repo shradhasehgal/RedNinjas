@@ -6,6 +6,7 @@ import Board from './components/Board'
 import BigBoard from './components/BigBoard'
 import GameStarter from './components/GameStarter'
 import Landing from './components/Landing'
+import Config from './components/Config-mallika'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import axios from 'axios';
 
@@ -19,6 +20,7 @@ function App() {
             <Route exact path='/' component={Landing} />
             <Route exact path='/three' component={Board} />
             <Route exact path='/nine' component={BigBoard} />
+            <Route exact path='/config' component={Config} />
           </Switch>
         </Router>
       </div>
