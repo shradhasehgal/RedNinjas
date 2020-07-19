@@ -1,17 +1,13 @@
 // import logo from './logo.svg';
-import React, { Component } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import Board from "./components/Board";
-import BigBoard from "./components/BigBoard";
-import GameStarter from "./components/GameStarter";
-import Landing from "./components/Landing";
-import Config from "./components/Config-mallika";
-import Overview from "./components/Overview";
-import Rules from "./components/Rules";
-import "bootstrap/dist/css/bootstrap.min.css";
-import common from "./static/css/Common.module.css";
+import React, { Component } from 'react'
+import './App.css'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Board from './components/Board'
+import BigBoard from './components/BigBoard'
+import GameStarter from './components/GameStarter'
+import Landing from './components/Landing'
+import Error from './components/Error'
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import axios from 'axios';
 
 class NavigationBar extends Component {
@@ -63,18 +59,15 @@ class NavigationBar extends Component {
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/three" component={Board} />
-          <Route exact path="/nine" component={BigBoard} />
-          <Route exact path="/config" component={Config} />
-          <Route exact path="/overview" component={Overview} />
-          <Route exact path="/rules" component={Rules} />
-        </Switch>
-      </Router>
-      <NavigationBar />
-    </div>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/three' component={Board} />
+            <Route exact path='/nine' component={BigBoard} />
+            <Route path='*' exact={true} component={Error} />
+          </Switch>
+        </Router>
+      </div>
   );
 }
 

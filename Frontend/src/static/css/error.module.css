@@ -1,0 +1,61 @@
+.content {
+    background-color: #000000;
+    padding: 2%;
+    opacity: 0.7;
+    z-index: 0;
+    max-width: 85%;
+  }
+  
+  .landingBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    align-items: center;
+    background-image: url('../assets/final.gif');
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .heading {
+    color: #ffffff;
+    font-size: 2rem;
+  }
+
+  .button {
+    padding: 1rem 2.4rem;
+    font-size: .94rem;
+}
+
+  @media screen and (max-width: 950px) {
+    .heading {
+      font-size: 1.7rem;
+    }
+
+    .content{
+        padding: 2.5%;
+    }
+
+    .button {
+        padding: 0.75rem 1rem !important;
+        font-size: .85rem !important;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .heading {
+      font-size: 1.4rem;
+    }
+    
+    .content{
+        padding: 5%;
+    }
+
+    .button {
+        padding: 0.5rem 1rem !important;
+        font-size: .80rem !important;
+    }
+  }
