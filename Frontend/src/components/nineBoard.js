@@ -12,9 +12,13 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import classNames from "classnames";
 
+<<<<<<< HEAD:Frontend/src/components/nineBoard.js
 
 
 export default class NineBoard extends Component {
+=======
+export default class BigBoard extends Component {
+>>>>>>> e9ba7be4... MessagesUsingToast:Frontend/src/components/BigBoard.js
     constructor(props) {
         super(props)
     console.log(this.props.gameBeginner)

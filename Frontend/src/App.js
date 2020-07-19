@@ -11,6 +11,7 @@ import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Overview from "./components/Overview";
 import Rules from "./components/Rules";
 import common from "./static/css/Common.module.css";
+import Message from './components/Message'
 // import axios from 'axios';
 import ThreeGame from './components/threeGame'
 import NineGame from './components/nineGame'
@@ -88,6 +89,7 @@ function App() {
           <Route exact path='/Result' component={Result} />
           <Route exact path="/overview" component={Overview} />
           <Route exact path="/rules" component={Rules} />
+          <Route exact path='/message' component={Message} />
           <Route path='*' exact={true} component={Error} />
 
         </Switch>
