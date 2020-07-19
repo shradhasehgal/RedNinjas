@@ -7,6 +7,7 @@ import BigBoard from './components/BigBoard'
 import GameStarter from './components/GameStarter'
 import Landing from './components/Landing'
 import Result from './components/Result'
+import Message from './components/Message'
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import axios from 'axios';
 
@@ -21,6 +22,7 @@ function App() {
             <Route exact path='/three' component={Board} />
             <Route exact path='/nine' component={BigBoard} />
             <Route exact path='/Result' component={Result} />
+            <Route exact path='/message' component={Message} />
           </Switch>
         </Router>
       </div>

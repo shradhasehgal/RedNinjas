@@ -1,0 +1,24 @@
+
+.main {
+    flex:1 ;
+    top: 50%;
+    left: 0;
+}
+.bottomleft {
+    bottom: 0;
+    left: 0;
+    transition: transform .6s ease-in;
+    animation: toast-in-left .7s;
+}
+
+
+.title {
+    background-color: ;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: left;
+	margin-top: 0;
+	margin-bottom: 6px;
+    width: 300px;
+    height: 25px;
+}
