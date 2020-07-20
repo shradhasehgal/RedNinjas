@@ -56,11 +56,10 @@ class NavigationBar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#home">3x3</Nav.Link>
-            <Nav.Link href="#home">9x9</Nav.Link>
-            <Nav.Link href="#link">About</Nav.Link>
-            <Nav.Link href="#link">Rules</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/three">3x3</Nav.Link>
+            <Nav.Link href="/nine">9x9</Nav.Link>
+            <Nav.Link href="/overview">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -78,14 +77,14 @@ function App() {
           <Route exact path='/nine' component={NineGame} />
 
 
-          <Route exact path='/win_player_three' component={WinHumanThree} />
-          <Route exact path='/lose_player_three' component={WinAgentThree} />
+          {/* <Route exact path='/win_player_three' component={WinHumanThree} /> */}
+          {/* <Route exact path='/lose_player_three' component={WinAgentThree} /> */}
 
 
-          <Route exact path='/win_player_nine' component={WinHumanNine} />
-          <Route exact path='/lose_player_nine' component={WinAgentNine} />
-          <Route exact path='/config' component={Config} />
-          <Route exact path='/Result' component={Result} />
+          {/* <Route exact path='/win_player_nine' component={WinHumanNine} /> */}
+          {/* <Route exact path='/lose_player_nine' component={WinAgentNine} /> */}
+          {/* <Route exact path='/config' component={Config} /> */}
+          {/* <Route exact path='/Result' component={Result} /> */}
           <Route exact path="/overview" component={Overview} />
           <Route exact path="/rules" component={Rules} />
           <Route exact path='/message' component={Message} />
