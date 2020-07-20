@@ -493,16 +493,18 @@ export default class NineBoard extends Component {
                                             this.sleep(0.5).then(() => {
                                                 if(this.state.win === true)
                                                 {
-                                                    this.sleep(5).then(() => {
-                                                        if(this.state.winner === "HUMAN")
-                                                        {
-                                                            window.location.href = '/win_player_nine'
-                                                        }
-                                                        else
-                                                        {
-                                                        console.log("win here plisssss!!")
-                                                        window.location.href = '/lose_player_nine'
-                                                        }
+                                                    this.sleep(2).then(() => {
+                                                        // if(this.state.winner === "HUMAN")
+                                                        // {
+                                                        //     window.location.href = '/win_player_nine'
+                                                        // }
+                                                        // else
+                                                        // {
+                                                        // console.log("win here plisssss!!")
+                                                        // window.location.href = '/lose_player_nine'
+                                                        // }
+                                                        this.props.update_Win_Nine("nine",this.state.winner)
+
                                                 })
                                                 }
                                             })
@@ -515,16 +517,17 @@ export default class NineBoard extends Component {
                             else
                             {
                                 console.log("win here!!")
-                                this.sleep(5).then(() => {
-                                    if(this.state.winner === "HUMAN")
-                                    {
-                                        window.location.href = '/win_player_nine'
-                                    }
-                                    else
-                                    {
-                                    console.log("win here plisssss!!")
-                                    window.location.href = '/lose_player_nine'
-                                    }
+                                this.sleep(2).then(() => {
+                                    // if(this.state.winner === "HUMAN")
+                                    // {
+                                    //     window.location.href = '/win_player_nine'
+                                    // }
+                                    // else
+                                    // {
+                                    // console.log("win here plisssss!!")
+                                    // window.location.href = '/lose_player_nine'
+                                    // }
+                                    this.props.update_Win_Nine("nine",this.state.winner)
                                 })
                             }
                         }

@@ -300,15 +300,17 @@ export default class ThreeBoard extends Component {
 
                 if(this.state.win === true)
                 {
+                  console.log('hellllllllllllooooooo')
                   this.sleep(5).then(() => {
-                    if(this.state.winner === "HUMAN")
-                    {
-                        window.location.href = '/win_player_three'
-                    }
-                    else
-                    {
-                      window.location.href = '/lose_player_three'
-                    }
+                    this.props.update_Win_Three("three",this.state.winner)
+                    // if(this.state.winner === "HUMAN")
+                    // {
+                    //     window.location.href = '/win_player_three'
+                    // }
+                    // else
+                    // {
+                    //   window.location.href = '/lose_player_three'
+                    // }
                   })
                 }
               }
@@ -321,14 +323,17 @@ export default class ThreeBoard extends Component {
         {
           console.log("win here!!")
           this.sleep(5).then(() => {
-            if(this.state.winner === "HUMAN")
-            {
-                window.location.href = '/win_player_three'
-            }
-            else
-            {
-              window.location.href = '/lose_player_three'
-            }
+            this.props.update_Win_Three("three",this.state.winner)
+
+            // this.props.handleStartHuman_Three(e)
+            // if(this.state.winner === "HUMAN")
+            // {
+            //     window.location.href = '/win_player_three'
+            // }
+            // else
+            // {
+            //   window.location.href = '/lose_player_three'
+            // }
           })
         }
       })
