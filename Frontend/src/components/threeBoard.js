@@ -19,6 +19,7 @@ import {
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
+import classNames from "classnames";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -421,14 +422,14 @@ export default class ThreeBoard extends Component {
   render() {
     return (
       <div>
-
-        <div className={game.landingBody}
-
-        >
+        <div className={classNames(game.landingBody,{
+          [styles.whiteBg]: !this.state.darkMode
+        }
+      )}>
 
           <div style={{ margin: "auto", width: "600px", maxWidth: "90%" }}>
-            <div className={styles.heading}>
-              <h1>RED NINJA TIC TAC TOE</h1>
+            <div className={classNames(styles.heading, {[styles.lightHeading] : !this.state.darkMode})}>
+              <h1 className={styles.title}>RED NINJA TIC TAC TOE</h1>
             </div>
             <Container style={{ maxWidth: "600px" }}>
               <Container fluid="true">
@@ -437,7 +438,7 @@ export default class ThreeBoard extends Component {
                     {row.map((cell, j) => (
                       <Col
                         md
-                        className={styles.cellThree}
+                        className={classNames(styles.cellThree, {[styles.greyCell]: !this.state.darkMode})}
                         onClick={(e) => this.handleCellClick(e, 3 * i + j)}
                       >
                         {this.state.symbol[this.state.board[i][j]]}
@@ -456,7 +457,7 @@ export default class ThreeBoard extends Component {
               ))}
             </Container>
 
-            <Container className={styles.boardInfo}>
+            <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
                 <Col className = {styles.center}>Depth: 3</Col>
                 <Col className = {styles.center}>Turn: {this.state.turn}</Col>
@@ -468,7 +469,7 @@ export default class ThreeBoard extends Component {
                 </Col>
                 <Col style={{marginLeft: "-10px"}}><Button
                 variant="dark"
-                className={styles.button}
+                className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
               >
                 {this.state.startGameButton}

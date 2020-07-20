@@ -68,8 +68,22 @@
   color: #212121 !important;
 }
 
+.lightHeading {
+  color: black !important;
+  background-color: rgb(175, 165, 165) !important;
+}
+
 .center {
   margin: auto;
+}
+
+.whiteBg{
+  background-color: white !important;
+}
+
+.greyCell{
+  background-color: #cec1c1 !important; 
+  color: white;
 }
 
 @media screen and (max-width: 650px) {
@@ -87,6 +101,18 @@
     font-size: 2rem;
   }
 
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .center {
+    font-size: 0.85rem;
+  }
+
+  .button {
+    font-size: 0.7rem !important;
+
+  }
 }
 
 @media screen and (max-width: 525px) {
