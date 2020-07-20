@@ -10,6 +10,8 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
+import game from "../static/css/game.module.css";
+
 
 
 import ThreeBoard from './threeBoard.js'
