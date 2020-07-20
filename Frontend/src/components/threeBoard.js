@@ -25,7 +25,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import common from "../static/css/Common.module.css";
-import game from "../static/css/game.module.css";
 import configStyles from "../static/css/Config-mallika.module.css";
 
 
@@ -422,7 +421,7 @@ export default class ThreeBoard extends Component {
   render() {
     return (
       <div>
-        <div className={classNames(game.landingBody,{
+        <div className={classNames(styles.landingBody,{
           [styles.whiteBg]: !this.state.darkMode
         }
       )}>

@@ -1,4 +1,11 @@
 
+.landingBody {
+  align-items: center;
+  background-color: #3b3251;
+  min-height: 100vh;
+  display: flex;
+}
+
 .cellThree {
   max-width: 100% !important;
   height: 185px;

@@ -10,6 +10,8 @@ import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import classNames from "classnames";
+
 
 
 export default class NineBoard extends Component {
@@ -648,7 +650,10 @@ export default class NineBoard extends Component {
 
     render() {
         return (
-            <div style={{ marginTop: "2%", margin: "0 auto", maxWidth: "90%" }}>
+            <div className={classNames(styles.landingBody,{
+                [styles.whiteBg]: !this.state.darkMode
+              })}>
+                <div style={{ margin: "auto", width: "700px", maxWidth: "90%" }}>
                 <div style={{ textAlign: "center" }}>
                     <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
                 </div>
@@ -705,6 +710,7 @@ export default class NineBoard extends Component {
                 <div>
                     <div> Turn : {this.state.turn}</div>
                 </div>
+            </div>
             </div>
         )
     }
