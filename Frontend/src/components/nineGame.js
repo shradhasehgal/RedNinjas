@@ -66,6 +66,7 @@ export default class ThreeGame extends Component {
         winner : gameWinner,
         route : gameRoute
       })
+      console.log(this.state.winner)
     }
 
 =======
@@ -87,6 +88,7 @@ export default class ThreeGame extends Component {
 
     updateStateOfComponents_Nine(message)
     {
+      console.log("Changing comp")
       if(message === "Go To Game")
       {
 <<<<<<< HEAD
@@ -98,8 +100,11 @@ export default class ThreeGame extends Component {
       }
       else if(message === "Show Configuration")
       {
+      console.log("Changing comp aaaaaayiye aapka intezaar thaa")
+      console.log(this.state.winner)
+
         this.setState({
-          shownNineConfigurationComponent : true,
+          showNineConfigurationComponent : true,
           showNineGameComponent : false,
           showNineWinComponent : false,
           gameBeginner : " ",
@@ -121,6 +126,7 @@ export default class ThreeGame extends Component {
           showNineWinComponent : true,
 >>>>>>> 0b132584... Changed to component implementation
         })
+        console.log(this.state.showNineConfigurationComponent)
       }
     }
 
@@ -129,7 +135,7 @@ export default class ThreeGame extends Component {
             <div>
 <<<<<<< HEAD
                 {this.state.showNineConfigurationComponent && <NineConfiguration update_Nine={this.updateStateOfComponents_Nine} handleStartAgent_Nine={this.handleStartAgent_Nine} handleStartHuman_Nine={this.handleStartHuman_Nine} gameBeginner={this.state.gameBeginner}/>}
-                {this.state.showNineGameComponent && <NineBoard update_Win_Nine={this.updateStateOfComponents_Nine} gameBeginner = {this.state.gameBeginner}/>}
+                {this.state.showNineGameComponent && <NineBoard update_Win_Nine={this.updateStateForWinComponent} gameBeginner = {this.state.gameBeginner}/>}
                 {this.state.showNineWinComponent && <GameResults update_Nine={this.updateStateOfComponents_Nine} winner = {this.state.winner} route = {this.state.route}/>}
 =======
                 {this.state.showNineConfigurationComponent && <NineConfiguration update_Nine={this.updateStateOfComponents_Nine} handleStartAgent_Nine={this.handleStartAgent_Nine} handleStartHuman_Nine={this.handleStartHuman_Nine}/>}

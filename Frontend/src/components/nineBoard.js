@@ -504,11 +504,12 @@ export default class NineBoard extends Component {
 
                                             let copy_bigBoard2 = this.state.bigboard.slice()
                                             this.checkPartialWin(copy_bigBoard2)
-
+                                            
+                                            console.log(this.state.ultimateWin)
                                             this.sleep(0.5).then(() => {
-                                                if(this.state.win === true)
+                                                if(this.state.ultimateWin === true)
                                                 {
-                                                    this.sleep(2).then(() => {
+                                                    this.sleep(5).then(() => {
                                                         // if(this.state.winner === "HUMAN")
                                                         // {
                                                         //     window.location.href = '/win_player_nine'
@@ -518,7 +519,9 @@ export default class NineBoard extends Component {
                                                         // console.log("win here plisssss!!")
                                                         // window.location.href = '/lose_player_nine'
                                                         // }
-                                                        this.props.update_Win_Nine("nine",this.state.winner)
+                                                        console.log("Hey entered here1")
+                                                        console.log(this.state.winner)
+                                                        this.props. update_Win_Nine("nine",this.state.winner)
 
                                                 })
                                                 }
@@ -531,8 +534,9 @@ export default class NineBoard extends Component {
                             }
                             else
                             {
-                                console.log("win here!!")
-                                this.sleep(2).then(() => {
+                               
+                                
+                                this.sleep(5).then(() => {
                                     // if(this.state.winner === "HUMAN")
                                     // {
                                     //     window.location.href = '/win_player_nine'
@@ -542,7 +546,9 @@ export default class NineBoard extends Component {
                                     // console.log("win here plisssss!!")
                                     // window.location.href = '/lose_player_nine'
                                     // }
-                                    this.props.update_Win_Nine("nine",this.state.winner)
+                                    console.log("Hey entered here2")
+                                    console.log(this.state.winner)
+                                    this.props. update_Win_Nine("nine",this.state.winner)
                                 })
                             }
                         }
@@ -746,7 +752,7 @@ export default class NineBoard extends Component {
                     </Button>{" "}
                 </div>
                 <div>
-                    <div> Turn : {this.state.turn}</div>
+                    {this.state.turn === "HUMAN" ? this.state.turn : <i class="fas fa-spinner fa-4x fa-pulse"></i>}
                 </div>
 <<<<<<< HEAD:Frontend/src/components/nineBoard.js
             </div>
@@ -835,3 +841,10 @@ const heading = {
 
 {/* <i class="far fa-sad-cry"></i> */ }
 {/* <i class="fas fa-sad-cry"></i> */ }
+
+
+
+
+
+
+{/* <i class="fas fa-spinner fa-pulse"></i> */}

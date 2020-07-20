@@ -24,51 +24,35 @@ import classNames from "classnames";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
-=======
-// import styles from "../static/css/Three.module.css";
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
 import common from "../static/css/Common.module.css";
 import configStyles from "../static/css/Config-mallika.module.css";
 
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
+
+import Sound from 'react-sound';
+
 
 // import soundfile from '../static/assets/game.mp3'
 
+// import ThreeSound from '/threeSound.js'
 
-=======
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
 export default class ThreeBoard extends Component {
   constructor(props) {
     super(props);
     console.log(this.props.depth)
     console.log(this.props.gameBeginner)
     this.state = {
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
-=======
       // show_3x3_BoardComponent: this.props.show_3x3_BoardComponent,
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
       board: [
         [" ", " ", " "],
         [" ", " ", " "],
         [" ", " ", " "],
       ],
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
       turn: this.props.gameBeginner,
       win: false,
       winner: " ",
-=======
-      // gameBeginner: " ",
-      startGameValue: false,
-      whoPlaysFirstDialog: false,
-      startGameButton: "Start Game",
-      turn : this.props.gameBeginner,
-      win: false,
-      // depth: " ",
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
       undoStack: [],
       symbol: {
         X: (
@@ -92,13 +76,7 @@ export default class ThreeBoard extends Component {
           </div>
         )
       },
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
       darkMode: true
-=======
-      // showWinComponent : false,
-      // showConfigurationComponent : false,
-      // showGameConfiguration : false
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
     };
   }
 
@@ -456,11 +434,8 @@ export default class ThreeBoard extends Component {
 >>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
 
   handleStartGame = (e, startGame) => {
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
-=======
     // console.log("The game begins!");
     // console.log(this.state.gameBeginner)
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
 
     if (startGame === "Start Game") {
       this.setState({
@@ -476,24 +451,15 @@ export default class ThreeBoard extends Component {
           [" ", " ", " "],
           [" ", " ", " "],
         ],
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
-=======
         // gameBeginner: " ",
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
         startGameValue: false,
         whoPlaysFirstDialog: false,
         startGameButton: "Start Game",
         win: false,
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
         winner: " ",
         depth: this.props.depth,
         undoStack: [],
         turn: this.props.gameBeginner,
-=======
-        depth: this.props.depth,
-        undoStack: [],
-        turn : this.props.gameBeginner,
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
       });
     }
     if (this.props.gameBeginner === "AGENT") {
@@ -524,17 +490,13 @@ export default class ThreeBoard extends Component {
     }
   };
 
+
   handleUndoFeature = (e, index, cell) => {
     let copy_board = this.state.board.slice();
     let copy_undoStack = this.state.undoStack.slice();
 
     let totalOfUndoButtons = copy_undoStack.length;
     let buttonsToErase = totalOfUndoButtons - (index + 1);
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
-=======
-    // console.log(totalOfUndoButtons);
-    // console.log(buttonsToErase);
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
 
     for (let i = 0; i <= buttonsToErase; i++) {
       copy_board[Math.floor(copy_undoStack[copy_undoStack.length - 1] / 3)][
@@ -549,20 +511,6 @@ export default class ThreeBoard extends Component {
 
   };
 
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
-=======
-  // handleDepth = (e, depth_selected) => {
-
-  //   if (this.state.depth === " ") {
-
-  //     this.setState({
-  //       depth: depth_selected
-  //     });
-
-  //   }
-  // };
-
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
   render() {
     return (
       <div>
@@ -624,8 +572,6 @@ export default class ThreeBoard extends Component {
             {/* <audio className="audio-element">
             <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
         </audio> */}
-
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
             {/* <div>
             <audio className="audio-element">
               <source src="./../static/assets/game.mp3"></source>
@@ -634,9 +580,6 @@ export default class ThreeBoard extends Component {
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
-          </div>
-        </div>
-=======
         <div> Turn : {this.state.turn}</div>
 
         {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
@@ -666,9 +609,13 @@ export default class ThreeBoard extends Component {
           </Button>
         </ButtonGroup> */}
 
+        {this.state.turn === "HUMAN" ? this.state.turn : <i class="fas fa-spinner fa-4x fa-pulse"></i>}
+          {/* <ThreeSound/> */}
+        {/* <div> Turn : {this.state.turn}</div> */}
         {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
         {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
+      </div>
+      </div>
       </div>
     );
   }

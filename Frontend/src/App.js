@@ -14,10 +14,6 @@ import Message from './components/Message'
 // import axios from 'axios';
 import ThreeGame from './components/threeGame'
 import NineGame from './components/nineGame'
-import WinHumanThree from './components/winHumanThree'
-import WinAgentThree from './components/winAgentThree'
-import WinHumanNine from './components/winHumanNine'
-import WinAgentNine from './components/winAgentNine'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
