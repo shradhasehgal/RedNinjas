@@ -33,13 +33,13 @@ export default class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
-            win : 1
+            win : 2 
     };
   }
 
   render() {
 
-    if (this.state.win) {
+    if (this.state.win==1) {
 
     return (
       <div className={styles.wrapper}>
@@ -48,7 +48,7 @@ export default class Result extends Component {
             className={styles.containerBody}
             style={{ display: "flex" }}>
             <Container style={{ marginTop: "auto", marginBottom: "auto", marginLeft:"auto",marginRight:"auto" ,padding:"1%"}}>
-                <img className={styles.gifc} src={require('../static/assets/rocket.gif')} />
+                <img className={styles.gif} src={require('../static/assets/win.gif')} />
                 <br></br><br></br><br></br>
                 <MDBAnimation type="bounce" infinite>
                     <text className={styles.text}>You WONNN   </text>
@@ -60,7 +60,7 @@ export default class Result extends Component {
           </Container>
       </div>
     );
-  } else {
+  } else if (this.state.win==0) {
     return (
         <div className={styles.wrapper}>
           <Container className={styles.mainDiv}>
@@ -68,18 +68,44 @@ export default class Result extends Component {
               className={styles.containerBody}
               style={{ display: "flex" }}>
               <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
-                  <img className={styles.gifl} src={require('../static/assets/sad.gif')} />
+                  <img className={styles.gif} src={require('../static/assets/sad.gif')} />
                   <MDBAnimation type="bounce" infinite>
                       <text className={styles.text}>You LOST :((</text>
                       <br></br>
                       <text className={styles.text}> Better Luck next time!!</text>
                   </MDBAnimation>
                   <Button size="lg" variant="light"> Play Again!</Button>
+
                 </Container>
               </Container>
             </Container>
+            
         </div>
+
       );
+
+  } else {
+    return (
+      <div className={styles.wrapper}>
+        <Container className={styles.mainDiv}>
+          <Container
+            className={styles.containerBody}
+            style={{ display: "flex" }}>
+            <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
+                <img className={styles.gif} src={require('../static/assets/tie.gif')} />
+                <MDBAnimation type="bounce" infinite>
+                    <br></br>
+                    <text className={styles.text}>It's A Tie !! </text>
+                </MDBAnimation>
+                <Button size="lg" variant="light"> Play Again!</Button>
+
+              </Container>
+            </Container>
+          </Container>
+          
+      </div>
+
+    );
 
   }
 

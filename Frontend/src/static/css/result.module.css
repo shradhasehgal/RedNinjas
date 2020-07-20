@@ -30,14 +30,15 @@
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
   }
   
-  .gifc {
+  .gif {
       margin: auto;
       align-items: center;
       align-items: center;
-      border-color:#000;
-      border-style: solid;
-      border-width: 1%;
-      width: 60%;
+      
+      width: 80%;
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
     }
   
   .text {
@@ -48,16 +49,7 @@
       font-style: oblique ;
       font-family: "Bradley Hand, cursive" ;
     }
-  
-  .gifl {
-      margin: auto;
-      align-items: center;
-      border-color:#000;
-      border-style: solid;
-      border-width: 50%;
-      width: 90%;
-      
-    }
+
   
     @media screen and (min-width: 801px) {
       .text {
