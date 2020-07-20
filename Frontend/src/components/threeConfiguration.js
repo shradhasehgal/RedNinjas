@@ -13,12 +13,9 @@ import NineBoard from "./nineBoard.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-<<<<<<< HEAD
 
 import configStyles from "../static/css/Config-mallika.module.css";
 
-=======
->>>>>>> 0b132584... Changed to component implementation
 import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
 
@@ -32,7 +29,6 @@ export default class ThreeConfiguration extends Component {
       }
     }
      
-<<<<<<< HEAD
 //     render() {
 //       return (
         
@@ -225,53 +221,3 @@ render() {
 const iconStyles = {
 color: "#FF7885",
 };
-=======
-    render() {
-      return (
-          <div>
-
-
-        <Button variant="default" onClick={(e) => this.props.handleStartHuman_Three(e)}>
-          Beginner_Human
-        </Button>
-
-
-        <Button variant="default" onClick={(e) => this.props.handleStartAgent_Three(e)}>
-          Beginner_Agent
-        </Button>
-
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="default" onClick={(e) => this.props.handleDepth_Three(e, 1)}>
-            Depth 1
-          </Button>
-          <Button variant="default" onClick={(e) => this.props.handleDepth_Three(e, 2)}>
-            Depth 2
-          </Button>
-          <Button variant="default" onClick={(e) => this.props.handleDepth_Three(e, 3)}>
-            Depth 3
-          </Button>
-          <Button variant="default" onClick={(e) => this.props.handleDepth_Three(e, 4)}>
-            Depth 4
-          </Button>
-          <Button variant="default" onClick={(e) => this.props.handleDepth_Three(e, -1)}>
-            Ultimate
-          </Button>
-        </ButtonGroup>
-
-        <div style={{}}>
-          <Button
-            variant="info"
-            size="lg"
-            style={{}}
-            onClick={(e) => this.props.update_Three("Go To Game")}
-          >
-              Go To Game
-            {/* {this.state.startGameButton} */}
-          </Button>{" "}
-        </div>
-
-              {/* <p>Hello</p> */}
-          </div>
-      )}
-}
->>>>>>> 0b132584... Changed to component implementation

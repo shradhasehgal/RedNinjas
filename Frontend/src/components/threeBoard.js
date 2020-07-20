@@ -285,7 +285,6 @@ export default class ThreeBoard extends Component {
       let copy_board2 = this.state.board.slice();
       this.check_win(copy_board2);
 
-<<<<<<< HEAD:Frontend/src/components/threeBoard.js
       this.sleep(1).then(() => {
 
         if (this.state.win === false) {
@@ -353,85 +352,6 @@ export default class ThreeBoard extends Component {
 
     }
   };
-=======
-      // this.setState({
-      // board: copy_board,
-      // });
-
-      // const sendData = {
-      //   gameBeginner: this.state.gameBeginner,
-      //   board: JSON.stringify(this.state.board),
-      //   depth: JSON.stringify(this.state.depth),
-      // }
-
-      // useEffect(()=> {
-      //     fetch("/agent").then(response =>
-      //         response.json().then(data => {
-      //             console.log(data)
-      //         }))
-      // },[])
-      // console.log(sendData)
-      // console.log(this.state.win)
-
-      // console.log(JSON.stringify(this.state.board))
-      if (this.state.win === false) {
-        // console.log("hiiii")
-        axios
-        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
-          params: {
-            gameBeginner: this.props.gameBeginner,
-            board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.props.depth)
-          },
-        }) //route to be filled according to flask route name
-        .then((res) => {
-          
-          let copy_board = this.state.board.slice();
-          // console.log(res.status)
-          console.log(res.data)
-          // console.log(copy_board)
-
-          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-          this.state.undoStack.push(3 * res.data.r + res.data.c)
-
-          // console.log(this.state.startGameButton)
-          if(this.state.startGameButton === "Reset Game")
-          {
-              this.setState({
-                  board : copy_board,
-                  turn : "HUMAN"
-              })
-              let copy_board3 = this.state.board.slice();
-              this.check_win(copy_board3);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
-  };
-
-
-
-  // handleStartHuman = (e) => {
-  //   console.log("Human begins the game!");
-  //   this.setState({
-  //     gameBeginner: "HUMAN",
-  //     turn : "HUMAN"
-  //   });
-  // };
-
-
-
-  // handleStartAgent = (e) => {
-  //   console.log("Agent begins the game!");
-  //   this.setState({
-  //     gameBeginner: "AGENT",
-  //     turn : " "
-  //   });
-  // };
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/threeBoard.js
 
   handleStartGame = (e, startGame) => {
     // console.log("The game begins!");
@@ -572,6 +492,7 @@ export default class ThreeBoard extends Component {
             {/* <audio className="audio-element">
             <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
         </audio> */}
+
             {/* <div>
             <audio className="audio-element">
               <source src="./../static/assets/game.mp3"></source>
@@ -580,6 +501,8 @@ export default class ThreeBoard extends Component {
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
+          </div>
+        </div>
         <div> Turn : {this.state.turn}</div>
 
         {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
@@ -614,8 +537,6 @@ export default class ThreeBoard extends Component {
         {/* <div> Turn : {this.state.turn}</div> */}
         {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
         {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
-      </div>
-      </div>
       </div>
     );
   }

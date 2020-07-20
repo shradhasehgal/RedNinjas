@@ -18,7 +18,7 @@ export default class Error extends Component {
                 <div className={styles.content}>
                     <h1 className={styles.heading}>Looks like you're lost in deep space.</h1>
                     <Link to="/">
-                        <Button size="lg"className={styles.button}>
+                        <Button size="lg" variant="danger" className={styles.button}>
                             Go back home
                         </Button>
                     </Link>

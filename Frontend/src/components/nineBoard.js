@@ -12,19 +12,10 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import classNames from "classnames";
 
-<<<<<<< HEAD:Frontend/src/components/nineBoard.js
-<<<<<<< HEAD:Frontend/src/components/nineBoard.js
 
-
-export default class NineBoard extends Component {
-=======
-export default class BigBoard extends Component {
->>>>>>> e9ba7be4... MessagesUsingToast:Frontend/src/components/BigBoard.js
-=======
 
 
 export default class NineBoard extends Component {
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/nineBoard.js
     constructor(props) {
         super(props)
     console.log(this.props.gameBeginner)
@@ -35,10 +26,7 @@ export default class NineBoard extends Component {
             turn: this.props.gameBeginner,
             startGameValue: false,
             ultimateWin: false,
-<<<<<<< HEAD:Frontend/src/components/nineBoard.js
             winner : " ",
-=======
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/nineBoard.js
             // gameBeginner: " ",
             rowToPlace: " ",
             columnToPlace: " ",
@@ -639,12 +627,7 @@ export default class NineBoard extends Component {
             });
         }
 
-<<<<<<< HEAD:Frontend/src/components/nineBoard.js
         if (this.state.turn === "AGENT") {
-=======
-        if (this.props.gameBeginner === "AGENT") {
-            console.log("Agent beginner")
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/nineBoard.js
             axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                 params: {
                     board: JSON.stringify(this.state.bigboard),
@@ -672,26 +655,6 @@ export default class NineBoard extends Component {
         }
     }
 
-<<<<<<< HEAD:Frontend/src/components/nineBoard.js
-=======
-    // handleStartHuman = (e) => {
-    //     console.log("Human begins the game!");
-    //     this.setState({
-    //         gameBeginner: "HUMAN",
-    //         turn: "HUMAN"
-    //     });
-    // };
-
-    // handleStartAgent = (e) => {
-    //     console.log("Agent begins the game!");
-    //     this.setState({
-    //         gameBeginner: "AGENT",
-    //         turn: "AGENT"
-    //     });
-    // };
-
-
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/nineBoard.js
     render() {
         return (
             <div className={classNames(styles.landingBody,{
@@ -754,19 +717,7 @@ export default class NineBoard extends Component {
                 <div>
                     {this.state.turn === "HUMAN" ? this.state.turn : <i class="fas fa-spinner fa-4x fa-pulse"></i>}
                 </div>
-<<<<<<< HEAD:Frontend/src/components/nineBoard.js
             </div>
-=======
-
-                {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
-                    Beginner_Human
-            </Button>
-
-
-                <Button variant="default" onClick={(e) => this.handleStartAgent(e)}>
-                    Beginner_Agent
-            </Button> */}
->>>>>>> 0b132584... Changed to component implementation:Frontend/src/components/nineBoard.js
             </div>
         )
     }
