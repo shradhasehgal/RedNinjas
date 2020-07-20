@@ -7,6 +7,9 @@ import Landing from './components/Landing'
 import Error from './components/Error'
 import Result from './components/Result'
 import Config from './components/Config-mallika'
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Overview from "./components/Overview";
+import common from "./static/css/Common.module.css";
 // import axios from 'axios';
 import ThreeGame from './components/threeGame'
 import NineGame from './components/nineGame'
@@ -15,6 +18,9 @@ import WinAgentThree from './components/winAgentThree'
 import WinHumanNine from './components/winHumanNine'
 import WinAgentNine from './components/winAgentNine'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
+
+
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
@@ -79,12 +85,23 @@ function App() {
           <Route exact path='/lose_player_nine' component={WinAgentNine} />
           <Route exact path='/config' component={Config} />
           <Route exact path='/Result' component={Result} />
+          <Route exact path="/overview" component={Overview} />
           <Route path='*' exact={true} component={Error} />
 
         </Switch>
       </Router>
+      <NavigationBar />
     </div>
   );
 }
 
 export default App;
+
+const navstyles = {
+  backgroundColor: "#3b3251",
+  position: "fixed",
+  top: "0%",
+  overflow: "hidden",
+  width: "100%",
+  zIndex: "9999999 !important",
+};
