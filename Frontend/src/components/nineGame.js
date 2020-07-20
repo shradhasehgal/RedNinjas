@@ -13,17 +13,14 @@ import common from "../static/css/Common.module.css";
 
 
 import NineBoard from './nineBoard.js'
-import NineWin from './nineWin.js'
 import NineConfiguration from './nineConfiguration.js'
 
 export default class ThreeGame extends Component {
     constructor(props) {
       super(props);
-    //   console.log("came here")
       this.state = {
           showNineConfigurationComponent : true,
           showNineGameComponent : false,
-          showNineWinComponent : false,
           gameBeginner : " "
 
       }
@@ -53,19 +50,9 @@ export default class ThreeGame extends Component {
     {
       if(message === "Go To Game")
       {
-        //   console.log("Came here")
         this.setState({
           showNineConfigurationComponent : false,
           showNineGameComponent : true,
-          showNineWinComponent : false,
-        })
-      }
-      else if(message === "Display Win")
-      {
-        this.setState({
-          showNineConfigurationComponent : false,
-          showNineGameComponent : false,
-          showNineWinComponent : true,
         })
       }
     }
@@ -73,12 +60,8 @@ export default class ThreeGame extends Component {
     render() {
       return (
             <div>
-                {this.state.showNineConfigurationComponent && <NineConfiguration update_Nine={this.updateStateOfComponents_Nine} handleStartAgent_Nine={this.handleStartAgent_Nine} handleStartHuman_Nine={this.handleStartHuman_Nine}/>}
-                {/* <hr /> */}
+                {this.state.showNineConfigurationComponent && <NineConfiguration update_Nine={this.updateStateOfComponents_Nine} handleStartAgent_Nine={this.handleStartAgent_Nine} handleStartHuman_Nine={this.handleStartHuman_Nine} gameBeginner={this.state.gameBeginner}/>}
                 {this.state.showNineGameComponent && <NineBoard update_Nine={this.updateStateOfComponents_Nine} gameBeginner = {this.state.gameBeginner}/>}
-                {/* <hr /> */}
-                {this.state.showNineWinComponent && <NineWin update_Nine={this.updateStateOfComponents_Nine}/>}
-                {/* <hr /> */}
           </div>
       )}
 }

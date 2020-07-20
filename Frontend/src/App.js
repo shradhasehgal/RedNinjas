@@ -2,18 +2,19 @@
 import React, { Component } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import threeBoard from './components/threeBoard'
-import nineBoard from './components/nineBoard'
-import GameStarter from './components/GameStarter'
+
 import Landing from './components/Landing'
 import Error from './components/Error'
 import Result from './components/Result'
 import Config from './components/Config-mallika'
-import threeGame from './components/threeGame'
-import nineGame from './components/nineGame'
-import 'bootstrap/dist/css/bootstrap.min.css'
 // import axios from 'axios';
-
+import ThreeGame from './components/threeGame'
+import NineGame from './components/nineGame'
+import WinHumanThree from './components/winHumanThree'
+import WinAgentThree from './components/winAgentThree'
+import WinHumanNine from './components/winHumanNine'
+import WinAgentNine from './components/winAgentNine'
+import 'bootstrap/dist/css/bootstrap.min.css'
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
@@ -63,28 +64,27 @@ class NavigationBar extends Component {
 function App() {
   return (
     <div className="App">
-        <Router>
-          <Switch>
-            <Route exact path='/' component={Landing} />
-            <Route exact path='/three' component={threeGame} />
-            <Route exact path='/nine' component={nineGame} />
-            <Route exact path='/config' component={Config} />
-            <Route exact path='/Result' component={Result} />
-            <Route path='*' exact={true} component={Error} />
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/three' component={ThreeGame} />
+          <Route exact path='/nine' component={NineGame} />
 
-          </Switch>
-        </Router>
-      </div>
+
+          <Route exact path='/win_player_three' component={WinHumanThree} />
+          <Route exact path='/lose_player_three' component={WinAgentThree} />
+
+
+          <Route exact path='/win_player_nine' component={WinHumanNine} />
+          <Route exact path='/lose_player_nine' component={WinAgentNine} />
+          <Route exact path='/config' component={Config} />
+          <Route exact path='/Result' component={Result} />
+          <Route path='*' exact={true} component={Error} />
+
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
 export default App;
-
-const navstyles = {
-  backgroundColor: "#3b3251",
-  position: "fixed",
-  top: "0%",
-  overflow: "hidden",
-  width: "100%",
-  zIndex: "9999999 !important",
-};

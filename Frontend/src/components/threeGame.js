@@ -13,17 +13,14 @@ import common from "../static/css/Common.module.css";
 
 
 import ThreeBoard from './threeBoard.js'
-import ThreeWin from './threeWin.js'
 import ThreeConfiguration from './threeConfiguration.js'
 
 export default class ThreeGame extends Component {
     constructor(props) {
       super(props);
-      // console.log("came here")
       this.state = {
           showThreeConfigurationComponent : true,
           showThreeGameComponent : false,
-          showThreeWinComponent : false,
           depth : " ",
           gameBeginner : " "
 
@@ -54,7 +51,6 @@ export default class ThreeGame extends Component {
 
     handleDepth_Three(e,selected_depth)
     {
-      // console.log("came to change depth")
       this.setState({
         depth : selected_depth
       })
@@ -66,16 +62,7 @@ export default class ThreeGame extends Component {
       {
         this.setState({
           showThreeConfigurationComponent : false,
-          showThreeGameComponent : true,
-          showThreeWinComponent : false,
-        })
-      }
-      else if(message === "Display Win")
-      {
-        this.setState({
-          showThreeConfigurationComponent : false,
-          showThreeGameComponent : false,
-          showThreeWinComponent : true,
+          showThreeGameComponent : true
         })
       }
     }
@@ -83,14 +70,8 @@ export default class ThreeGame extends Component {
     render() {
       return (
             <div>
-              {/* calculation : {this.state.showThreeConfigurationComponent} */}
-              {/* <p>hello</p> */}
-                {this.state.showThreeConfigurationComponent && <ThreeConfiguration update_Three={this.updateStateOfComponents_Three} handleStartAgent_Three={this.handleStartAgent_Three} handleStartHuman_Three={this.handleStartHuman_Three} handleDepth_Three={this.handleDepth_Three}/>}
-                {/* <hr /> */}
+                {this.state.showThreeConfigurationComponent && <ThreeConfiguration update_Three={this.updateStateOfComponents_Three} handleStartAgent_Three={this.handleStartAgent_Three} handleStartHuman_Three={this.handleStartHuman_Three} handleDepth_Three={this.handleDepth_Three} depth={this.state.depth} gameBeginner={this.state.gameBeginner}/>}
                 {this.state.showThreeGameComponent && <ThreeBoard update_Three={this.updateStateOfComponents_Three} depth = {this.state.depth} gameBeginner = {this.state.gameBeginner}/>}
-                {/* <hr /> */}
-                {this.state.showThreeWinComponent && <ThreeWin update_Three={this.updateStateOfComponents_Three}/>}
-                {/* <hr /> */}
           </div>
       )}
 }

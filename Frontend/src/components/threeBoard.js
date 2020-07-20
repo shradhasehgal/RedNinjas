@@ -16,37 +16,33 @@ import {
   MDBCol,
   MDBIcon,
 } from "mdbreact";
-// import { Link } from 'react-router-dom'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
-// import Sky from 'react-sky';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-// import styles from "../static/css/Three.module.css";
 import common from "../static/css/Common.module.css";
+
+// import soundfile from '../static/assets/game.mp3'
+
 
 export default class ThreeBoard extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.depth)
-    console.log(this.props.gameBeginner)
     this.state = {
-      // show_3x3_BoardComponent: this.props.show_3x3_BoardComponent,
       board: [
         [" ", " ", " "],
         [" ", " ", " "],
         [" ", " ", " "],
       ],
-      // gameBeginner: " ",
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
       turn : this.props.gameBeginner,
-      win: false,
-      // depth: " ",
+      win : false,
+      winner : " ",
       undoStack: [],
       symbol: {
         X: (
@@ -70,11 +66,21 @@ export default class ThreeBoard extends Component {
           </div>
         )
       },
-      // showWinComponent : false,
-      // showConfigurationComponent : false,
-      // showGameConfiguration : false
     };
   }
+
+
+
+  // playAudio() {
+  //   const audioEl = document.getElementsByClassName("audio-element")[0]
+  //   audioEl.play()
+  // }
+
+
+  // componentDidMount () {
+  //   const audioEl = document.getElementsByClassName("audio-element")[0]
+  //   audioEl.play()
+  // }
 
   // pop()  {
   //     // return top most element in the stack
@@ -125,6 +131,15 @@ export default class ThreeBoard extends Component {
   //         }
   //     }
 
+
+  setWinner(gameWinner)
+  {
+    this.setState({
+      winner : gameWinner
+    })
+  }
+
+
   check_win(copy_board) {
     for (let i = 0; i < 3; i++) {
       if (
@@ -137,10 +152,16 @@ export default class ThreeBoard extends Component {
           copy_board[i][0] = "WA";
           copy_board[i][1] = "WA";
           copy_board[i][2] = "WA";
+
+          this.setWinner("AGENT")
+
         } else if (copy_board[i][0] === "X") {
           copy_board[i][0] = "WH";
           copy_board[i][1] = "WH";
           copy_board[i][2] = "WH";
+
+          this.setWinner("HUMAN")
+
         }
         this.setState({
           win: true,
@@ -158,10 +179,16 @@ export default class ThreeBoard extends Component {
           copy_board[0][i] = "WA";
           copy_board[1][i] = "WA";
           copy_board[2][i] = "WA";
+
+          this.setWinner("AGENT")
+
         } else if (copy_board[0][i] === "X") {
           copy_board[0][i] = "WH";
           copy_board[1][i] = "WH";
           copy_board[2][i] = "WH";
+
+          this.setWinner("HUMAN")
+
         }
         this.setState({
           win: true,
@@ -179,10 +206,16 @@ export default class ThreeBoard extends Component {
         copy_board[0][0] = "WA";
         copy_board[1][1] = "WA";
         copy_board[2][2] = "WA";
+
+        this.setWinner("AGENT")
+
       } else if (copy_board[0][0] === "X") {
         copy_board[0][0] = "WH";
         copy_board[1][1] = "WH";
         copy_board[2][2] = "WH";
+
+        this.setWinner("HUMAN")
+
       }
       this.setState({
         win: true,
@@ -199,10 +232,16 @@ export default class ThreeBoard extends Component {
         copy_board[0][2] = "WA";
         copy_board[1][1] = "WA";
         copy_board[2][0] = "WA";
+
+        this.setWinner("AGENT")
+
       } else if (copy_board[0][2] === "X") {
         copy_board[0][2] = "WH";
         copy_board[1][1] = "WH";
         copy_board[2][0] = "WH";
+
+        this.setWinner("HUMAN")
+
       }
       this.setState({
         win: true,
@@ -216,44 +255,20 @@ export default class ThreeBoard extends Component {
   }
 
   handleCellClick = (e, cell) => {
-    // console.log(this.state.turn)
-    // console.log("came to handle cell click")
     if (this.state.startGameValue && this.state.win === false && this.state.turn === "HUMAN") {
       this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
+        // this.playAudio()
         copy_board[Math.floor(cell / 3)][cell % 3] = "X";
       }
       this.setState({
         board: copy_board,
         turn : "AGENT"
       });
-      // console.log('hjfhhdhf')
 
       let copy_board2 = this.state.board.slice();
       this.check_win(copy_board2);
-
-      // this.setState({
-      // board: copy_board,
-      // });
-
-      // const sendData = {
-      //   gameBeginner: this.state.gameBeginner,
-      //   board: JSON.stringify(this.state.board),
-      //   depth: JSON.stringify(this.state.depth),
-      // }
-
-      // useEffect(()=> {
-      //     fetch("/agent").then(response =>
-      //         response.json().then(data => {
-      //             console.log(data)
-      //         }))
-      // },[])
-      // console.log(sendData)
-      // console.log(this.state.win)
-
-      // console.log(JSON.stringify(this.state.board))
-
 
       this.sleep(1).then(() => {
 
@@ -282,42 +297,46 @@ export default class ThreeBoard extends Component {
                 })
                 let copy_board3 = this.state.board.slice();
                 this.check_win(copy_board3);
+
+                if(this.state.win === true)
+                {
+                  this.sleep(5).then(() => {
+                    if(this.state.winner === "HUMAN")
+                    {
+                        window.location.href = '/win_player_three'
+                    }
+                    else
+                    {
+                      window.location.href = '/lose_player_three'
+                    }
+                  })
+                }
               }
             })
             .catch((err) => {
               console.log(err);
             });
         }
+        else
+        {
+          console.log("win here!!")
+          this.sleep(5).then(() => {
+            if(this.state.winner === "HUMAN")
+            {
+                window.location.href = '/win_player_three'
+            }
+            else
+            {
+              window.location.href = '/lose_player_three'
+            }
+          })
+        }
       })
      
     }
   };
 
-
-
-  // handleStartHuman = (e) => {
-  //   console.log("Human begins the game!");
-  //   this.setState({
-  //     gameBeginner: "HUMAN",
-  //     turn : "HUMAN"
-  //   });
-  // };
-
-
-
-  // handleStartAgent = (e) => {
-  //   console.log("Agent begins the game!");
-  //   this.setState({
-  //     gameBeginner: "AGENT",
-  //     turn : " "
-  //   });
-  // };
-
-
-
   handleStartGame = (e, startGame) => {
-    // console.log("The game begins!");
-    // console.log(this.state.gameBeginner)
 
     if (startGame === "Start Game") {
       this.setState({
@@ -333,11 +352,11 @@ export default class ThreeBoard extends Component {
           [" ", " ", " "],
           [" ", " ", " "],
         ],
-        // gameBeginner: " ",
         startGameValue: false,
         whoPlaysFirstDialog: false,
         startGameButton: "Start Game",
         win: false,
+        winner : " ",
         depth: this.props.depth,
         undoStack: [],
         turn : this.props.gameBeginner,
@@ -378,8 +397,6 @@ export default class ThreeBoard extends Component {
 
     let totalOfUndoButtons = copy_undoStack.length;
     let buttonsToErase = totalOfUndoButtons - (index + 1);
-    // console.log(totalOfUndoButtons);
-    // console.log(buttonsToErase);
 
     for (let i = 0; i <= buttonsToErase; i++) {
       copy_board[Math.floor(copy_undoStack[copy_undoStack.length - 1] / 3)][
@@ -393,17 +410,6 @@ export default class ThreeBoard extends Component {
     });
 
   };
-
-  // handleDepth = (e, depth_selected) => {
-
-  //   if (this.state.depth === " ") {
-
-  //     this.setState({
-  //       depth: depth_selected
-  //     });
-
-  //   }
-  // };
 
   render() {
     return (
@@ -456,35 +462,16 @@ export default class ThreeBoard extends Component {
           </Button>{" "}
         </div>
 
+        {/* <audio className="audio-element">
+            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+        </audio> */}
+
+          {/* <div>
+            <audio className="audio-element">
+              <source src="./../static/assets/game.mp3"></source>
+            </audio>
+          </div> */}
         <div> Turn : {this.state.turn}</div>
-
-        {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
-          Beginner_Human
-        </Button>
-
-
-        <Button variant="default" onClick={(e) => this.handleStartAgent(e)}>
-          Beginner_Agent
-        </Button>
-
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 1)}>
-            Depth 1
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 2)}>
-            Depth 2
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 3)}>
-            Depth 3
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 4)}>
-            Depth 4
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, -1)}>
-            Ultimate
-          </Button>
-        </ButtonGroup> */}
-
         {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
         {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
       </div>
@@ -492,11 +479,6 @@ export default class ThreeBoard extends Component {
   }
 }
 
-// var stack = new Landing();
-
-
-//   border-collapse: "separate"
-// }
 const heading = {
   display: "inline-block",
   textAlign: "center",
@@ -505,13 +487,4 @@ const heading = {
 };
 
 const startButton = {
-  // position: 'absolute',
-  // bottom:0,
-  // right : 0
-  // left:50
 };
-
-// const cellStyle = {
-
-// }
-// "proxy": "http://127.0.0.1:5000/"
