@@ -17,6 +17,7 @@
   background-size: cover;
   background-position: center;
   display: flex;
+  font-family: 'Acme', sans-serif;
 }
 .heading {
   color: #ffffff;

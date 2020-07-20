@@ -53,8 +53,8 @@ export default class Landing extends Component {
               <Container className={configStyles.startWrapper}>
                 <Row className="mb-5">
                   <Col
-                    sm={6}
-                    md={6}
+                    sm={12}
+                    md={12}
                     lg={6}
                     className="justify-content-center align-self-center"
                   >
@@ -63,8 +63,8 @@ export default class Landing extends Component {
                     </h3>
                   </Col>
                   <Col
-                    sm={6}
-                    md={6}
+                    sm={12}
+                    md={12}
                     lg={6}
                     className="justify-content-center align-self-center"
                   >
@@ -80,6 +80,7 @@ export default class Landing extends Component {
                           "fas fa-robot mr-2 " + configStyles.iconStyles
                         }
                       ></i>
+                      <h5 className={configStyles.playerName}>AGENT</h5>
                     </div>
                     <div
                       style={{
@@ -94,21 +95,22 @@ export default class Landing extends Component {
                           configStyles.iconStyles
                         }
                       ></i>
+                      <h5 className={configStyles.playerName}>HUMAN</h5>
                     </div>
                   </Col>
                 </Row>
                 <Row className="mb-5">
                   <Col
-                    sm={6}
-                    md={6}
+                    sm={12}
+                    md={12}
                     lg={6}
                     className="justify-content-center align-self-center"
                   >
                     <h3 className={configStyles.startContent}>Depth Type</h3>
                   </Col>
                   <Col
-                    sm={6}
-                    md={6}
+                    sm={12}
+                    md={12}
                     lg={6}
                     className="justify-content-center align-self-center"
                   >

@@ -9,6 +9,7 @@ import GameStarter from "./components/GameStarter";
 import Landing from "./components/Landing";
 import Config from "./components/Config-mallika";
 import Overview from "./components/Overview";
+import Rules from "./components/Rules";
 import "bootstrap/dist/css/bootstrap.min.css";
 import common from "./static/css/Common.module.css";
 // import axios from 'axios';
@@ -51,6 +52,7 @@ class NavigationBar extends Component {
             <Nav.Link href="#home">3x3</Nav.Link>
             <Nav.Link href="#home">9x9</Nav.Link>
             <Nav.Link href="#link">About</Nav.Link>
+            <Nav.Link href="#link">Rules</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -68,6 +70,7 @@ function App() {
           <Route exact path="/nine" component={BigBoard} />
           <Route exact path="/config" component={Config} />
           <Route exact path="/overview" component={Overview} />
+          <Route exact path="/rules" component={Rules} />
         </Switch>
       </Router>
       <NavigationBar />

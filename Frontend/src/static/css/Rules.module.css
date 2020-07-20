@@ -25,6 +25,7 @@
     color: #ffffff;
     font-size: 2vw;
     font-family: 'Acme', sans-serif;
+    margin-bottom: 5%;
   }
   
   .subheading {
@@ -37,7 +38,7 @@
   }
   
   .gifs{
-    width: 70%;
+    width: 80%;
   }
   .text{
     text-align: justify;
