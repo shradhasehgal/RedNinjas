@@ -1,33 +1,51 @@
-import React, { Component, useState } from "react";
-import Toast from 'react-bootstrap/Toast'
-import Button from 'react-bootstrap/Button'
+import React, { Component, useState ,useEffect} from "react";
 import styles from "../static/css/message.module.css";
-import { Row, Container } from "react-bootstrap";
+import { Button, Fade, Toast } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert'
+import { toast } from 'react-toastify';
 
-export default function Message() {
-    const [showA, setShowA] = useState(true);
-    const toggleShowA = () => setShowA(!showA);
-    // pass these are props
-    var message = "Place it in"
-    var row = 2
-    var coloumn = 0 
 
+function Message() {
+    const [show, setShow] = useState(true);
+    var row = null
+    var coloumn = null
+
+if (row)
+{
     return (
-        <Container className={styles.bottomleft}>
-            <Row>
-                <Button size="mg" variant="light" onClick={toggleShowA}>Message</Button>
-            </Row>
-            <Row className={styles.bottomleft}>
-                <Toast show={showA} onClose={toggleShowA} style={{bottom: 0,left: 0,}} variant="success">
-                    <Toast.Header className={styles.title}>
-                        <strong className="mr-auto">Here's A suggestion</strong>
-                    </Toast.Header>
-                    <Toast.Body>{message} {row} {coloumn}</Toast.Body>
-                </Toast>
-            </Row>
-        </Container> 
+        <div aria-live="polite" aria-atomic="true">
+            <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
+                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
+                    <Toast.Header className={styles.text}>
+                    <strong className="mr-auto">Hint!!</strong>
+            </Toast.Header>
+            <Toast.Body>Play in localboard {row} {coloumn} </Toast.Body>
+          </Toast>
+        </div>
+        </div>
     );
+} else {
+    return (
+        <div aria-live="polite" aria-atomic="true">
+            <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
+                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
+                    <Toast.Header className={styles.text}>
+                    <strong className="mr-auto">Hint!!</strong>
+            </Toast.Header>
+            <Toast.Body>Play in any empty localboard</Toast.Body>
+          </Toast>
+        </div>
+        </div>
+    );
+
+}
+
   }
   
+// render(<Example />);
+
+
+export default Message;
+
 
  
