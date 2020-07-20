@@ -1,30 +1,39 @@
 {
   "files": {
-    "main.css": "/static/css/main.11dc7e79.chunk.css",
-    "main.js": "/static/js/main.9160c2af.chunk.js",
-    "main.js.map": "/static/js/main.9160c2af.chunk.js.map",
+    "main.css": "/static/css/main.65a0e103.chunk.css",
+    "main.js": "/static/js/main.e3cef4cb.chunk.js",
+    "main.js.map": "/static/js/main.e3cef4cb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.02030f09.js",
     "runtime-main.js.map": "/static/js/runtime-main.02030f09.js.map",
     "static/css/2.82e1ca60.chunk.css": "/static/css/2.82e1ca60.chunk.css",
-    "static/js/2.f31e8518.chunk.js": "/static/js/2.f31e8518.chunk.js",
-    "static/js/2.f31e8518.chunk.js.map": "/static/js/2.f31e8518.chunk.js.map",
+    "static/js/2.e797d32a.chunk.js": "/static/js/2.e797d32a.chunk.js",
+    "static/js/2.e797d32a.chunk.js.map": "/static/js/2.e797d32a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.a2b5c03f2b52aba2850982f2f87b241f.js": "/precache-manifest.a2b5c03f2b52aba2850982f2f87b241f.js",
+    "precache-manifest.4cd41990e01b6222484609d8e1ef9834.js": "/precache-manifest.4cd41990e01b6222484609d8e1ef9834.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.82e1ca60.chunk.css.map": "/static/css/2.82e1ca60.chunk.css.map",
-    "static/css/main.11dc7e79.chunk.css.map": "/static/css/main.11dc7e79.chunk.css.map",
-    "static/js/2.f31e8518.chunk.js.LICENSE.txt": "/static/js/2.f31e8518.chunk.js.LICENSE.txt",
+    "static/css/main.65a0e103.chunk.css.map": "/static/css/main.65a0e103.chunk.css.map",
+    "static/js/2.e797d32a.chunk.js.LICENSE.txt": "/static/js/2.e797d32a.chunk.js.LICENSE.txt",
     "static/media/mdb.css": "/static/media/arrow_right.8ef6a08c.svg",
+    "static/media/astro.gif": "/static/media/astro.ea8e9be4.gif",
     "static/media/all.min.css": "/static/media/fa-solid-900.f3a7d3b5.woff",
     "static/media/Landing.module.css": "/static/media/idea2.2e32b0d0.gif",
     "static/media/Three.module.css": "/static/media/mars-bg-2.7e97385a.png",
-    "static/media/Common.module.css": "/static/media/space.ce41aaf9.jpg"
+    "static/media/result.module.css": "/static/media/mars-bg.20ea22a5.png",
+    "static/media/error.module.css": "/static/media/maybee.11f32caa.gif",
+    "static/media/nine-final.gif": "/static/media/nine-final.22ee378d.gif",
+    "static/media/rocket.gif": "/static/media/rocket.027e9997.gif",
+    "static/media/sad.gif": "/static/media/sad.28b9b575.gif",
+    "static/media/Common.module.css": "/static/media/space.ce41aaf9.jpg",
+    "static/media/three2.gif": "/static/media/three2.dd19d2e4.gif",
+    "static/media/tie.gif": "/static/media/tie.96b51d3b.gif",
+    "static/media/win.gif": "/static/media/win.7dddbc6c.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.02030f09.js",
     "static/css/2.82e1ca60.chunk.css",
-    "static/js/2.f31e8518.chunk.js",
-    "static/css/main.11dc7e79.chunk.css",
-    "static/js/main.9160c2af.chunk.js"
+    "static/js/2.e797d32a.chunk.js",
+    "static/css/main.65a0e103.chunk.css",
+    "static/js/main.e3cef4cb.chunk.js"
   ]
 }
