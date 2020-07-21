@@ -53,6 +53,7 @@
 .iconStyles {
   color: #3b3251;
   /* color: #AD4977; */
+  cursor: pointer;
 }
 .iconStyles:hover {
   /* color: #3b3251; */
@@ -75,7 +76,7 @@
     font-size: 30px;
   }
   .iconStyles {
-    font-size: 6rem;
+    font-size: 5rem;
   }
   .icon {
     margin: '0 10%';
@@ -96,7 +97,7 @@
   }
   .iconStyles {
     color: #3b3251;
-    font-size: 4rem;
+    font-size: 3rem;
   }
   .icon {
     margin: '0 7%';
@@ -117,7 +118,7 @@
     font-size: 8px;
   }
   .iconStyles {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #3b3251;
   }
 }

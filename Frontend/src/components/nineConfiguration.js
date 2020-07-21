@@ -19,7 +19,8 @@ export default class NineConfiguration extends Component {
       this.state = {
           showWinComponent : false,
           showConfigurationComponent : false,
-          showGameConfiguration : false
+          showGameConfiguration : false,
+          beginner:this.props.gameBeginner
       }
     }
   
@@ -69,8 +70,8 @@ render() {
             <Container className={configStyles.startWrapper}>
               <Row className="mb-5">
                 <Col
-                  sm={6}
-                  md={6}
+                  sm={12}
+                  md={12}
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
@@ -79,8 +80,8 @@ render() {
                   </h3>
                 </Col>
                 <Col
-                  sm={6}
-                  md={6}
+                  sm={12}
+                  md={12}
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
@@ -93,10 +94,11 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-robot mr-2 " + configStyles.iconStyles
+                        "fas fa-robot mr-2 " + configStyles.iconStyles + (this.state.beginner === "AGENT" ? " fa-border" : "")
                       }
-                      onClick = {(e) => this.props.handleStartAgent_Nine(e)}
+                      onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Nine(e)}}
                     ></i>
+                    <h5 className={configStyles.playerName}>AGENT</h5>
                   </div>
                   <div
                     style={{
@@ -108,10 +110,11 @@ render() {
                     <i
                       className={
                         "fas fa-user-astronaut mr-2 " +
-                        configStyles.iconStyles
+                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " fa-border" : "")
                       }
-                      onClick = {(e) => this.props.handleStartHuman_Nine(e)}
+                      onClick = {(e) => {this.setState({beginner:"HUMAN"});this.props.handleStartHuman_Nine(e)}}
                     ></i>
+                    <h5 className={configStyles.playerName}>HUMAN</h5>
                   </div>
                 </Col>
               </Row>

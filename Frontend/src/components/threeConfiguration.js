@@ -26,6 +26,8 @@ export default class ThreeConfiguration extends Component {
         //   showWinComponent : false,
         //   showConfigurationComponent : false,
         //   showGameConfiguration : false
+        beginner:this.props.gameBeginner,
+        depth:this.props.depth
       }
     }
      
@@ -96,8 +98,8 @@ render() {
             <Container className={configStyles.startWrapper}>
               <Row className="mb-5">
                 <Col
-                  sm={6}
-                  md={6}
+                  sm={12}
+                  md={12}
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
@@ -106,8 +108,8 @@ render() {
                   </h3>
                 </Col>
                 <Col
-                  sm={6}
-                  md={6}
+                  sm={12}
+                  md={12}
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
@@ -120,10 +122,11 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-robot mr-2 " + configStyles.iconStyles
+                        "fas fa-robot mr-2 " + configStyles.iconStyles+ (this.state.beginner === "AGENT" ? " fa-border" : "")
                       }
-                      onClick = {(e) => this.props.handleStartAgent_Three(e)}
+                      onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Three(e)}}
                     ></i>
+                    <h5 className={configStyles.playerName}>AGENT</h5>
                   </div>
                   <div
                     style={{
@@ -135,60 +138,61 @@ render() {
                     <i
                       className={
                         "fas fa-user-astronaut mr-2 " +
-                        configStyles.iconStyles
+                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " fa-border" : "")
                       }
-                      onClick = {(e) => this.props.handleStartHuman_Three(e)}
+                      onClick = {(e) => {this.setState({beginner:"HUMAN"}); this.props.handleStartHuman_Three(e)}}
                     ></i>
+                    <h5 className={configStyles.playerName}>HUMAN</h5>
                   </div>
                 </Col>
               </Row>
               <Row className="mb-5">
                 <Col
-                  sm={6}
-                  md={6}
+                  sm={12}
+                  md={12}
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
                   <h3 className={configStyles.startContent}>Depth Type</h3>
                 </Col>
                 <Col
-                  sm={6}
-                  md={6}
+                  sm={12}
+                  md={12}
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
                   <Button
                     size="md"
-                    variant="light"
-                    onClick={(e) => this.props.handleDepth_Three(e, 1)}
+                    variant = {this.state.depth==="1"?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:"1"});this.props.handleDepth_Three(e, 1)}}
                   >
                     1
                   </Button>
                   <Button
                     size="md"
-                    variant="light"
-                    onClick={(e) => this.props.handleDepth_Three(e, 2)}
+                    variant = {this.state.depth==="2"?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:"2"});this.props.handleDepth_Three(e, 2)}}
                   >
                     2
                   </Button>
                   <Button
                     size="md"
-                    variant="light"
-                    onClick={(e) => this.props.handleDepth_Three(e, 3)}
+                    variant = {this.state.depth==="3"?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:"3"});this.props.handleDepth_Three(e, 3)}}
                   >
                     3
                   </Button>
                   <Button
                     size="md"
-                    variant="light"
-                    onClick={(e) => this.props.handleDepth_Three(e, 4)}
+                    variant = {this.state.depth==="4"?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:"4"});this.props.handleDepth_Three(e, 4)}}
                   >
                     4
                   </Button>
                   <Button
                     size="md"
-                    variant="light"
-                    onClick={(e) => this.props.handleDepth_Three(e, -1)}
+                    variant = {this.state.depth==="-1"?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:"11"});this.props.handleDepth_Three(e, -1)}}
                   >
                     Ultimate
                   </Button>

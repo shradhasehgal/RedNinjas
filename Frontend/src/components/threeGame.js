@@ -25,8 +25,8 @@ export default class ThreeGame extends Component {
           showThreeConfigurationComponent : true,
           showThreeGameComponent : false,
           showThreeWinComponent : false,
-          depth : " ",
-          gameBeginner : " ",
+          depth : "1",
+          gameBeginner : "AGENT",
           route : " ",
           winner : " "
 
