@@ -30,7 +30,7 @@ import configStyles from "../static/css/Config-mallika.module.css";
 
 // import Sound from 'react-sound';
 
-// const soundfile = require("../static/assets/click-game.mp3")
+const soundfile = require("../static/assets/click-game.mp3")
 
 // import soundfile from '../static/assets/click-game.mp3'
 
@@ -87,11 +87,11 @@ export default class ThreeBoard extends Component {
 
 
 
-  // playAudio() {
-  //   console.log("came to hear sound")
-  //   const audioEl = document.getElementsByClassName("audio-element")[0]
-  //   audioEl.play()
-  // }
+  playAudio() {
+    console.log("came to hear sound")
+    const audioEl = document.getElementsByClassName("audio-element")[0]
+    audioEl.play()
+  }
 
 
   // componentDidMount () {
@@ -403,7 +403,7 @@ export default class ThreeBoard extends Component {
     // console.log("The game begins!");
     // console.log(this.state.gameBeginner)
 
-    // this.playAudio()
+    this.playAudio()
 
     if (startGame === "Start Game") {
       this.setState({
@@ -570,10 +570,10 @@ export default class ThreeBoard extends Component {
             {/* <audio className="audio-element">
             <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
         </audio> */}
-{/* 
+
             <audio className="audio-element">
               <source src = "soundfile"></source>
-            </audio> */}
+            </audio> */
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}

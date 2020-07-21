@@ -80,7 +80,7 @@ export default class ThreeGame extends Component {
           showNineConfigurationComponent : true,
           showNineGameComponent : false,
           showNineWinComponent : false,
-          gameBeginner : " ",
+          gameBeginner : "AGENT",
           route : " ",
           winner : " "
         })
