@@ -1,20 +1,4 @@
 import React, { Component, useEffect } from "react";
-import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavbarToggler,
-  MDBCollapse,
-} from "mdbreact";
-import {
-  MDBRow,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBIcon,
-} from "mdbreact";
 // import { Link } from 'react-router-dom'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Button, Container, Col, Row } from "react-bootstrap";
