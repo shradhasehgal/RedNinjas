@@ -51,7 +51,7 @@ export default class GameResults extends Component {
             className={styles.containerBody}
             style={{ display: "flex" }}>
             <Container style={{ marginTop: "auto", marginBottom: "auto", marginLeft:"auto",marginRight:"auto" ,padding:"1%"}}>
-                <img className={styles.gifc} src={require('../static/assets/rocket.gif')} />
+                <img className={styles.gif} src={require('../static/assets/rocket.gif')} />
                 <br></br><br></br><br></br>
                 <MDBAnimation type="bounce" infinite>
                     <text className={styles.text}>You WONNN   </text>
@@ -71,7 +71,7 @@ export default class GameResults extends Component {
               className={styles.containerBody}
               style={{ display: "flex" }}>
               <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
-                  <img className={styles.gifl} src={require('../static/assets/sad.gif')} />
+                  <img className={styles.gif} src={require('../static/assets/sad.gif')} />
                   <MDBAnimation type="bounce" infinite>
                       <text className={styles.text}>You LOST :((</text>
                       <br></br>
