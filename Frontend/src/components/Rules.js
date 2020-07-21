@@ -85,7 +85,8 @@ export default class Overview extends Component {
               >
                 <img
                   className={rulesStyles.gifs}
-                  src={require("../static/assets/nine-final.gif")}
+                  style={{width:"100%"}}
+                  src={require("../static/assets/nine-final3.gif")}
                 />
               </Col>
               <Col
