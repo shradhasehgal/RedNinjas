@@ -71,7 +71,7 @@
   font-size: 0.80rem !important;
   padding: 0.45rem 0.7rem !important;
   margin-left: -10px;
-  transition: background-color 0.2s ease-out, color 0.2s ease-out !important;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out !important;
 }
 
 .button:hover{
@@ -80,8 +80,9 @@
 }
 
 .lightHeading {
-  color: black !important;
-  background-color: rgb(175, 165, 165) !important;
+  /* color: black !important; */
+  background-color:#3b3251 !important;
+  opacity: 0.9;
 }
 
 .center {
@@ -89,13 +90,13 @@
 }
 
 .whiteBg{
-  background-color: white !important;
+  background-color: rgb(211, 193, 193) !important;
 }
 
 .greyCell{
-  background-color: rgb(175, 165, 165) !important; 
+  background-color: white !important; 
   opacity: 0.7;
-  color: white;
+  color: rgb(211, 193, 193) !important;
 }
 
 .highlighted {
@@ -117,6 +118,10 @@
 
 .nineSpinner {
   font-size: 1.5rem;
+}
+
+.iconAgent{
+  color: #AD4977;
 }
 
 @media screen and (max-width: 650px) {

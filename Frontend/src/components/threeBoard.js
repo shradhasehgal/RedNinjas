@@ -57,26 +57,27 @@ export default class ThreeBoard extends Component {
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
-            <i className={'fas fa-user-astronaut ' + styles.iconThree}></i>
+            <i className={'fas fa-user-astronaut ' + styles.iconThree }></i>
           </div>
         ),
         O: (
           <div style={{ textAlign: "center" }}>
-            <i className={'fas fa-robot ' + styles.iconThree}></i>
+            <i className={'fas fa-robot ' + styles.iconThree + ' ' + styles.iconAgent}></i>
           </div>
         ),
         WA: (
           <div style={{ textAlign: "center" }}>
-            <i className={'fas fa-robot fa-spin ' + styles.iconThree}></i>
+            <i className={'fas fa-robot fa-spin ' + styles.iconThree + ' '+ styles.iconAgent}></i>
           </div>
         ),
         WH: (
           <div style={{ textAlign: "center" }}>
-            <i className={'fas fa-user-astronaut fa-spin ' + styles.iconThree}></i>
+            <i className={'fas fa-user-astronaut fa-spin ' + styles.iconThree }></i>
           </div>
         )
       },
-      darkMode: true
+      darkMode: true,
+      heading: "RED NINJA TIC TAC TOE"
     };
   }
 
@@ -144,8 +145,13 @@ export default class ThreeBoard extends Component {
 
 
   setWinner(gameWinner) {
+    let topHeading = "Houston, you did it!  🎉"
+    if (gameWinner=="AGENT")
+      topHeading = "Robots win 🙁"
+
     this.setState({
-      winner: gameWinner
+      winner: gameWinner,
+      heading: topHeading
     })
   }
 
@@ -166,7 +172,7 @@ export default class ThreeBoard extends Component {
           copy_board[i][1] = "WA";
           copy_board[i][2] = "WA";
 
-          this.setWinner("AGENT")
+          this.setWinner("AGENT");
 
         } else if (copy_board[i][0] === "X") {
           copy_board[i][0] = "WH";
@@ -441,7 +447,7 @@ export default class ThreeBoard extends Component {
 
           <div style={{ margin: "auto", width: "600px", maxWidth: "90%" }}>
             <div className={classNames(styles.heading, {[styles.lightHeading] : !this.state.darkMode})}>
-              <h1 className={styles.title}>RED NINJA TIC TAC TOE</h1>
+              <h1 className={styles.title}>{this.state.heading}</h1>
             </div>
 
             <Container style={{ maxWidth: "600px" }}>
@@ -485,7 +491,12 @@ export default class ThreeBoard extends Component {
             </Container>
             <Container fluid="true" style={{marginTop: "5%"}}>
               {this.state.undoStack.map((cell, i) => (
-                <Button variant="dark" onClick={(e) => this.handleUndoFeature(e, i, cell)}>
+                <Button variant={ this.state.darkMode
+                  ? "dark"
+                  : "light"
+                }
+ 
+                onClick={(e) => this.handleUndoFeature(e, i, cell)}>
                   {i + 1}
                 </Button>
               ))}

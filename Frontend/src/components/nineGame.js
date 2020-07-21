@@ -36,14 +36,13 @@ export default class ThreeGame extends Component {
     updateStateForWinComponent(gameRoute,gameWinner)
     {
       console.log("Heyyyyy")
-      this.setState({
+      setTimeout(() => this.setState({
         showNineConfigurationComponent : false,
         showNineGameComponent : false,
         showNineWinComponent : true,
         winner : gameWinner,
         route : gameRoute
-      })
-      console.log(this.state.winner)
+      }), 2000)
     }
 
     handleStartAgent_Nine(e)

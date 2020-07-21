@@ -114,7 +114,8 @@ export default class NineBoard extends Component {
                     {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
                 </div>
             },
-            darkMode: true
+            darkMode: true,
+            heading: "RED NINJA TIC TAC TOE"
         }
     }
 
@@ -231,12 +232,16 @@ export default class NineBoard extends Component {
     }
 
 
-    setWinner(gameWinner)
-    {
+    setWinner(gameWinner) {
+        let topHeading = "Houston, you did it!  🎉"
+        if (gameWinner=="AGENT")
+          topHeading = "You lost 🙁"
+    
         this.setState({
-            winner : gameWinner
+          winner: gameWinner,
+          heading: topHeading
         })
-    }
+      }
 
     check_ultimate_win(copy_board) {
 
