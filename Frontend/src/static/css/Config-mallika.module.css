@@ -45,6 +45,11 @@
   font-family: 'Acme', sans-serif;
 }
 
+.playerName{
+  margin-top: 1vh;
+  color: #ffffff;
+}
+
 .iconStyles {
   color: #3b3251;
   /* color: #AD4977; */
@@ -86,6 +91,9 @@
   .startContent {
     font-size: 20px;
   }
+  .playerName {
+    font-size: 10px;
+  }
   .iconStyles {
     color: #3b3251;
     font-size: 4rem;
@@ -104,6 +112,9 @@
   }
   .startContent {
     font-size: 15px;
+  }
+  .playerName {
+    font-size: 8px;
   }
   .iconStyles {
     font-size: 3rem;
