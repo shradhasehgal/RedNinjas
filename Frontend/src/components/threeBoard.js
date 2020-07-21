@@ -28,10 +28,11 @@ import common from "../static/css/Common.module.css";
 import configStyles from "../static/css/Config-mallika.module.css";
 
 
-import Sound from 'react-sound';
+// import Sound from 'react-sound';
 
+// const soundfile = require("../static/assets/click-game.mp3")
 
-// import soundfile from '../static/assets/game.mp3'
+// import soundfile from '../static/assets/click-game.mp3'
 
 // import ThreeSound from '/threeSound.js'
 
@@ -47,6 +48,7 @@ export default class ThreeBoard extends Component {
         [" ", " ", " "],
         [" ", " ", " "],
       ],
+      human_move_number : 0,
       startGameValue: false,
       whoPlaysFirstDialog: false,
       startGameButton: "Start Game",
@@ -54,6 +56,8 @@ export default class ThreeBoard extends Component {
       win: false,
       winner: " ",
       undoStack: [],
+      symbol_stack : [],
+      value_beginner : " ",
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
@@ -84,6 +88,7 @@ export default class ThreeBoard extends Component {
 
 
   // playAudio() {
+  //   console.log("came to hear sound")
   //   const audioEl = document.getElementsByClassName("audio-element")[0]
   //   audioEl.play()
   // }
@@ -142,6 +147,32 @@ export default class ThreeBoard extends Component {
   //             }
   //         }
   //     }
+
+
+
+
+  checkTie(copy_board)
+  {
+    let tie_flag = true
+
+    for(let i = 0; i < 3; i++)
+    {
+      for(let j = 0; j < 3; j++)
+      {
+        if(copy_board[i][j] === " ")
+        {
+          tie_flag = false
+        }
+      }
+    }
+    if(tie_flag === true)
+    {
+      this.setState({
+        win : true,
+        winner : "TIE"
+      })
+    }
+  }
 
 
   setWinner(gameWinner) {
@@ -263,8 +294,13 @@ export default class ThreeBoard extends Component {
 
       }
       this.setState({
-        win: true,
+        win: true
       });
+    }
+
+    if(this.state.win === false)
+    {
+      this.checkTie(copy_board)
     }
   }
 
@@ -277,15 +313,20 @@ export default class ThreeBoard extends Component {
     // console.log(this.state.turn)
     // console.log("came to handle cell click")
     if (this.state.startGameValue && this.state.win === false && this.state.turn === "HUMAN") {
-      this.state.undoStack.push(cell);
+      // this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
         // this.playAudio()
         copy_board[Math.floor(cell / 3)][cell % 3] = "X";
+
+        this.state.undoStack.push(cell)
+        this.state.symbol_stack.push("H")
+
       }
       this.setState({
         board: copy_board,
-        turn: "AGENT"
+        turn: "AGENT",
+        human_move_number : this.state.human_move_number + 1
       });
 
       let copy_board2 = this.state.board.slice();
@@ -310,6 +351,8 @@ export default class ThreeBoard extends Component {
               copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
               this.state.undoStack.push(3 * res.data.r + res.data.c)
 
+              this.state.symbol_stack.push("A")
+
               if (this.state.startGameButton === "Reset Game") {
                 this.setState({
                   board: copy_board,
@@ -318,18 +361,11 @@ export default class ThreeBoard extends Component {
                 let copy_board3 = this.state.board.slice();
                 this.check_win(copy_board3);
 
+                console.log()
                 if (this.state.win === true) {
                   console.log('hellllllllllllooooooo')
                   this.sleep(5).then(() => {
                     this.props.update_Win_Three("three", this.state.winner)
-                    // if(this.state.winner === "HUMAN")
-                    // {
-                    //     window.location.href = '/win_player_three'
-                    // }
-                    // else
-                    // {
-                    //   window.location.href = '/lose_player_three'
-                    // }
                   })
                 }
               }
@@ -343,15 +379,6 @@ export default class ThreeBoard extends Component {
           this.sleep(5).then(() => {
             this.props.update_Win_Three("three", this.state.winner)
 
-            // this.props.handleStartHuman_Three(e)
-            // if(this.state.winner === "HUMAN")
-            // {
-            //     window.location.href = '/win_player_three'
-            // }
-            // else
-            // {
-            //   window.location.href = '/lose_player_three'
-            // }
           })
         }
       })
@@ -360,8 +387,23 @@ export default class ThreeBoard extends Component {
   };
 
   handleStartGame = (e, startGame) => {
+
+    if(this.props.gameBeginner === "AGENT")
+    {
+      this.setState({
+        value_beginner : 0
+      })
+    }
+    else
+    {
+      this.setState({
+        value_beginner : 1
+      })
+    }
     // console.log("The game begins!");
     // console.log(this.state.gameBeginner)
+
+    // this.playAudio()
 
     if (startGame === "Start Game") {
       this.setState({
@@ -387,7 +429,20 @@ export default class ThreeBoard extends Component {
         undoStack: [],
         turn: this.props.gameBeginner,
       });
-    }
+
+      if(this.props.gameBeginner === "AGENT")
+      {
+        this.setState({
+          value_beginner : 0
+        })
+      }
+      else
+      {
+        this.setState({
+          value_beginner : 1
+        })
+      }
+  }
     if (this.props.gameBeginner === "AGENT") {
       axios
         .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
@@ -403,6 +458,7 @@ export default class ThreeBoard extends Component {
 
           copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
           this.state.undoStack.push(3 * res.data.r + res.data.c)
+          this.state.symbol_stack.push("A")
           if (this.state.startGameButton === "Reset Game") {
             this.setState({
               board: copy_board,
@@ -420,6 +476,7 @@ export default class ThreeBoard extends Component {
   handleUndoFeature = (e, index, cell) => {
     let copy_board = this.state.board.slice();
     let copy_undoStack = this.state.undoStack.slice();
+    let copy_symbol_stack = this.state.symbol_stack.slice();
 
     let totalOfUndoButtons = copy_undoStack.length;
     let buttonsToErase = totalOfUndoButtons - (index + 1);
@@ -430,9 +487,16 @@ export default class ThreeBoard extends Component {
       ] = " ";
       copy_undoStack.pop();
     }
+
+      for (let i = 0; i <= buttonsToErase; i++) {
+        copy_symbol_stack.pop();
+    }
+
     this.setState({
       board: copy_board,
       undoStack: copy_undoStack,
+      symbol_stack : copy_symbol_stack,
+      turn : "HUMAN"
     });
 
   };
@@ -472,7 +536,7 @@ export default class ThreeBoard extends Component {
 
             <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
-                    <Col className = {styles.center}>Depth: {this.props.depth}</Col>
+                    <Col className = {styles.center}>Depth: {this.props.depth === -1 ? 5 : this.props.depth}</Col>
                 <Col className = {styles.center}>Turn: {this.state.turn}</Col>
                 <Col className = {styles.center}>
                 { this.state.darkMode
@@ -489,65 +553,32 @@ export default class ThreeBoard extends Component {
               </Button></Col>
               </Row>
             </Container>
+            {this.state.win === false ? 
             <Container fluid="true" style={{marginTop: "5%"}}>
-              {this.state.undoStack.map((cell, i) => (
-                <Button variant={ this.state.darkMode
-                  ? "dark"
-                  : "light"
-                }
- 
-                onClick={(e) => this.handleUndoFeature(e, i, cell)}>
-                  {i + 1}
-                </Button>
-              ))}
-            </Container>
+              {this.state.symbol_stack.map((cell, i) => (
 
+                  this.state.symbol_stack[i] === "H" ? <Button variant={ this.state.darkMode
+                    ? "dark"
+                    : "light"
+                  }
+
+                  onClick={(e) => this.handleUndoFeature(e, i, cell)}>
+                    {Math.ceil((i + 1)/2) + (i + 1)%2 - this.state.value_beginner}
+                  </Button> : <></>
+              ))}
+            </Container> : " "}
             {/* <audio className="audio-element">
             <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
         </audio> */}
-
-            {/* <div>
+{/* 
             <audio className="audio-element">
-              <source src="./../static/assets/game.mp3"></source>
-            </audio>
-          </div> */}
+              <source src = "soundfile"></source>
+            </audio> */}
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
           </div>
         </div>
-
-        {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
-          Beginner_Human
-        </Button>
-
-
-        <Button variant="default" onClick={(e) => this.handleStartAgent(e)}>
-          Beginner_Agent
-        </Button>
-
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 1)}>
-            Depth 1
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 2)}>
-            Depth 2
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 3)}>
-            Depth 3
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, 4)}>
-            Depth 4
-          </Button>
-          <Button variant="default" onClick={(e) => this.handleDepth(e, -1)}>
-            Ultimate
-          </Button>
-        </ButtonGroup> */}
-
-          {/* <ThreeSound/> */}
-        {/* <div> Turn : {this.state.turn}</div> */}
-        {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
-        {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
       </div>
     );
   }

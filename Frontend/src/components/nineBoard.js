@@ -115,13 +115,47 @@ export default class NineBoard extends Component {
                 </div>
             },
             darkMode: true,
-            heading: "RED NINJA TIC TAC TOE"
+            heading : "RED NINJA TIC TAC TOE", 
         }
     }
 
     changeMode(darkMode) {
         this.setState({darkMode: !darkMode})
       }
+
+
+    checkTie(bigBoard)
+    {
+        let outer_row, outer_column, inner_row, inner_column;
+        for(outer_row = 0; outer_row < 3; outer_row++)
+        {
+            for(outer_column = 0; outer_column < 3; outer_column++)
+            {
+                let tie_flag = true
+                for(inner_row = 0; inner_row < 3; inner_row++)
+                {
+                    for(inner_column = 0; inner_column < 3; inner_column++)
+                    {
+                        if(bigBoard[outer_row][outer_column][inner_row][inner_column] === " " || this.state.ultimateWinBoard[outer_row][outer_column] !== " ")
+                        {
+                            tie_flag = false
+                        }
+                    }
+                }
+                if(tie_flag === true)
+                {
+                    let ultimateBoard = this.state.ultimateWinBoard.slice()
+
+                    ultimateBoard[outer_row][outer_column] = "T"
+
+                    this.setState({
+                        ultimateWinBoard : ultimateBoard
+                    })
+                }
+            }
+        }
+    }
+
 
     alterBigBoardRow(winner_symbol, winner_status, loser_symbol, loser_status, win_row) {
         let copy_bigBoard = this.state.bigboard.slice()
@@ -243,6 +277,42 @@ export default class NineBoard extends Component {
         })
       }
 
+
+      checkFinalTie(copy_board)
+      {
+          let count = 0
+          for(let row = 0; row < 3; row++) {
+                if( (copy_board[row][0] !== copy_board[row][1] || copy_board[row][0] !== copy_board[row][2] || copy_board[row][1] !== copy_board[row][2]) && copy_board[row][0] !== " " && copy_board[row][1] !== " " && copy_board[row][2] !== " ") {
+                    count++;
+                }
+          }
+
+          for(let column = 0; column < 3; column++) {
+              if((copy_board[0][column] !== copy_board[1][column] || copy_board[0][column] !== copy_board[2][column] || copy_board[1][column] !== copy_board[2][column]) && copy_board[0][column] !== " " && copy_board[1][column] && copy_board[2][column] !== " ") {
+                  count++;
+              }
+          }
+
+          if( ( copy_board[0][0] !== copy_board[1][1] || copy_board[0][0] !== copy_board[2][2] || copy_board[1][1] !== copy_board[2][2]) && copy_board[0][0] !== " " && copy_board[1][1] !== " " && copy_board[2][2] !== " ") {
+              count++;
+          }
+
+          if( ( copy_board[0][2] !== copy_board[1][1] || copy_board[0][2] !== copy_board[2][0] || copy_board[1][1] !== copy_board[2][0]) && copy_board[0][2] !== " " && copy_board[1][1] !== " " && copy_board[2][0] !== " ") {
+              count++;
+          }
+
+          if(count === 8) {
+            this.setState({
+                winner : "TIE",
+                ultimateWin : true
+            })
+          }
+
+        console.log("count is " + count)
+
+        }
+  
+
     check_ultimate_win(copy_board) {
 
         if (this.state.ultimateWin === false) {
@@ -339,6 +409,10 @@ export default class NineBoard extends Component {
                 });
             }
         }
+        if(this.state.ultimateWin === false)
+        {
+            this.checkFinalTie(copy_board)
+        }
     }
 
     place_partial(bigBoard, outer_row, outer_column, symbol) {
@@ -359,6 +433,8 @@ export default class NineBoard extends Component {
         let copyUltimateWinBoard_2 = this.state.ultimateWinBoard.slice()
         this.check_ultimate_win(copyUltimateWinBoard_2)
     }
+
+
 
     checkPartialWin(bigBoard) {
         for (let outer_row = 0; outer_row < 3; outer_row++) {
@@ -437,9 +513,9 @@ export default class NineBoard extends Component {
                 }
             }
         }
+
+        // this.checkTie(bigBoard)
     }
-
-
 
     checkValidityOfMove(outer_row, outer_column) {
         if (this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ") {
@@ -451,7 +527,13 @@ export default class NineBoard extends Component {
                 return true
         }
         else
+        {
+            this.setState({
+                rowToPlace : " ",
+                columnToPlace : " "
+            })
             return true
+        }
     }
 
 
@@ -476,7 +558,7 @@ export default class NineBoard extends Component {
                         let copy_bigBoard2 = this.state.bigboard.slice()
                         this.checkPartialWin(copy_bigBoard2)
 
-
+                        console.log(this.state.ultimateWinBoard)
                         this.sleep(0.5).then(() => {
                         
                             if (this.state.ultimateWin === false) {
@@ -598,6 +680,7 @@ export default class NineBoard extends Component {
     }
 
     handleStartGame = (e, startGame) => {
+    
 
         if (startGame === "Start Game") {
             this.setState({
