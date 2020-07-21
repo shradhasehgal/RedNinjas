@@ -64,13 +64,14 @@ export default class ThreeGame extends Component {
     updateStateForWinComponent(gameRoute,gameWinner)
     {
       console.log("Heyyyyy")
-      this.setState({
+      setTimeout(() => this.setState({
         showThreeConfigurationComponent : false,
         showThreeGameComponent : false,
         showThreeWinComponent : true,
         winner : gameWinner,
         route : gameRoute
-      })
+      }), 2000)
+      
     }
 
     updateStateOfComponents_Three(message)

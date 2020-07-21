@@ -113,9 +113,14 @@ export default class NineBoard extends Component {
                     {/* <i class="fas fa-user-astronaut fa-2x green-text mr-2"></i> */}
                     {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
                 </div>
-            }
+            },
+            darkMode: true
         }
     }
+
+    changeMode(darkMode) {
+        this.setState({darkMode: !darkMode})
+      }
 
     alterBigBoardRow(winner_symbol, winner_status, loser_symbol, loser_status, win_row) {
         let copy_bigBoard = this.state.bigboard.slice()
@@ -661,9 +666,10 @@ export default class NineBoard extends Component {
                 [styles.whiteBg]: !this.state.darkMode
               })}>
                 <div style={{ margin: "auto", width: "700px", maxWidth: "90%" }}>
-                <div style={{ textAlign: "center" }}>
-                    <h1 style={heading}>RED NINJA TIC TAC TOE</h1>
-                </div>
+                <Container className={classNames(styles.heading, styles.nineHeading, {[styles.lightHeading] : !this.state.darkMode})}>
+              <Row>
+                  <Col><h1 className={styles.title}>RED NINJA TIC TAC TOE</h1></Col></Row>
+            </Container>
                 <Container>
                     <Container fluid='true'>
                         {
@@ -672,15 +678,15 @@ export default class NineBoard extends Component {
                                     {
                                         row.map((column, outerColumn) => (
 
-                                            <Col md style={cellStyle1}
+                                            <Col md style={cellStyle1} className={({[styles.greyCell]: !this.state.darkMode})}  
                                             >
                                                 {
                                                     this.state.bigboard.map((inner_row, innerRow) => (
                                                         <Row style={{ maxWidth: "100%", margin: "0 auto" }}>
                                                             {
                                                                 inner_row.map((inner_column, innerColumn) => (
-                                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false ? cellStyle3 : cellStyle2}
-                                                                    className={styles.cellNine}  
+                                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false && this.state.darkMode? cellStyle3 : cellStyle2}
+                                                                    className={classNames(styles.cellNine,{[styles.greyCell]: !this.state.darkMode, [styles.highlighted]: outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false && !this.state.darkMode})}  
                                                                         onClick={(e) => this.handleCellClick(e, outerRow, outerColumn, innerRow, innerColumn)}>
 
                                                                         {
@@ -704,19 +710,26 @@ export default class NineBoard extends Component {
                     </Container>
                 </Container>
 
-                <div style={{}}>
-                    <Button
-                        variant="info"
-                        size="lg"
-                        style={{}}
-                        onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
-                    >
-                        {this.state.startGameButton}
-                    </Button>{" "}
-                </div>
-                <div>
-                    {this.state.turn === "HUMAN" ? this.state.turn : <i class="fas fa-spinner fa-4x fa-pulse"></i>}
-                </div>
+                <Container className={classNames(styles.boardInfo, styles.nineBoardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
+              <Row style={{padding: "1%"}}>
+              <Col className = {styles.center}>Turn: {this.state.turn} {this.state.turn === "HUMAN" || !this.state.startGameValue? '': <i className={"fas fa-spinner fa-1x fa-pulse ml-2 "+styles.nineSpinner}></i>}
+</Col>
+
+                <Col className = {styles.center}>
+                { this.state.darkMode
+                  ? <i class="fa fa-2x fa-toggle-on" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
+                  :<i class="fa fa-2x fa-toggle-off" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
+                }
+                </Col>
+                <Col style={{marginLeft: "-10px"}}><Button
+                variant="dark"
+                className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode})}
+                onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
+              >
+                {this.state.startGameButton}
+              </Button></Col>
+              </Row>
+            </Container>
             </div>
             </div>
         )
@@ -736,7 +749,7 @@ const cellStyle1 = {
 }
 
 const cellStyle2 = {
-    backgroundColor: 'black',
+    backgroundColor: 'black !important',
     textAlign: 'center',
     border: "1px solid",
     width: "5%",

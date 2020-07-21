@@ -57,22 +57,22 @@ export default class ThreeBoard extends Component {
       symbol: {
         X: (
           <div style={{ textAlign: "center" }} className={styles.centerDiv}>
-            <i className={'fas fa-user-astronaut orange-text mr-2 ' + styles.iconThree}></i>
+            <i className={'fas fa-user-astronaut ' + styles.iconThree}></i>
           </div>
         ),
         O: (
           <div style={{ textAlign: "center" }}>
-            <i className={'fas fa-robot orange-text mr-2 ' + styles.iconThree}></i>
+            <i className={'fas fa-robot ' + styles.iconThree}></i>
           </div>
         ),
         WA: (
           <div style={{ textAlign: "center" }}>
-            <i className={'fas fa-robot light-green-text fa-spin mr-2 ' + styles.iconThree}></i>
+            <i className={'fas fa-robot fa-spin ' + styles.iconThree}></i>
           </div>
         ),
         WH: (
           <div style={{ textAlign: "center" }}>
-            <i className={'fas fa-user-astronaut light-green-text fa-spin mr-2 ' + styles.iconThree}></i>
+            <i className={'fas fa-user-astronaut fa-spin ' + styles.iconThree}></i>
           </div>
         )
       },
@@ -443,6 +443,7 @@ export default class ThreeBoard extends Component {
             <div className={classNames(styles.heading, {[styles.lightHeading] : !this.state.darkMode})}>
               <h1 className={styles.title}>RED NINJA TIC TAC TOE</h1>
             </div>
+
             <Container style={{ maxWidth: "600px" }}>
               <Container fluid="true">
                 {this.state.board.map((row, i) => (
@@ -461,17 +462,11 @@ export default class ThreeBoard extends Component {
               </Container>
             </Container>
 
-            <Container fluid="true">
-              {this.state.undoStack.map((cell, i) => (
-                <Button onClick={(e) => this.handleUndoFeature(e, i, cell)}>
-                  {i + 1}
-                </Button>
-              ))}
-            </Container>
+
 
             <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
-                <Col className = {styles.center}>Depth: 3</Col>
+                    <Col className = {styles.center}>Depth: {this.props.depth}</Col>
                 <Col className = {styles.center}>Turn: {this.state.turn}</Col>
                 <Col className = {styles.center}>
                 { this.state.darkMode
@@ -488,6 +483,13 @@ export default class ThreeBoard extends Component {
               </Button></Col>
               </Row>
             </Container>
+            <Container fluid="true" style={{marginTop: "5%"}}>
+              {this.state.undoStack.map((cell, i) => (
+                <Button variant="dark" onClick={(e) => this.handleUndoFeature(e, i, cell)}>
+                  {i + 1}
+                </Button>
+              ))}
+            </Container>
 
             {/* <audio className="audio-element">
             <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
@@ -503,7 +505,6 @@ export default class ThreeBoard extends Component {
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
           </div>
         </div>
-        <div> Turn : {this.state.turn}</div>
 
         {/* <Button variant="default" onClick={(e) => this.handleStartHuman(e)}>
           Beginner_Human
@@ -532,7 +533,6 @@ export default class ThreeBoard extends Component {
           </Button>
         </ButtonGroup> */}
 
-        {this.state.turn === "HUMAN" ? this.state.turn : <i class="fas fa-spinner fa-4x fa-pulse"></i>}
           {/* <ThreeSound/> */}
         {/* <div> Turn : {this.state.turn}</div> */}
         {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
