@@ -14,7 +14,7 @@ import classNames from "classnames";
 import Message from './Message.js'
 
 
-
+let blinker;
 export default class NineBoard extends Component {
     constructor(props) {
         super(props)
@@ -119,9 +119,25 @@ export default class NineBoard extends Component {
         }
     }
 
+    componentDidMount() {
+        this.startBlinker();
+    }
+    
+    startBlinker(){
+        blinker = setInterval(() => {
+            let newHighlight = !this.state.highlightButton;
+            if(!this.state.startGameValue)
+            this.setState({ highlightButton: newHighlight });
+        }, 400);
+    }
+
+    stopBlinker(){
+        clearInterval(blinker);
+    }
+
     changeMode(darkMode) {
         this.setState({darkMode: !darkMode})
-      }
+    }
 
 
     checkTie(bigBoard)
@@ -831,7 +847,7 @@ export default class NineBoard extends Component {
                 </Col>
                 <Col style={{marginLeft: "-10px"}}><Button
                 variant="dark"
-                className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode})}
+                className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
               >
                 {this.state.startGameButton}

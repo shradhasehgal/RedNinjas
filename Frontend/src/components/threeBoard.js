@@ -566,15 +566,15 @@ export default class ThreeBoard extends Component {
 
             <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
-              <Col  xs={4} className = {styles.center}>Depth: {this.props.depth === "-1" ? 5 : this.props.depth}</Col>
-                <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
+              <Col  xs={4} className = {styles.center}>Level: {this.props.depth === "-1" ? 5 : this.props.depth}</Col>
+                <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
                 <Col className = {styles.center}>
                 <span>{ this.state.darkMode
                   ? <i class="fa fa-2x fa-toggle-on" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
                   :<i class="fa fa-2x fa-toggle-off" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
                 }</span>
                 </Col>
-                <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
+                <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
                 <Col  xs={4}><Button
                 variant="dark"
                 className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
@@ -585,9 +585,9 @@ export default class ThreeBoard extends Component {
               </Row>
             </Container>
             {this.state.win === false ? 
-            <Container fluid="true" style={{marginTop: "5%", color:"white"}}> 
+            <Container fluid="true" className={classNames(styles.undo, {[styles.lightUndo]: !this.state.darkMode})}> 
             {
-              this.state.symbol_stack.length  > 1 || this.state.symbol_stack[0] == "H" ? 'Reverse to': ''
+              this.state.symbol_stack.length  > 1 || this.state.symbol_stack[0] == "H" ? 'Reverse to ': ''
             }
               {this.state.symbol_stack.map((cell, i) => (
                   this.state.symbol_stack[i] === "H" ? <Button variant={ this.state.darkMode

@@ -90,7 +90,14 @@
   color: #212121 !important;
 }
 
+.undo {
+  margin-top: 5%;
+  color: white;
+}
 
+.lightUndo {
+  color: #3b3251;
+}
 
 .center {
   margin: auto;
