@@ -14,11 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-<<<<<<< HEAD
-  "/precache-manifest.e4e2cb24a4448d1da9ec20328d8003fb.js"
-=======
-  "/precache-manifest.a2b5c03f2b52aba2850982f2f87b241f.js"
->>>>>>> d0410896... Added 404 page
+  "/precache-manifest.07005c2ef47372b84f8e42de8acd45d5.js"
 );
 
 self.addEventListener('message', (event) => {

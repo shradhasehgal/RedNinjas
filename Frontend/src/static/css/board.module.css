@@ -79,16 +79,18 @@
   color: #212121 !important;
 }
 
-.highlightButton {
-  background-color: white !important;
-  color: #212121 !important;
-}
-
 .lightHeading {
   /* color: black !important; */
   background-color:#3b3251 !important;
   opacity: 0.9;
 }
+
+.highlightButton {
+  background-color: white !important;
+  color: #212121 !important;
+}
+
+
 
 .center {
   margin: auto;
