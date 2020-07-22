@@ -8,7 +8,12 @@
   background-size: cover;
   background-position: center;
   font-family: 'Acme', sans-serif;
+}
 
+.selectedButton {
+  background-color: #3b3251 !important;
+  border-color: #3b3251 !important;
+  color: white !important;
 }
 
 .mainDiv {

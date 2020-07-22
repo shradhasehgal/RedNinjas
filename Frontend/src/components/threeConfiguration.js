@@ -122,12 +122,12 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-user-astronaut mr-2 " +
-                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " "+configStyles.iconSelect : "")
+                        "fas fa-robot mr-2 " + configStyles.iconStyles+ (this.state.beginner === "AGENT" ? " "+configStyles.iconSelect : "")
                       }
-                      onClick = {(e) => {this.setState({beginner:"HUMAN"}); this.props.handleStartHuman_Three(e)}}
+                      onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Three(e)}}
                     ></i>
-                    <h5 className={configStyles.playerName}>HUMAN</h5>
+                    <h5 className={configStyles.playerName}>AGENT</h5>
+                    
                   </div>
                   <div
                     style={{
@@ -138,11 +138,12 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-robot mr-2 " + configStyles.iconStyles+ (this.state.beginner === "AGENT" ? " "+configStyles.iconSelect : "")
+                        "fas fa-user-astronaut mr-2 " +
+                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " "+configStyles.iconSelect : "")
                       }
-                      onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Three(e)}}
+                      onClick = {(e) => {this.setState({beginner:"HUMAN"}); this.props.handleStartHuman_Three(e)}}
                     ></i>
-                    <h5 className={configStyles.playerName}>AGENT</h5>
+                    <h5 className={configStyles.playerName}>HUMAN</h5>
                   </div>
                   
                 </Col>
@@ -164,35 +165,40 @@ render() {
                 >
                   <Button
                     size="md"
-                    variant = {this.state.depth===1?"danger":"light"}
+                    variant = "light"
+                    className = {this.state.depth===1? configStyles.selectedButton: ""}
                     onClick={(e) => {this.setState({depth:1});this.props.handleDepth_Three(e, 1)}}
                   >
                     1
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth===2?"danger":"light"}
+                    variant = "light"
+                    className = {this.state.depth===2? configStyles.selectedButton: ""}
                     onClick={(e) => {this.setState({depth:2});this.props.handleDepth_Three(e, 2)}}
                   >
                     2
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth===3?"danger":"light"}
+                    variant = "light"
+                    className = {this.state.depth===3? configStyles.selectedButton: ""}
                     onClick={(e) => {this.setState({depth:3});this.props.handleDepth_Three(e, 3)}}
                   >
                     3
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth===4?"danger":"light"}
+                    variant = "light"
+                    className = {this.state.depth===4? configStyles.selectedButton: ""}
                     onClick={(e) => {this.setState({depth:4});this.props.handleDepth_Three(e, 4)}}
                   >
                     4
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth===-1?"danger":"light"}
+                    variant = "light"
+                    className = {this.state.depth===-1? configStyles.selectedButton: ""}
                     onClick={(e) => {this.setState({depth:-1});this.props.handleDepth_Three(e, -1)}}
                   >
                     Ultimate

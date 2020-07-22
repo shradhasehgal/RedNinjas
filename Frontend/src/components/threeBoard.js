@@ -456,6 +456,7 @@ export default class ThreeBoard extends Component {
         undoStack: [],
         symbol_stack : [],
         turn: this.props.gameBeginner,
+        heading: "RED NINJA TIC TAC TOE"
       });
 
       this.startBlinker();
