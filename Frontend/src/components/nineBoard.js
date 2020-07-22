@@ -837,7 +837,7 @@ const cellStyle1 = {
 }
 
 const cellStyle2 = {
-    backgroundColor: 'black !important',
+    backgroundColor: 'black',
     textAlign: 'center',
     border: "1px solid",
     width: "5%",

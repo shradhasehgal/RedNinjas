@@ -19,6 +19,7 @@
   flex-basis: 0;
   flex-grow: 1;
   min-width: 0;
+  cursor: pointer;
 }
 
 .cellNine { 
@@ -70,11 +71,15 @@
 .button {
   font-size: 0.80rem !important;
   padding: 0.45rem 0.7rem !important;
-  margin-left: -10px;
   transition: background-color 0.1s ease-out, color 0.1s ease-out !important;
 }
 
 .button:hover{
+  background-color: white !important;
+  color: #212121 !important;
+}
+
+.highlightButton {
   background-color: white !important;
   color: #212121 !important;
 }

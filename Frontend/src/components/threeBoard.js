@@ -35,8 +35,10 @@ const soundfile = require("../static/assets/click-game.mp3")
 // import soundfile from '../static/assets/click-game.mp3'
 
 // import ThreeSound from '/threeSound.js'
+let blinker;
 
 export default class ThreeBoard extends Component {
+
   constructor(props) {
     super(props);
     console.log(this.props.depth)
@@ -81,11 +83,26 @@ export default class ThreeBoard extends Component {
         )
       },
       darkMode: true,
-      heading: "RED NINJA TIC TAC TOE"
+      heading: "RED NINJA TIC TAC TOE",
+      highlightButton: true
     };
   }
 
+  componentDidMount() {
+    this.startBlinker();
+  }
 
+  startBlinker(){
+    blinker = setInterval(() => {
+      let newHighlight = !this.state.highlightButton;
+      if(!this.state.startGameValue)
+        this.setState({ highlightButton: newHighlight });
+    }, 400);
+  }
+
+  stopBlinker(){
+    clearInterval(blinker);
+  }
 
   playAudio() {
     console.log("came to hear sound")
@@ -169,16 +186,17 @@ export default class ThreeBoard extends Component {
     {
       this.setState({
         win : true,
-        winner : "TIE"
+        winner : "TIE",
+        heading: "IT'S A TIE!"
       })
     }
   }
 
 
   setWinner(gameWinner) {
-    let topHeading = "Houston, you did it!  🎉"
+    let topHeading = "HOUSTON, YOU DID IT!  🎉"
     if (gameWinner=="AGENT")
-      topHeading = "Robots win 🙁"
+      topHeading = "ROBOT'S WIN 🙁"
 
     this.setState({
       winner: gameWinner,
@@ -326,7 +344,8 @@ export default class ThreeBoard extends Component {
       this.setState({
         board: copy_board,
         turn: "AGENT",
-        human_move_number : this.state.human_move_number + 1
+        human_move_number : this.state.human_move_number + 1,
+        heading: "AGENT'S TURN"
       });
 
       let copy_board2 = this.state.board.slice();
@@ -356,7 +375,8 @@ export default class ThreeBoard extends Component {
               if (this.state.startGameButton === "Reset Game") {
                 this.setState({
                   board: copy_board,
-                  turn: "HUMAN"
+                  turn: "HUMAN",
+                  heading: "YOUR TURN"
                 })
                 let copy_board3 = this.state.board.slice();
                 this.check_win(copy_board3);
@@ -391,7 +411,7 @@ export default class ThreeBoard extends Component {
     if(this.props.gameBeginner === "AGENT")
     {
       this.setState({
-        value_beginner : 0
+        value_beginner : 0,
       })
     }
     else
@@ -406,10 +426,17 @@ export default class ThreeBoard extends Component {
     this.playAudio()
 
     if (startGame === "Start Game") {
+      let topHeading = "YOUR TURN"
+      if(this.props.gameBeginner === "AGENT")
+        topHeading = "AGENT'S TURN"
+
       this.setState({
         startGameButton: "Reset Game",
         startGameValue: true,
+        heading: topHeading,
+        highlightButton: false
       });
+      this.stopBlinker();
     }
     else if (startGame === "Reset Game") {
 
@@ -430,6 +457,7 @@ export default class ThreeBoard extends Component {
         turn: this.props.gameBeginner,
       });
 
+      this.startBlinker();
       if(this.props.gameBeginner === "AGENT")
       {
         this.setState({
@@ -463,6 +491,7 @@ export default class ThreeBoard extends Component {
             this.setState({
               board: copy_board,
               turn: "HUMAN",
+              heading:"YOUR TURN"
             })
           }
         })
@@ -496,7 +525,8 @@ export default class ThreeBoard extends Component {
       board: copy_board,
       undoStack: copy_undoStack,
       symbol_stack : copy_symbol_stack,
-      turn : "HUMAN"
+      turn : "HUMAN",
+      heading: "YOUR TURN"
     });
 
   };
@@ -510,9 +540,9 @@ export default class ThreeBoard extends Component {
       )}>
 
           <div style={{ margin: "auto", width: "600px", maxWidth: "90%" }}>
-            <div className={classNames(styles.heading, {[styles.lightHeading] : !this.state.darkMode})}>
-              <h1 className={styles.title}>{this.state.heading}</h1>
-            </div>
+            <Container className={classNames(styles.heading, {[styles.lightHeading] : !this.state.darkMode})}>
+              <Row><Col> <h1 className={styles.title}>{this.state.heading}</h1></Col></Row>
+            </Container>
 
             <Container style={{ maxWidth: "600px" }}>
               <Container fluid="true">
@@ -536,17 +566,18 @@ export default class ThreeBoard extends Component {
 
             <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
-                    <Col className = {styles.center}>Depth: {this.props.depth === -1 ? 5 : this.props.depth}</Col>
-                <Col className = {styles.center}>Turn: {this.state.turn}</Col>
+                <Col  xs={4} className = {styles.center}>Depth: {this.props.depth === -1 ? 5 : this.props.depth}</Col>
+                <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
                 <Col className = {styles.center}>
-                { this.state.darkMode
+                <span>{ this.state.darkMode
                   ? <i class="fa fa-2x fa-toggle-on" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
                   :<i class="fa fa-2x fa-toggle-off" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
-                }
+                }</span>
                 </Col>
-                <Col style={{marginLeft: "-10px"}}><Button
+                <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
+                <Col  xs={4}><Button
                 variant="dark"
-                className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode})}
+                className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
               >
                 {this.state.startGameButton}
@@ -573,7 +604,7 @@ export default class ThreeBoard extends Component {
 
             <audio className="audio-element">
               <source src = "soundfile"></source>
-            </audio> */
+            </audio> 
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
