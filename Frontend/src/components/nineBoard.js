@@ -533,6 +533,23 @@ export default class NineBoard extends Component {
     }
 
 
+    hintPlacer()
+    {
+        if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
+        {
+            console.log("place in the cell")
+            this.setState({
+                messageForHint : "Place in the cell"
+            })
+        }
+        else
+        {
+            console.log("place anywhere")
+            this.setState({
+                messageForHint : "Place anywhere"
+            })
+        }
+    }
 
     sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -579,22 +596,8 @@ export default class NineBoard extends Component {
                                             })
                                             let copy_bigBoard2 = this.state.bigboard.slice()
                                             this.checkPartialWin(copy_bigBoard2)
-                                            if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
-                                            {
-                                                console.log("place in the cell")
-                                                this.setState({
-                                                    messageForHint : "Place in the cell"
-                                                })
-                                            }
-                                            else
-                                            {
-                                                console.log("place anywhere")
-                                                this.setState({
-                                                    messageForHint : "Place anywhere"
-                                                })
-                                            }
-                                            // this.messageBoxChecker()                                            
-                                            // console.log(this.state.ultimateWin)
+
+                                            this.state.hintPlacer()
                                             this.sleep(0.5).then(() => {
                                                 if(this.state.ultimateWin === true)
                                                 {
@@ -656,21 +659,8 @@ export default class NineBoard extends Component {
                                 })
                                 let copy_bigBoard2 = this.state.bigboard.slice()
                                 this.checkPartialWin(copy_bigBoard2)
-
-                                if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
-                                {
-                                    console.log("place in the cell")
-                                    this.setState({
-                                        messageForHint : "Place in the cell"
-                                    })
-                                }
-                                else
-                                {
-                                    console.log("place anywhere")
-                                    this.setState({
-                                        messageForHint : "Place anywhere"
-                                    })
-                                }
+                                
+                                this.hintPlacer()
                             }
                         })
                         .catch((err) => {
@@ -768,20 +758,8 @@ export default class NineBoard extends Component {
                         let copy_bigBoard2 = this.state.bigboard.slice()
                         this.checkPartialWin(copy_bigBoard2)
                         // this.messageBoxChecker()
-                        if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
-                        {
-                            console.log("place in the cell")
-                            this.setState({
-                                messageForHint : "Place in the cell"
-                            })
-                        }
-                        else
-                        {
-                            console.log("place anywhere")
-                            this.setState({
-                                messageForHint : "Place anywhere"
-                            })
-                        }
+                        this.hintPlacer()
+                        
                     }
                 })
         }
