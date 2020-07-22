@@ -380,7 +380,7 @@ export default class ThreeBoard extends Component {
                   this.check_win(copy_board3);
   
                   if (this.state.win === true) {
-                    this.sleep(5).then(() => {
+                    this.sleep(1).then(() => {
                       this.props.update_Win_Three("three", this.state.winner)
                     })
                   }
@@ -402,7 +402,7 @@ export default class ThreeBoard extends Component {
             });
         }
         else {
-          this.sleep(5).then(() => {
+          this.sleep(2).then(() => {
             this.props.update_Win_Three("three", this.state.winner)
 
           })

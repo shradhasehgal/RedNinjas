@@ -552,7 +552,7 @@ export default class NineBoard extends Component {
             }
         }
 
-        // this.checkTie(bigBoard)
+        this.checkTie(bigBoard)
     }
 
     checkValidityOfMove(outer_row, outer_column) {
@@ -700,9 +700,6 @@ export default class NineBoard extends Component {
                                 this.checkPartialWin(copy_bigBoard2)
                                 
                                 this.hintPlacer()
-                            }
-                            else
-                            {
                             }
                         })
                         .catch((err) => {
