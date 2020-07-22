@@ -5,21 +5,20 @@ import Alert from 'react-bootstrap/Alert'
 import { toast } from 'react-toastify';
 
 
-function Message() {
+const Message = (props) => {
     const [show, setShow] = useState(true);
     var row = null
     var coloumn = null
 
-if (row)
-{
+if (props.messageForHint === "Place in the cell") {
     return (
         <div aria-live="polite" aria-atomic="true">
             <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
+                <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide >
                     <Toast.Header className={styles.text}>
                     <strong className="mr-auto">Hint!!</strong>
             </Toast.Header>
-            <Toast.Body>Play in localboard {row} {coloumn} </Toast.Body>
+            <Toast.Body>Play in localboard {props.row_to_place} {props.column_to_place} </Toast.Body>
           </Toast>
         </div>
         </div>
@@ -28,7 +27,7 @@ if (row)
     return (
         <div aria-live="polite" aria-atomic="true">
             <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
+                <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide >
                     <Toast.Header className={styles.text}>
                     <strong className="mr-auto">Hint!!</strong>
             </Toast.Header>

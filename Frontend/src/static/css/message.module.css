@@ -15,3 +15,19 @@
     color:  white; 
     font-family: 'Acme', sans-serif;
 }
+
+.box2 { 
+    width:300px;
+    background-color: rgb(70, 180, 98);
+    -webkit-box-shadow: 10px 10px 5px 0px #42d67b42;
+    -moz-box-shadow: 10px 10px 5px 0px #42d67b42;
+    box-shadow: 10px 10px 5px 0px #42d67b42;
+    
+}
+
+.text2{
+    background-color:red;
+    color:  white; 
+    font-family: 'Acme', sans-serif;
+}
+

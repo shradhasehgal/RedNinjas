@@ -11,14 +11,14 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import classNames from "classnames";
-
+import Message from './Message.js'
 
 
 
 export default class NineBoard extends Component {
     constructor(props) {
         super(props)
-    console.log(this.props.gameBeginner)
+    // console.log(this.props.gameBeginner)
 
         this.state = {
             show_9x9_BoardComponent: this.props.show_9x9_BoardComponent,
@@ -27,7 +27,7 @@ export default class NineBoard extends Component {
             startGameValue: false,
             ultimateWin: false,
             winner : " ",
-            // gameBeginner: " ",
+            messageForHint : " ",
             rowToPlace: " ",
             columnToPlace: " ",
             moveNumber: 1,
@@ -308,7 +308,7 @@ export default class NineBoard extends Component {
             })
           }
 
-        console.log("count is " + count)
+        // console.log("count is " + count)
 
         }
   
@@ -518,7 +518,7 @@ export default class NineBoard extends Component {
     }
 
     checkValidityOfMove(outer_row, outer_column) {
-        if (this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ") {
+        if (this.state.rowToPlace !== " " && this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ") {
             if (outer_row !== this.state.rowToPlace)
                 return false
             else if (outer_column !== this.state.columnToPlace)
@@ -528,10 +528,6 @@ export default class NineBoard extends Component {
         }
         else
         {
-            this.setState({
-                rowToPlace : " ",
-                columnToPlace : " "
-            })
             return true
         }
     }
@@ -558,7 +554,7 @@ export default class NineBoard extends Component {
                         let copy_bigBoard2 = this.state.bigboard.slice()
                         this.checkPartialWin(copy_bigBoard2)
 
-                        console.log(this.state.ultimateWinBoard)
+                        // console.log(this.state.ultimateWinBoard)
                         this.sleep(0.5).then(() => {
                         
                             if (this.state.ultimateWin === false) {
@@ -570,7 +566,7 @@ export default class NineBoard extends Component {
                                     },
                                 }) //route to be filled according to flask route name
                                     .then((res) => {
-                                        console.log(res.data)
+                                        // console.log(res.data)
                                         let copy_board1 = this.state.bigboard.slice()
                                         copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
                                         if (this.state.startGameButton === "Reset Game") {
@@ -581,26 +577,28 @@ export default class NineBoard extends Component {
                                                 columnToPlace: res.data["agent-move"][3],
                                                 turn: "HUMAN"
                                             })
-
                                             let copy_bigBoard2 = this.state.bigboard.slice()
                                             this.checkPartialWin(copy_bigBoard2)
-                                            
-                                            console.log(this.state.ultimateWin)
+                                            if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
+                                            {
+                                                console.log("place in the cell")
+                                                this.setState({
+                                                    messageForHint : "Place in the cell"
+                                                })
+                                            }
+                                            else
+                                            {
+                                                console.log("place anywhere")
+                                                this.setState({
+                                                    messageForHint : "Place anywhere"
+                                                })
+                                            }
+                                            // this.messageBoxChecker()                                            
+                                            // console.log(this.state.ultimateWin)
                                             this.sleep(0.5).then(() => {
                                                 if(this.state.ultimateWin === true)
                                                 {
                                                     this.sleep(5).then(() => {
-                                                        // if(this.state.winner === "HUMAN")
-                                                        // {
-                                                        //     window.location.href = '/win_player_nine'
-                                                        // }
-                                                        // else
-                                                        // {
-                                                        // console.log("win here plisssss!!")
-                                                        // window.location.href = '/lose_player_nine'
-                                                        // }
-                                                        console.log("Hey entered here1")
-                                                        console.log(this.state.winner)
                                                         this.props. update_Win_Nine("nine",this.state.winner)
 
                                                 })
@@ -614,26 +612,15 @@ export default class NineBoard extends Component {
                             }
                             else
                             {
-                               
-                                
                                 this.sleep(5).then(() => {
-                                    // if(this.state.winner === "HUMAN")
-                                    // {
-                                    //     window.location.href = '/win_player_nine'
-                                    // }
-                                    // else
-                                    // {
-                                    // console.log("win here plisssss!!")
-                                    // window.location.href = '/lose_player_nine'
-                                    // }
-                                    console.log("Hey entered here2")
-                                    console.log(this.state.winner)
                                     this.props. update_Win_Nine("nine",this.state.winner)
                                 })
                             }
                         }
                         )}
                     else {
+
+                        
                         console.log("try again")
                     }
                 }
@@ -655,7 +642,7 @@ export default class NineBoard extends Component {
                         },
                     }) //route to be filled according to flask route name
                         .then((res) => {
-                            console.log(res.data)
+                            // console.log(res.data)
                             let copy_board1 = this.state.bigboard.slice()
 
                             copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
@@ -669,6 +656,21 @@ export default class NineBoard extends Component {
                                 })
                                 let copy_bigBoard2 = this.state.bigboard.slice()
                                 this.checkPartialWin(copy_bigBoard2)
+
+                                if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
+                                {
+                                    console.log("place in the cell")
+                                    this.setState({
+                                        messageForHint : "Place in the cell"
+                                    })
+                                }
+                                else
+                                {
+                                    console.log("place anywhere")
+                                    this.setState({
+                                        messageForHint : "Place anywhere"
+                                    })
+                                }
                             }
                         })
                         .catch((err) => {
@@ -680,15 +682,29 @@ export default class NineBoard extends Component {
     }
 
     handleStartGame = (e, startGame) => {
-    
+        
+        // console.log("yayyyayayaa")
+        // console.log(startGame)
+        // console.log(this.state.startGameButton)
+        // console.log(this.state.messageForHint)
 
         if (startGame === "Start Game") {
+            console.log("hujuahkjf")
             this.setState({
                 startGameButton: "Reset Game",
                 startGameValue: true
             });
         }
-        else if (startGame === "Reset Game") {
+        // console.log(this.state.startGameButton)
+        // console.log(this.state.startGameValue)
+        if(this.props.gameBeginner === "HUMAN")
+        {
+            this.setState({
+                messageForHint : "Place Anywhere"
+            })
+        }
+
+        if (startGame === "Reset Game") {
             let copy_board = this.state.bigboard;
 
             for (let outer_row = 0; outer_row < 3; outer_row++) {
@@ -718,9 +734,17 @@ export default class NineBoard extends Component {
                 ],
                 turn : this.props.gameBeginner
             });
-        }
 
-        if (this.state.turn === "AGENT") {
+            if(this.props.gameBeginner === "HUMAN")
+            {
+                this.setState({
+                    messageForHint : "Place Anywhere"
+                })
+            }
+        }
+        // console.log(this.state.startGameValue)
+
+        if (this.state.turn === "AGENT" && this.state.startGameValue === true) {
             axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                 params: {
                     board: JSON.stringify(this.state.bigboard),
@@ -743,9 +767,27 @@ export default class NineBoard extends Component {
                         })
                         let copy_bigBoard2 = this.state.bigboard.slice()
                         this.checkPartialWin(copy_bigBoard2)
+                        // this.messageBoxChecker()
+                        if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
+                        {
+                            console.log("place in the cell")
+                            this.setState({
+                                messageForHint : "Place in the cell"
+                            })
+                        }
+                        else
+                        {
+                            console.log("place anywhere")
+                            this.setState({
+                                messageForHint : "Place anywhere"
+                            })
+                        }
                     }
                 })
         }
+
+        console.log(this.state.startGameButton)
+        console.log(this.state.startGameValue)
     }
 
     render() {
@@ -818,6 +860,8 @@ export default class NineBoard extends Component {
               </Button></Col>
               </Row>
             </Container>
+
+            {this.state.startGameValue === true && this.state.turn === "HUMAN" && <Message row_to_place = {this.state.rowToPlace} column_to_place = {this.state.columnToPlace} messageForHint = {this.state.messageForHint}/>}
             </div>
             </div>
         )
