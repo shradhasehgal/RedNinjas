@@ -129,7 +129,7 @@ class Move ():
                     
                         moves.append([CurrentSmallBoardRow,CurrentSmallBoardColoumn,i,j,move_val])
                         print("1 ",i,j,move_val)
-                        if move_val > optimal_val:
+                        if move_val >= optimal_val:
 
                             best_global_row=CurrentSmallBoardRow
                             best_global_coloumn=CurrentSmallBoardColoumn
@@ -171,7 +171,7 @@ class Move ():
                                 
                                     moves.append([m,n,i,j,move_val])
                                     print("2 ",m,n,i,j,move_val) 
-                                    if move_val > optimal_val:
+                                    if move_val >= optimal_val:
 
                                         best_global_row=m
                                         best_global_coloumn=n 

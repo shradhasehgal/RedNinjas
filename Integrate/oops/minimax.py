@@ -132,7 +132,7 @@ class Minimax ():
 
             best_val = -math.inf
 
-            if board_obj.checkboard[rowindex][coloumnindex]==EMPTY:
+            if current_checkboard[rowindex][coloumnindex]==EMPTY:
 
                 for i in range(0,3):
                     for j in range(0,3):
@@ -150,7 +150,7 @@ class Minimax ():
 
                 for m in range(0,3):
                     for n in range(0,3):
-                        if board_obj.checkboard[m][n]==EMPTY:
+                        if current_checkboard[m][n]==EMPTY:
                             # print("m,n",m,n)
                             for i in range(0,3):
                                 for j in range(0,3):
@@ -170,12 +170,12 @@ class Minimax ():
 
             best_val = math.inf
 
-            if board_obj.checkboard[rowindex][coloumnindex]==EMPTY:
+            if current_checkboard[rowindex][coloumnindex]==EMPTY:
 
                 for i in range(0,3):
                     for j in range(0,3):
                         if(board_obj.board[rowindex][coloumnindex][i][j]==EMPTY):
-                            board_obj.board[rowindex][coloumnindex][i][j] = AGENT
+                            board_obj.board[rowindex][coloumnindex][i][j] = HUMAN
                             best_val = min(best_val,self.ultimate_minimax(board_obj,depth+1,current_utility,current_checkboard,rowindex,coloumnindex,i,j,not(is_max),alpha,beta,upto_depth))
                             board_obj.board[rowindex][coloumnindex][i][j]=EMPTY
                             if best_val <= alpha:
@@ -188,11 +188,11 @@ class Minimax ():
 
                 for m in range(0,3):
                     for n in range(0,3):
-                        if board_obj.checkboard[m][n]==EMPTY:
+                        if current_checkboard[m][n]==EMPTY:
                             for i in range(0,3):
                                 for j in range(0,3):
                                     if(board_obj.board[m][n][i][j]==EMPTY):
-                                        board_obj.board[m][n][i][j] = AGENT
+                                        board_obj.board[m][n][i][j] = HUMAN
                                         best_val = min(best_val,self.ultimate_minimax(board_obj,depth+1,current_utility,current_checkboard,m,n,i,j,not(is_max),alpha,beta,upto_depth))
                                         board_obj.board[m][n][i][j]=EMPTY
                                         if best_val <= alpha:
