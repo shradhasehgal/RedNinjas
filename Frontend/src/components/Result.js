@@ -33,7 +33,7 @@ export default class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
-            win : 2 
+            win : 0 
     };
   }
 

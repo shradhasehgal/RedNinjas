@@ -7,19 +7,19 @@ import { toast } from 'react-toastify';
 
 function Message() {
     const [show, setShow] = useState(true);
-    var row = null
-    var coloumn = null
+    var row = 2
+    var coloumn = 2 
 
 if (row)
 {
     return (
         <div aria-live="polite" aria-atomic="true">
             <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
-                    <Toast.Header className={styles.text}>
+                <Toast onClose={() => setShow(false)} show={show} delay={10000} autohide >
+                    <Toast.Header className={styles.text} >
                     <strong className="mr-auto">Hint!!</strong>
             </Toast.Header>
-            <Toast.Body>Play in localboard {row} {coloumn} </Toast.Body>
+            <Toast.Body  className={styles.bodytext} >Play in localboard {row} {coloumn} </Toast.Body>
           </Toast>
         </div>
         </div>
@@ -32,7 +32,7 @@ if (row)
                     <Toast.Header className={styles.text}>
                     <strong className="mr-auto">Hint!!</strong>
             </Toast.Header>
-            <Toast.Body>Play in any empty localboard</Toast.Body>
+            <Toast.Body className={styles.bodytext}>Play in any empty localboard</Toast.Body>
           </Toast>
         </div>
         </div>
