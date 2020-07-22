@@ -77,6 +77,17 @@
   color: #ffffff;
 }
 
+@media screen and (min-width:990px){
+  .ruleimg{
+    width: 70%;
+  }
+}
+@media screen and (min-width: 801px) and (max-width:990px) {
+  .ruleimg{
+    width: 50%;
+  }
+}
+
 @media screen and (min-width: 801px) {
   .heading {
     font-size: 50px;
@@ -100,9 +111,7 @@
     font-size: 15px;
     /* color: lawngreen; */
   }
-  .ruleimg{
-    width: 70%;
-  }
+
 }
 @media screen and (max-width: 800px) and (min-width: 361px) {
   .heading {
