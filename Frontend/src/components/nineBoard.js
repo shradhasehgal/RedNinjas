@@ -24,7 +24,6 @@ let drawMessage = "IT'S A TIE!"
 export default class NineBoard extends Component {
     constructor(props) {
         super(props)
-    // console.log(this.props.gameBeginner)
 
         this.state = {
             show_9x9_BoardComponent: this.props.show_9x9_BoardComponent,
@@ -301,38 +300,53 @@ export default class NineBoard extends Component {
       }
 
 
-      checkFinalTie(copy_board)
+      checkFinalTie()
       {
-          let count = 0
-          for(let row = 0; row < 3; row++) {
-                if( (copy_board[row][0] !== copy_board[row][1] || copy_board[row][0] !== copy_board[row][2] || copy_board[row][1] !== copy_board[row][2]) && copy_board[row][0] !== " " && copy_board[row][1] !== " " && copy_board[row][2] !== " ") {
-                    count++;
+        //   let count = 0
+        //   for(let row = 0; row < 3; row++) {
+        //         if( (copy_board[row][0] !== copy_board[row][1] || copy_board[row][0] !== copy_board[row][2] || copy_board[row][1] !== copy_board[row][2]) && copy_board[row][0] !== " " && copy_board[row][1] !== " " && copy_board[row][2] !== " ") {
+        //             count++;
+        //         }
+        //   }
+
+        //   for(let column = 0; column < 3; column++) {
+        //       if((copy_board[0][column] !== copy_board[1][column] || copy_board[0][column] !== copy_board[2][column] || copy_board[1][column] !== copy_board[2][column]) && copy_board[0][column] !== " " && copy_board[1][column] && copy_board[2][column] !== " ") {
+        //           count++;
+        //       }
+        //   }
+
+        //   if( ( copy_board[0][0] !== copy_board[1][1] || copy_board[0][0] !== copy_board[2][2] || copy_board[1][1] !== copy_board[2][2]) && copy_board[0][0] !== " " && copy_board[1][1] !== " " && copy_board[2][2] !== " ") {
+        //       count++;
+        //   }
+
+        //   if( ( copy_board[0][2] !== copy_board[1][1] || copy_board[0][2] !== copy_board[2][0] || copy_board[1][1] !== copy_board[2][0]) && copy_board[0][2] !== " " && copy_board[1][1] !== " " && copy_board[2][0] !== " ") {
+        //       count++;
+        //   }
+
+        let final_tie_flag = true
+        for(let outer_row = 0; outer_row < 3; outer_row++)
+        {
+            for(let outer_column = 0; outer_column < 3; outer_column++)
+            {
+                for(let inner_row = 0; inner_row < 3; inner_row++)
+                {
+                    for(let inner_column = 0; inner_column < 3; inner_column++)
+                    {
+                        if(this.state.bigboard[outer_row][outer_column][inner_row][inner_column] === " " )
+                        {
+                            final_tie_flag = false;
+                        }
+                    }
                 }
-          }
+            }
+        }
 
-          for(let column = 0; column < 3; column++) {
-              if((copy_board[0][column] !== copy_board[1][column] || copy_board[0][column] !== copy_board[2][column] || copy_board[1][column] !== copy_board[2][column]) && copy_board[0][column] !== " " && copy_board[1][column] && copy_board[2][column] !== " ") {
-                  count++;
-              }
-          }
-
-          if( ( copy_board[0][0] !== copy_board[1][1] || copy_board[0][0] !== copy_board[2][2] || copy_board[1][1] !== copy_board[2][2]) && copy_board[0][0] !== " " && copy_board[1][1] !== " " && copy_board[2][2] !== " ") {
-              count++;
-          }
-
-          if( ( copy_board[0][2] !== copy_board[1][1] || copy_board[0][2] !== copy_board[2][0] || copy_board[1][1] !== copy_board[2][0]) && copy_board[0][2] !== " " && copy_board[1][1] !== " " && copy_board[2][0] !== " ") {
-              count++;
-          }
-
-          if(count === 8) {
+          if(final_tie_flag === true) {
             this.setState({
                 winner : "TIE",
                 ultimateWin : true
             })
           }
-
-        // console.log("count is " + count)
-
         }
   
 
@@ -434,7 +448,7 @@ export default class NineBoard extends Component {
         }
         if(this.state.ultimateWin === false)
         {
-            this.checkFinalTie(copy_board)
+            this.checkFinalTie()
         }
     }
 
@@ -560,14 +574,12 @@ export default class NineBoard extends Component {
     {
         if(this.state.ultimateWinBoard[this.state.rowToPlace][this.state.columnToPlace] === " ")
         {
-            console.log("place in the cell")
             this.setState({
                 messageForHint : "Place in the cell"
             })
         }
         else
         {
-            console.log("place anywhere")
             this.setState({
                 messageForHint : "Place anywhere"
             })
@@ -595,7 +607,6 @@ export default class NineBoard extends Component {
                         let copy_bigBoard2 = this.state.bigboard.slice()
                         this.checkPartialWin(copy_bigBoard2)
 
-                        // console.log(this.state.ultimateWinBoard)
                         this.sleep(0.5).then(() => {
                         
                             if (this.state.ultimateWin === false) {
@@ -607,7 +618,6 @@ export default class NineBoard extends Component {
                                     },
                                 }) //route to be filled according to flask route name
                                     .then((res) => {
-                                        // console.log(res.data)
                                         let copy_board1 = this.state.bigboard.slice()
                                         copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
                                         if (this.state.startGameButton === "Reset Game") {
@@ -622,7 +632,7 @@ export default class NineBoard extends Component {
                                             let copy_bigBoard2 = this.state.bigboard.slice()
                                             this.checkPartialWin(copy_bigBoard2)
 
-                                            this.state.hintPlacer()
+                                            this.hintPlacer()
                                             this.sleep(0.5).then(() => {
                                                 if(this.state.ultimateWin === true)
                                                 {
@@ -690,6 +700,9 @@ export default class NineBoard extends Component {
                                 
                                 this.hintPlacer()
                             }
+                            else
+                            {
+                            }
                         })
                         .catch((err) => {
                             console.log(err);
@@ -701,30 +714,97 @@ export default class NineBoard extends Component {
 
     handleStartGame = (e, startGame) => {
         
-        // console.log("yayyyayayaa")
-        // console.log(startGame)
-        // console.log(this.state.startGameButton)
-        // console.log(this.state.messageForHint)
-
         if (startGame === "Start Game") {
-            console.log("hujuahkjf")
+
+            this.setState({
+                bigboard: [
+
+                    [[[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]]],
+    
+                    [[[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]]],
+    
+                    [[[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]]]
+    
+                ],
+            })
+
+            if(this.props.gameBeginner === "HUMAN")
+            {
+                this.setState({
+                    messageForHint : "Place Anywhere"
+                })
+            }
             this.setState({
                 startGameButton: "Reset Game",
                 startGameValue: true,
                 highlightButton: false,
+                turn : this.props.gameBeginner
             });
-        }
-        // console.log(this.state.startGameButton)
-        // console.log(this.state.startGameValue)
-        if(this.props.gameBeginner === "HUMAN")
-        {
-            this.setState({
-                messageForHint : "Place Anywhere"
-            })
-        }
 
-        if (startGame === "Reset Game") {
-            let copy_board = this.state.bigboard;
+            if (this.state.turn === "AGENT") {
+                axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
+                    params: {
+                        board: JSON.stringify(this.state.bigboard),
+                        checkboard: JSON.stringify(this.state.ultimateWinBoard),
+                        previous_move: JSON.stringify([-1, -1, -1, -1])
+                    },
+                }) //route to be filled according to flask route name
+                    .then((res) => {
+    
+                        let copy_board1 = this.state.bigboard.slice()
+                        copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+    
+                        if (this.state.startGameButton === "Reset Game") {
+                            this.setState({
+                                bigboard: copy_board1,
+                                rowToPlace: res.data["agent-move"][2],
+                                columnToPlace: res.data["agent-move"][3],
+                                moveNumber: this.moveNumber + 1,
+                                turn: "HUMAN",
+                                heading: humanTurn
+                            })
+                            let copy_bigBoard2 = this.state.bigboard.slice()
+                            this.checkPartialWin(copy_bigBoard2)
+                            // this.messageBoxChecker()
+                            this.hintPlacer()
+                            
+                        }
+                    })
+            }
+    
+        }
+        else if (startGame === "Reset Game") {
+            let copy_board = this.state.bigboard.slice();
 
             for (let outer_row = 0; outer_row < 3; outer_row++) {
                 for (let outer_column = 0; outer_column < 3; outer_column++) {
@@ -764,42 +844,8 @@ export default class NineBoard extends Component {
                     messageForHint : "Place Anywhere"
                 })
             }
+
         }
-        // console.log(this.state.startGameValue)
-
-        if (this.state.turn === "AGENT" && this.state.startGameValue === true) {
-            axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
-                params: {
-                    board: JSON.stringify(this.state.bigboard),
-                    checkboard: JSON.stringify(this.state.ultimateWinBoard),
-                    previous_move: JSON.stringify([-1, -1, -1, -1])
-                },
-            }) //route to be filled according to flask route name
-                .then((res) => {
-
-                    let copy_board1 = this.state.bigboard.slice()
-                    copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
-
-                    if (this.state.startGameButton === "Reset Game") {
-                        this.setState({
-                            bigboard: copy_board1,
-                            rowToPlace: res.data["agent-move"][2],
-                            columnToPlace: res.data["agent-move"][3],
-                            moveNumber: this.moveNumber + 1,
-                            turn: "HUMAN",
-                            heading: humanTurn
-                        })
-                        let copy_bigBoard2 = this.state.bigboard.slice()
-                        this.checkPartialWin(copy_bigBoard2)
-                        // this.messageBoxChecker()
-                        this.hintPlacer()
-                        
-                    }
-                })
-        }
-
-        console.log(this.state.startGameButton)
-        console.log(this.state.startGameValue)
     }
 
     render() {
