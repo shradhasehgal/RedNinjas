@@ -601,10 +601,10 @@ export default class ThreeBoard extends Component {
               <Col  xs={4} className = {styles.center}>Level: {this.props.depth === -1 ? 5 : this.props.depth}</Col>
                 <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
                 <Col className = {styles.center}>
-                <span>{ this.state.darkMode
+                { this.state.darkMode
                   ? <i class="fa fa-2x fa-toggle-on" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
                   :<i class="fa fa-2x fa-toggle-off" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
-                }</span>
+                }
                 </Col>
                 <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
                 <Col  xs={4}><Button

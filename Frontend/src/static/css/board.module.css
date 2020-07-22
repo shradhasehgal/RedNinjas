@@ -101,7 +101,7 @@
 }
 
 .center {
-  margin: auto;
+  margin: auto -10px;
 }
 
 .whiteBg{

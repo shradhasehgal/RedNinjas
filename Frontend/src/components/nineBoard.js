@@ -344,7 +344,8 @@ export default class NineBoard extends Component {
           if(final_tie_flag === true) {
             this.setState({
                 winner : "TIE",
-                ultimateWin : true
+                ultimateWin : true,
+                heading: drawMessage
             })
           }
         }
@@ -903,10 +904,10 @@ export default class NineBoard extends Component {
               <Col  style={{cursor :"pointer", fontSize: "1.5rem"}} className = {styles.center} xs={4}><i onClick={()=> window.open("/rules", "_blank")} class="fa fa-info-circle" aria-hidden="true"></i></Col>
                 <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
                 <Col className = {styles.center}>
-                <span>{ this.state.darkMode
+                { this.state.darkMode
                   ? <i class="fa fa-2x fa-toggle-on" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
                   :<i class="fa fa-2x fa-toggle-off" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
-                }</span>
+                }
                 </Col>
                 <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
                 <Col  xs={4}><Button
