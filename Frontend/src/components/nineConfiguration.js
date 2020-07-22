@@ -68,7 +68,7 @@ render() {
               Select your game configuration
             </h1>
             <Container className={configStyles.startWrapper}>
-              <Row className="mb-3">
+              <Row className="mb-0">
                 <Col
                   sm={12}
                   md={12}
@@ -123,11 +123,11 @@ render() {
                     sm={12}
                     md={12}
                     lg={6}
-                    className="justify-content-center align-self-center mb-3"
+                    className="justify-content-center align-self-center"
                   >
                     <img
                       // className={rulesStyles.gifs}
-                      style={{ width: "50%" }}
+                      className={configStyles.ruleimg}
                       src={require("../static/assets/nine-final3.gif")}
                     />
                   </Col>
@@ -135,7 +135,7 @@ render() {
                     sm={12}
                     md={12}
                     lg={6}
-                    className="justify-content-center align-self-center mb-3"
+                    className="justify-content-center align-self-center"
                   >
                     <p className={configStyles.rulestext} style={{textAlign:"left"}}>
                       Quick Rules :
@@ -210,11 +210,11 @@ render() {
                   <>
                     
                     {this.props.gameBeginner != " " ? (
-                      <Button size="lg" variant="light" onClick={(e) => this.props.update_Nine("Go To Game")}>
+                      <Button size="md" variant="light" onClick={(e) => this.props.update_Nine("Go To Game")}>
                         Let's Play!
                       </Button>
                     ) : (
-                      <Button size="lg" variant="light" disabled>
+                      <Button size="md" variant="light" disabled>
                         Let's Play!
                       </Button>
                     )}

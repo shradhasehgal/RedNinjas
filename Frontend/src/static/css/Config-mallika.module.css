@@ -97,8 +97,11 @@
     margin: '0 10%';
   }
   .rulestext{
-    font-size: 18px;
+    font-size: 15px;
     /* color: lawngreen; */
+  }
+  .ruleimg{
+    width: 70%;
   }
 }
 @media screen and (max-width: 800px) and (min-width: 361px) {
@@ -109,7 +112,7 @@
     font-size: 20px;
   }
   .startContent {
-    font-size: 20px;
+    font-size: 15px;
   }
   .playerName {
     font-size: 10px;
@@ -125,20 +128,24 @@
     margin: '0 7%';
   }
   .rulestext{
-    font-size: 15px;
+    font-size: 12px;
     /* color: lightcoral; */
+  }
+  .ruleimg{
+    width: 50%;
   }
 }
 
 @media screen and (max-width: 360px) {
   .heading {
-    font-size: 20px;
+    font-size: 15px;
+    margin-bottom: 2%;
   }
   .subheading {
     font-size: 15px;
   }
   .startContent {
-    font-size: 15px;
+    font-size: 12px;
   }
   .playerName {
     font-size: 8px;
@@ -153,5 +160,8 @@
   .rulestext{
     font-size: 9px;
     /* color: lightseagreen; */
+  }
+  .ruleimg{
+    width: 55%;
   }
 }
