@@ -77,7 +77,7 @@ export default class Overview extends Component {
               >
                 <img
                   className={overviewStyles.gifs}
-                  src={require("../static/assets/astro.gif")}
+                  src={require("../static/assets/about/level2.gif")}
                 />
               </Col>
             </Row>
@@ -90,7 +90,7 @@ export default class Overview extends Component {
               >
                 <img
                   className={overviewStyles.gifs}
-                  src={require("../static/assets/astro.gif")}
+                  src={require("../static/assets/about/l4-light.gif")}
                 />
               </Col>
               <Col
@@ -135,8 +135,8 @@ export default class Overview extends Component {
                 a custom data structure beforehand.
               </p>
               <img
-                style={{ width: "50%" }}
-                src={require("../static/assets/astro.gif")}
+                style={{ width: "50%", margin:"5% 0" }}
+                src={require("../static/assets/about/ultimate-dark-tie.gif")}
               />
             </div>
             <div>
@@ -158,14 +158,14 @@ export default class Overview extends Component {
                 The last section mentions about the optimizations.
               </p>
               <img
-                style={{ width: "50%" }}
-                src={require("../static/assets/astro.gif")}
+                style={{ width: "50%", margin:"5% 0" }}
+                src={require("../static/assets/about/extreme-main.gif")}
               />
             </div>
           </div>
           <div className={overviewStyles.content}>
             <h3 className={overviewStyles.heading}>Salient Features</h3>
-            <Row className="mb-5">
+            <Row className="mb-5 mt-5">
               <Col
                 sm={12}
                 md={12}
@@ -173,8 +173,8 @@ export default class Overview extends Component {
                 className="justify-content-center align-self-center"
               >
                 <img
-                  className={overviewStyles.gifs}
-                  src={require("../static/assets/astro.gif")}
+                  style={{width:"50%"}}
+                  src={require("../static/assets/about/responsive-themes.gif")}
                 />
               </Col>
               <Col
@@ -243,7 +243,7 @@ export default class Overview extends Component {
               >
                 <img
                   className={overviewStyles.gifs}
-                  src={require("../static/assets/astro.gif")}
+                  src={require("../static/assets/about/extreme-guide.gif")}
                 />
               </Col>
             </Row>
@@ -255,8 +255,8 @@ export default class Overview extends Component {
                 className="justify-content-center align-self-center"
               >
                 <img
-                  className={overviewStyles.gifs}
-                  src={require("../static/assets/astro.gif")}
+                  style={{width:"90%"}}
+                  src={require("../static/assets/about/error.gif")}
                 />
               </Col>
               <Col
@@ -338,7 +338,7 @@ export default class Overview extends Component {
               >
                 <img
                   className={overviewStyles.gifs}
-                  src={require("../static/assets/astro.gif")}
+                  src={require("../static/assets/about/abp.gif")}
                 />
               </Col>
             </Row>

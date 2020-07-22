@@ -139,7 +139,7 @@ render() {
                     className="justify-content-center align-self-center"
                   >
                     <p className={configStyles.rulestext} style={{textAlign:"left"}}>
-                      Quick Rules :
+                      <strong style={{fontSize:"2vh"}}>Quick Rules :</strong>
                       <li>
                         If your opponent places their move in a cell of a small
                         board - <u>inner numbering</u>, your next move must be placed in any cell in the small board - <u>outer numbering</u> with the same row and column number as the cell that your opponent
