@@ -36,6 +36,7 @@
   flex-grow: 1;
   min-width: 0;
   max-width: 90%;
+  cursor: pointer
 }
 
 .iconThree {
@@ -171,6 +172,11 @@
   .cellNine {
     height: 40px !important;
   }
+
+
+  .iconNine{
+    font-size: 1.2rem;
+  }
 }
 
 
@@ -194,10 +200,6 @@
 
   .iconThree {
     font-size: 2.5rem;
-  }
-
-  .iconNine{
-    font-size: 1rem;
   }
 
   .cellThree {

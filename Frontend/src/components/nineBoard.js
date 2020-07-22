@@ -15,6 +15,12 @@ import Message from './Message.js'
 
 
 let blinker;
+let humanTurn = "YOUR TURN"
+let agentTurn = "AGENT'S TURN"
+let winMessage = "YOU WON! 🎉"
+let loseMessage = "YOU LOST 🙁"
+let drawMessage = "IT'S A TIE!"
+
 export default class NineBoard extends Component {
     constructor(props) {
         super(props)
@@ -116,6 +122,7 @@ export default class NineBoard extends Component {
             },
             darkMode: true,
             heading : "RED NINJA TIC TAC TOE", 
+            highlightButton: false,
         }
     }
 
@@ -165,7 +172,7 @@ export default class NineBoard extends Component {
                     ultimateBoard[outer_row][outer_column] = "T"
 
                     this.setState({
-                        ultimateWinBoard : ultimateBoard
+                        ultimateWinBoard : ultimateBoard,
                     })
                 }
             }
@@ -283,9 +290,9 @@ export default class NineBoard extends Component {
 
 
     setWinner(gameWinner) {
-        let topHeading = "Houston, you did it!  🎉"
+        let topHeading = winMessage;
         if (gameWinner=="AGENT")
-          topHeading = "You lost 🙁"
+          topHeading = loseMessage
     
         this.setState({
           winner: gameWinner,
@@ -581,7 +588,8 @@ export default class NineBoard extends Component {
 
                         this.setState({
                             bigboard: copy_bigBoard1,
-                            turn: "AGENT"
+                            turn: "AGENT",
+                            heading: agentTurn
                         })
 
                         let copy_bigBoard2 = this.state.bigboard.slice()
@@ -608,7 +616,8 @@ export default class NineBoard extends Component {
                                                 moveNumber: this.moveNumber + 1,
                                                 rowToPlace: res.data["agent-move"][2],
                                                 columnToPlace: res.data["agent-move"][3],
-                                                turn: "HUMAN"
+                                                turn: "HUMAN",
+                                                heading: humanTurn
                                             })
                                             let copy_bigBoard2 = this.state.bigboard.slice()
                                             this.checkPartialWin(copy_bigBoard2)
@@ -651,7 +660,8 @@ export default class NineBoard extends Component {
 
                     this.setState({
                         bigboard: copy_bigBoard1,
-                        turn: "AGENT"
+                        turn: "AGENT",
+                        heading: agentTurn
                     })
                     axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
                         params: {
@@ -671,7 +681,9 @@ export default class NineBoard extends Component {
                                     moveNumber: this.moveNumber + 1,
                                     rowToPlace: res.data["agent-move"][2],
                                     columnToPlace: res.data["agent-move"][3],
-                                    turn: "HUMAN"
+                                    turn: "HUMAN",
+                                    heading: humanTurn,
+
                                 })
                                 let copy_bigBoard2 = this.state.bigboard.slice()
                                 this.checkPartialWin(copy_bigBoard2)
@@ -698,7 +710,8 @@ export default class NineBoard extends Component {
             console.log("hujuahkjf")
             this.setState({
                 startGameButton: "Reset Game",
-                startGameValue: true
+                startGameValue: true,
+                highlightButton: false,
             });
         }
         // console.log(this.state.startGameButton)
@@ -723,6 +736,9 @@ export default class NineBoard extends Component {
                 }
             }
 
+            let topHeading = humanTurn;
+            if(this.props.gameBeginner == "AGENT")
+                topHeading = agentTurn;
             this.setState({
                 bigboard: copy_board,
                 gameBeginner: this.props.gameBeginner,
@@ -738,7 +754,8 @@ export default class NineBoard extends Component {
                     [" ", " ", " "],
                     [" ", " ", " "],
                 ],
-                turn : this.props.gameBeginner
+                turn : this.props.gameBeginner,
+                heading: topHeading
             });
 
             if(this.props.gameBeginner === "HUMAN")
@@ -769,7 +786,8 @@ export default class NineBoard extends Component {
                             rowToPlace: res.data["agent-move"][2],
                             columnToPlace: res.data["agent-move"][3],
                             moveNumber: this.moveNumber + 1,
-                            turn: "HUMAN"
+                            turn: "HUMAN",
+                            heading: humanTurn
                         })
                         let copy_bigBoard2 = this.state.bigboard.slice()
                         this.checkPartialWin(copy_bigBoard2)
@@ -792,7 +810,7 @@ export default class NineBoard extends Component {
                 <div style={{ margin: "auto", width: "700px", maxWidth: "90%" }}>
                 <Container className={classNames(styles.heading, styles.nineHeading, {[styles.lightHeading] : !this.state.darkMode})}>
               <Row>
-                  <Col><h1 className={styles.title}>RED NINJA TIC TAC TOE</h1></Col></Row>
+                  <Col><h1 className={styles.title}>{this.state.heading}  {this.state.turn === "HUMAN" || !this.state.startGameValue? '': <i className={"fas fa-spinner fa-1x fa-pulse ml-2 "+styles.nineSpinner}></i>}</h1></Col></Row>
             </Container>
                 <Container>
                     <Container fluid='true'>
@@ -834,18 +852,18 @@ export default class NineBoard extends Component {
                     </Container>
                 </Container>
 
-                <Container className={classNames(styles.boardInfo, styles.nineBoardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
+                <Container styles ={{marginTop: "1% !important"}} className={classNames(styles.boardInfo, styles.nineBoardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
-              <Col className = {styles.center}>Turn: {this.state.turn} {this.state.turn === "HUMAN" || !this.state.startGameValue? '': <i className={"fas fa-spinner fa-1x fa-pulse ml-2 "+styles.nineSpinner}></i>}
-</Col>
-
+              <Col  style={{cursor :"pointer", fontSize: "1.5rem"}} className = {styles.center} xs={4}><i onClick={()=> window.open("/rules", "_blank")} class="fa fa-info-circle" aria-hidden="true"></i></Col>
+                <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
                 <Col className = {styles.center}>
-                { this.state.darkMode
+                <span>{ this.state.darkMode
                   ? <i class="fa fa-2x fa-toggle-on" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
                   :<i class="fa fa-2x fa-toggle-off" style={{cursor :"pointer"}} onClick = {() => this.changeMode(this.state.darkMode)} aria-hidden="true"></i>
-                }
+                }</span>
                 </Col>
-                <Col style={{marginLeft: "-10px"}}><Button
+                <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
+                <Col  xs={4}><Button
                 variant="dark"
                 className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
