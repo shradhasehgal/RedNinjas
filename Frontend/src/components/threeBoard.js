@@ -453,6 +453,7 @@ export default class ThreeBoard extends Component {
         winner: " ",
         depth: this.props.depth,
         undoStack: [],
+        symbol_stack : [],
         turn: this.props.gameBeginner,
       });
 
