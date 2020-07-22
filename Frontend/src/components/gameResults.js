@@ -52,9 +52,9 @@ export default class GameResults extends Component {
             style={{ display: "flex" }}>
             <Container style={{ marginTop: "auto", marginBottom: "auto", marginLeft:"auto",marginRight:"auto" ,padding:"1%"}}>
                 <img className={styles.gif} src={require('../static/assets/win.gif')} />
-                <br></br><br></br><br></br>
-                <MDBAnimation type="bounce" infinite>
-                    <text className={styles.text}>You WONNN   </text>
+                <br></br><br></br>
+                <MDBAnimation type="tada" infinite>
+                    {/* <text className={styles.text}>You WONNN   </text> */}
                     <text className={styles.text}>Congrats!!!</text>
                 </MDBAnimation>
                     {this.props.route === "three" ? <Button size="lg" variant="light" onClick={(e) => this.props.update_Three("Show Configuration")}>Play Again!</Button> : <Button size="lg" variant="light" onClick={(e) => this.props.update_Nine("Show Configuration")}> Play Again!</Button>}
@@ -72,10 +72,10 @@ export default class GameResults extends Component {
               style={{ display: "flex" }}>
               <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
                   <img className={styles.gif} src={require('../static/assets/sad.gif')} />
-                  <MDBAnimation type="bounce" infinite>
-                      <text className={styles.text}>You LOST :((</text>
-                      <br></br>
-                      <text className={styles.text}> Better Luck next time!!</text>
+                  <MDBAnimation type="tada" infinite>
+                      {/* <text className={styles.text}>You LOST :((</text>
+                      <br></br> */}
+                      <text className={styles.text}> Better Luck next time!</text>
                   </MDBAnimation>
                   {this.props.route === "three" ? <Button size="lg" variant="light" onClick={(e) => this.props.update_Three("Show Configuration")}>Play Again!</Button> : <Button size="lg" variant="light" onClick={(e) => this.props.update_Nine("Show Configuration")}> Play Again!</Button>}
 
@@ -95,9 +95,9 @@ export default class GameResults extends Component {
             style={{ display: "flex" }}>
             <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
                 <img className={styles.gif} src={require('../static/assets/tie.gif')} />
-                <MDBAnimation type="bounce" infinite>
+                <MDBAnimation type="tada" infinite>
                     <br></br>
-                    <text className={styles.text}>It's A Tie !! </text>
+                    <text className={styles.text}>It's A Tie!</text>
                 </MDBAnimation>
                 {this.props.route === "three" ? <Button size="lg" variant="light" onClick={(e) => this.props.update_Three("Show Configuration")}>Play Again!</Button> : <Button size="lg" variant="light" onClick={(e) => this.props.update_Nine("Show Configuration")}> Play Again!</Button>}
                 {/* <Button size="lg" variant="light"> Play Again!</Button> */}

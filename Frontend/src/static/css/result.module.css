@@ -46,8 +46,8 @@
       align-items: center;
       color:white;
       padding:"10%";
-      font-style: oblique ;
-      font-family: "Bradley Hand, cursive" ;
+      /* font-style: oblique ; */
+      font-family: 'Acme', sans-serif;
     }
 
   
