@@ -378,7 +378,7 @@ export default class NineBoard extends Component {
 
         }
 
-        if (this.state.ultimateWin === false) {
+        else if (this.state.ultimateWin === false) {
             for (let i = 0; i < 3; i++) { // for column
                 if (
                     copy_board[0][i] === copy_board[1][i] &&
@@ -403,7 +403,7 @@ export default class NineBoard extends Component {
             }
         }
 
-        if (this.state.ultimateWin === false) {
+        else if (this.state.ultimateWin === false) {
             if (
                 copy_board[0][0] === copy_board[1][1] &&
                 copy_board[0][0] === copy_board[2][2] &&
@@ -425,7 +425,7 @@ export default class NineBoard extends Component {
             }
         }
 
-        if (this.state.ultimateWin === false) {
+        else if (this.state.ultimateWin === false) {
             if (
                 copy_board[0][2] === copy_board[1][1] &&
                 copy_board[0][2] === copy_board[2][0] &&
@@ -433,7 +433,7 @@ export default class NineBoard extends Component {
                 copy_board[0][2] !== " "
             ) {
                 if (copy_board[0][2] === "O") {
-                    this.alterBigBoardLeftDiagonal("O", "WH", "X", "LA")
+                    this.alterBigBoardRightDiagonal("O", "WH", "X", "LA")
                     this.setWinner("HUMAN")
 
                 } else if (copy_board[0][2] === "X") {

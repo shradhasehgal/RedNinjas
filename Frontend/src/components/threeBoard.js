@@ -334,13 +334,15 @@ export default class ThreeBoard extends Component {
       // this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
+
         // this.playAudio()
         copy_board[Math.floor(cell / 3)][cell % 3] = "X";
 
         this.state.undoStack.push(cell)
         this.state.symbol_stack.push("H")
 
-      }
+
+      
       this.setState({
         board: copy_board,
         turn: "AGENT",
@@ -373,30 +375,52 @@ export default class ThreeBoard extends Component {
 
               this.state.symbol_stack.push("A")
 
-              if (this.state.startGameButton === "Reset Game") {
-                this.setState({
-                  board: copy_board,
-                  turn: "HUMAN",
-                  heading: "YOUR TURN"
-                })
-                let copy_board3 = this.state.board.slice();
-                this.check_win(copy_board3);
-
-                console.log()
-                if (this.state.win === true) {
-                  console.log('hellllllllllllooooooo')
-                  this.sleep(5).then(() => {
-                    this.props.update_Win_Three("three", this.state.winner)
+              this.sleep(1).then(() => {
+                if (this.state.startGameButton === "Reset Game") {
+                  console.log("jhjhiuhuuhhhj")
+                  this.setState({
+                    board: copy_board,
+                    turn: "HUMAN",
+                    heading: "YOUR TURN"
                   })
+                  let copy_board3 = this.state.board.slice();
+                  this.check_win(copy_board3);
+  
+                  console.log()
+                  if (this.state.win === true) {
+                    // console.log('hellllllllllllooooooo')
+                    this.sleep(5).then(() => {
+                      this.props.update_Win_Three("three", this.state.winner)
+                    })
+                  }
                 }
-              }
+
+              })
+              // if (this.state.startGameButton === "Reset Game") {
+              //   console.log("jhjhiuhuuhhhj")
+              //   this.setState({
+              //     board: copy_board,
+              //     turn: "HUMAN",
+              //     heading: "YOUR TURN"
+              //   })
+              //   let copy_board3 = this.state.board.slice();
+              //   this.check_win(copy_board3);
+
+              //   console.log()
+              //   if (this.state.win === true) {
+              //     // console.log('hellllllllllllooooooo')
+              //     this.sleep(5).then(() => {
+              //       this.props.update_Win_Three("three", this.state.winner)
+              //     })
+              //   }
+              // }
             })
             .catch((err) => {
               console.log(err);
             });
         }
         else {
-          console.log("win here!!")
+          // console.log("win here!!")
           this.sleep(5).then(() => {
             this.props.update_Win_Three("three", this.state.winner)
 
@@ -404,6 +428,7 @@ export default class ThreeBoard extends Component {
         }
       })
     }
+  }
   };
 
   handleStartGame = (e, startGame) => {
@@ -431,12 +456,48 @@ export default class ThreeBoard extends Component {
         topHeading = "AGENT'S TURN"
 
       this.setState({
+        board: [
+          [" ", " ", " "],
+          [" ", " ", " "],
+          [" ", " ", " "],
+        ],
         startGameButton: "Reset Game",
         startGameValue: true,
         heading: topHeading,
         highlightButton: false
       });
       this.stopBlinker();
+
+      if (this.props.gameBeginner === "AGENT") {
+        axios
+          .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+            params: {
+              gameBeginner: this.props.gameBeginner,
+              board: JSON.stringify(this.state.board),
+              depth: JSON.stringify(this.props.depth)
+            },
+          }) //route to be filled according to flask route name
+          .then((res) => {
+  
+            let copy_board = this.state.board.slice();
+  
+            copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+            this.state.undoStack.push(3 * res.data.r + res.data.c)
+            this.state.symbol_stack.push("A")
+            if (this.state.startGameButton === "Reset Game") {
+              console.log("heyyyyyyyuhuhjmh")
+              this.setState({
+                board: copy_board,
+                turn: "HUMAN",
+                heading:"YOUR TURN"
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
     }
     else if (startGame === "Reset Game") {
 
@@ -460,6 +521,7 @@ export default class ThreeBoard extends Component {
       });
 
       this.startBlinker();
+
       if(this.props.gameBeginner === "AGENT")
       {
         this.setState({
@@ -473,34 +535,34 @@ export default class ThreeBoard extends Component {
         })
       }
   }
-    if (this.props.gameBeginner === "AGENT") {
-      axios
-        .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
-          params: {
-            gameBeginner: this.props.gameBeginner,
-            board: JSON.stringify(this.state.board),
-            depth: JSON.stringify(this.props.depth)
-          },
-        }) //route to be filled according to flask route name
-        .then((res) => {
+    // if (this.props.gameBeginner === "AGENT") {
+    //   axios
+    //     .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+    //       params: {
+    //         gameBeginner: this.props.gameBeginner,
+    //         board: JSON.stringify(this.state.board),
+    //         depth: JSON.stringify(this.props.depth)
+    //       },
+    //     }) //route to be filled according to flask route name
+    //     .then((res) => {
 
-          let copy_board = this.state.board.slice();
+    //       let copy_board = this.state.board.slice();
 
-          copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-          this.state.undoStack.push(3 * res.data.r + res.data.c)
-          this.state.symbol_stack.push("A")
-          if (this.state.startGameButton === "Reset Game") {
-            this.setState({
-              board: copy_board,
-              turn: "HUMAN",
-              heading:"YOUR TURN"
-            })
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    //       copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
+    //       this.state.undoStack.push(3 * res.data.r + res.data.c)
+    //       this.state.symbol_stack.push("A")
+    //       if (this.state.startGameButton === "Reset Game") {
+    //         this.setState({
+    //           board: copy_board,
+    //           turn: "HUMAN",
+    //           heading:"YOUR TURN"
+    //         })
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
   };
 
 
