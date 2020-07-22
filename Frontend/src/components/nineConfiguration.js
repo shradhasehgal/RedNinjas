@@ -64,11 +64,11 @@ render() {
           style={{ display: "flex" }}
         >
           <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
-            <h1 className={configStyles.heading}>
+            <h1 className={configStyles.heading} style={{marginBottom:"2%"}}>
               Select your game configuration
             </h1>
             <Container className={configStyles.startWrapper}>
-              <Row className="mb-5">
+              <Row className="mb-3">
                 <Col
                   sm={12}
                   md={12}
@@ -94,7 +94,7 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-robot mr-2 " + configStyles.iconStyles + (this.state.beginner === "AGENT" ? " fa-border" : "")
+                        "fas fa-robot mr-2 " + configStyles.iconStyles + (this.state.beginner === "AGENT" ? " "+configStyles.iconSelect  : "")
                       }
                       onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Nine(e)}}
                     ></i>
@@ -110,7 +110,7 @@ render() {
                     <i
                       className={
                         "fas fa-user-astronaut mr-2 " +
-                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " fa-border" : "")
+                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " "+configStyles.iconSelect  : "")
                       }
                       onClick = {(e) => {this.setState({beginner:"HUMAN"});this.props.handleStartHuman_Nine(e)}}
                     ></i>
@@ -118,7 +118,42 @@ render() {
                   </div>
                 </Col>
               </Row>
-              {/* <Row className="mb-5">
+              <Row>
+                  <Col
+                    sm={12}
+                    md={12}
+                    lg={6}
+                    className="justify-content-center align-self-center mb-3"
+                  >
+                    <img
+                      // className={rulesStyles.gifs}
+                      style={{ width: "50%" }}
+                      src={require("../static/assets/nine-final3.gif")}
+                    />
+                  </Col>
+                  <Col
+                    sm={12}
+                    md={12}
+                    lg={6}
+                    className="justify-content-center align-self-center mb-3"
+                  >
+                    <p className={configStyles.rulestext} style={{textAlign:"left"}}>
+                      Quick Rules :
+                      <li>
+                        If your opponent places their move in a cell of a small
+                        board - <u>inner numbering</u>, your next move must be placed in any cell in the small board - <u>outer numbering</u> with the same row and column number as the cell that your opponent
+                        placed it in.
+                      </li>
+                      <br />
+                      <li>
+                        In case the small board already has a win or a tie
+                        condition, then the player can place their symbol in any
+                        of the empty cells across all the 9 small boards.
+                      </li>
+                    </p>
+                  </Col>
+                </Row>
+              {/* <Row className="mb-3">
                 <Col
                   sm={6}
                   md={6}

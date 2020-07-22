@@ -122,7 +122,7 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-robot mr-2 " + configStyles.iconStyles+ (this.state.beginner === "AGENT" ? " fa-border" : "")
+                        "fas fa-robot mr-2 " + configStyles.iconStyles+ (this.state.beginner === "AGENT" ? " "+configStyles.iconSelect : "")
                       }
                       onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Three(e)}}
                     ></i>
@@ -138,7 +138,7 @@ render() {
                     <i
                       className={
                         "fas fa-user-astronaut mr-2 " +
-                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " fa-border" : "")
+                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " "+configStyles.iconSelect : "")
                       }
                       onClick = {(e) => {this.setState({beginner:"HUMAN"}); this.props.handleStartHuman_Three(e)}}
                     ></i>
@@ -153,7 +153,7 @@ render() {
                   lg={6}
                   className="justify-content-center align-self-center"
                 >
-                  <h3 className={configStyles.startContent}>Depth Type</h3>
+                  <h3 className={configStyles.startContent}>Difficulty Level:</h3>
                 </Col>
                 <Col
                   sm={12}
@@ -192,7 +192,7 @@ render() {
                   <Button
                     size="md"
                     variant = {this.state.depth==="-1"?"danger":"light"}
-                    onClick={(e) => {this.setState({depth:"11"});this.props.handleDepth_Three(e, -1)}}
+                    onClick={(e) => {this.setState({depth:"-1"});this.props.handleDepth_Three(e, -1)}}
                   >
                     Ultimate
                   </Button>

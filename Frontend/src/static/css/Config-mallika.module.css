@@ -54,15 +54,27 @@
   color: #3b3251;
   /* color: #AD4977; */
   cursor: pointer;
+  border: 5px solid #ad4977;
+  border-radius: 10%;
+  padding: 10%;
 }
 .iconStyles:hover {
   /* color: #3b3251; */
   color: #3b3251d2;
 }
+.iconSelect{
+  border: 5px solid #ffffff;
+}
 
 .icon {
   text-align: 'center';
   display: 'inline-block';
+}
+
+.rulestext{
+  text-align:"left"; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
 }
 
 @media screen and (min-width: 801px) {
@@ -78,13 +90,20 @@
   .iconStyles {
     font-size: 5rem;
   }
+  .iconSelect{
+    font-size: 5rem;
+  }
   .icon {
     margin: '0 10%';
+  }
+  .rulestext{
+    font-size: 18px;
+    /* color: lawngreen; */
   }
 }
 @media screen and (max-width: 800px) and (min-width: 361px) {
   .heading {
-    font-size: 30px;
+    font-size: 25px;
   }
   .subheading {
     font-size: 20px;
@@ -99,8 +118,15 @@
     color: #3b3251;
     font-size: 3rem;
   }
+  .iconSelect {
+    font-size: 3rem;
+  }
   .icon {
     margin: '0 7%';
+  }
+  .rulestext{
+    font-size: 15px;
+    /* color: lightcoral; */
   }
 }
 
@@ -120,5 +146,12 @@
   .iconStyles {
     font-size: 2rem;
     color: #3b3251;
+  }
+  .iconSelect {
+    font-size: 2rem;
+  }
+  .rulestext{
+    font-size: 9px;
+    /* color: lightseagreen; */
   }
 }
