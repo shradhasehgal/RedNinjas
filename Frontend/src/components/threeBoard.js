@@ -106,64 +106,6 @@ export default class ThreeBoard extends Component {
     audioEl.play()
   }
 
-
-  // componentDidMount () {
-  //   const audioEl = document.getElementsByClassName("audio-element")[0]
-  //   audioEl.play()
-  // }
-
-  // pop()  {
-  //     // return top most element in the stack
-  //     // and removes it from the stack
-  //     // Underflow if stack is empty
-  //     if (this.state.data.length == 0) {
-  //         return "Underflow";
-  //     } else {
-  //     return this.state.data.pop();
-  //     }
-  // }
-
-  //     top () {
-  //       return this.data.length;
-  //     }
-
-  //     push (...element) {
-  //         for (var i of element) {
-  //             return this.state.data.push(i)
-  //         }
-  //     }
-
-  // // peek() method looks at the object at the top of this stack
-  // // without removing it from the stack.
-  // // The stack is not modified (it does not remove the element;
-  // // it only returns the element for information purposes).
-
-  //     peek () {
-  //         return this.state.data[this.state.data.length - 1];
-  //     }
-
-  //     clear () {
-  //         return this.state.data = [];
-  //     }
-
-  //     length(){
-  //         // console.log(this.state.data.length)
-  //       return this.state.data.length;
-  //   }
-
-  //     search (value) {
-  //         for (let i = 0; i < this.state.data.length; i++) {
-  //             if (this.state.data[i] === value) {
-  //                 return value;
-  //             } else {
-  //                 return false;
-  //             }
-  //         }
-  //     }
-
-
-
-
   checkTie(copy_board)
   {
     let tie_flag = true
@@ -187,7 +129,6 @@ export default class ThreeBoard extends Component {
       })
     }
   }
-
 
   setWinner(gameWinner) {
     let topHeading = "HOUSTON, YOU DID IT!  🎉"
@@ -427,7 +368,7 @@ export default class ThreeBoard extends Component {
       })
     }
 
-    this.playAudio()
+    // this.playAudio()
 
     if (startGame === "Start Game") {
       let topHeading = "YOUR TURN"
@@ -468,6 +409,16 @@ export default class ThreeBoard extends Component {
                 board: copy_board,
                 turn: "HUMAN",
                 heading:"YOUR TURN"
+              })
+            }
+            else
+            {
+              this.setState ({
+                board: [
+                  [" ", " ", " "],
+                  [" ", " ", " "],
+                  [" ", " ", " "],
+                ]
               })
             }
           })
@@ -512,34 +463,6 @@ export default class ThreeBoard extends Component {
         })
       }
   }
-    // if (this.props.gameBeginner === "AGENT") {
-    //   axios
-    //     .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
-    //       params: {
-    //         gameBeginner: this.props.gameBeginner,
-    //         board: JSON.stringify(this.state.board),
-    //         depth: JSON.stringify(this.props.depth)
-    //       },
-    //     }) //route to be filled according to flask route name
-    //     .then((res) => {
-
-    //       let copy_board = this.state.board.slice();
-
-    //       copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
-    //       this.state.undoStack.push(3 * res.data.r + res.data.c)
-    //       this.state.symbol_stack.push("A")
-    //       if (this.state.startGameButton === "Reset Game") {
-    //         this.setState({
-    //           board: copy_board,
-    //           turn: "HUMAN",
-    //           heading:"YOUR TURN"
-    //         })
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
   };
 
 
@@ -662,7 +585,4 @@ const heading = {
   textAlign: "center",
   width: "80%",
   lineHeight: 1.5,
-};
-
-const startButton = {
 };
