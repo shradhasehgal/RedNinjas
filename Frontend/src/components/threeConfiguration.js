@@ -163,36 +163,36 @@ render() {
                 >
                   <Button
                     size="md"
-                    variant = {this.state.depth==="1"?"danger":"light"}
-                    onClick={(e) => {this.setState({depth:"1"});this.props.handleDepth_Three(e, 1)}}
+                    variant = {this.state.depth===1?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:1});this.props.handleDepth_Three(e, 1)}}
                   >
                     1
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth==="2"?"danger":"light"}
-                    onClick={(e) => {this.setState({depth:"2"});this.props.handleDepth_Three(e, 2)}}
+                    variant = {this.state.depth===2?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:2});this.props.handleDepth_Three(e, 2)}}
                   >
                     2
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth==="3"?"danger":"light"}
-                    onClick={(e) => {this.setState({depth:"3"});this.props.handleDepth_Three(e, 3)}}
+                    variant = {this.state.depth===3?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:3});this.props.handleDepth_Three(e, 3)}}
                   >
                     3
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth==="4"?"danger":"light"}
-                    onClick={(e) => {this.setState({depth:"4"});this.props.handleDepth_Three(e, 4)}}
+                    variant = {this.state.depth===4?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:4});this.props.handleDepth_Three(e, 4)}}
                   >
                     4
                   </Button>
                   <Button
                     size="md"
-                    variant = {this.state.depth==="-1"?"danger":"light"}
-                    onClick={(e) => {this.setState({depth:"-1"});this.props.handleDepth_Three(e, -1)}}
+                    variant = {this.state.depth===-1?"danger":"light"}
+                    onClick={(e) => {this.setState({depth:-1});this.props.handleDepth_Three(e, -1)}}
                   >
                     Ultimate
                   </Button>

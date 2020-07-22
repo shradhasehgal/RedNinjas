@@ -366,6 +366,7 @@ export default class ThreeBoard extends Component {
 
               let copy_board = this.state.board.slice();
               console.log(res.data)
+              console.log(res.status)
 
               copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
               this.state.undoStack.push(3 * res.data.r + res.data.c)
@@ -566,7 +567,7 @@ export default class ThreeBoard extends Component {
 
             <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
-              <Col  xs={4} className = {styles.center}>Level: {this.props.depth === "-1" ? 5 : this.props.depth}</Col>
+              <Col  xs={4} className = {styles.center}>Level: {this.props.depth === -1 ? 5 : this.props.depth}</Col>
                 <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
                 <Col className = {styles.center}>
                 <span>{ this.state.darkMode
