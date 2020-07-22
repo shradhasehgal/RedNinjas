@@ -76,7 +76,7 @@ render() {
                   className="justify-content-center align-self-center"
                 >
                   <h3 className={configStyles.startContent}>
-                    Game Beginner :
+                    Choose Beginner :
                   </h3>
                 </Col>
                 <Col
@@ -94,11 +94,12 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-robot mr-2 " + configStyles.iconStyles + (this.state.beginner === "AGENT" ? " "+configStyles.iconSelect  : "")
+                        "fas fa-user-astronaut mr-2 " +
+                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " "+configStyles.iconSelect  : "")
                       }
-                      onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Nine(e)}}
+                      onClick = {(e) => {this.setState({beginner:"HUMAN"});this.props.handleStartHuman_Nine(e)}}
                     ></i>
-                    <h5 className={configStyles.playerName}>AGENT</h5>
+                    <h5 className={configStyles.playerName}>HUMAN</h5>
                   </div>
                   <div
                     style={{
@@ -109,13 +110,13 @@ render() {
                   >
                     <i
                       className={
-                        "fas fa-user-astronaut mr-2 " +
-                        configStyles.iconStyles + (this.state.beginner === "HUMAN" ? " "+configStyles.iconSelect  : "")
+                        "fas fa-robot mr-2 " + configStyles.iconStyles + (this.state.beginner === "AGENT" ? " "+configStyles.iconSelect  : "")
                       }
-                      onClick = {(e) => {this.setState({beginner:"HUMAN"});this.props.handleStartHuman_Nine(e)}}
+                      onClick = {(e) => {this.setState({beginner:"AGENT"}); this.props.handleStartAgent_Nine(e)}}
                     ></i>
-                    <h5 className={configStyles.playerName}>HUMAN</h5>
+                    <h5 className={configStyles.playerName}>AGENT</h5>
                   </div>
+                  
                 </Col>
               </Row>
               <Row>
