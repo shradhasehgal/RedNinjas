@@ -41,10 +41,7 @@ export default class ThreeBoard extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.depth)
-    console.log(this.props.gameBeginner)
     this.state = {
-      // show_3x3_BoardComponent: this.props.show_3x3_BoardComponent,
       board: [
         [" ", " ", " "],
         [" ", " ", " "],
@@ -105,7 +102,6 @@ export default class ThreeBoard extends Component {
   }
 
   playAudio() {
-    console.log("came to hear sound")
     const audioEl = document.getElementsByClassName("audio-element")[0]
     audioEl.play()
   }
@@ -328,8 +324,6 @@ export default class ThreeBoard extends Component {
   }
 
   handleCellClick = (e, cell) => {
-    // console.log(this.state.turn)
-    // console.log("came to handle cell click")
     if (this.state.startGameValue && this.state.win === false && this.state.turn === "HUMAN") {
       // this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
@@ -367,17 +361,16 @@ export default class ThreeBoard extends Component {
             .then((res) => {
 
               let copy_board = this.state.board.slice();
-              console.log(res.data)
-              console.log(res.status)
+              // console.log(res.data)
+              // console.log(res.status)
 
               copy_board[res.data.r][res.data.c] = "O"       /////// will uncomment when backend and frontend are bound together because for now this will give error
               this.state.undoStack.push(3 * res.data.r + res.data.c)
 
               this.state.symbol_stack.push("A")
 
-              this.sleep(1).then(() => {
+              this.sleep(3).then(() => {
                 if (this.state.startGameButton === "Reset Game") {
-                  console.log("jhjhiuhuuhhhj")
                   this.setState({
                     board: copy_board,
                     turn: "HUMAN",
@@ -386,9 +379,7 @@ export default class ThreeBoard extends Component {
                   let copy_board3 = this.state.board.slice();
                   this.check_win(copy_board3);
   
-                  console.log()
                   if (this.state.win === true) {
-                    // console.log('hellllllllllllooooooo')
                     this.sleep(5).then(() => {
                       this.props.update_Win_Three("three", this.state.winner)
                     })
@@ -396,31 +387,12 @@ export default class ThreeBoard extends Component {
                 }
 
               })
-              // if (this.state.startGameButton === "Reset Game") {
-              //   console.log("jhjhiuhuuhhhj")
-              //   this.setState({
-              //     board: copy_board,
-              //     turn: "HUMAN",
-              //     heading: "YOUR TURN"
-              //   })
-              //   let copy_board3 = this.state.board.slice();
-              //   this.check_win(copy_board3);
-
-              //   console.log()
-              //   if (this.state.win === true) {
-              //     // console.log('hellllllllllllooooooo')
-              //     this.sleep(5).then(() => {
-              //       this.props.update_Win_Three("three", this.state.winner)
-              //     })
-              //   }
-              // }
             })
             .catch((err) => {
               console.log(err);
             });
         }
         else {
-          // console.log("win here!!")
           this.sleep(5).then(() => {
             this.props.update_Win_Three("three", this.state.winner)
 
@@ -445,8 +417,6 @@ export default class ThreeBoard extends Component {
         value_beginner : 1
       })
     }
-    // console.log("The game begins!");
-    // console.log(this.state.gameBeginner)
 
     this.playAudio()
 
@@ -485,7 +455,6 @@ export default class ThreeBoard extends Component {
             this.state.undoStack.push(3 * res.data.r + res.data.c)
             this.state.symbol_stack.push("A")
             if (this.state.startGameButton === "Reset Game") {
-              console.log("heyyyyyyyuhuhjmh")
               this.setState({
                 board: copy_board,
                 turn: "HUMAN",
@@ -500,7 +469,6 @@ export default class ThreeBoard extends Component {
 
     }
     else if (startGame === "Reset Game") {
-
       this.setState({
         board: [
           [" ", " ", " "],
