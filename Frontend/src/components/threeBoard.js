@@ -369,7 +369,7 @@ export default class ThreeBoard extends Component {
 
               this.state.symbol_stack.push("A")
 
-              this.sleep(3).then(() => {
+              this.sleep(5).then(() => {
                 if (this.state.startGameButton === "Reset Game") {
                   this.setState({
                     board: copy_board,
@@ -384,6 +384,15 @@ export default class ThreeBoard extends Component {
                       this.props.update_Win_Three("three", this.state.winner)
                     })
                   }
+                }
+                else{
+                  this.setState({
+                    board: [
+                      [" ", " ", " "],
+                      [" ", " ", " "],
+                      [" ", " ", " "],
+                    ]
+                  })
                 }
 
               })
@@ -487,6 +496,7 @@ export default class ThreeBoard extends Component {
         turn: this.props.gameBeginner,
       });
 
+      console.log(this.state.board)
       this.startBlinker();
 
       if(this.props.gameBeginner === "AGENT")
@@ -592,7 +602,6 @@ export default class ThreeBoard extends Component {
                 ))}
               </Container>
             </Container>
-
 
 
             <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
