@@ -18,7 +18,7 @@ if (props.messageForHint === "Place in the cell") {
                     <Toast.Header className={styles.text}>
                     <strong className="mr-auto">Hint!!</strong>
             </Toast.Header>
-            <Toast.Body>Play in localboard {props.row_to_place} {props.column_to_place} </Toast.Body>
+            <Toast.Body className={styles.bodytext} >Play in localboard {props.row_to_place} {props.column_to_place} </Toast.Body>
           </Toast>
         </div>
         </div>
@@ -31,7 +31,7 @@ if (props.messageForHint === "Place in the cell") {
                     <Toast.Header className={styles.text}>
                     <strong className="mr-auto">Hint!!</strong>
             </Toast.Header>
-            <Toast.Body>Play in any empty localboard</Toast.Body>
+            <Toast.Body className={styles.bodytext}>Play in any empty localboard</Toast.Body>
           </Toast>
         </div>
         </div>
