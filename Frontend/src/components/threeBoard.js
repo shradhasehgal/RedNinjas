@@ -368,7 +368,7 @@ export default class ThreeBoard extends Component {
       })
     }
 
-    // this.playAudio()
+    this.playAudio()
 
     if (startGame === "Start Game") {
       let topHeading = "YOUR TURN"
@@ -563,13 +563,14 @@ export default class ThreeBoard extends Component {
                   </Button> : <></>
               ))}
             </Container> : " "}
-            {/* <audio className="audio-element">
-            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
-        </audio> */}
 
             <audio className="audio-element">
+            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+        </audio>
+
+            {/* <audio className="audio-element">
               <source src = "soundfile"></source>
-            </audio> 
+            </audio>  */}
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
