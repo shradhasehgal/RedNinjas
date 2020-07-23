@@ -447,7 +447,7 @@ export default class ThreeBoard extends Component {
       }
 
     }
-    else if (startGame === "Reset Game") {
+    else if (startGame === "Reset Game" && !this.state.win) {
       this.setState({
         board: [
           [" ", " ", " "],
@@ -523,11 +523,11 @@ export default class ThreeBoard extends Component {
       )}>
 
           <div style={{ margin: "auto", width: "600px", maxWidth: "90%" }}>
-            <Container className={classNames(styles.heading, {[styles.lightHeading] : !this.state.darkMode})}>
+            <Container className={classNames(styles.heading, styles.board, {[styles.lightHeading] : !this.state.darkMode})}>
               <Row><Col> <h1 className={styles.title}>{this.state.heading}</h1></Col></Row>
             </Container>
 
-            <Container style={{ maxWidth: "600px" }}>
+            <Container className={styles.board} >
               <Container fluid="true">
                 {this.state.board.map((row, i) => (
                   <Row>
@@ -546,7 +546,7 @@ export default class ThreeBoard extends Component {
             </Container>
 
 
-            <Container className={classNames(styles.boardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
+            <Container className={classNames(styles.boardInfo, styles.board, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
               <Col  xs={4} className = {styles.center}>Level: {this.props.depth === -1 ? 5 : this.props.depth}</Col>
                 <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
@@ -561,6 +561,7 @@ export default class ThreeBoard extends Component {
                 variant="dark"
                 className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
+                disabled={this.state.win}
               >
                 {this.state.startGameButton}
               </Button></Col>

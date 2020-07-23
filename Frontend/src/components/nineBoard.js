@@ -838,7 +838,7 @@ export default class NineBoard extends Component {
             }
     
         }
-        else if (startGame === "Reset Game") {
+        else if (startGame === "Reset Game" && this.state.win) {
             let copy_board = this.state.bigboard.slice();
 
             for (let outer_row = 0; outer_row < 3; outer_row++) {
@@ -887,11 +887,11 @@ export default class NineBoard extends Component {
                 [styles.whiteBg]: !this.state.darkMode
               })}>
                 <div style={{ margin: "auto", width: "700px", maxWidth: "90%" }}>
-                <Container className={classNames(styles.heading, styles.nineHeading, {[styles.lightHeading] : !this.state.darkMode})}>
+                <Container className={classNames(styles.heading, styles.nineHeading, styles.board, {[styles.lightHeading] : !this.state.darkMode})}>
               <Row>
                   <Col><h1 className={styles.title}>{this.state.heading}  {this.state.turn === "HUMAN" || !this.state.startGameValue? '': <i className={"fas fa-spinner fa-1x fa-pulse ml-2 "+styles.nineSpinner}></i>}</h1></Col></Row>
             </Container>
-                <Container>
+                <Container className={styles.board}>
                     <Container fluid='true'>
                         {
                             this.state.bigboard.map((row, outerRow) => (
@@ -931,7 +931,7 @@ export default class NineBoard extends Component {
                     </Container>
                 </Container>
 
-                <Container styles ={{marginTop: "1% !important"}} className={classNames(styles.boardInfo, styles.nineBoardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
+                <Container styles ={{marginTop: "1% !important"}} className={classNames(styles.boardInfo, styles.board, styles.nineBoardInfo, {[styles.lightHeading]: !this.state.darkMode})}>
               <Row style={{padding: "1%"}}>
               <Col  style={{cursor :"pointer", fontSize: "1.5rem"}} className = {styles.center} xs={4}><i onClick={()=> window.open("/rules", "_blank")} class="fa fa-info-circle" aria-hidden="true"></i></Col>
                 <Col  className = {styles.center}><i class="fa fa-sun" aria-hidden="true"></i></Col>
@@ -944,6 +944,7 @@ export default class NineBoard extends Component {
                 <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
                 <Col  xs={4}><Button
                 variant="dark"
+                disabled={this.state.win}
                 className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
               >

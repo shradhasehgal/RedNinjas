@@ -56,7 +56,7 @@
   background-color: #212121;
   opacity: 0.7;
   margin-bottom: 5%;
-  margin-top: 5%;
+  margin-top: 60px;
 }
 
 .boardInfo{
@@ -137,6 +137,98 @@
 
 .iconAgent{
   color: #AD4977;
+}
+
+
+@media screen and (max-height: 850px) {
+
+  .cellThree{
+    height: 160px;
+  }
+
+  .board {
+    width: 480px !important;
+  }
+
+  .cellNine {
+    height: 48px !important;
+  }
+
+}
+
+@media screen and (max-height: 800px) {
+
+  .cellThree{
+    height: 140px;
+    /* width: 145px; */
+  }
+
+  .board {
+    width: 420px !important;
+  }
+
+  .cellNine {
+    height: 42px !important;
+  }
+
+  .button {
+    font-size: 0.66rem !important;
+  }
+
+
+}
+
+@media screen and (max-height: 750px) {
+
+  .cellThree{
+    height: 130px;
+    /* width: 145px; */
+  }
+
+  .board {
+    width: 390px !important;
+  }
+
+}
+
+@media screen and (max-height: 700px) {
+
+  .cellThree{
+    height: 110px;
+    /* width: 145px; */
+  }
+
+  .cellNine{
+    height: 32px !important;
+  }
+
+  .board {
+    width: 330px !important;
+  }
+
+  .title{
+    font-size: 1.5rem;
+  }
+
+  .center {
+    font-size: 0.8rem;
+  }
+
+  .button {
+    font-size: 0.6rem !important;
+  }
+
+  .heading{
+    margin-bottom: 2%;
+  }
+
+  .iconThree {
+    font-size: 3.5rem;
+  }
+
+  .boardInfo {
+    margin-top: 2%;
+  }
 }
 
 @media screen and (max-width: 650px) {
