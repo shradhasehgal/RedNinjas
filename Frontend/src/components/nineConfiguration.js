@@ -12,6 +12,7 @@ import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
 import configStyles from "../static/css/Config-mallika.module.css";
 
+const play_game_sound = require("../static/assets/sounds/lets-play.mp3")
 
 export default class NineConfiguration extends Component {
     constructor(props) {
@@ -55,6 +56,11 @@ export default class NineConfiguration extends Component {
 //       )}
 // }
 
+playAudio(audio_element) {
+  const audioEl = document.getElementsByClassName(audio_element)[0]
+  audioEl.play()
+  }
+  
 render() {
   return (
     <div className={configStyles.wrapper}>
@@ -211,7 +217,7 @@ render() {
                   <>
                     
                     {this.props.gameBeginner != " " ? (
-                      <Button size="md" variant="light" onClick={(e) => this.props.update_Nine("Go To Game")}>
+                      <Button size="md" variant="light" onClick={(e) => {this.playAudio("audio-element-play");this.props.update_Nine("Go To Game")}}>
                         Let's Play!
                       </Button>
                     ) : (
@@ -225,6 +231,9 @@ render() {
           </Container>
         </Container>
       </Container>
+      <audio className="audio-element-play">
+              <source src = {play_game_sound}></source>
+            </audio> 
     </div>
   );
 }

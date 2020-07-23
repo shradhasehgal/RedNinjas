@@ -30,7 +30,9 @@ import configStyles from "../static/css/Config-mallika.module.css";
 
 // import Sound from 'react-sound';
 
-// const soundfile = require("../static/assets/click-game.mp3")
+const start_game_sound = require("../static/assets/sounds/start-game.mp3")
+
+const place_icon_sound = require("../static/assets/sounds/place-icon.mp3")
 
 // import soundfile from '../static/assets/click-game.mp3'
 
@@ -101,10 +103,10 @@ export default class ThreeBoard extends Component {
     clearInterval(blinker);
   }
 
-  playAudio() {
-    const audioEl = document.getElementsByClassName("audio-element")[0]
+  playAudio(audio_element) {
+    const audioEl = document.getElementsByClassName(audio_element)[0]
     audioEl.play()
-  }
+    }
 
   checkTie(copy_board)
   {
@@ -287,7 +289,7 @@ export default class ThreeBoard extends Component {
       let copy_board = this.state.board.slice();
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
 
-        // this.playAudio()
+        this.playAudio("audio-element-icon")        
         copy_board[Math.floor(cell / 3)][cell % 3] = "X";
 
         this.state.undoStack.push(cell)
@@ -372,6 +374,7 @@ export default class ThreeBoard extends Component {
 
   handleStartGame = (e, startGame) => {
 
+    this.playAudio("audio-element-start")
     if(this.props.gameBeginner === "AGENT")
     {
       this.setState({
@@ -385,7 +388,6 @@ export default class ThreeBoard extends Component {
       })
     }
 
-    this.playAudio()
 
     if (startGame === "Start Game") {
       let topHeading = "YOUR TURN"
@@ -581,13 +583,17 @@ export default class ThreeBoard extends Component {
               ))}
             </Container> : " "}
 
-            <audio className="audio-element">
-            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
-        </audio>
-
             {/* <audio className="audio-element">
-              <source src = "soundfile"></source>
-            </audio>  */}
+            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+        </audio> */}
+
+             <audio className="audio-element-start">
+              <source src = {start_game_sound}></source>
+            </audio> 
+
+            <audio className="audio-element-icon">
+              <source src = {place_icon_sound}></source>
+            </audio> 
 
             {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
             {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}

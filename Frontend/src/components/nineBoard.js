@@ -13,6 +13,9 @@ import 'mdbreact/dist/css/mdb.css';
 import classNames from "classnames";
 import Message from './Message.js'
 
+const start_game_sound = require("../static/assets/sounds/start-game.mp3")
+
+const place_icon_sound = require("../static/assets/sounds/place-icon.mp3")
 
 let blinker;
 let humanTurn = "YOUR TURN"
@@ -129,6 +132,11 @@ export default class NineBoard extends Component {
     componentDidMount() {
         this.startBlinker();
     }
+
+    playAudio(audio_element) {
+        const audioEl = document.getElementsByClassName(audio_element)[0]
+        audioEl.play()
+        }
     
     startBlinker(){
         blinker = setInterval(() => {
@@ -617,6 +625,8 @@ export default class NineBoard extends Component {
                         this.setState({
                             messageForError : false
                         })
+                        this.playAudio("audio-element-icon")
+
                         copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
 
                         this.setState({
@@ -690,7 +700,7 @@ export default class NineBoard extends Component {
                     let copy_bigBoard1 = this.state.bigboard.slice()
 
                     copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
-
+                    this.playAudio("audio-element-icon")
                     this.setState({
                         bigboard: copy_bigBoard1,
                         turn: "AGENT",
@@ -733,6 +743,7 @@ export default class NineBoard extends Component {
     }
 
     handleStartGame = (e, startGame) => {
+        this.playAudio("audio-element-start")
         
         if (startGame === "Start Game") {
 
@@ -940,6 +951,14 @@ export default class NineBoard extends Component {
               </Button></Col>
               </Row>
             </Container>
+
+            <audio className="audio-element-start">
+              <source src = {start_game_sound}></source>
+            </audio> 
+
+            <audio className="audio-element-icon">
+              <source src = {place_icon_sound}></source>
+            </audio> 
 
             {this.state.startGameValue === true && this.state.turn === "HUMAN" && <Message row_to_place = {this.state.rowToPlace} column_to_place = {this.state.columnToPlace} messageForHint = {this.state.messageForHint} messageForError = {this.state.messageForError}/>}
             </div>

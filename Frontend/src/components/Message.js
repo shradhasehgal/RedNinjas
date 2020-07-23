@@ -10,6 +10,7 @@ const Message = (props) => {
     var row = null
     var coloumn = null
 
+
 if (props.messageForHint === "Place in the cell") {
     return (
         <div aria-live="polite" aria-atomic="true">
@@ -36,10 +37,24 @@ if (props.messageForHint === "Place in the cell") {
         </div>
         </div>
     );
-
 }
-
-  }
+}
+// if(props.messageForError === true)
+// {
+//     return (
+//         <div aria-live="polite" aria-atomic="true">
+//             <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
+//                 <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide >
+//                     <Toast.Header className={styles.text}>
+//                     <strong className="mr-auto">Hint!!</strong>
+//             </Toast.Header>
+//             <Toast.Body className={styles.bodytext} >Play in the highlighted cell</Toast.Body>
+//           </Toast>
+//         </div>
+//         </div>
+//     );
+// }
+//   }
   
 // render(<Example />);
 

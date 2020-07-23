@@ -19,6 +19,8 @@ import configStyles from "../static/css/Config-mallika.module.css";
 import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
 
+const play_game_sound = require("../static/assets/sounds/lets-play.mp3")
+
 export default class ThreeConfiguration extends Component {
     constructor(props) {
       super(props);
@@ -80,6 +82,11 @@ export default class ThreeConfiguration extends Component {
 //           </div>
 //       )}
 // }
+
+playAudio(audio_element) {
+  const audioEl = document.getElementsByClassName(audio_element)[0]
+  audioEl.play()
+  }
 
 
 
@@ -210,7 +217,7 @@ render() {
                   <>
                     {this.props.depth !== " " &&
                     this.props.gameBeginner != " " ? (
-                      <Button size="lg" variant="light" onClick={(e) => this.props.update_Three("Go To Game")}>
+                      <Button size="lg" variant="light" onClick={(e) => {this.playAudio("audio-element-play");this.props.update_Three("Go To Game")}}>
                         Let's Play!
                       </Button>
                     ) : (
@@ -224,6 +231,9 @@ render() {
           </Container>
         </Container>
       </Container>
+      <audio className="audio-element-play">
+              <source src = {play_game_sound}></source>
+            </audio> 
     </div>
   );
 }
