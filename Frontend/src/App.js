@@ -14,6 +14,7 @@ import Message from './components/Message'
 // import axios from 'axios';
 import ThreeGame from './components/threeGame'
 import NineGame from './components/nineGame'
+import Scores from './components/Scores'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -85,6 +86,7 @@ function App() {
           <Route exact path="/overview" component={Overview} />
           <Route exact path="/rules" component={Rules} />
           <Route exact path='/message' component={Message} />
+          <Route exact path='/scores' component={Scores} />
           <Route path='*' exact={true} component={Error} />
 
         </Switch>
