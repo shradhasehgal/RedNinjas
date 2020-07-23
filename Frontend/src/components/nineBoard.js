@@ -756,6 +756,9 @@ export default class NineBoard extends Component {
                 ],
             })
 
+            let topHeading = humanTurn;
+            if(this.props.gameBeginner == "AGENT")
+                topHeading = agentTurn;
             if(this.props.gameBeginner === "HUMAN")
             {
                 this.setState({
@@ -766,7 +769,8 @@ export default class NineBoard extends Component {
                 startGameButton: "Reset Game",
                 startGameValue: true,
                 highlightButton: false,
-                turn : this.props.gameBeginner
+                turn : this.props.gameBeginner,
+                heading: topHeading
             });
 
             if (this.state.turn === "AGENT") {
@@ -814,9 +818,7 @@ export default class NineBoard extends Component {
                 }
             }
 
-            let topHeading = humanTurn;
-            if(this.props.gameBeginner == "AGENT")
-                topHeading = agentTurn;
+            
             this.setState({
                 bigboard: copy_board,
                 gameBeginner: this.props.gameBeginner,
@@ -833,7 +835,7 @@ export default class NineBoard extends Component {
                     [" ", " ", " "],
                 ],
                 turn : this.props.gameBeginner,
-                heading: topHeading
+                heading: "RED NINJA TIC TAC TOE"
             });
 
             if(this.props.gameBeginner === "HUMAN")
