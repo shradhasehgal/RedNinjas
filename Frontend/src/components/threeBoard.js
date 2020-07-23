@@ -30,7 +30,7 @@ import configStyles from "../static/css/Config-mallika.module.css";
 
 // import Sound from 'react-sound';
 
-const soundfile = require("../static/assets/click-game.mp3")
+// const soundfile = require("../static/assets/click-game.mp3")
 
 // import soundfile from '../static/assets/click-game.mp3'
 
