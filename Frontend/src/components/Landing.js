@@ -83,7 +83,7 @@ export default class Landing extends Component {
           {/* <hr /> */}
           {/* {this.state.showNineGameComponent && <nineBoard update={this.updateStateOfComponents}/>} */}
           {/* <hr /> */}
-          {/* {this.state.showNineWinComponent && <nineWin update={this.updateStateOfComponents}/>} */} */}
+          {/* {this.state.showNineWinComponent && <nineWin update={this.updateStateOfComponents}/>} */}
       </div>
     );
   }
