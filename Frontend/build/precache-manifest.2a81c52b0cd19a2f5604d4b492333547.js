@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "74519c4775023a6fc59aa98e629b281c",
+    "revision": "dceb639b37e9eef1d318905bc018cdc8",
     "url": "/index.html"
   },
   {
-    "revision": "a9695e923537881db7ee",
+    "revision": "d8f8945160630726f03b",
     "url": "/static/css/2.82e1ca60.chunk.css"
   },
   {
-    "revision": "f667b4723d0a090e055d",
-    "url": "/static/css/main.186eb0b9.chunk.css"
+    "revision": "1a0352f42221ca6310ca",
+    "url": "/static/css/main.ce89f07c.chunk.css"
   },
   {
-    "revision": "a9695e923537881db7ee",
-    "url": "/static/js/2.1f06ed8d.chunk.js"
+    "revision": "d8f8945160630726f03b",
+    "url": "/static/js/2.99269f31.chunk.js"
   },
   {
     "revision": "d2966845b94a3318bf32eecc7af8015d",
-    "url": "/static/js/2.1f06ed8d.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.99269f31.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f667b4723d0a090e055d",
-    "url": "/static/js/main.ddfa5ca9.chunk.js"
+    "revision": "1a0352f42221ca6310ca",
+    "url": "/static/js/main.097e7814.chunk.js"
   },
   {
     "revision": "441cfea73f775386a3f5",
@@ -38,10 +38,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "8ef6a08cdc1154920165680a4edde771",
     "url": "/static/media/arrow_right.8ef6a08c.svg"
-  },
-  {
-    "revision": "eba816ab57fbea29f1a44ddc46ac7fef",
-    "url": "/static/media/click-game.eba816ab.mp3"
   },
   {
     "revision": "0a0c2a59080d0e14de964fa8bf8dbcfa",
@@ -124,6 +120,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/l4-light.92122851.gif"
   },
   {
+    "revision": "69d512d0853fcb3b2ca7b8d3016cebe4",
+    "url": "/static/media/lets-play.69d512d0.mp3"
+  },
+  {
     "revision": "eb715576028b2986badfe8a08210180a",
     "url": "/static/media/level2.eb715576.gif"
   },
@@ -144,6 +144,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/nine-final3.8a7c241e.gif"
   },
   {
+    "revision": "827b07495c1f87899d3cfcdf603e0949",
+    "url": "/static/media/place-icon.827b0749.mp3"
+  },
+  {
     "revision": "618a73f9656c6b2d7d866ad2f3c04bc8",
     "url": "/static/media/responsive-themes.618a73f9.gif"
   },
@@ -154,6 +158,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "ce41aaf9891f3a95dcd7aaf6c4f3f521",
     "url": "/static/media/space.ce41aaf9.jpg"
+  },
+  {
+    "revision": "eba816ab57fbea29f1a44ddc46ac7fef",
+    "url": "/static/media/start-game.eba816ab.mp3"
   },
   {
     "revision": "dd19d2e44d1284f7b50c20b49d295c67",
