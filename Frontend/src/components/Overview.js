@@ -286,6 +286,45 @@ export default class Overview extends Component {
                 </li>
               </Col>
             </Row>
+            <Row className="mb-5">
+              <Col
+                sm={12}
+                md={12}
+                lg={6}
+                className="justify-content-center align-self-center"
+              >
+                <li className={overviewStyles.text}>
+                  <i class="fas fa-angle-double-right"></i>{" "}
+                  <strong>Past Score Records</strong>
+                  <br />
+                  The application also consists of a page where a user can view their <a href="/rules" style={{ color: "#3b3251" }}>
+                  Past Games'
+                </a> results. 
+                  The records include the Game type (3x3 or 9x9), the game level, and the result.
+                  <br />
+                  <br />
+                </li>
+                <li className={overviewStyles.text}>
+                  <i class="fas fa-angle-double-right"></i>{" "}
+                  <strong>Sound effects</strong>
+                  <br />
+                  We have also included fun audio effects that add to the overall experience of the gameplay for a user.
+                  <br />
+                  <br />
+                </li>
+              </Col>
+              <Col
+                sm={12}
+                md={12}
+                lg={6}
+                className="justify-content-center align-self-center"
+              >
+                <img
+                  style={{width:"100%"}}
+                  src={require("../static/assets/about/scores.png")}
+                />
+              </Col>
+            </Row>
           </div>
 
           <div className={overviewStyles.content}>

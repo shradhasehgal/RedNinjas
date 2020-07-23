@@ -2,7 +2,7 @@
     margin: auto;
     align-items: center;
     background-image: url('../assets/mars-bg.png');
-    position: fixed;
+    /* position: fixed; */
     min-width: 100%;
     min-height: 100%;
     background-size: cover;
@@ -69,4 +69,27 @@
         font-size: 15px;
       }
       
+    }
+
+    @media screen and (max-height:600px){
+      .text {
+        font-size: 15px;
+      }
+      .containerBody {
+        max-height: 600px;
+      }
+      .gif{
+        width: 50%;
+      }
+    }
+    @media screen and (max-height:700px) and (min-height:600px){
+      .text {
+        font-size: 15px;
+      }
+      .containerBody {
+        max-height: 500px;
+      }
+      .gif{
+        width: 50%;
+      }
     }
