@@ -33,6 +33,7 @@ export default class NineBoard extends Component {
             ultimateWin: false,
             winner : " ",
             messageForHint : " ",
+            messageForError : false,
             rowToPlace: " ",
             columnToPlace: " ",
             moveNumber: 1,
@@ -597,6 +598,9 @@ export default class NineBoard extends Component {
             if (copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] === " ") {
                 if (this.state.moveNumber !== 1) {
                     if (this.checkValidityOfMove(outerRow, outerColumn) === true) {
+                        this.setState({
+                            messageForError : false
+                        })
                         copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
 
                         this.setState({
@@ -658,7 +662,9 @@ export default class NineBoard extends Component {
                         }
                         )}
                     else {
-
+                            this.setState({
+                                messageForError : true
+                            })
                         
                         console.log("try again")
                     }
@@ -919,7 +925,7 @@ export default class NineBoard extends Component {
               </Row>
             </Container>
 
-            {this.state.startGameValue === true && this.state.turn === "HUMAN" && <Message row_to_place = {this.state.rowToPlace} column_to_place = {this.state.columnToPlace} messageForHint = {this.state.messageForHint}/>}
+            {this.state.startGameValue === true && this.state.turn === "HUMAN" && <Message row_to_place = {this.state.rowToPlace} column_to_place = {this.state.columnToPlace} messageForHint = {this.state.messageForHint} messageForError = {this.state.messageForError}/>}
             </div>
             </div>
         )

@@ -53,7 +53,7 @@ export default class GameResults extends Component {
             <Container style={{ marginTop: "auto", marginBottom: "auto", marginLeft:"auto",marginRight:"auto" ,padding:"1%"}}>
                 <img className={styles.gif} src={require('../static/assets/win.gif')} />
                 <br></br><br></br>
-                <MDBAnimation type="tada" infinite>
+                <MDBAnimation type="fadeIn" infinite>
                     {/* <text className={styles.text}>You WONNN   </text> */}
                     <text className={styles.text}>Congrats!!!</text>
                 </MDBAnimation>
@@ -72,7 +72,7 @@ export default class GameResults extends Component {
               style={{ display: "flex" }}>
               <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
                   <img className={styles.gif} src={require('../static/assets/sad.gif')} />
-                  <MDBAnimation type="tada" infinite>
+                  <MDBAnimation type="fadeIn" infinite>
                       {/* <text className={styles.text}>You LOST :((</text>
                       <br></br> */}
                       <text className={styles.text}> Better Luck next time!</text>
@@ -95,7 +95,7 @@ export default class GameResults extends Component {
             style={{ display: "flex" }}>
             <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
                 <img className={styles.gif} src={require('../static/assets/tie.gif')} />
-                <MDBAnimation type="tada" infinite>
+                <MDBAnimation type="fadeIn" infinite>
                     <br></br>
                     <text className={styles.text}>It's A Tie!</text>
                 </MDBAnimation>
