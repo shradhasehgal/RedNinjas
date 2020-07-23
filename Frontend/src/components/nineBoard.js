@@ -838,7 +838,7 @@ export default class NineBoard extends Component {
             }
     
         }
-        else if (startGame === "Reset Game" && this.state.win) {
+        else if (startGame === "Reset Game" && !this.state.win) {
             let copy_board = this.state.bigboard.slice();
 
             for (let outer_row = 0; outer_row < 3; outer_row++) {
