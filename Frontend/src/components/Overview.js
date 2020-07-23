@@ -256,7 +256,7 @@ export default class Overview extends Component {
               >
                 <img
                   style={{width:"90%"}}
-                  src={require("../static/assets/about/error.gif")}
+                  src={require("../static/assets/about/undo.gif")}
                 />
               </Col>
               <Col
@@ -267,20 +267,19 @@ export default class Overview extends Component {
               >
                 <li className={overviewStyles.text}>
                   <i class="fas fa-angle-double-right"></i>{" "}
-                  <strong>404 Error Page</strong>
+                  <strong>Undo Moves</strong>
                   <br />
-                  We have accounted for cases wherein the user may try to access
-                  an undefined route. In such cases we have included a custom
-                  404 error page.
+                  This feature allows users to revert back their moves upto a particular move. The gameplay would then begin from that move.
+                  This is only in the 3x3 games.
                   <br />
                   <br />
                 </li>
                 <li className={overviewStyles.text}>
                   <i class="fas fa-angle-double-right"></i>{" "}
-                  <strong>Browser support</strong>
+                  <strong>Hint Boxes</strong>
                   <br />
-                  The application has been tested on the browsers : Firefox,
-                  Chrome, Edge and Safari.
+                  For the 9x9 game, the users are provided with hint boxes that appear with a message containing the next board they have to place their move in.abs
+                  The alert boxes also appear in cases of incorrect moves.
                   <br />
                   <br />
                 </li>
@@ -323,6 +322,45 @@ export default class Overview extends Component {
                   style={{width:"100%"}}
                   src={require("../static/assets/about/scores.png")}
                 />
+              </Col>
+            </Row>
+            <Row className="mb-5">
+              <Col
+                sm={12}
+                md={12}
+                lg={6}
+                className="justify-content-center align-self-center"
+              >
+                <img
+                  style={{width:"90%"}}
+                  src={require("../static/assets/about/error.gif")}
+                />
+              </Col>
+              <Col
+                sm={12}
+                md={12}
+                lg={6}
+                className="justify-content-center align-self-center"
+              >
+                <li className={overviewStyles.text}>
+                  <i class="fas fa-angle-double-right"></i>{" "}
+                  <strong>404 Error Page</strong>
+                  <br />
+                  We have accounted for cases wherein the user may try to access
+                  an undefined route. In such cases we have included a custom
+                  404 error page.
+                  <br />
+                  <br />
+                </li>
+                <li className={overviewStyles.text}>
+                  <i class="fas fa-angle-double-right"></i>{" "}
+                  <strong>Browser support</strong>
+                  <br />
+                  The application has been tested on the browsers : Firefox,
+                  Chrome, Edge and Safari.
+                  <br />
+                  <br />
+                </li>
               </Col>
             </Row>
           </div>
