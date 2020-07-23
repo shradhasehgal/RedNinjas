@@ -58,6 +58,7 @@ class NavigationBar extends Component {
             <Nav.Link href="/nine">9x9</Nav.Link>
             <Nav.Link href="/rules">Rule Book</Nav.Link>
             <Nav.Link href="/overview">About</Nav.Link>
+            <Nav.Link href="/scores">Past Scores</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

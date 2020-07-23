@@ -81,7 +81,7 @@ export default class ThreeBoard extends Component {
       },
       darkMode: true,
       heading: "RED NINJA TIC TAC TOE",
-      highlightButton: true
+      highlightButton: true,
     };
   }
 
@@ -127,7 +127,22 @@ export default class ThreeBoard extends Component {
         winner : "TIE",
         heading: "IT'S A TIE!"
       })
+      this.setScores("TIE");
     }
+
+  }
+
+  setScores(gameWinner){
+    let status ="WIN"
+    if(gameWinner == "AGENT")
+      status = "LOST"
+    else if(gameWinner == "TIE")
+      status = "TIE"
+    console.log(this.props.depth);
+    let score = {game: "3*3", depth: this.props.depth, winner: status};
+    let a = JSON.parse(localStorage.getItem('scores')) || [];
+    a.push(score);
+    localStorage.setItem('scores', JSON.stringify(a));
   }
 
   setWinner(gameWinner) {
@@ -139,6 +154,8 @@ export default class ThreeBoard extends Component {
       winner: gameWinner,
       heading: topHeading
     })
+
+    this.setScores(gameWinner);
   }
 
   changeMode(darkMode) {

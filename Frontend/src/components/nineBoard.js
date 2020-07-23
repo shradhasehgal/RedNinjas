@@ -146,6 +146,19 @@ export default class NineBoard extends Component {
         this.setState({darkMode: !darkMode})
     }
 
+    setScores(gameWinner){
+        let status ="WIN"
+        if(gameWinner == "AGENT")
+          status = "LOST"
+        else if(gameWinner == "TIE")
+          status = "TIE"
+        console.log(this.props.depth);
+        let score = {game: "9*9", depth: "ULTIMATE", winner: status};
+        let a = JSON.parse(localStorage.getItem('scores')) || [];
+        a.push(score);
+        localStorage.setItem('scores', JSON.stringify(a));
+      }
+
 
     checkTie(bigBoard)
     {
@@ -293,7 +306,8 @@ export default class NineBoard extends Component {
         let topHeading = winMessage;
         if (gameWinner=="AGENT")
           topHeading = loseMessage
-    
+        
+        this.setScores(gameWinner);
         this.setState({
           winner: gameWinner,
           heading: topHeading
@@ -348,6 +362,8 @@ export default class NineBoard extends Component {
                 ultimateWin : true,
                 heading: drawMessage
             })
+
+            this.setScores("TIE");
           }
         }
   
