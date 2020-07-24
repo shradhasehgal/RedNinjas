@@ -325,27 +325,6 @@ export default class NineBoard extends Component {
 
       checkFinalTie()
       {
-        //   let count = 0
-        //   for(let row = 0; row < 3; row++) {
-        //         if( (copy_board[row][0] !== copy_board[row][1] || copy_board[row][0] !== copy_board[row][2] || copy_board[row][1] !== copy_board[row][2]) && copy_board[row][0] !== " " && copy_board[row][1] !== " " && copy_board[row][2] !== " ") {
-        //             count++;
-        //         }
-        //   }
-
-        //   for(let column = 0; column < 3; column++) {
-        //       if((copy_board[0][column] !== copy_board[1][column] || copy_board[0][column] !== copy_board[2][column] || copy_board[1][column] !== copy_board[2][column]) && copy_board[0][column] !== " " && copy_board[1][column] && copy_board[2][column] !== " ") {
-        //           count++;
-        //       }
-        //   }
-
-        //   if( ( copy_board[0][0] !== copy_board[1][1] || copy_board[0][0] !== copy_board[2][2] || copy_board[1][1] !== copy_board[2][2]) && copy_board[0][0] !== " " && copy_board[1][1] !== " " && copy_board[2][2] !== " ") {
-        //       count++;
-        //   }
-
-        //   if( ( copy_board[0][2] !== copy_board[1][1] || copy_board[0][2] !== copy_board[2][0] || copy_board[1][1] !== copy_board[2][0]) && copy_board[0][2] !== " " && copy_board[1][1] !== " " && copy_board[2][0] !== " ") {
-        //       count++;
-        //   }
-
         let final_tie_flag = true
         for(let outer_row = 0; outer_row < 3; outer_row++)
         {
@@ -676,48 +655,22 @@ export default class NineBoard extends Component {
                                         }
                                         else
                                         {
+                                            let copy_board = this.state.bigboard.slice();
 
-            this.setState({
-                bigboard: [
+                                                for (let outer_row = 0; outer_row < 3; outer_row++) {
+                                                    for (let outer_column = 0; outer_column < 3; outer_column++) {
+                                                        for (let inner_row = 0; inner_row < 3; inner_row++) {
+                                                            for (let inner_column = 0; inner_column < 3; inner_column++) {
+                                                                copy_board[outer_row][outer_column][inner_row][inner_column] = " "
+                                                            }
+                                                        }
+                                                    }
+                                                }
 
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]],
-    
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]],
-    
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]]
-    
-                ],
-            })
+
+                                                this.setState({
+                                                    bigboard: copy_board
+                                                })
                                         }
                                     })
                                     .catch((err) => {
@@ -739,50 +692,6 @@ export default class NineBoard extends Component {
                         
                         console.log("try again")
                     }
-                // }
-                // else {
-
-                //     let copy_bigBoard1 = this.state.bigboard.slice()
-
-                //     copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
-                //     this.playAudio("audio-element-icon")
-                //     this.setState({
-                //         bigboard: copy_bigBoard1,
-                //         turn: "AGENT",
-                //         heading: agentTurn
-                //     })
-                //     axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
-                //         params: {
-                //             board: JSON.stringify(this.state.bigboard),
-                //             checkboard: JSON.stringify(this.state.ultimateWinBoard),
-                //             previous_move: JSON.stringify([outerRow, outerColumn, innerRow, innerColumn])
-                //         },
-                //     }) //route to be filled according to flask route name
-                //         .then((res) => {
-                //             // console.log(res.data)
-                //             let copy_board1 = this.state.bigboard.slice()
-
-                //             copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
-                //             if (this.state.startGameButton === "Reset Game") {
-                //                 this.setState({
-                //                     bigboard: copy_board1,
-                //                     moveNumber: this.moveNumber + 1,
-                //                     rowToPlace: res.data["agent-move"][2],
-                //                     columnToPlace: res.data["agent-move"][3],
-                //                     turn: "HUMAN",
-                //                     heading: humanTurn,
-
-                //                 })
-                //                 let copy_bigBoard2 = this.state.bigboard.slice()
-                //                 this.checkPartialWin(copy_bigBoard2)
-                                
-                //                 this.hintPlacer()
-                //             }
-                //         })
-                //         .catch((err) => {
-                //             console.log(err);
-                //         });
-                // }
             }
             else
             {
@@ -798,46 +707,20 @@ export default class NineBoard extends Component {
         
         if (startGame === "Start Game") {
 
-            this.setState({
-                bigboard: [
+            let copy_board = this.state.bigboard.slice();
 
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]],
-    
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]],
-    
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]]
-    
-                ],
+            for (let outer_row = 0; outer_row < 3; outer_row++) {
+                for (let outer_column = 0; outer_column < 3; outer_column++) {
+                    for (let inner_row = 0; inner_row < 3; inner_row++) {
+                        for (let inner_column = 0; inner_column < 3; inner_column++) {
+                            copy_board[outer_row][outer_column][inner_row][inner_column] = " "
+                        }
+                    }
+                }
+            }
+
+            this.setState({
+                bigboard : copy_board
             })
 
             let topHeading = humanTurn;
@@ -889,7 +772,7 @@ export default class NineBoard extends Component {
             }
     
         }
-        else if (startGame === "Reset Game" && !this.state.win) {
+        else if (startGame === "Reset Game" && !this.state.ultimateWin) {
             let copy_board = this.state.bigboard.slice();
 
             for (let outer_row = 0; outer_row < 3; outer_row++) {
@@ -995,7 +878,7 @@ export default class NineBoard extends Component {
                 <Col  className = {styles.center}><i class="fa fa-moon" aria-hidden="true"></i></Col>
                 <Col  xs={4}><Button
                 variant="dark"
-                disabled={this.state.win}
+                disabled={this.state.ultimateWin}
                 className={classNames(styles.button, {[styles.lightHeading]: !this.state.darkMode, [styles.highlightButton]: this.state.highlightButton})}
                 onClick={(e) => this.handleStartGame(e, this.state.startGameButton)}
               >
@@ -1058,20 +941,6 @@ const cellStyle3 = {
     maxWidth: "90%"
 }
 
-// const cellStyle3 = {
-//     backgroundColor: 'pink',
-//     textAlign: 'center',
-//     border: "1px solid",
-//     width: "10%",
-//     height: 250,
-//     padding: "3%",
-//     // flexBasis: 0,
-//     // flexGrow: 1,
-//     // minWidth: 0,
-//     // maxWidth: "100%"
-// }
-//   border-collapse: "separate"
-// }
 const heading = {
     display: "inline-block",
     textAlign: 'center',
