@@ -329,7 +329,7 @@ export default class ThreeBoard extends Component {
 
               this.state.symbol_stack.push("A")
 
-              this.sleep(5).then(() => {
+              this.sleep(2).then(() => {
                 if (this.state.startGameButton === "Reset Game") {
                   this.setState({
                     board: copy_board,
