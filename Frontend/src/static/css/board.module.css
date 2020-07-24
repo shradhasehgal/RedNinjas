@@ -248,6 +248,10 @@
     height: 48px !important;
   }
 
+  .iconNine {
+    font-size: 2rem;
+  }
+
 }
 
 @media screen and (max-height: 800px) and (min-width: 900px){
@@ -270,6 +274,10 @@
   }
 
 
+  .iconNine {
+    font-size: 1.75rem;
+  }
+
 }
 
 @media screen and (max-height: 750px) and (min-width: 900px){
@@ -281,6 +289,10 @@
 
   .board {
     width: 390px !important;
+  }
+
+  .iconNine {
+    font-size: 1.5rem;
   }
 
 }
@@ -322,5 +334,9 @@
 
   .boardInfo {
     margin-top: 2%;
+  }
+
+  .iconNine {
+    font-size: 1.25rem;
   }
 }
