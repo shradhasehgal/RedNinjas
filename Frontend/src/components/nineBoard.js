@@ -404,7 +404,7 @@ export default class NineBoard extends Component {
 
         }
 
-        else if (this.state.ultimateWin === false) {
+        if (this.state.ultimateWin === false) {
             for (let i = 0; i < 3; i++) { // for column
                 if (
                     copy_board[0][i] === copy_board[1][i] &&
@@ -429,7 +429,7 @@ export default class NineBoard extends Component {
             }
         }
 
-        else if (this.state.ultimateWin === false) {
+        if (this.state.ultimateWin === false) {
             if (
                 copy_board[0][0] === copy_board[1][1] &&
                 copy_board[0][0] === copy_board[2][2] &&
@@ -451,7 +451,7 @@ export default class NineBoard extends Component {
             }
         }
 
-        else if (this.state.ultimateWin === false) {
+        if (this.state.ultimateWin === false) {
             if (
                 copy_board[0][2] === copy_board[1][1] &&
                 copy_board[0][2] === copy_board[2][0] &&
@@ -620,7 +620,7 @@ export default class NineBoard extends Component {
         if (this.state.startGameValue === true && this.state.ultimateWin === false && this.state.turn === "HUMAN") {
             let copy_bigBoard1 = this.state.bigboard.slice()
             if (copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] === " ") {
-                if (this.state.moveNumber !== 1) {
+                // if (this.state.moveNumber !== 1) {
                     if (this.checkValidityOfMove(outerRow, outerColumn) === true) {
                         this.setState({
                             messageForError : false
@@ -654,7 +654,7 @@ export default class NineBoard extends Component {
                                         if (this.state.startGameButton === "Reset Game") {
                                             this.setState({
                                                 bigboard: copy_board1,
-                                                moveNumber: this.moveNumber + 1,
+                                                moveNumber: this.state.moveNumber + 1,
                                                 rowToPlace: res.data["agent-move"][2],
                                                 columnToPlace: res.data["agent-move"][3],
                                                 turn: "HUMAN",
@@ -668,11 +668,56 @@ export default class NineBoard extends Component {
                                                 if(this.state.ultimateWin === true)
                                                 {
                                                     this.sleep(5).then(() => {
-                                                        this.props. update_Win_Nine("nine",this.state.winner)
+                                                        this.props.update_Win_Nine("nine",this.state.winner)
 
                                                 })
                                                 }
                                             })
+                                        }
+                                        else
+                                        {
+
+            this.setState({
+                bigboard: [
+
+                    [[[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]]],
+    
+                    [[[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]]],
+    
+                    [[[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]],
+    
+                    [[" ", " ", " "],
+                    [" ", " ", " "],
+                    [" ", " ", " "]]]
+    
+                ],
+            })
                                         }
                                     })
                                     .catch((err) => {
@@ -682,7 +727,7 @@ export default class NineBoard extends Component {
                             else
                             {
                                 this.sleep(5).then(() => {
-                                    this.props. update_Win_Nine("nine",this.state.winner)
+                                    this.props.update_Win_Nine("nine",this.state.winner)
                                 })
                             }
                         }
@@ -694,50 +739,50 @@ export default class NineBoard extends Component {
                         
                         console.log("try again")
                     }
-                }
-                else {
+                // }
+                // else {
 
-                    let copy_bigBoard1 = this.state.bigboard.slice()
+                //     let copy_bigBoard1 = this.state.bigboard.slice()
 
-                    copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
-                    this.playAudio("audio-element-icon")
-                    this.setState({
-                        bigboard: copy_bigBoard1,
-                        turn: "AGENT",
-                        heading: agentTurn
-                    })
-                    axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
-                        params: {
-                            board: JSON.stringify(this.state.bigboard),
-                            checkboard: JSON.stringify(this.state.ultimateWinBoard),
-                            previous_move: JSON.stringify([outerRow, outerColumn, innerRow, innerColumn])
-                        },
-                    }) //route to be filled according to flask route name
-                        .then((res) => {
-                            // console.log(res.data)
-                            let copy_board1 = this.state.bigboard.slice()
+                //     copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] = "O"
+                //     this.playAudio("audio-element-icon")
+                //     this.setState({
+                //         bigboard: copy_bigBoard1,
+                //         turn: "AGENT",
+                //         heading: agentTurn
+                //     })
+                //     axios.get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", {
+                //         params: {
+                //             board: JSON.stringify(this.state.bigboard),
+                //             checkboard: JSON.stringify(this.state.ultimateWinBoard),
+                //             previous_move: JSON.stringify([outerRow, outerColumn, innerRow, innerColumn])
+                //         },
+                //     }) //route to be filled according to flask route name
+                //         .then((res) => {
+                //             // console.log(res.data)
+                //             let copy_board1 = this.state.bigboard.slice()
 
-                            copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
-                            if (this.state.startGameButton === "Reset Game") {
-                                this.setState({
-                                    bigboard: copy_board1,
-                                    moveNumber: this.moveNumber + 1,
-                                    rowToPlace: res.data["agent-move"][2],
-                                    columnToPlace: res.data["agent-move"][3],
-                                    turn: "HUMAN",
-                                    heading: humanTurn,
+                //             copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][res.data["agent-move"][2]][res.data["agent-move"][3]] = "X"
+                //             if (this.state.startGameButton === "Reset Game") {
+                //                 this.setState({
+                //                     bigboard: copy_board1,
+                //                     moveNumber: this.moveNumber + 1,
+                //                     rowToPlace: res.data["agent-move"][2],
+                //                     columnToPlace: res.data["agent-move"][3],
+                //                     turn: "HUMAN",
+                //                     heading: humanTurn,
 
-                                })
-                                let copy_bigBoard2 = this.state.bigboard.slice()
-                                this.checkPartialWin(copy_bigBoard2)
+                //                 })
+                //                 let copy_bigBoard2 = this.state.bigboard.slice()
+                //                 this.checkPartialWin(copy_bigBoard2)
                                 
-                                this.hintPlacer()
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                }
+                //                 this.hintPlacer()
+                //             }
+                //         })
+                //         .catch((err) => {
+                //             console.log(err);
+                //         });
+                // }
             }
         }
     }
@@ -824,7 +869,7 @@ export default class NineBoard extends Component {
                                 bigboard: copy_board1,
                                 rowToPlace: res.data["agent-move"][2],
                                 columnToPlace: res.data["agent-move"][3],
-                                moveNumber: this.moveNumber + 1,
+                                moveNumber: this.state.moveNumber + 1,
                                 turn: "HUMAN",
                                 heading: humanTurn
                             })
@@ -960,8 +1005,8 @@ export default class NineBoard extends Component {
             <audio className="audio-element-icon">
               <source src = {place_icon_sound}></source>
             </audio> 
-
-            {this.state.startGameValue === true && this.state.turn === "HUMAN" && <Message row_to_place = {this.state.rowToPlace} column_to_place = {this.state.columnToPlace} messageForHint = {this.state.messageForHint} messageForError = {this.state.messageForError}/>}
+            {this.state.startGameValue === true && this.state.turn === "HUMAN" && <Message row_to_place = {this.state.rowToPlace} column_to_place = {this.state.columnToPlace} messageForHint = {this.state.messageForHint}/>}
+            {this.state.messageForError && <Message messageForError = {this.state.messageForError}/>}
             </div>
             </div>
         )

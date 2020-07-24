@@ -10,6 +10,21 @@ const Message = (props) => {
     var row = null
     var coloumn = null
 
+if(props.messageForError === true)
+{
+    return (
+        <div aria-live="polite" aria-atomic="true">
+        <div className={styles.box1} style={{ position: 'absolute', top: 50, left: 0}} >
+        <Toast onClose={() => setShow(false)} delay={4000}>
+            <Toast.Header className={styles.text}>
+            <strong className="mr-auto">Hint!!</strong>
+        </Toast.Header>
+        <Toast.Body className={styles.bodytext1}> Wrong Placement! Play in the highlighted localboard</Toast.Body>
+        </Toast>
+        </div>
+        </div>
+    )
+}
 
 if (props.messageForHint === "Place in the cell") {
     return (
