@@ -1,0 +1,50 @@
+.content {
+  background-color: #000000;
+  padding: 10%;
+  opacity: 0.7;
+  z-index: 0;
+  margin: 0 auto;
+  width: 1200px;
+  max-width: 80%;
+}
+
+.landingBody {
+  margin: auto;
+  align-items: center;
+  background-image: url('../assets/idea2.gif');
+  /* position: fixed; */
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  font-family: 'Acme', sans-serif;
+}
+.heading {
+  color: #ffffff;
+  font-size: 2vw;
+}
+
+.subheading {
+  color: #ffffff;
+  font-size: 1.2vw;
+}
+
+/* @media screen and (min-width: 601 */
+
+@media screen and (min-width: 601) {
+  .heading {
+    font-size: 50px;
+  }
+  .subheading {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 30px;
+  }
+  .subheading {
+    font-size: 15px;
+  }
+}

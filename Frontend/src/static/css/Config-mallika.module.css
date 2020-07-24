@@ -1,0 +1,259 @@
+.wrapper {
+  margin: auto;
+  align-items: center;
+  background-image: url('../assets/idea2.gif');
+  /* position: fixed; */
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  font-family: 'Acme', sans-serif;
+}
+
+.selectedButton {
+  background-color: #3b3251 !important;
+  border-color: #3b3251 !important;
+  color: white !important;
+}
+
+.mainDiv {
+  min-height: 100vh;
+  /* margin: 0; */
+  overflow: auto;
+  display: flex;
+}
+
+.containerBody {
+  background-color: #ad4977;
+  text-align: center;
+  margin: auto;
+  min-height: 70vh;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.26);
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #3b3251 !important;
+}
+
+.heading {
+  margin-bottom: 10%;
+  color: #ffffff;
+  font-family: 'Acme', sans-serif;
+}
+
+.startContent {
+  color: #ffffff;
+  font-family: 'Acme', sans-serif;
+}
+
+.playerName {
+  margin-top: 1vh;
+  color: #ffffff;
+}
+
+.iconStyles {
+  color: #3b3251;
+  /* color: #AD4977; */
+  cursor: pointer;
+  border: 5px solid #ad4977;
+  border-radius: 10%;
+  padding: 10%;
+}
+.iconStyles:hover {
+  /* color: #3b3251; */
+  color: #3b3251d2;
+}
+.iconSelect {
+  border: 5px solid #ffffff;
+}
+
+.icon {
+  text-align: 'center';
+  display: 'inline-block';
+}
+
+.rulestext {
+  text-align: 'left';
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 990px) {
+  .ruleimg {
+    width: 70%;
+  }
+}
+@media screen and (min-width: 801px) and (max-width: 990px) {
+  .ruleimg {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  .heading {
+    font-size: 50px;
+  }
+  .subheading {
+    font-size: 20px;
+  }
+  .startContent {
+    font-size: 30px;
+  }
+  .iconStyles {
+    font-size: 5rem;
+  }
+  .iconSelect {
+    font-size: 5rem;
+  }
+  .icon {
+    margin: '0 10%';
+  }
+  .rulestext {
+    font-size: 15px;
+    /* color: lawngreen; */
+  }
+}
+@media screen and (max-width: 800px) and (min-width: 361px) {
+  .heading {
+    font-size: 25px;
+  }
+  .subheading {
+    font-size: 20px;
+  }
+  .startContent {
+    font-size: 15px;
+  }
+  .playerName {
+    font-size: 10px;
+  }
+  .iconStyles {
+    color: #3b3251;
+    font-size: 3rem;
+  }
+  .iconSelect {
+    font-size: 3rem;
+  }
+  .icon {
+    margin: '0 7%';
+  }
+  .rulestext {
+    font-size: 12px;
+    /* color: lightcoral; */
+  }
+  .ruleimg {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .heading {
+    font-size: 15px;
+    margin-bottom: 2%;
+  }
+  .subheading {
+    font-size: 15px;
+  }
+  .startContent {
+    font-size: 12px;
+  }
+  .playerName {
+    font-size: 8px;
+  }
+  .iconStyles {
+    font-size: 2rem;
+    color: #3b3251;
+  }
+  .iconSelect {
+    font-size: 2rem;
+  }
+  .rulestext {
+    font-size: 9px;
+    /* color: lightseagreen; */
+  }
+  .ruleimg {
+    width: 55%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .text {
+    font-size: 15px;
+  }
+  .containerBody {
+    max-height: 600px;
+    margin-top: 10vh;
+  }
+  .gif {
+    width: 50%;
+  }
+  .heading {
+    font-size: 20px;
+    margin-bottom: 2%;
+  }
+  .subheading {
+    font-size: 15px;
+  }
+  .startContent {
+    font-size: 15px;
+  }
+  .playerName {
+    font-size: 12px;
+  }
+  .iconStyles {
+    font-size: 2.5rem;
+    color: #3b3251;
+  }
+  .iconSelect {
+    font-size: 2.5rem;
+  }
+  .rulestext {
+    font-size: 12px;
+    /* color: lightseagreen; */
+  }
+  .ruleimg {
+    width: 55%;
+  }
+}
+@media screen and (max-height: 700px) and (min-height: 600px) {
+  .text {
+    font-size: 15px;
+  }
+  .containerBody {
+    max-height: 600px;
+    margin-top: 10vh;
+  }
+  .gif {
+    width: 50%;
+  }
+  .heading {
+    font-size: 20px;
+    margin-bottom: 2%;
+  }
+  .subheading {
+    font-size: 15px;
+  }
+  .startContent {
+    font-size: 15px;
+  }
+  .playerName {
+    font-size: 12px;
+  }
+  .iconStyles {
+    font-size: 2.5rem;
+    color: #3b3251;
+  }
+  .iconSelect {
+    font-size: 2.5rem;
+  }
+  .rulestext {
+    font-size: 12px;
+    /* color: lightseagreen; */
+  }
+  .ruleimg {
+    width: 55%;
+  }
+}

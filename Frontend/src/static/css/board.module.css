@@ -1,0 +1,320 @@
+.landingBody {
+  align-items: center;
+  background-color: #3b3251;
+  min-height: 100vh;
+  display: flex;
+}
+
+.cellThree {
+  max-width: 100% !important;
+  height: 185px;
+  padding: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  text-align: center;
+  border: 1px solid;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.cellNine {
+  width: 5%;
+  height: 60px;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  text-align: center;
+  border: 1px solid;
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0;
+  max-width: 90%;
+  cursor: pointer;
+}
+
+.iconThree {
+  font-size: 4.5rem;
+  z-index: 0;
+  color: #4f3e79;
+}
+
+.iconNine {
+  font-size: 3rem;
+}
+
+.heading {
+  color: white;
+  padding-top: 2%;
+  padding-bottom: 1%;
+  background-color: #212121;
+  opacity: 0.7;
+  margin-bottom: 5%;
+  margin-top: 60px;
+}
+
+.boardInfo {
+  background-color: #212121;
+  opacity: 0.7;
+  z-index: 0;
+  color: white;
+  margin-top: 5%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.button {
+  font-size: 0.8rem !important;
+  padding: 0.45rem 0.7rem !important;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out !important;
+}
+
+.button:hover {
+  background-color: white !important;
+  color: #212121 !important;
+}
+
+.lightHeading {
+  /* color: black !important; */
+  background-color: #3b3251 !important;
+  opacity: 0.9;
+}
+
+.highlightButton {
+  background-color: white !important;
+  color: #212121 !important;
+}
+
+.undo {
+  margin-top: 5%;
+  color: white;
+}
+
+.lightUndo {
+  color: #3b3251;
+}
+
+.center {
+  margin: auto -10px;
+}
+
+.whiteBg {
+  background-color: rgb(211, 193, 193) !important;
+}
+
+.greyCell {
+  background-color: white !important;
+  opacity: 0.7;
+  color: rgb(211, 193, 193) !important;
+}
+
+.highlighted {
+  background-color: black !important;
+}
+
+.nineHeading {
+  margin-bottom: 2% !important;
+  margin-top: 8%;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.nineBoardInfo {
+  margin-top: 2%;
+}
+
+.nineSpinner {
+  font-size: 1.5rem;
+}
+
+.iconAgent {
+  color: #ad4977;
+}
+
+.darkCell {
+  background-color: black !important;
+}
+
+.lightCell {
+  background-color: grey !important;
+}
+
+@media screen and (max-width: 650px) {
+  .cellThree {
+    height: 130px;
+  }
+
+  .iconThree {
+    font-size: 4rem;
+  }
+
+  .iconNine {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .center {
+    font-size: 0.85rem;
+  }
+
+  .button {
+    font-size: 0.7rem !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cellNine {
+    height: 40px !important;
+  }
+
+  .iconNine {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .cellThree {
+    height: 120px;
+  }
+
+  .iconNine {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .cellNine {
+    height: 30px !important;
+  }
+
+  .iconThree {
+    font-size: 2.5rem;
+  }
+
+  .cellThree {
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .center {
+    font-size: 0.75rem !important;
+  }
+
+  .button {
+    font-size: 0.6rem !important;
+  }
+}
+
+@media screen and (max-height: 900px) and (min-width: 900px) {
+  .cellThree {
+    height: 160px;
+  }
+
+  .board {
+    width: 480px !important;
+  }
+
+  .cellNine {
+    height: 48px !important;
+  }
+
+  .iconNine {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-height: 800px) and (min-width: 900px) {
+  .cellThree {
+    height: 140px;
+    /* width: 145px; */
+  }
+
+  .board {
+    width: 420px !important;
+  }
+
+  .cellNine {
+    height: 42px !important;
+  }
+
+  .button {
+    font-size: 0.66rem !important;
+  }
+
+  .iconNine {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (max-height: 750px) and (min-width: 900px) {
+  .cellThree {
+    height: 130px;
+    /* width: 145px; */
+  }
+
+  .board {
+    width: 390px !important;
+  }
+
+  .iconNine {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-height: 700px) and (min-width: 900px) {
+  .cellThree {
+    height: 110px;
+    /* width: 145px; */
+  }
+
+  .cellNine {
+    height: 32px !important;
+  }
+
+  .board {
+    width: 330px !important;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .center {
+    font-size: 0.8rem;
+  }
+
+  .button {
+    font-size: 0.6rem !important;
+  }
+
+  .heading {
+    margin-bottom: 2%;
+  }
+
+  .iconThree {
+    font-size: 3.5rem;
+  }
+
+  .boardInfo {
+    margin-top: 2%;
+  }
+
+  .iconNine {
+    font-size: 1.25rem;
+  }
+}
