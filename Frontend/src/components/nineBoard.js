@@ -685,7 +685,7 @@ export default class NineBoard extends Component {
                                         if (this.state.startGameButton === "Reset Game") {
                                             this.setState({
                                                 bigboard: copy_board1,
-                                                moveNumber: this.state.moveNumber + 1,
+                                                // moveNumber: this.state.moveNumber + 1,
                                                 rowToPlace: res.data["agent-move"][2],
                                                 columnToPlace: res.data["agent-move"][3],
                                                 turn: "HUMAN",
@@ -783,7 +783,7 @@ export default class NineBoard extends Component {
                                 bigboard: copy_board1,
                                 rowToPlace: res.data["agent-move"][2],
                                 columnToPlace: res.data["agent-move"][3],
-                                moveNumber: this.state.moveNumber + 1,
+                                // moveNumber: this.state.moveNumber + 1,
                                 turn: "HUMAN",
                                 heading: humanTurn,
                                 agentOuterRow : res.data["agent-move"][0] ,
@@ -828,7 +828,7 @@ export default class NineBoard extends Component {
                 winner : " ",
                 rowToPlace: " ",
                 columnToPlace: " ",
-                moveNumber: 1,
+                // moveNumber: 1,
                 ultimateWinBoard: [
                     [" ", " ", " "],
                     [" ", " ", " "],

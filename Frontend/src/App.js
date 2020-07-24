@@ -4,8 +4,8 @@ import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Landing from './components/Landing'
 import Error from './components/Error'
-import Result from './components/Result'
-import Config from './components/Config-mallika'
+// import Result from './components/Result'
+import Config from './components/Config'
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Overview from "./components/Overview";
 import Rules from "./components/Rules";
