@@ -844,6 +844,10 @@ export default class NineBoard extends Component {
         }
     }
 
+    checkDarkHighlight(){
+        
+    }
+
     render() {
         return (
             <div className={classNames(styles.landingBody,{
@@ -869,8 +873,8 @@ export default class NineBoard extends Component {
                                                         <Row style={{ maxWidth: "100%", margin: "0 auto" }}>
                                                             {
                                                                 inner_row.map((inner_column, innerColumn) => (
-                                                                    <Col md style={outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false && this.state.darkMode && this.state.messageForHint === "Place in the cell" ? cellStyle3 : cellStyle2}
-                                                                    className={classNames(styles.cellNine,{[styles.greyCell]: !this.state.darkMode, [styles.highlighted]: outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false && !this.state.darkMode && this.state.messageForHint === "Place in the cell"})}  
+                                                                    <Col md style={(outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false && this.state.darkMode && this.state.messageForHint === "Place in the cell") || (outerRow == this.state.agentOuterRow && innerRow == this.state.agentInnerRow && outerColumn == this.state.agentOuterColumn && innerColumn == this.state.agentInnerColumn && this.state.darkMode && !this.state.ultimateWin) ? cellStyle3 : cellStyle2}
+                                                                    className={classNames(styles.cellNine,{[styles.greyCell]: !this.state.darkMode, [styles.highlighted]: (outerRow === this.state.rowToPlace && outerColumn === this.state.columnToPlace && this.state.rowToPlace !== " " && this.state.columnToPlace !== " " && this.state.ultimateWin === false && !this.state.darkMode && this.state.messageForHint === "Place in the cell") || (outerRow == this.state.agentOuterRow && innerRow == this.state.agentInnerRow && outerColumn == this.state.agentOuterColumn && innerColumn == this.state.agentInnerColumn && !this.state.darkMode && !this.state.ultimateWin)})}  
                                                                         onClick={(e) => this.handleCellClick(e, outerRow, outerColumn, innerRow, innerColumn)}>
 
                                                                         {

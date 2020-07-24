@@ -139,7 +139,13 @@
   color: #AD4977;
 }
 
+.darkCell {
+  background-color: black !important;
+}
 
+.lightCell {
+  background-color: grey !important;
+}
 
 @media screen and (max-width: 650px) {
   
