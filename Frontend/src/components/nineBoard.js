@@ -784,6 +784,12 @@ export default class NineBoard extends Component {
                 //         });
                 // }
             }
+            else
+            {
+                this.setState({
+                    messageForError : true
+                })
+            }
         }
     }
 
