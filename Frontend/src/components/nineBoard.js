@@ -39,7 +39,11 @@ export default class NineBoard extends Component {
             messageForError : false,
             rowToPlace: " ",
             columnToPlace: " ",
-            moveNumber: 1,
+            agentOuterRow : " ",
+            agentOuterColumn : " ",
+            agentInnerRow : " ",
+            agentInnerColumn : " ",
+            // moveNumber: 1,
             ultimateWinBoard: [
                 [" ", " ", " "],
                 [" ", " ", " "],
@@ -574,6 +578,50 @@ export default class NineBoard extends Component {
         }
     }
 
+    resetBoard()
+    {
+        this.setState({
+            bigboard: [
+
+                [[[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]],
+
+                [[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]],
+
+                [[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]]],
+
+                [[[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]],
+
+                [[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]],
+
+                [[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]]],
+
+                [[[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]],
+
+                [[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]],
+
+                [[" ", " ", " "],
+                [" ", " ", " "],
+                [" ", " ", " "]]]
+
+            ]
+        })
+    }
 
     hintPlacer()
     {
@@ -637,7 +685,11 @@ export default class NineBoard extends Component {
                                                 rowToPlace: res.data["agent-move"][2],
                                                 columnToPlace: res.data["agent-move"][3],
                                                 turn: "HUMAN",
-                                                heading: humanTurn
+                                                heading: humanTurn,
+                                                agentOuterRow : res.data["agent-move"][0] ,
+                                                agentOuterColumn : res.data["agent-move"][1],
+                                                agentInnerRow : res.data["agent-move"][2],
+                                                agentInnerColumn : res.data["agent-move"][3] 
                                             })
                                             let copy_bigBoard2 = this.state.bigboard.slice()
                                             this.checkPartialWin(copy_bigBoard2)
@@ -655,62 +707,7 @@ export default class NineBoard extends Component {
                                         }
                                         else
                                         {
-                                            // let copy_board = this.state.bigboard.slice();
-
-                                            //     for (let outer_row = 0; outer_row < 3; outer_row++) {
-                                            //         for (let outer_column = 0; outer_column < 3; outer_column++) {
-                                            //             for (let inner_row = 0; inner_row < 3; inner_row++) {
-                                            //                 for (let inner_column = 0; inner_column < 3; inner_column++) {
-                                            //                     copy_board[outer_row][outer_column][inner_row][inner_column] = " "
-                                            //                 }
-                                            //             }
-                                            //         }
-                                            //     }
-
-
-                                                this.setState({
-                                                bigboard: [
-
-                                                    [[[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]],
-                                    
-                                                    [[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]],
-                                    
-                                                    [[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]]],
-                                    
-                                                    [[[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]],
-                                    
-                                                    [[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]],
-                                    
-                                                    [[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]]],
-                                    
-                                                    [[[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]],
-                                    
-                                                    [[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]],
-                                    
-                                                    [[" ", " ", " "],
-                                                    [" ", " ", " "],
-                                                    [" ", " ", " "]]]
-                                    
-                                                ]
-                                            //         bigboard: copy_board
-                                                })
-                                            
+                                            this.resetBoard()
                                         }
                                     })
                                     .catch((err) => {
@@ -746,65 +743,7 @@ export default class NineBoard extends Component {
         this.playAudio("audio-element-start")
         
         if (startGame === "Start Game") {
-
-            // let copy_board = this.state.bigboard.slice();
-
-            // for (let outer_row = 0; outer_row < 3; outer_row++) {
-            //     for (let outer_column = 0; outer_column < 3; outer_column++) {
-            //         for (let inner_row = 0; inner_row < 3; inner_row++) {
-            //             for (let inner_column = 0; inner_column < 3; inner_column++) {
-            //                 copy_board[outer_row][outer_column][inner_row][inner_column] = " "
-            //             }
-            //         }
-            //     }
-            // }
-
-            // this.setState({
-                // bigboard : copy_board
-            // })
-            this.setState({
-                bigboard: [
-
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]],
-    
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]],
-    
-                    [[[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]],
-    
-                    [[" ", " ", " "],
-                    [" ", " ", " "],
-                    [" ", " ", " "]]]
-    
-                ]
-            //         bigboard: copy_board
-                })
-
+            this.resetBoard()
             let topHeading = humanTurn;
             if(this.props.gameBeginner == "AGENT")
                 topHeading = agentTurn;
@@ -842,7 +781,11 @@ export default class NineBoard extends Component {
                                 columnToPlace: res.data["agent-move"][3],
                                 moveNumber: this.state.moveNumber + 1,
                                 turn: "HUMAN",
-                                heading: humanTurn
+                                heading: humanTurn,
+                                agentOuterRow : res.data["agent-move"][0] ,
+                                agentOuterColumn : res.data["agent-move"][1],
+                                agentInnerRow : res.data["agent-move"][2],
+                                agentInnerColumn : res.data["agent-move"][3] 
                             })
                             let copy_bigBoard2 = this.state.bigboard.slice()
                             this.checkPartialWin(copy_bigBoard2)
@@ -851,47 +794,8 @@ export default class NineBoard extends Component {
                             
                         }
                         else{
-                            this.setState({
-                            bigboard: [
-
-                                [[[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]],
-                
-                                [[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]],
-                
-                                [[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]]],
-                
-                                [[[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]],
-                
-                                [[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]],
-                
-                                [[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]]],
-                
-                                [[[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]],
-                
-                                [[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]],
-                
-                                [[" ", " ", " "],
-                                [" ", " ", " "],
-                                [" ", " ", " "]]]
-                
-                            ]
-                        })
+                            
+                            this.resetBoard();
                         }
                     })
             }

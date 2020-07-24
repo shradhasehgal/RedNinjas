@@ -278,7 +278,7 @@ export default class Overview extends Component {
                   <i class="fas fa-angle-double-right"></i>{" "}
                   <strong>Hint Boxes</strong>
                   <br />
-                  For the 9x9 game, the users are provided with hint boxes that appear with a message containing the next board they have to place their move in.abs
+                  For the 9x9 game, the users are provided with hint boxes that appear with a message containing the next board they have to place their move in.
                   The alert boxes also appear in cases of incorrect moves.
                   <br />
                   <br />
