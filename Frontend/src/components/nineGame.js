@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Col, Row } from "react-bootstrap";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import styles from "../static/css/Landing.module.css";
-import common from "../static/css/Common.module.css";
 
 import NineBoard from "./nineBoard.js";
 import NineConfiguration from "./nineConfiguration.js";
@@ -34,8 +30,7 @@ export default class ThreeGame extends Component {
     this.handleStartHuman_Nine = this.handleStartHuman_Nine.bind(this);
   }
 
-  updateStateForWinComponent(gameRoute, gameWinner) {
-    console.log("Heyyyyy");
+  updateStateForWinComponent(gameRoute, gameWinner) { //to hide the  9*9 game component and display the win component
     setTimeout(
       () =>
         this.setState({
@@ -61,8 +56,7 @@ export default class ThreeGame extends Component {
     });
   }
 
-  updateStateOfComponents_Nine(message) {
-    console.log("Changing comp");
+  updateStateOfComponents_Nine(message) { //to display the 9*9 game component and hide the configuration component
     if (message === "Go To Game") {
       this.setState({
         showNineConfigurationComponent: false,
@@ -70,8 +64,6 @@ export default class ThreeGame extends Component {
         showNineWinComponent: false,
       });
     } else if (message === "Show Configuration") {
-      console.log("Changing comp aaaaaayiye aapka intezaar thaa");
-      console.log(this.state.winner);
 
       this.setState({
         showNineConfigurationComponent: true,
@@ -81,7 +73,6 @@ export default class ThreeGame extends Component {
         route: " ",
         winner: " ",
       });
-      console.log(this.state.showNineConfigurationComponent);
     }
   }
 

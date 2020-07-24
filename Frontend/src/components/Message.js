@@ -1,13 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
+import React, {useState} from "react";
 import styles from "../static/css/message.module.css";
-import { Button, Fade, Toast } from "react-bootstrap";
-import Alert from "react-bootstrap/Alert";
-import { toast } from "react-toastify";
+import { Toast } from "react-bootstrap";
 
 const Message = (props) => {
   const [show, setShow] = useState(true);
-  var row = null;
-  var coloumn = null;
 
   if (props.messageForError === true) {
     return (
@@ -78,23 +74,4 @@ const Message = (props) => {
     );
   }
 };
-// if(props.messageForError === true)
-// {
-//     return (
-//         <div aria-live="polite" aria-atomic="true">
-//             <div className={styles.box} style={{ position: 'absolute', top: 50, right: 0}} >
-//                 <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide >
-//                     <Toast.Header className={styles.text}>
-//                     <strong className="mr-auto">Hint!!</strong>
-//             </Toast.Header>
-//             <Toast.Body className={styles.bodytext} >Play in the highlighted cell</Toast.Body>
-//           </Toast>
-//         </div>
-//         </div>
-//     );
-// }
-//   }
-
-// render(<Example />);
-
 export default Message;

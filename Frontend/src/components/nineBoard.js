@@ -1,23 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component} from "react";
 import styles from "../static/css/board.module.css";
-import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavbarToggler,
-  MDBCollapse,
-} from "mdbreact";
-import {
-  MDBRow,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBIcon,
-} from "mdbreact";
-// import { Link } from 'react-router-dom'
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 
@@ -57,7 +39,6 @@ export default class NineBoard extends Component {
       agentOuterColumn: " ",
       agentInnerRow: " ",
       agentInnerColumn: " ",
-      // moveNumber: 1,
       ultimateWinBoard: [
         [" ", " ", " "],
         [" ", " ", " "],
@@ -130,16 +111,12 @@ export default class NineBoard extends Component {
           <div style={{ textAlign: "center" }}>
             <i className={"fas fa-times amber-text " + styles.iconNine}></i>
 
-            {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
-            {/* <i class="far fa-grin fa-3x amber-text mr-2"></i> */}
           </div>
         ),
         O: (
           <div style={{ textAlign: "center" }}>
             <i className={"far fa-circle pink-text " + styles.iconNine}></i>
 
-            {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
-            {/* <i class="fas fa-grin fa-3x pink-text mr-2"></i> */}
           </div>
         ),
         WA: (
@@ -148,32 +125,24 @@ export default class NineBoard extends Component {
               className={"fas fa-laugh-wink amber-text " + styles.iconNine}
             ></i>
 
-            {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
-            {/* <i class="fas fa-robot fa-2x light-green-text mr-2"></i> */}
           </div>
         ),
         WH: (
           <div style={{ textAlign: "center" }}>
             <i className={"far fa-laugh-wink pink-text " + styles.iconNine}></i>
 
-            {/* <i class="fas fa-user-astronaut fa-2x green-text mr-2"></i> */}
-            {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
           </div>
         ),
         LA: (
           <div style={{ textAlign: "center" }}>
             <i className={"fas fa-sad-cry amber-text " + styles.iconNine}></i>
 
-            {/* <i class="fas fa-times fa-2x amber-text mr-2"></i> */}
-            {/* <i class="fas fa-robot fa-2x light-green-text mr-2"></i> */}
           </div>
         ),
         LH: (
           <div style={{ textAlign: "center" }}>
             <i className={"far fa-sad-cry pink-text " + styles.iconNine}></i>
 
-            {/* <i class="fas fa-user-astronaut fa-2x green-text mr-2"></i> */}
-            {/* <i class="far fa-circle fa-2x pink-text mr-2"></i> */}
           </div>
         ),
       },
@@ -187,12 +156,12 @@ export default class NineBoard extends Component {
     this.startBlinker();
   }
 
-  playAudio(audio_element) {
+  playAudio(audio_element) { //for the sound effect for button clicks
     const audioEl = document.getElementsByClassName(audio_element)[0];
     audioEl.play();
   }
 
-  startBlinker() {
+  startBlinker() { //start the start button blinker
     blinker = setInterval(() => {
       let newHighlight = !this.state.highlightButton;
       if (!this.state.startGameValue)
@@ -200,19 +169,18 @@ export default class NineBoard extends Component {
     }, 400);
   }
 
-  stopBlinker() {
+  stopBlinker() { //stop the blinker button when clicked
     clearInterval(blinker);
   }
 
-  changeMode(darkMode) {
+  changeMode(darkMode) { //toggle the dark and light mode
     this.setState({ darkMode: !darkMode });
   }
 
-  setScores(gameWinner) {
+  setScores(gameWinner) { //setting the scores of the human player
     let status = "WIN";
     if (gameWinner == "AGENT") status = "LOST";
     else if (gameWinner == "TIE") status = "TIE";
-    console.log(this.props.depth);
     let score = { game: "9*9", depth: "ULTIMATE", winner: status };
     let history = localStorage.getItem("scores");
     let a = [];
@@ -222,7 +190,7 @@ export default class NineBoard extends Component {
     localStorage.setItem("scores", JSON.stringify(a));
   }
 
-  checkTie(bigBoard) {
+  checkTie(bigBoard) { //to check if there is a TIE in a localBoard of the 9*9 game
     let outer_row, outer_column, inner_row, inner_column;
     for (outer_row = 0; outer_row < 3; outer_row++) {
       for (outer_column = 0; outer_column < 3; outer_column++) {
@@ -251,7 +219,7 @@ export default class NineBoard extends Component {
     }
   }
 
-  alterBigBoardRow(
+  alterBigBoardRow(//to change the icons of the winner and loser in row
     winner_symbol,
     winner_status,
     loser_symbol,
@@ -296,7 +264,7 @@ export default class NineBoard extends Component {
     });
   }
 
-  alterBigBoardColumn(
+  alterBigBoardColumn( //to change the icons of the winner and loser in column
     winner_symbol,
     winner_status,
     loser_symbol,
@@ -342,7 +310,7 @@ export default class NineBoard extends Component {
     });
   }
 
-  alterBigBoardLeftDiagonal(
+  alterBigBoardLeftDiagonal( //to change the icons of the winner and loser in left diagonal
     winner_symbol,
     winner_status,
     loser_symbol,
@@ -390,7 +358,7 @@ export default class NineBoard extends Component {
     });
   }
 
-  alterBigBoardRightDiagonal(
+  alterBigBoardRightDiagonal( //to change the icons of the winner and loser in right diagonal
     winner_symbol,
     winner_status,
     loser_symbol,
@@ -448,7 +416,7 @@ export default class NineBoard extends Component {
     });
   }
 
-  checkFinalTie() {
+  checkFinalTie() { //to check if there is a TIE condition in the global board (entire game)
     let final_tie_flag = true;
     for (let outer_row = 0; outer_row < 3; outer_row++) {
       for (let outer_column = 0; outer_column < 3; outer_column++) {
@@ -477,8 +445,8 @@ export default class NineBoard extends Component {
     }
   }
 
-  check_ultimate_win(copy_board) {
-    if (this.state.ultimateWin === false) {
+  check_ultimate_win(copy_board) { //to check if there is a win in the global board
+    if (this.state.ultimateWin === false) { //row
       for (let i = 0; i < 3; i++) {
         //for row
         if (
@@ -502,7 +470,7 @@ export default class NineBoard extends Component {
       }
     }
 
-    if (this.state.ultimateWin === false) {
+    if (this.state.ultimateWin === false) { //column
       for (let i = 0; i < 3; i++) {
         // for column
         if (
@@ -526,7 +494,7 @@ export default class NineBoard extends Component {
       }
     }
 
-    if (this.state.ultimateWin === false) {
+    if (this.state.ultimateWin === false) { //left diagonal
       if (
         copy_board[0][0] === copy_board[1][1] &&
         copy_board[0][0] === copy_board[2][2] &&
@@ -547,7 +515,7 @@ export default class NineBoard extends Component {
       }
     }
 
-    if (this.state.ultimateWin === false) {
+    if (this.state.ultimateWin === false) { //right diagonal
       if (
         copy_board[0][2] === copy_board[1][1] &&
         copy_board[0][2] === copy_board[2][0] &&
@@ -572,7 +540,7 @@ export default class NineBoard extends Component {
     }
   }
 
-  place_partial(bigBoard, outer_row, outer_column, symbol) {
+  place_partial(bigBoard, outer_row, outer_column, symbol) { //to put the winning symbol in local boards
     for (let inner_row = 0; inner_row < 3; inner_row++) {
       for (let inner_column = 0; inner_column < 3; inner_column++) {
         bigBoard[outer_row][outer_column][inner_row][inner_column] = symbol;
@@ -591,8 +559,8 @@ export default class NineBoard extends Component {
     this.check_ultimate_win(copyUltimateWinBoard_2);
   }
 
-  checkPartialWin(bigBoard) {
-    for (let outer_row = 0; outer_row < 3; outer_row++) {
+  checkPartialWin(bigBoard) { //to check if there is a win by any player in the local boards
+    for (let outer_row = 0; outer_row < 3; outer_row++) { //for rows
       for (let outer_column = 0; outer_column < 3; outer_column++) {
         for (let i = 0; i < 3; i++) {
           if (
@@ -614,7 +582,7 @@ export default class NineBoard extends Component {
       }
     }
 
-    for (let outer_row = 0; outer_row < 3; outer_row++) {
+    for (let outer_row = 0; outer_row < 3; outer_row++) { //for columns
       for (let outer_column = 0; outer_column < 3; outer_column++) {
         for (let i = 0; i < 3; i++) {
           if (
@@ -636,7 +604,7 @@ export default class NineBoard extends Component {
       }
     }
 
-    for (let outer_row = 0; outer_row < 3; outer_row++) {
+    for (let outer_row = 0; outer_row < 3; outer_row++) { //for left diagonal
       for (let outer_column = 0; outer_column < 3; outer_column++) {
         if (
           bigBoard[outer_row][outer_column][0][0] ===
@@ -656,7 +624,7 @@ export default class NineBoard extends Component {
       }
     }
 
-    for (let outer_row = 0; outer_row < 3; outer_row++) {
+    for (let outer_row = 0; outer_row < 3; outer_row++) { //for right diagonal
       for (let outer_column = 0; outer_column < 3; outer_column++) {
         if (
           bigBoard[outer_row][outer_column][0][2] ===
@@ -698,7 +666,7 @@ export default class NineBoard extends Component {
     }
   }
 
-  resetBoard() {
+  resetBoard() { //to reset the board back to the original state when reset happens
     this.setState({
       bigboard: [
         [
@@ -764,7 +732,7 @@ export default class NineBoard extends Component {
     });
   }
 
-  hintPlacer() {
+  hintPlacer() { // function to handle the display of hint boxes for the human player
     if (
       this.state.ultimateWinBoard[this.state.rowToPlace][
         this.state.columnToPlace
@@ -784,7 +752,7 @@ export default class NineBoard extends Component {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  handleCellClick = (e, outerRow, outerColumn, innerRow, innerColumn) => {
+  handleCellClick = (e, outerRow, outerColumn, innerRow, innerColumn) => { //to place the human and agent's symbols
     if (
       this.state.startGameValue === true &&
       this.state.ultimateWin === false &&
@@ -794,7 +762,6 @@ export default class NineBoard extends Component {
       if (
         copy_bigBoard1[outerRow][outerColumn][innerRow][innerColumn] === " "
       ) {
-        // if (this.state.moveNumber !== 1) {
         if (this.checkValidityOfMove(outerRow, outerColumn) === true) {
           this.setState({
             messageForError: false,
@@ -816,7 +783,7 @@ export default class NineBoard extends Component {
             if (this.state.ultimateWin === false) {
               axios
                 .get(
-                  "https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate",
+                  "https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", //axios request to the backend with appropriate data of human's move
                   {
                     params: {
                       board: JSON.stringify(this.state.bigboard),
@@ -829,7 +796,7 @@ export default class NineBoard extends Component {
                       ]),
                     },
                   }
-                ) //route to be filled according to flask route name
+                )
                 .then((res) => {
                   let copy_board1 = this.state.bigboard.slice();
                   copy_board1[res.data["agent-move"][0]][
@@ -838,7 +805,6 @@ export default class NineBoard extends Component {
                   if (this.state.startGameButton === "Reset Game") {
                     this.setState({
                       bigboard: copy_board1,
-                      // moveNumber: this.state.moveNumber + 1,
                       rowToPlace: res.data["agent-move"][2],
                       columnToPlace: res.data["agent-move"][3],
                       turn: "HUMAN",
@@ -876,8 +842,6 @@ export default class NineBoard extends Component {
           this.setState({
             messageForError: true,
           });
-
-          console.log("try again");
         }
       } else {
         this.setState({
@@ -887,7 +851,7 @@ export default class NineBoard extends Component {
     }
   };
 
-  handleStartGame = (e, startGame) => {
+  handleStartGame = (e, startGame) => { //function to start abd reset the game
     this.playAudio("audio-element-start");
 
     if (startGame === "Start Game") {
@@ -910,7 +874,7 @@ export default class NineBoard extends Component {
       if (this.state.turn === "AGENT") {
         axios
           .get(
-            "https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate",
+            "https://redninjas-tic-tac-toe.herokuapp.com/agent-turn-ultimate", //request with appropriate data of human's move to be sent to the backend
             {
               params: {
                 board: JSON.stringify(this.state.bigboard),
@@ -918,7 +882,7 @@ export default class NineBoard extends Component {
                 previous_move: JSON.stringify([-1, -1, -1, -1]),
               },
             }
-          ) //route to be filled according to flask route name
+          )
           .then((res) => {
             let copy_board1 = this.state.bigboard.slice();
             copy_board1[res.data["agent-move"][0]][res.data["agent-move"][1]][
@@ -930,7 +894,6 @@ export default class NineBoard extends Component {
                 bigboard: copy_board1,
                 rowToPlace: res.data["agent-move"][2],
                 columnToPlace: res.data["agent-move"][3],
-                // moveNumber: this.state.moveNumber + 1,
                 turn: "HUMAN",
                 heading: humanTurn,
                 agentOuterRow: res.data["agent-move"][0],
@@ -940,7 +903,6 @@ export default class NineBoard extends Component {
               });
               let copy_bigBoard2 = this.state.bigboard.slice();
               this.checkPartialWin(copy_bigBoard2);
-              // this.messageBoxChecker()
               this.hintPlacer();
             } else {
               this.resetBoard();
@@ -970,7 +932,6 @@ export default class NineBoard extends Component {
         winner: " ",
         rowToPlace: " ",
         columnToPlace: " ",
-        // moveNumber: 1,
         ultimateWinBoard: [
           [" ", " ", " "],
           [" ", " ", " "],
@@ -1245,26 +1206,3 @@ const heading = {
   width: "80%",
   lineHeight: 1.5,
 };
-
-//   <i class="far fa-grin"></i>
-{
-  /* <i class="fas fa-grin"></i> */
-}
-
-{
-  /* <i class="far fa-laugh-wink"></i> */
-}
-{
-  /* <i class="fas fa-laugh-wink"></i> */
-}
-
-{
-  /* <i class="far fa-sad-cry"></i> */
-}
-{
-  /* <i class="fas fa-sad-cry"></i> */
-}
-
-{
-  /* <i class="fas fa-spinner fa-pulse"></i> */
-}

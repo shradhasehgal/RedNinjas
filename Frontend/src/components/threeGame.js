@@ -1,15 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-// import { Button, Container, Col, Row } from "react-bootstrap";
-// import axios from 'axios';
-// import Board from "./threeBoard.js";
-// import BigBoard from "./nineBoard.js";
-import { Button, Container, Col, Row } from "react-bootstrap";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import styles from "../static/css/Landing.module.css";
-import common from "../static/css/Common.module.css";
 
 import ThreeBoard from "./threeBoard.js";
 import ThreeConfiguration from "./threeConfiguration.js";
@@ -57,8 +49,7 @@ export default class ThreeGame extends Component {
     });
   }
 
-  updateStateForWinComponent(gameRoute, gameWinner) {
-    console.log("Heyyyyy");
+  updateStateForWinComponent(gameRoute, gameWinner) { //to display the Win component and hide the 3*3 game component
     setTimeout(
       () =>
         this.setState({
@@ -72,7 +63,7 @@ export default class ThreeGame extends Component {
     );
   }
 
-  updateStateOfComponents_Three(message) {
+  updateStateOfComponents_Three(message) { //to display the 3*3 game and hide the configuration component
     if (message === "Go To Game") {
       this.setState({
         showThreeConfigurationComponent: false,

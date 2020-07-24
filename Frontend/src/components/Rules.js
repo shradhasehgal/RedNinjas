@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Col, Row } from "react-bootstrap";
-// import axios from 'axios';
+import { Container, Col, Row } from "react-bootstrap";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import rulesStyles from "../static/css/Rules.module.css";
-import common from "../static/css/Common.module.css";
 
 export default class Overview extends Component {
   constructor(props) {

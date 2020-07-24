@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Col, Row, Table } from "react-bootstrap";
-// import axios from 'axios';
+import { Button, Container, Table } from "react-bootstrap";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import styles from "../static/css/scores.module.css";
-import common from "../static/css/Common.module.css";
 
 export default class Scores extends Component {
   constructor(props) {

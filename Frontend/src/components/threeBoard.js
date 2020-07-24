@@ -1,22 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { Component} from "react";
 import styles from "../static/css/board.module.css";
-import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavbarToggler,
-  MDBCollapse,
-} from "mdbreact";
-import {
-  MDBRow,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-  MDBIcon,
-} from "mdbreact";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import classNames from "classnames";
@@ -24,18 +7,9 @@ import classNames from "classnames";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import common from "../static/css/Common.module.css";
-import configStyles from "../static/css/Config-mallika.module.css";
-
-// import Sound from 'react-sound';
 
 const start_game_sound = require("../static/assets/sounds/start-game.mp3");
-
 const place_icon_sound = require("../static/assets/sounds/place-icon.mp3");
-
-// import soundfile from '../static/assets/click-game.mp3'
-
-// import ThreeSound from '/threeSound.js'
 let blinker;
 
 export default class ThreeBoard extends Component {
@@ -110,16 +84,16 @@ export default class ThreeBoard extends Component {
     }, 400);
   }
 
-  stopBlinker() {
+  stopBlinker() { // to stop the start button blinker when clicked
     clearInterval(blinker);
   }
 
-  playAudio(audio_element) {
+  playAudio(audio_element) { //function for the audio effect of button clicks
     const audioEl = document.getElementsByClassName(audio_element)[0];
     audioEl.play();
   }
 
-  checkTie(copy_board) {
+  checkTie(copy_board) { //To check if there happened a tie in the game
     let tie_flag = true;
 
     for (let i = 0; i < 3; i++) {
@@ -139,11 +113,10 @@ export default class ThreeBoard extends Component {
     }
   }
 
-  setScores(gameWinner) {
+  setScores(gameWinner) { //setting the scores of the human player
     let status = "WIN";
-    if (gameWinner == "AGENT") status = "LOST";
-    else if (gameWinner == "TIE") status = "TIE";
-    console.log(this.props.depth);
+    if (gameWinner === "AGENT") status = "LOST";
+    else if (gameWinner === "TIE") status = "TIE";
     let score = { game: "3*3", depth: this.props.depth, winner: status };
     let history = localStorage.getItem("scores");
     let a = [];
@@ -153,9 +126,9 @@ export default class ThreeBoard extends Component {
     localStorage.setItem("scores", JSON.stringify(a));
   }
 
-  setWinner(gameWinner) {
+  setWinner(gameWinner) { //to set the winner of the game
     let topHeading = "HOUSTON, YOU DID IT!  🎉";
-    if (gameWinner == "AGENT") topHeading = "ROBOT'S WIN 🙁";
+    if (gameWinner === "AGENT") topHeading = "ROBOT'S WIN 🙁";
 
     this.setState({
       winner: gameWinner,
@@ -165,12 +138,12 @@ export default class ThreeBoard extends Component {
     this.setScores(gameWinner);
   }
 
-  changeMode(darkMode) {
+  changeMode(darkMode) { //to toggle the dark and night modes in the game
     this.setState({ darkMode: !darkMode });
   }
 
-  check_win(copy_board) {
-    for (let i = 0; i < 3; i++) {
+  check_win(copy_board) { //to check if there was a win of a player
+    for (let i = 0; i < 3; i++) { // for each row
       if (
         copy_board[i][0] === copy_board[i][1] &&
         copy_board[i][0] === copy_board[i][2] &&
@@ -195,7 +168,7 @@ export default class ThreeBoard extends Component {
         });
       }
     }
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) { //for each column
       if (
         copy_board[0][i] === copy_board[1][i] &&
         copy_board[0][i] === copy_board[2][i] &&
@@ -221,7 +194,7 @@ export default class ThreeBoard extends Component {
       }
     }
 
-    if (
+    if ( // for left diagonal
       copy_board[0][0] === copy_board[1][1] &&
       copy_board[0][0] === copy_board[2][2] &&
       copy_board[1][1] === copy_board[2][2] &&
@@ -245,7 +218,7 @@ export default class ThreeBoard extends Component {
       });
     }
 
-    if (
+    if ( //for right daigonal
       copy_board[0][2] === copy_board[1][1] &&
       copy_board[0][2] === copy_board[2][0] &&
       copy_board[1][1] === copy_board[2][0] &&
@@ -278,13 +251,12 @@ export default class ThreeBoard extends Component {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  handleCellClick = (e, cell) => {
+  handleCellClick = (e, cell) => { // to place the icons of human and agent
     if (
       this.state.startGameValue &&
       this.state.win === false &&
       this.state.turn === "HUMAN"
     ) {
-      // this.state.undoStack.push(cell);
       let copy_board = this.state.board.slice();
       if (copy_board[Math.floor(cell / 3)][cell % 3] === " ") {
         this.playAudio("audio-element-icon");
@@ -306,19 +278,17 @@ export default class ThreeBoard extends Component {
         this.sleep(1).then(() => {
           if (this.state.win === false) {
             axios
-              .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", {
+              .get("https://redninjas-tic-tac-toe.herokuapp.com/agent-turn", { //axios request with appropriate data of human's move
                 params: {
                   gameBeginner: this.props.gameBeginner,
                   board: JSON.stringify(this.state.board),
                   depth: JSON.stringify(this.props.depth),
                 },
-              }) //route to be filled according to flask route name
+              })
               .then((res) => {
                 let copy_board = this.state.board.slice();
-                // console.log(res.data)
-                // console.log(res.status)
 
-                copy_board[res.data.r][res.data.c] = "O"; /////// will uncomment when backend and frontend are bound together because for now this will give error
+                copy_board[res.data.r][res.data.c] = "O"; 
                 this.state.undoStack.push(3 * res.data.r + res.data.c);
 
                 this.state.symbol_stack.push("A");
@@ -362,7 +332,7 @@ export default class ThreeBoard extends Component {
     }
   };
 
-  handleStartGame = (e, startGame) => {
+  handleStartGame = (e, startGame) => { // to start and reset the game
     this.playAudio("audio-element-start");
     if (this.props.gameBeginner === "AGENT") {
       this.setState({
@@ -399,11 +369,11 @@ export default class ThreeBoard extends Component {
               board: JSON.stringify(this.state.board),
               depth: JSON.stringify(this.props.depth),
             },
-          }) //route to be filled according to flask route name
+          }) 
           .then((res) => {
             let copy_board = this.state.board.slice();
 
-            copy_board[res.data.r][res.data.c] = "O"; /////// will uncomment when backend and frontend are bound together because for now this will give error
+            copy_board[res.data.r][res.data.c] = "O";
             this.state.undoStack.push(3 * res.data.r + res.data.c);
             this.state.symbol_stack.push("A");
             if (this.state.startGameButton === "Reset Game") {
@@ -433,7 +403,6 @@ export default class ThreeBoard extends Component {
           [" ", " ", " "],
           [" ", " ", " "],
         ],
-        // gameBeginner: " ",
         startGameValue: false,
         whoPlaysFirstDialog: false,
         startGameButton: "Start Game",
@@ -445,7 +414,6 @@ export default class ThreeBoard extends Component {
         turn: this.props.gameBeginner,
       });
 
-      console.log(this.state.board);
       this.startBlinker();
 
       if (this.props.gameBeginner === "AGENT") {
@@ -460,7 +428,7 @@ export default class ThreeBoard extends Component {
     }
   };
 
-  handleUndoFeature = (e, index, cell) => {
+  handleUndoFeature = (e, index, cell) => { // to undo the moves of the human player
     let copy_board = this.state.board.slice();
     let copy_undoStack = this.state.undoStack.slice();
     let copy_symbol_stack = this.state.symbol_stack.slice();
@@ -589,7 +557,7 @@ export default class ThreeBoard extends Component {
                 })}
               >
                 {this.state.symbol_stack.length > 1 ||
-                this.state.symbol_stack[0] == "H"
+                this.state.symbol_stack[0] === "H"
                   ? "Reverse to "
                   : ""}
                 {this.state.symbol_stack.map((cell, i) =>
@@ -611,10 +579,6 @@ export default class ThreeBoard extends Component {
               " "
             )}
 
-            {/* <audio className="audio-element">
-            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
-        </audio> */}
-
             <audio className="audio-element-start">
               <source src={start_game_sound}></source>
             </audio>
@@ -623,8 +587,6 @@ export default class ThreeBoard extends Component {
               <source src={place_icon_sound}></source>
             </audio>
 
-            {/* <i class="fas fa-space-shuttle fa-6x orange-text mr-2"></i> */}
-            {/* <i class="fas fa-rocket fa-6x orange-text mr-2"></i> */}
           </div>
         </div>
       </div>

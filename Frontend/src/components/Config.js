@@ -1,15 +1,9 @@
-import React, { Component, useEffect } from "react";
-// import { Link } from 'react-router-dom'
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import React, { Component} from "react";
 import { Button, Container, Col, Row } from "react-bootstrap";
-import axios from "axios";
-// import Sky from 'react-sky';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import styles from "../static/css/Three.module.css";
-import common from "../static/css/Common.module.css";
 import configStyles from "../static/css/Config-mallika.module.css";
 
 export default class Landing extends Component {

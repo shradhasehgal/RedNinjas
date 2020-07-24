@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, Col, Row } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";

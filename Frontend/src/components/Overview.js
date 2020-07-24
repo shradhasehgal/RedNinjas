@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Col, Row } from "react-bootstrap";
-// import axios from 'axios';
+import {Container, Col, Row } from "react-bootstrap";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import overviewStyles from "../static/css/Overview.module.css";
-import common from "../static/css/Common.module.css";
 
 export default class Overview extends Component {
   constructor(props) {
@@ -19,7 +16,6 @@ export default class Overview extends Component {
         <Container className={overviewStyles.contentContainer}>
           <h1 className={overviewStyles.heading}>About the Application</h1>
           <div className={overviewStyles.content}>
-            {/* <h3 className={overviewStyles.heading}>Quick Overview</h3> */}
             <p className={overviewStyles.text}>
               This application is an AI algorithm based Tic-Tac-Toe with
               incremental levels of difficulty. The game uses the Minimax
