@@ -72,6 +72,8 @@ As mentioned in the project demo instructions that were given with the problem s
 
 There are 9 cells in 3*3 tic-tac-toe board, which are numbered sequentially from 0 to 8.
 
+![Numbering3](./img/numbering3.png)
+
 ## Rules for 3x3
 
 * Start by selecting a depth and a player who shall begin the game
@@ -96,6 +98,9 @@ b) *Complexity Level2*
 
 At level 2, the agent’s smartness is increased and a new function is used to compute the utilities of the next states. The agent can now look at upto 2 levels deep from the current state. The function we have considered here is the number of **crossover win states** that a particular empty cell can contribute to. That is given a cell on the board, how many win configurations can it be a part of.
 
+![comp2](./img/comp2.png)
+
+
 For instance, suppose the agent is about to place its move in the cell [0], if permitted, it can win in three ways 
 * Horizontally : by placing in cells 1 and 2 
 * Vertically       : by placing in cells 3 and 6 
@@ -115,12 +120,19 @@ At level 3, there is an extension to the strategies of level 2. As expected, the
 
 For eg :  Here with just cross overs the agent may tend to place its next move in cell 2 ,6 or 8 . If it chooses 8 , it doesn’t gain any immediate advantage with this, hence the agent will be directed to placing its next move in cell 1 or cell 3 or cell 2 or cell 6 thereby increasing its chances of winning .
 
+![comp3](./img/comp3.png)
+
+
 d) *Complexity Level4*
 
 At level 4, the agent now can look upto 4 depths, adopts all the strategies of level 2 and 3, and additionally now also tries to block the human player from 
 winning. So it now also looks at moves that can cause the **human to lose**, thereby further increasing the ability of the agent to think.
 
 For example : consider the configuration below , just but applying to the custom utility function of complexity level 3 it would have placed in cell[1] / cell[2] / cell [3] / cell [6] If it does to the human will win , so as to stop the human from winning the utility function is written so that the agent places in cell[3] 
+
+
+![comp4](./img/comp4.png)
+
 
 
 ## Analysing the 3x3 Ultimate TicTacToe
@@ -142,6 +154,10 @@ The 9x9 tic-tac-toe follows the standard rules of gameplay wherein :
 
 ## Naming Convention
 
+
+![name9](./img/name9.png)
+
+
 * **Global Board** : 
 The entire board 
     Numbering : Row and column numbering starting with 0 . 
@@ -149,6 +165,8 @@ The entire board
 * **Local board**   : 
 Each cell in the global board , which is 3*3 tic-tac-toe board 
         Numbering : Row and column numbering starting with 0 . 
+
+![cell9](./img/cell9.png)
 
 
 While designing the agent for this extreme tic tac toe version, we have a trade-off between the smartness and the response time. This is primarily because, both the depth and the breadth of the recursion tree that is to be explored now is larger in the case of 9x9. The root node itself would have 81 possibilities and the leaf nodes would extend upto **81! combinations**. It would take **hours to compute** the best move!
@@ -170,3 +188,5 @@ Even while computing the utility also we made use of the utilities of the parent
 Collectively, there isn't a 100% guarantee that the agent will win. But the agent doesn't play mindlessly either. It's likely that agent wins/ tie .The response time with these optimizations was brought down from over 90s to less than 10s.
 
 ## State Diagram
+
+![cell9](img/tictactoe-state.png)
