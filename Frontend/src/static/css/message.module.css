@@ -1,62 +1,57 @@
-.box { 
-    background-color: #03000e;
-    -webkit-box-shadow: 10px 10px 5px 0px #6e428042;
-    -moz-box-shadow: 10px 10px 5px 0px #6e428042;
-    box-shadow: 10px 10px 5px 0px #6e428042;
+.box {
+  background-color: #03000e;
+  -webkit-box-shadow: 10px 10px 5px 0px #6e428042;
+  -moz-box-shadow: 10px 10px 5px 0px #6e428042;
+  box-shadow: 10px 10px 5px 0px #6e428042;
 }
 
-.box1 { 
-    background-color:rgb(161, 56, 56);
-    -webkit-box-shadow: 10px 10px 5px 0px #ad473942;
-    -moz-box-shadow: 10px 10px 5px 0px #ad473942;
-    box-shadow: 10px 10px 5px 0px #ad473942;
+.box1 {
+  background-color: rgb(161, 56, 56);
+  -webkit-box-shadow: 10px 10px 5px 0px #ad473942;
+  -moz-box-shadow: 10px 10px 5px 0px #ad473942;
+  box-shadow: 10px 10px 5px 0px #ad473942;
 }
-.text{
-    /* background-color: #04000f; */
-    color:  black; 
-    font-family: 'Acme', sans-serif;
-}
-
-.bodytext{
-    background-color:#03000e;
-    color: white; 
-    font-family: 'Acme', sans-serif;
+.text {
+  /* background-color: #04000f; */
+  color: black;
+  font-family: 'Acme', sans-serif;
 }
 
-.bodytext1{
-    background-color:rgb(161, 56, 56);
-    color: white; 
-    font-family: 'Acme', sans-serif;
+.bodytext {
+  background-color: #03000e;
+  color: white;
+  font-family: 'Acme', sans-serif;
+}
+
+.bodytext1 {
+  background-color: rgb(161, 56, 56);
+  color: white;
+  font-family: 'Acme', sans-serif;
 }
 
 @media screen and (min-width: 769px) {
-    .box {
-        width:300px;
-    }
-    .box1 {
-        width:300px;
-    }
-    
+  .box {
+    width: 300px;
+  }
+  .box1 {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 800px) and (min-width: px) {
+  .box {
+    width: 250px;
+  }
+  .box1 {
+    width: 250px;
+  }
+}
 
-    
+@media screen and (max-width: 414px) {
+  .box {
+    width: 160px;
   }
-  @media screen and (max-width: 800px) and (min-width: px) {
-    .box {
-        width:250px;
-    }
-    .box1 {
-        width:250px;
-    }
 
+  .box1 {
+    width: 160px;
   }
-  
-  @media screen and (max-width: 414px) {
-    .box{
-        width:160px;
-    }
-   
-    .box1{
-        width:160px;
-    }
-    
-  }
+}

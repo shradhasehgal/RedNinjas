@@ -1,4 +1,3 @@
-
 .landingBody {
   align-items: center;
   background-color: #3b3251;
@@ -13,7 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:black;
+  background-color: black;
   text-align: center;
   border: 1px solid;
   flex-basis: 0;
@@ -22,10 +21,10 @@
   cursor: pointer;
 }
 
-.cellNine { 
-  width:5%;
+.cellNine {
+  width: 5%;
   height: 60px;
-  padding:1%;
+  padding: 1%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,7 +35,7 @@
   flex-grow: 1;
   min-width: 0;
   max-width: 90%;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .iconThree {
@@ -50,7 +49,7 @@
 }
 
 .heading {
-  color:white;
+  color: white;
   padding-top: 2%;
   padding-bottom: 1%;
   background-color: #212121;
@@ -59,7 +58,7 @@
   margin-top: 60px;
 }
 
-.boardInfo{
+.boardInfo {
   background-color: #212121;
   opacity: 0.7;
   z-index: 0;
@@ -70,19 +69,19 @@
 }
 
 .button {
-  font-size: 0.80rem !important;
+  font-size: 0.8rem !important;
   padding: 0.45rem 0.7rem !important;
   transition: background-color 0.1s ease-out, color 0.1s ease-out !important;
 }
 
-.button:hover{
+.button:hover {
   background-color: white !important;
   color: #212121 !important;
 }
 
 .lightHeading {
   /* color: black !important; */
-  background-color:#3b3251 !important;
+  background-color: #3b3251 !important;
   opacity: 0.9;
 }
 
@@ -104,12 +103,12 @@
   margin: auto -10px;
 }
 
-.whiteBg{
+.whiteBg {
   background-color: rgb(211, 193, 193) !important;
 }
 
-.greyCell{
-  background-color: white !important; 
+.greyCell {
+  background-color: white !important;
   opacity: 0.7;
   color: rgb(211, 193, 193) !important;
 }
@@ -135,8 +134,8 @@
   font-size: 1.5rem;
 }
 
-.iconAgent{
-  color: #AD4977;
+.iconAgent {
+  color: #ad4977;
 }
 
 .darkCell {
@@ -148,8 +147,7 @@
 }
 
 @media screen and (max-width: 650px) {
-  
-  .cellThree{
+  .cellThree {
     height: 130px;
   }
 
@@ -171,38 +169,31 @@
 
   .button {
     font-size: 0.7rem !important;
-
   }
 }
 
 @media screen and (max-width: 767px) {
-
   .cellNine {
     height: 40px !important;
   }
 
-
-  .iconNine{
+  .iconNine {
     font-size: 1.2rem;
   }
 }
 
-
 @media screen and (max-width: 625px) {
-
   .cellThree {
     height: 120px;
   }
 
-  .iconNine{
+  .iconNine {
     font-size: 1rem;
   }
-
 }
 
 @media screen and (max-width: 525px) {
-
-  .cellNine{
+  .cellNine {
     height: 30px !important;
   }
 
@@ -216,12 +207,11 @@
 }
 
 @media screen and (max-width: 375px) {
-
-  .title{
+  .title {
     font-size: 1.4rem;
   }
 
-  .center{
+  .center {
     font-size: 0.75rem !important;
   }
 
@@ -230,13 +220,8 @@
   }
 }
 
-
-
-
-
-@media screen and (max-height: 900px) and (min-width: 900px){
-
-  .cellThree{
+@media screen and (max-height: 900px) and (min-width: 900px) {
+  .cellThree {
     height: 160px;
   }
 
@@ -251,12 +236,10 @@
   .iconNine {
     font-size: 2rem;
   }
-
 }
 
-@media screen and (max-height: 800px) and (min-width: 900px){
-
-  .cellThree{
+@media screen and (max-height: 800px) and (min-width: 900px) {
+  .cellThree {
     height: 140px;
     /* width: 145px; */
   }
@@ -273,16 +256,13 @@
     font-size: 0.66rem !important;
   }
 
-
   .iconNine {
     font-size: 1.75rem;
   }
-
 }
 
-@media screen and (max-height: 750px) and (min-width: 900px){
-
-  .cellThree{
+@media screen and (max-height: 750px) and (min-width: 900px) {
+  .cellThree {
     height: 130px;
     /* width: 145px; */
   }
@@ -294,17 +274,15 @@
   .iconNine {
     font-size: 1.5rem;
   }
-
 }
 
-@media screen and (max-height: 700px) and (min-width: 900px){
-
-  .cellThree{
+@media screen and (max-height: 700px) and (min-width: 900px) {
+  .cellThree {
     height: 110px;
     /* width: 145px; */
   }
 
-  .cellNine{
+  .cellNine {
     height: 32px !important;
   }
 
@@ -312,7 +290,7 @@
     width: 330px !important;
   }
 
-  .title{
+  .title {
     font-size: 1.5rem;
   }
 
@@ -324,7 +302,7 @@
     font-size: 0.6rem !important;
   }
 
-  .heading{
+  .heading {
     margin-bottom: 2%;
   }
 

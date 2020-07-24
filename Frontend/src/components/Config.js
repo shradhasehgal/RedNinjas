@@ -30,7 +30,13 @@ export default class Landing extends Component {
             className={configStyles.containerBody}
             style={{ display: "flex" }}
           >
-            <Container style={{ marginTop: "auto", marginBottom: "auto", padding:"3% 0"}}>
+            <Container
+              style={{
+                marginTop: "auto",
+                marginBottom: "auto",
+                padding: "3% 0",
+              }}
+            >
               <h1 className={configStyles.heading}>
                 Select your game configuration
               </h1>

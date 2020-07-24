@@ -1,76 +1,75 @@
 .contentContainer {
-    background-color: #AD4977;
-    padding: 5%;
-    margin: 12vh auto;
-    color: #ffffff;
-    /* opacity: 0.7; */
-    min-height: 80vh;
-  }
+  background-color: #ad4977;
+  padding: 5%;
+  margin: 12vh auto;
+  color: #ffffff;
+  /* opacity: 0.7; */
+  min-height: 80vh;
+}
 
-  .content{
-    margin: 5% auto;
-    max-width: 80%;
-    line-height: 1.5;
-  }
+.content {
+  margin: 5% auto;
+  max-width: 80%;
+  line-height: 1.5;
+}
 
-  .landingBody {
-    margin: auto;
-    align-items: center;
-    background-color: #3b3251;
-    min-width: 100%;
-    min-height: 100vh;
-    display: flex;
-  }
+.landingBody {
+  margin: auto;
+  align-items: center;
+  background-color: #3b3251;
+  min-width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+.heading {
+  color: #ffffff;
+  font-size: 2vw;
+  font-family: 'Acme', sans-serif;
+  margin-bottom: 2%;
+}
+
+.subheading {
+  color: #8953bb;
+  font-size: 1.2vw;
+}
+
+.rowstyles {
+  padding: 5%;
+}
+
+.gifs {
+  width: 80%;
+}
+.text {
+  text-align: justify;
+}
+
+@media screen and (min-width: 601px) {
   .heading {
-    color: #ffffff;
-    font-size: 2vw;
-    font-family: 'Acme', sans-serif;
-    margin-bottom: 2%;
+    font-size: 50px;
   }
-  
   .subheading {
-    color: #8953bb;
-    font-size: 1.2vw;
+    font-size: 20px;
   }
+  .text {
+    font-size: 20px;
+  }
+  .rowstyles {
+    font-size: 20px;
+  }
+}
 
-  .rowstyles{
-      padding: 5%;
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 30px;
   }
-  
-  .gifs{
-    width: 80%;
+  .subheading {
+    font-size: 15px;
   }
-  .text{
-    text-align: justify;
+  .rowstyles {
+    font-size: 10px;
   }
-
-  @media screen and (min-width: 601px) {
-    .heading {
-      font-size: 50px;
-    }
-    .subheading {
-      font-size: 20px;
-    }
-    .text {
-      font-size: 20px;
-    }
-    .rowstyles{
-        font-size: 20px;
-    }
+  .text {
+    font-size: 12px;
   }
-  
-  @media screen and (max-width: 600px) {
-    .heading {
-      font-size: 30px;
-    }
-    .subheading {
-      font-size: 15px;
-    }
-    .rowstyles{
-        font-size: 10px;
-    }
-    .text {
-      font-size: 12px;
-    }
-  }
-  
+}

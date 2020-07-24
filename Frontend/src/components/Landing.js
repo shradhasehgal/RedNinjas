@@ -9,24 +9,20 @@ import "mdbreact/dist/css/mdb.css";
 import styles from "../static/css/Landing.module.css";
 import common from "../static/css/Common.module.css";
 
-
 export default class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        // showThreeConfigurationComponent : false,
-        // showThreeGameComponent : false,
-        // showThreeWinComponent : false,
+      // showThreeConfigurationComponent : false,
+      // showThreeGameComponent : false,
+      // showThreeWinComponent : false,
+      // showNineConfigurationComponent : false,
+      // showNineGameComponent : false,
+      // showNineWinComponent : false,
+    };
 
-        // showNineConfigurationComponent : false,
-        // showNineGameComponent : false,
-        // showNineWinComponent : false,
-    }
-
-    // this.updateStateOfComponents = this.updateStateOfComponents.bind(this);  
-
+    // this.updateStateOfComponents = this.updateStateOfComponents.bind(this);
   }
-
 
   // updateStateOfComponents(message)
   //   {
@@ -59,31 +55,29 @@ export default class Landing extends Component {
             against the ultimate 3x3!
           </h4>
           <Link to="/three">
-            <Button variant="danger" size="lg"
-            >
+            <Button variant="danger" size="lg">
               {" "}
               3*3 TIC-TAC-TOE
             </Button>
           </Link>
           <Link to="/nine">
-            <Button variant="danger" size="lg"
-            >
+            <Button variant="danger" size="lg">
               {" "}
               9*9 TIC-TAC-TOE
             </Button>
           </Link>
         </div>
-          {/* {this.state.showThreeConfigurationComponent && <threeConfiguration update={this.updateStateOfComponents}/>}
+        {/* {this.state.showThreeConfigurationComponent && <threeConfiguration update={this.updateStateOfComponents}/>}
           {/* <hr /> */}
-          {/* {this.state.showThreeGameComponent && <Board/>} */}
-          {/* <hr /> */}
-          {/* {this.state.showThreeWinComponent && <threeWin update={this.updateStateOfComponents}/>} */}
+        {/* {this.state.showThreeGameComponent && <Board/>} */}
+        {/* <hr /> */}
+        {/* {this.state.showThreeWinComponent && <threeWin update={this.updateStateOfComponents}/>} */}
 
-          {/* {this.state.showNineConfigurationComponent && <nineConfiguration update={this.updateStateOfComponents}/>} */}
-          {/* <hr /> */}
-          {/* {this.state.showNineGameComponent && <nineBoard update={this.updateStateOfComponents}/>} */}
-          {/* <hr /> */}
-          {/* {this.state.showNineWinComponent && <nineWin update={this.updateStateOfComponents}/>} */}
+        {/* {this.state.showNineConfigurationComponent && <nineConfiguration update={this.updateStateOfComponents}/>} */}
+        {/* <hr /> */}
+        {/* {this.state.showNineGameComponent && <nineBoard update={this.updateStateOfComponents}/>} */}
+        {/* <hr /> */}
+        {/* {this.state.showNineWinComponent && <nineWin update={this.updateStateOfComponents}/>} */}
       </div>
     );
   }

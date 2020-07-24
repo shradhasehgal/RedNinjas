@@ -1,23 +1,21 @@
 // import logo from './logo.svg';
-import React, { Component } from 'react'
-import './App.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Landing from './components/Landing'
-import Error from './components/Error'
+import React, { Component } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Landing from "./components/Landing";
+import Error from "./components/Error";
 // import Result from './components/Result'
-import Config from './components/Config'
+import Config from "./components/Config";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import Overview from "./components/Overview";
 import Rules from "./components/Rules";
 import common from "./static/css/Common.module.css";
-import Message from './components/Message'
+import Message from "./components/Message";
 // import axios from 'axios';
-import ThreeGame from './components/threeGame'
-import NineGame from './components/nineGame'
-import Scores from './components/Scores'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-
+import ThreeGame from "./components/threeGame";
+import NineGame from "./components/nineGame";
+import Scores from "./components/Scores";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -71,14 +69,12 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path='/' component={Landing} />
-          <Route exact path='/three' component={ThreeGame} />
-          <Route exact path='/nine' component={NineGame} />
-
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/three" component={ThreeGame} />
+          <Route exact path="/nine" component={NineGame} />
 
           {/* <Route exact path='/win_player_three' component={WinHumanThree} /> */}
           {/* <Route exact path='/lose_player_three' component={WinAgentThree} /> */}
-
 
           {/* <Route exact path='/win_player_nine' component={WinHumanNine} /> */}
           {/* <Route exact path='/lose_player_nine' component={WinAgentNine} /> */}
@@ -86,10 +82,9 @@ function App() {
           {/* <Route exact path='/Result' component={Result} /> */}
           <Route exact path="/overview" component={Overview} />
           <Route exact path="/rules" component={Rules} />
-          <Route exact path='/message' component={Message} />
-          <Route exact path='/scores' component={Scores} />
-          <Route path='*' exact={true} component={Error} />
-
+          <Route exact path="/message" component={Message} />
+          <Route exact path="/scores" component={Scores} />
+          <Route path="*" exact={true} component={Error} />
         </Switch>
       </Router>
       <NavigationBar />

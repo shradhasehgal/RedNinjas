@@ -1,13 +1,13 @@
-.landingBody{
-    margin: auto;
-    align-items: center;
-    background-image: url("../assets/space.jpg");
-    position: fixed;
-    min-width: 100%;
-    min-height: 100%;
-    background-size: cover;
-    background-position: center;
+.landingBody {
+  margin: auto;
+  align-items: center;
+  background-image: url('../assets/space.jpg');
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
 }
-.heading{
-    color: #ffffff;
+.heading {
+  color: #ffffff;
 }

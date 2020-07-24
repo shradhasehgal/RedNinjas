@@ -35,8 +35,8 @@
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #3b3251 !important;
+  color: #fff;
+  background-color: #3b3251 !important;
 }
 
 .heading {
@@ -50,7 +50,7 @@
   font-family: 'Acme', sans-serif;
 }
 
-.playerName{
+.playerName {
   margin-top: 1vh;
   color: #ffffff;
 }
@@ -67,7 +67,7 @@
   /* color: #3b3251; */
   color: #3b3251d2;
 }
-.iconSelect{
+.iconSelect {
   border: 5px solid #ffffff;
 }
 
@@ -76,19 +76,19 @@
   display: 'inline-block';
 }
 
-.rulestext{
-  text-align:"left"; 
+.rulestext {
+  text-align: 'left';
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
 }
 
-@media screen and (min-width:990px){
-  .ruleimg{
+@media screen and (min-width: 990px) {
+  .ruleimg {
     width: 70%;
   }
 }
-@media screen and (min-width: 801px) and (max-width:990px) {
-  .ruleimg{
+@media screen and (min-width: 801px) and (max-width: 990px) {
+  .ruleimg {
     width: 50%;
   }
 }
@@ -106,17 +106,16 @@
   .iconStyles {
     font-size: 5rem;
   }
-  .iconSelect{
+  .iconSelect {
     font-size: 5rem;
   }
   .icon {
     margin: '0 10%';
   }
-  .rulestext{
+  .rulestext {
     font-size: 15px;
     /* color: lawngreen; */
   }
-
 }
 @media screen and (max-width: 800px) and (min-width: 361px) {
   .heading {
@@ -141,11 +140,11 @@
   .icon {
     margin: '0 7%';
   }
-  .rulestext{
+  .rulestext {
     font-size: 12px;
     /* color: lightcoral; */
   }
-  .ruleimg{
+  .ruleimg {
     width: 50%;
   }
 }
@@ -171,16 +170,16 @@
   .iconSelect {
     font-size: 2rem;
   }
-  .rulestext{
+  .rulestext {
     font-size: 9px;
     /* color: lightseagreen; */
   }
-  .ruleimg{
+  .ruleimg {
     width: 55%;
   }
 }
 
-@media screen and (max-height:600px){
+@media screen and (max-height: 600px) {
   .text {
     font-size: 15px;
   }
@@ -188,7 +187,7 @@
     max-height: 600px;
     margin-top: 10vh;
   }
-  .gif{
+  .gif {
     width: 50%;
   }
   .heading {
@@ -211,15 +210,15 @@
   .iconSelect {
     font-size: 2.5rem;
   }
-  .rulestext{
+  .rulestext {
     font-size: 12px;
     /* color: lightseagreen; */
   }
-  .ruleimg{
+  .ruleimg {
     width: 55%;
   }
 }
-@media screen and (max-height:700px) and (min-height:600px){
+@media screen and (max-height: 700px) and (min-height: 600px) {
   .text {
     font-size: 15px;
   }
@@ -227,7 +226,7 @@
     max-height: 600px;
     margin-top: 10vh;
   }
-  .gif{
+  .gif {
     width: 50%;
   }
   .heading {
@@ -250,11 +249,11 @@
   .iconSelect {
     font-size: 2.5rem;
   }
-  .rulestext{
+  .rulestext {
     font-size: 12px;
     /* color: lightseagreen; */
   }
-  .ruleimg{
+  .ruleimg {
     width: 55%;
   }
 }

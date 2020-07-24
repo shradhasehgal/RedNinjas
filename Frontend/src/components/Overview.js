@@ -135,7 +135,7 @@ export default class Overview extends Component {
                 a custom data structure beforehand.
               </p>
               <img
-                style={{ width: "50%", margin:"5% 0" }}
+                style={{ width: "50%", margin: "5% 0" }}
                 src={require("../static/assets/about/ultimate-dark-tie.gif")}
               />
             </div>
@@ -158,7 +158,7 @@ export default class Overview extends Component {
                 The last section mentions about the optimizations.
               </p>
               <img
-                style={{ width: "50%", margin:"5% 0" }}
+                style={{ width: "50%", margin: "5% 0" }}
                 src={require("../static/assets/about/extreme-main.gif")}
               />
             </div>
@@ -173,7 +173,7 @@ export default class Overview extends Component {
                 className="justify-content-center align-self-center"
               >
                 <img
-                  style={{width:"50%"}}
+                  style={{ width: "50%" }}
                   src={require("../static/assets/about/responsive-themes.gif")}
                 />
               </Col>
@@ -255,7 +255,7 @@ export default class Overview extends Component {
                 className="justify-content-center align-self-center"
               >
                 <img
-                  style={{width:"90%"}}
+                  style={{ width: "90%" }}
                   src={require("../static/assets/about/undo.gif")}
                 />
               </Col>
@@ -269,7 +269,8 @@ export default class Overview extends Component {
                   <i class="fas fa-angle-double-right"></i>{" "}
                   <strong>Undo Moves</strong>
                   <br />
-                  This feature allows users to revert back their moves upto a particular move. The gameplay would then begin from that move.
+                  This feature allows users to revert back their moves upto a
+                  particular move. The gameplay would then begin from that move.
                   This is only in the 3x3 games.
                   <br />
                   <br />
@@ -278,8 +279,10 @@ export default class Overview extends Component {
                   <i class="fas fa-angle-double-right"></i>{" "}
                   <strong>Hint Boxes</strong>
                   <br />
-                  For the 9x9 game, the users are provided with hint boxes that appear with a message containing the next board they have to place their move in.
-                  The alert boxes also appear in cases of incorrect moves.
+                  For the 9x9 game, the users are provided with hint boxes that
+                  appear with a message containing the next board they have to
+                  place their move in. The alert boxes also appear in cases of
+                  incorrect moves.
                   <br />
                   <br />
                 </li>
@@ -296,10 +299,13 @@ export default class Overview extends Component {
                   <i class="fas fa-angle-double-right"></i>{" "}
                   <strong>Past Score Records</strong>
                   <br />
-                  The application also consists of a page where a user can view their <a href="/rules" style={{ color: "#3b3251" }}>
-                  Past Games'
-                </a> results. 
-                  The records include the Game type (3x3 or 9x9), the game level, and the result.
+                  The application also consists of a page where a user can view
+                  their{" "}
+                  <a href="/rules" style={{ color: "#3b3251" }}>
+                    Past Games'
+                  </a>{" "}
+                  results. The records include the Game type (3x3 or 9x9), the
+                  game level, and the result.
                   <br />
                   <br />
                 </li>
@@ -307,7 +313,8 @@ export default class Overview extends Component {
                   <i class="fas fa-angle-double-right"></i>{" "}
                   <strong>Sound effects</strong>
                   <br />
-                  We have also included fun audio effects that add to the overall experience of the gameplay for a user.
+                  We have also included fun audio effects that add to the
+                  overall experience of the gameplay for a user.
                   <br />
                   <br />
                 </li>
@@ -319,7 +326,7 @@ export default class Overview extends Component {
                 className="justify-content-center align-self-center"
               >
                 <img
-                  style={{width:"100%"}}
+                  style={{ width: "100%" }}
                   src={require("../static/assets/about/scores.png")}
                 />
               </Col>
@@ -332,7 +339,7 @@ export default class Overview extends Component {
                 className="justify-content-center align-self-center"
               >
                 <img
-                  style={{width:"90%"}}
+                  style={{ width: "90%" }}
                   src={require("../static/assets/about/error.gif")}
                 />
               </Col>
