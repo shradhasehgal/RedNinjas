@@ -166,7 +166,11 @@ export default class NineBoard extends Component {
           status = "TIE"
         console.log(this.props.depth);
         let score = {game: "9*9", depth: "ULTIMATE", winner: status};
-        let a = JSON.parse(localStorage.getItem('scores')) || [];
+        let history = localStorage.getItem('scores');
+        let a = []
+        if(history)
+            a = JSON.parse(history) || [];
+
         a.push(score);
         localStorage.setItem('scores', JSON.stringify(a));
       }

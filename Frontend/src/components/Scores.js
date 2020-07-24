@@ -17,21 +17,33 @@ export default class Scores extends Component {
   }
 
   componentDidMount() {
-    let oldScores = JSON.parse(localStorage.getItem('scores')) || [];
-    this.setState({
-      scores: oldScores
-    })
+    let history = localStorage.getItem('scores');
+    if(history)
+    {
+      let oldScores = JSON.parse(history) || [];
+      this.setState({
+        scores: oldScores
+      })
+    }
   }
 
+  clearScores(){
+    localStorage.setItem('scores', []);
+    this.setState({
+      scores: []
+    })
+  }
   render() {
     return (
       <div className={styles.landingBody}>
         <Container className={styles.content}>
           <h1 className={styles.heading}>Previous Scores</h1>
           {this.state.scores.length == 0
-            ? 'You have played no games yet!'
+            ? 'You have not played any games yet!'
             :
 
+            <div>
+            <Button variant="dark" className={styles.button} onClick={(e) => this.clearScores()}>Clear Scores</Button>
             <Table striped bordered hover className={styles.table}>
               <thead>
                 <tr >
@@ -54,6 +66,7 @@ export default class Scores extends Component {
 
               </tbody>
             </Table>
+            </div>
           }
         </Container>
       </div>

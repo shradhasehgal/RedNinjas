@@ -22,7 +22,7 @@
     color: #ffffff;
     /* font-size: 2rem; */
     font-family: 'Acme', sans-serif;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
     margin-top: 5%;
   }
 
@@ -40,6 +40,14 @@
     transition-delay: 0.2s;
   }
 
+  .button {
+    background-color: #3b3251 !important;
+    border: #3b3251 !important;
+    margin-bottom: 3%;
+    font-size: 1rem;
+    padding: 1% 2% !important;
+  }
+
 @media screen and (max-width: 400px) {
 
   .heading{
@@ -53,6 +61,12 @@
 
   .content {
     padding: 7% !important;
+    margin-top: 50px;
+  }
+
+  .button{
+    padding: 3% !important;
+    font-size: 0.8rem !important;
   }
 }
 

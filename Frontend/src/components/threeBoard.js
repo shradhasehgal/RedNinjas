@@ -142,9 +142,14 @@ export default class ThreeBoard extends Component {
       status = "TIE"
     console.log(this.props.depth);
     let score = {game: "3*3", depth: this.props.depth, winner: status};
-    let a = JSON.parse(localStorage.getItem('scores')) || [];
+    let history = localStorage.getItem('scores');
+    let a = []
+    if(history)
+        a = JSON.parse(history) || [];
+
     a.push(score);
     localStorage.setItem('scores', JSON.stringify(a));
+   
   }
 
   setWinner(gameWinner) {
